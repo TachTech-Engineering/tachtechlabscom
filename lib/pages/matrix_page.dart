@@ -6,15 +6,33 @@ import '../widgets/search/search_filter_bar.dart';
 import '../widgets/matrix/tactic_accordion.dart';
 import '../widgets/matrix/overall_coverage_bar.dart';
 
-class MatrixPage extends ConsumerWidget {
-  const MatrixPage({super.key});
+class MatrixPage extends ConsumerStatefulWidget {
+  final String? initialTechniqueId;
+  
+  const MatrixPage({super.key, this.initialTechniqueId});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<MatrixPage> createState() => _MatrixPageState();
+}
+
+class _MatrixPageState extends ConsumerState<MatrixPage> {
+  @override
+  void initState() {
+    super.initState();
+    if (widget.initialTechniqueId != null) {
+      // Small delay to ensure providers are ready
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        ref.read(selectedTechniqueIdProvider.notifier).state = widget.initialTechniqueId;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final filteredTacticsAsync = ref.watch(filteredMatrixProvider);
 
     return Scaffold(
-      backgroundColor: AppTheme.background,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         title: const Text('ATT&CK Coverage Dashboard', style: TextStyle(fontWeight: FontWeight.bold)),
         actions: [

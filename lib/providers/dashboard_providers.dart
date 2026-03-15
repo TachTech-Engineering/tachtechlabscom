@@ -1,4 +1,4 @@
-import 'dart:async';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/mitre_models.dart';
 import '../services/matrix_service.dart';
@@ -70,6 +70,18 @@ class SelectedTechniqueIdNotifier extends Notifier<String?> {
 }
 
 final selectedTechniqueIdProvider = NotifierProvider<SelectedTechniqueIdNotifier, String?>(SelectedTechniqueIdNotifier.new);
+
+/// Notifier for ThemeMode
+class ThemeModeNotifier extends Notifier<ThemeMode> {
+  @override
+  ThemeMode build() => ThemeMode.light;
+
+  void toggle() {
+    state = state == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
+  }
+}
+
+final themeModeProvider = NotifierProvider<ThemeModeNotifier, ThemeMode>(ThemeModeNotifier.new);
 
 /// Summary data model for coverage statistics
 class CoverageSummary {

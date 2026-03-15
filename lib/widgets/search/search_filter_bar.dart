@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../providers/dashboard_providers.dart';
+import '../../models/mitre_models.dart';
 import '../../theme/app_theme.dart';
+import '../../utils/download_helper.dart';
+import 'dart:convert';
 
 class SearchAndFilterBar extends ConsumerWidget {
   const SearchAndFilterBar({super.key});
@@ -10,9 +13,10 @@ class SearchAndFilterBar extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final currentFilter = ref.watch(coverageFilterProvider);
     final resultsAsync = ref.watch(filteredMatrixProvider);
+    final themeMode = ref.watch(themeModeProvider);
 
     return Container(
-      color: AppTheme.surface,
+      color: Theme.of(context).cardTheme.color,
       padding: const EdgeInsets.symmetric(
         horizontal: AppTheme.spacingLg,
         vertical: AppTheme.spacingMd,
@@ -50,14 +54,30 @@ class SearchAndFilterBar extends ConsumerWidget {
                               borderSide: const BorderSide(color: AppTheme.primary),
                             ),
                             filled: true,
-                            fillColor: AppTheme.background,
+                            fillColor: Theme.of(context).scaffoldBackgroundColor,
                             contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: AppTheme.spacingMd),
                           ),
                         ),
                       ),
+                      const SizedBox(width: AppTheme.spacingMd),
+                      IconButton(
+                        onPressed: () => ref.read(themeModeProvider.notifier).toggle(),
+                        icon: Icon(themeMode == ThemeMode.light ? Icons.dark_mode : Icons.light_mode),
+                        tooltip: 'Toggle Theme',
+                      ),
                       if (isDesktop) ...[
                         const SizedBox(width: AppTheme.spacingMd),
-                        _buildFilterDropdown(ref, currentFilter),
+                        _buildFilterDropdown(context, ref, currentFilter),
+                        const SizedBox(width: AppTheme.spacingMd),
+                        ElevatedButton.icon(
+                          onPressed: () => _handleExport(ref),
+                          icon: const Icon(Icons.download, size: 18),
+                          label: const Text('Export'),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppTheme.primary,
+                            foregroundColor: Colors.white,
+                          ),
+                        ),
                       ],
                     ],
                   ),
@@ -113,7 +133,17 @@ class SearchAndFilterBar extends ConsumerWidget {
                   ),
                   if (!isDesktop) ...[
                     const SizedBox(height: AppTheme.spacingSm),
-                    _buildFilterDropdown(ref, currentFilter),
+                    Row(
+                      children: [
+                        Expanded(child: _buildFilterDropdown(context, ref, currentFilter)),
+                        const SizedBox(width: AppTheme.spacingMd),
+                        IconButton(
+                          onPressed: () => _handleExport(ref),
+                          icon: const Icon(Icons.download),
+                          tooltip: 'Export JSON',
+                        ),
+                      ],
+                    ),
                   ],
                 ],
               );
@@ -124,11 +154,11 @@ class SearchAndFilterBar extends ConsumerWidget {
     );
   }
 
-  Widget _buildFilterDropdown(WidgetRef ref, CoverageFilter currentFilter) {
+  Widget _buildFilterDropdown(BuildContext context, WidgetRef ref, CoverageFilter currentFilter) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: AppTheme.spacingMd),
       decoration: BoxDecoration(
-        color: AppTheme.background,
+        color: Theme.of(context).scaffoldBackgroundColor,
         borderRadius: BorderRadius.circular(AppTheme.radiusMd),
         border: Border.all(color: AppTheme.divider),
       ),
@@ -149,5 +179,29 @@ class SearchAndFilterBar extends ConsumerWidget {
         ),
       ),
     );
+  }
+
+  void _handleExport(WidgetRef ref) {
+    final matrixAsync = ref.read(attackMatrixProvider);
+    matrixAsync.whenData((tactics) {
+      final layer = {
+        'name': 'ATT&CK Coverage Export',
+        'versions': {
+          'attack': '18',
+          'navigator': '4.5',
+          'layer': '4.4',
+        },
+        'domain': 'enterprise-attack',
+        'techniques': tactics.expand((t) => t.techniques).map((tech) => {
+          'techniqueID': tech.id,
+          'score': tech.coverage == CoverageLevel.high ? 100 : tech.coverage == CoverageLevel.medium ? 50 : 0,
+          'color': '#${tech.coverage.color.toARGB32().toRadixString(16).substring(2)}',
+          'comment': 'Exported from TachTech Labs Dashboard',
+        }).toList(),
+      };
+      
+      final jsonString = const JsonEncoder.withIndent('  ').convert(layer);
+      downloadStringAsFile(jsonString, 'attck_coverage_layer.json');
+    });
   }
 }
