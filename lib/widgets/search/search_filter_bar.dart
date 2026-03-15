@@ -115,12 +115,14 @@ class SearchAndFilterBar extends ConsumerWidget {
                       ),
                       resultsAsync.when(
                         data: (tactics) {
-                          int techCount = 0;
+                          final uniqueIds = <String>{};
                           for (var t in tactics) {
-                            techCount += t.techniques.length;
+                            for (var tech in t.techniques) {
+                              uniqueIds.add(tech.id);
+                            }
                           }
                           return Text(
-                            '$techCount techniques match',
+                            '${uniqueIds.length} techniques match',
                             style: Theme.of(context).textTheme.bodySmall?.copyWith(
                               fontStyle: FontStyle.italic,
                             ),

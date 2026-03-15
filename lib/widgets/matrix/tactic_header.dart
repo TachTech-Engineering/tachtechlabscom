@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../models/mitre_models.dart';
 import '../../theme/app_theme.dart';
+import '../../utils/breakpoints.dart';
 
 class TacticHeader extends StatelessWidget {
   final Tactic tactic;
@@ -18,55 +19,67 @@ class TacticHeader extends StatelessWidget {
     int covered = tactic.techniques.where((t) => t.coverage != CoverageLevel.none).length;
     double percentage = total == 0 ? 0.0 : (covered / total) * 100;
 
-    return Row(
-      children: [
-        // Tactic ID
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: AppTheme.spacingSm, vertical: 2),
-          decoration: BoxDecoration(
-            color: AppTheme.primary.withValues(alpha: 0.1),
-            borderRadius: BorderRadius.circular(AppTheme.radiusSm),
-          ),
-          child: Text(
-            tactic.id,
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              color: AppTheme.primary,
-              fontWeight: FontWeight.bold,
-              fontFamily: 'monospace',
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isNarrow = Breakpoints.isMobile(constraints.maxWidth + 100); // Title row is narrower than screen
+
+        return Row(
+          children: [
+            // Tactic ID
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: AppTheme.spacingSm, vertical: 2),
+              decoration: BoxDecoration(
+                color: AppTheme.primary.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(AppTheme.radiusSm),
+              ),
+              child: Text(
+                tactic.id,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: AppTheme.primary,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'monospace',
+                ),
+              ),
             ),
-          ),
-        ),
-        const SizedBox(width: AppTheme.spacingMd),
-        // Tactic Name
-        Expanded(
-          child: Text(
-            tactic.name,
-            style: Theme.of(context).textTheme.displaySmall,
-          ),
-        ),
-        // Mini Progress Bar (4-block style approximation)
-        _buildMiniProgressBar(context, covered, total),
-        const SizedBox(width: AppTheme.spacingMd),
-        // Fraction
-        Text(
-          '$covered/$total',
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        const SizedBox(width: AppTheme.spacingSm),
-        // Percentage
-        SizedBox(
-          width: 45,
-          child: Text(
-            '${percentage.toStringAsFixed(0)}%',
-            textAlign: TextAlign.right,
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              color: AppTheme.textSecondary,
+            const SizedBox(width: AppTheme.spacingSm),
+            // Tactic Name
+            Expanded(
+              child: Text(
+                tactic.name,
+                style: isNarrow 
+                    ? Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold)
+                    : Theme.of(context).textTheme.displaySmall,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
-          ),
-        ),
-      ],
+            if (!isNarrow) ...[
+              const SizedBox(width: AppTheme.spacingMd),
+              // Mini Progress Bar
+              _buildMiniProgressBar(context, covered, total),
+            ],
+            const SizedBox(width: AppTheme.spacingMd),
+            // Fraction
+            Text(
+              '$covered/$total',
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(width: AppTheme.spacingSm),
+            // Percentage
+            SizedBox(
+              width: 35,
+              child: Text(
+                '${percentage.toStringAsFixed(0)}%',
+                textAlign: TextAlign.right,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: AppTheme.textSecondary,
+                ),
+              ),
+            ),
+          ],
+        );
+      }
     );
   }
 
