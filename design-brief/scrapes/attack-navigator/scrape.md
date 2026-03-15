@@ -1,0 +1,48 @@
+- generic [ref=e5]:
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - img [ref=e9] [cursor=pointer]
+      - generic [ref=e12]:
+        - tablist [ref=e13]:
+          - generic [ref=e16]:
+            - tab "new tab" [selected] [ref=e17]:
+              - generic [ref=e19]:
+                - text: new tab
+                - button [ref=e20] [cursor=pointer]:
+                  - img [ref=e21]: close
+            - tab [ref=e24] [cursor=pointer]:
+              - img [ref=e27]: add
+        - tabpanel "new tab"
+    - generic [ref=e28]:
+      - generic [ref=e29]:
+        - heading "MITRE ATT&CK® Navigator" [level=1] [ref=e31]:
+          - link "MITRE ATT&CK® Navigator" [ref=e32] [cursor=pointer]:
+            - /url: http://attack.mitre.org
+        - paragraph [ref=e34]: The ATT&CK Navigator is a web-based tool for annotating and exploring ATT&CK matrices. It can be used to visualize defensive coverage, red/blue team planning, the frequency of detected techniques, and more.
+        - generic [ref=e35]:
+          - button "help" [ref=e36]:
+            - generic [ref=e37]: help
+          - button "changelog" [ref=e40]:
+            - generic [ref=e41]: changelog
+          - button "theme ▾" [ref=e44]:
+            - generic [ref=e45]:
+              - text: theme ▾
+              - combobox [ref=e46]
+      - generic [ref=e50]:
+        - button "Create New Layer Create a new empty layer" [ref=e52] [cursor=pointer]:
+          - generic [ref=e53]:
+            - generic [ref=e54]: Create New Layer
+            - generic [ref=e55]: Create a new empty layer
+        - button "Open Existing Layer Load a layer from your computer or a URL" [ref=e58] [cursor=pointer]:
+          - generic [ref=e59]:
+            - generic [ref=e60]: Open Existing Layer
+            - generic [ref=e61]: Load a layer from your computer or a URL
+        - button "Create Layer from Other Layers Select layers to inherit properties from" [ref=e64] [cursor=pointer]:
+          - generic [ref=e65]:
+            - generic [ref=e66]: Create Layer from Other Layers
+            - generic [ref=e67]: Select layers to inherit properties from
+        - button "Create Customized Navigator Create a hyperlink to a customized ATT&CK Navigator" [ref=e70] [cursor=pointer]:
+          - generic [ref=e71]:
+            - generic [ref=e72]: Create Customized Navigator
+            - generic [ref=e73]: Create a hyperlink to a customized ATT&CK Navigator
+  - button "MITRE ATT&CK® Navigator v5.3.0" [ref=e75]

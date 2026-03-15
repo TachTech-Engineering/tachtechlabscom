@@ -1,0 +1,2499 @@
+- generic [ref=e10]:
+  - banner [ref=e12]:
+    - navigation [ref=e13]:
+      - link [ref=e14] [cursor=pointer]:
+        - /url: /
+        - img [ref=e15]
+      - list [ref=e17]:
+        - listitem [ref=e18]:
+          - button "Matrices" [ref=e19] [cursor=pointer]
+        - listitem [ref=e20]:
+          - button "Tactics" [ref=e21] [cursor=pointer]
+        - listitem [ref=e22]:
+          - button "Techniques" [ref=e23] [cursor=pointer]
+        - listitem [ref=e24]:
+          - button "Defenses" [ref=e25] [cursor=pointer]
+        - listitem [ref=e26]:
+          - button "CTI" [ref=e27] [cursor=pointer]
+        - listitem [ref=e28]:
+          - button "Resources" [ref=e29] [cursor=pointer]
+        - listitem [ref=e30]:
+          - link "Benefactors" [ref=e31] [cursor=pointer]:
+            - /url: /resources/engage-with-attack/benefactors/
+        - listitem [ref=e32]:
+          - link "Contribute" [ref=e33] [cursor=pointer]:
+            - /url: /resources/engage-with-attack/contribute/
+        - listitem [ref=e34]:
+          - link "Blog External site" [ref=e35] [cursor=pointer]:
+            - /url: https://medium.com/mitre-attack/
+            - text: Blog
+            - img "External site" [ref=e36]
+        - listitem [ref=e37]:
+          - button "Search" [ref=e38] [cursor=pointer]: Search
+  - generic [ref=e40]:
+    - tablist [ref=e41]:
+      - tablist [ref=e2214]:
+        - generic [ref=e2215]:
+          - generic: MATRICES
+          - generic "MATRICES" [ref=e2216]:
+            - generic [ref=e2217]:
+              - link "Enterprise" [ref=e2219] [cursor=pointer]:
+                - /url: /matrices/enterprise/
+              - generic [ref=e2221]:
+                - link "PRE" [ref=e2224] [cursor=pointer]:
+                  - /url: /matrices/enterprise/pre/
+                - link "Windows" [ref=e2227] [cursor=pointer]:
+                  - /url: /matrices/enterprise/windows/
+                - link "macOS" [ref=e2230] [cursor=pointer]:
+                  - /url: /matrices/enterprise/macos/
+                - link "Linux" [ref=e2233] [cursor=pointer]:
+                  - /url: /matrices/enterprise/linux/
+                - link "Cloud" [ref=e2236] [cursor=pointer]:
+                  - /url: /matrices/enterprise/cloud/
+                - link "Network Devices" [ref=e2240] [cursor=pointer]:
+                  - /url: /matrices/enterprise/network-devices/
+                - link "Containers" [ref=e2243] [cursor=pointer]:
+                  - /url: /matrices/enterprise/containers/
+                - link "ESXi" [ref=e2246] [cursor=pointer]:
+                  - /url: /matrices/enterprise/esxi/
+            - link "Mobile" [ref=e2249] [cursor=pointer]:
+              - /url: /matrices/mobile/
+            - link "ICS" [ref=e2253] [cursor=pointer]:
+              - /url: /matrices/ics/
+    - tabpanel [ref=e44]:
+      - list [ref=e47]:
+        - listitem [ref=e48]:
+          - link "Home" [ref=e49] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=e50]:
+          - text: ">"
+          - link "Matrices" [ref=e51] [cursor=pointer]:
+            - /url: /matrices/
+        - listitem [ref=e52]:
+          - text: ">"
+          - link "Enterprise" [ref=e53] [cursor=pointer]:
+            - /url: /matrices/enterprise/
+        - listitem [ref=e54]: "> Enterprise"
+      - tabpanel [ref=e55]:
+        - generic [ref=e57]:
+          - generic [ref=e58]:
+            - heading "Enterprise Matrix" [level=1] [ref=e59]
+            - paragraph [ref=e60]:
+              - text: Below are the tactics and techniques representing the MITRE ATT&CK
+              - superscript [ref=e61]: ®
+              - text: "Matrix for Enterprise. The Matrix contains information for the following platforms:"
+              - link "Windows" [ref=e62] [cursor=pointer]:
+                - /url: /matrices/enterprise/windows
+              - text: ","
+              - link "macOS" [ref=e63] [cursor=pointer]:
+                - /url: /matrices/enterprise/macos
+              - text: ","
+              - link "Linux" [ref=e64] [cursor=pointer]:
+                - /url: /matrices/enterprise/linux
+              - text: ","
+              - link "PRE" [ref=e65] [cursor=pointer]:
+                - /url: /matrices/enterprise/pre
+              - text: ","
+              - link "Office Suite" [ref=e66] [cursor=pointer]:
+                - /url: /matrices/enterprise/cloud/officesuite
+              - text: ","
+              - link "Identity Provider" [ref=e67] [cursor=pointer]:
+                - /url: /matrices/enterprise/cloud/identityprovider
+              - text: ","
+              - link "SaaS" [ref=e68] [cursor=pointer]:
+                - /url: /matrices/enterprise/cloud/saas
+              - text: ","
+              - link "IaaS" [ref=e69] [cursor=pointer]:
+                - /url: /matrices/enterprise/cloud/iaas
+              - text: ","
+              - link "Network Devices" [ref=e70] [cursor=pointer]:
+                - /url: /matrices/enterprise/network-devices
+              - text: ","
+              - link "Containers" [ref=e71] [cursor=pointer]:
+                - /url: /matrices/enterprise/containers
+              - text: ","
+              - link "ESXi" [ref=e72] [cursor=pointer]:
+                - /url: /matrices/enterprise/esxi
+              - text: .
+          - generic [ref=e74]:
+            - link "View on the ATT&CK® Navigator" [ref=e76] [cursor=pointer]:
+              - /url: https://mitre-attack.github.io/attack-navigator/
+              - text: View on the ATT&CK
+              - superscript [ref=e77]: ®
+              - text: Navigator
+              - img [ref=e78]
+            - link "Version Permalink" [ref=e82] [cursor=pointer]:
+              - /url: /versions/v18/matrices/enterprise/
+        - generic [ref=e84]:
+          - toolbar "matrix controls" [ref=e86]:
+            - group [ref=e87]:
+              - group [ref=e88]:
+                - 'button "layout: side" [ref=e89] [cursor=pointer]'
+            - group [ref=e90]:
+              - button "show sub-techniques" [ref=e91] [cursor=pointer]
+              - button "hide sub-techniques" [ref=e92] [cursor=pointer]
+            - group [ref=e93]:
+              - button "help" [ref=e94] [cursor=pointer]
+          - table [ref=e100]:
+            - rowgroup [ref=e101]:
+              - row "Reconnaissance Resource Development Initial Access Execution Persistence Privilege Escalation Defense Evasion Credential Access Discovery Lateral Movement Collection Command and Control Exfiltration Impact" [ref=e102]:
+                - cell "Reconnaissance" [ref=e103]:
+                  - link "Reconnaissance" [ref=e104] [cursor=pointer]:
+                    - /url: /tactics/TA0043
+                - cell "Resource Development" [ref=e105]:
+                  - link "Resource Development" [ref=e106] [cursor=pointer]:
+                    - /url: /tactics/TA0042
+                - cell "Initial Access" [ref=e107]:
+                  - link "Initial Access" [ref=e108] [cursor=pointer]:
+                    - /url: /tactics/TA0001
+                - cell "Execution" [ref=e109]:
+                  - link "Execution" [ref=e110] [cursor=pointer]:
+                    - /url: /tactics/TA0002
+                - cell "Persistence" [ref=e111]:
+                  - link "Persistence" [ref=e112] [cursor=pointer]:
+                    - /url: /tactics/TA0003
+                - cell "Privilege Escalation" [ref=e113]:
+                  - link "Privilege Escalation" [ref=e114] [cursor=pointer]:
+                    - /url: /tactics/TA0004
+                - cell "Defense Evasion" [ref=e115]:
+                  - link "Defense Evasion" [ref=e116] [cursor=pointer]:
+                    - /url: /tactics/TA0005
+                - cell "Credential Access" [ref=e117]:
+                  - link "Credential Access" [ref=e118] [cursor=pointer]:
+                    - /url: /tactics/TA0006
+                - cell "Discovery" [ref=e119]:
+                  - link "Discovery" [ref=e120] [cursor=pointer]:
+                    - /url: /tactics/TA0007
+                - cell "Lateral Movement" [ref=e121]:
+                  - link "Lateral Movement" [ref=e122] [cursor=pointer]:
+                    - /url: /tactics/TA0008
+                - cell "Collection" [ref=e123]:
+                  - link "Collection" [ref=e124] [cursor=pointer]:
+                    - /url: /tactics/TA0009
+                - cell "Command and Control" [ref=e125]:
+                  - link "Command and Control" [ref=e126] [cursor=pointer]:
+                    - /url: /tactics/TA0011
+                - cell "Exfiltration" [ref=e127]:
+                  - link "Exfiltration" [ref=e128] [cursor=pointer]:
+                    - /url: /tactics/TA0010
+                - cell "Impact" [ref=e129]:
+                  - link "Impact" [ref=e130] [cursor=pointer]:
+                    - /url: /tactics/TA0040
+              - row "11 techniques 8 techniques 11 techniques 17 techniques 23 techniques 14 techniques 47 techniques 17 techniques 34 techniques 9 techniques 17 techniques 18 techniques 9 techniques 15 techniques" [ref=e131]:
+                - cell "11 techniques" [ref=e132]
+                - cell "8 techniques" [ref=e133]
+                - cell "11 techniques" [ref=e134]
+                - cell "17 techniques" [ref=e135]
+                - cell "23 techniques" [ref=e136]
+                - cell "14 techniques" [ref=e137]
+                - cell "47 techniques" [ref=e138]
+                - cell "17 techniques" [ref=e139]
+                - cell "34 techniques" [ref=e140]
+                - cell "9 techniques" [ref=e141]
+                - cell "17 techniques" [ref=e142]
+                - cell "18 techniques" [ref=e143]
+                - cell "9 techniques" [ref=e144]
+                - cell "15 techniques" [ref=e145]
+            - rowgroup [ref=e146]:
+              - row [ref=e147]:
+                - cell "Active Scanning (3) = Gather Victim Host Information (4) = Gather Victim Identity Information (3) = Gather Victim Network Information (6) = Gather Victim Org Information (4) = Phishing for Information (4) = Search Closed Sources (2) = Search Open Technical Databases (5) = Search Open Websites/Domains (3) = Search Threat Vendor Data Search Victim-Owned Websites" [ref=e148]:
+                  - table [ref=e149]:
+                    - rowgroup [ref=e150]:
+                      - row "Active Scanning (3) =" [ref=e151]:
+                        - cell "Active Scanning (3)" [ref=e152]:
+                          - table [ref=e153]:
+                            - rowgroup [ref=e154]:
+                              - row "Active Scanning (3)" [ref=e155]:
+                                - cell "Active Scanning (3)" [ref=e156]:
+                                  - link "Active Scanning (3)" [ref=e158] [cursor=pointer]:
+                                    - /url: /techniques/T1595
+                                    - text: Active Scanning
+                                    - subscript [ref=e159]: (3)
+                        - cell "=" [ref=e160] [cursor=pointer]:
+                          - generic [ref=e161]: =
+                        - cell
+                      - row "Gather Victim Host Information (4) =" [ref=e162]:
+                        - cell "Gather Victim Host Information (4)" [ref=e163]:
+                          - table [ref=e164]:
+                            - rowgroup [ref=e165]:
+                              - row "Gather Victim Host Information (4)" [ref=e166]:
+                                - cell "Gather Victim Host Information (4)" [ref=e167]:
+                                  - link "Gather Victim Host Information (4)" [ref=e169] [cursor=pointer]:
+                                    - /url: /techniques/T1592
+                                    - text: Gather Victim Host Information
+                                    - subscript [ref=e170]: (4)
+                        - cell "=" [ref=e171] [cursor=pointer]:
+                          - generic [ref=e172]: =
+                        - cell
+                      - row "Gather Victim Identity Information (3) =" [ref=e173]:
+                        - cell "Gather Victim Identity Information (3)" [ref=e174]:
+                          - table [ref=e175]:
+                            - rowgroup [ref=e176]:
+                              - row "Gather Victim Identity Information (3)" [ref=e177]:
+                                - cell "Gather Victim Identity Information (3)" [ref=e178]:
+                                  - link "Gather Victim Identity Information (3)" [ref=e180] [cursor=pointer]:
+                                    - /url: /techniques/T1589
+                                    - text: Gather Victim Identity Information
+                                    - subscript [ref=e181]: (3)
+                        - cell "=" [ref=e182] [cursor=pointer]:
+                          - generic [ref=e183]: =
+                        - cell
+                      - row "Gather Victim Network Information (6) =" [ref=e184]:
+                        - cell "Gather Victim Network Information (6)" [ref=e185]:
+                          - table [ref=e186]:
+                            - rowgroup [ref=e187]:
+                              - row "Gather Victim Network Information (6)" [ref=e188]:
+                                - cell "Gather Victim Network Information (6)" [ref=e189]:
+                                  - link "Gather Victim Network Information (6)" [ref=e191] [cursor=pointer]:
+                                    - /url: /techniques/T1590
+                                    - text: Gather Victim Network Information
+                                    - subscript [ref=e192]: (6)
+                        - cell "=" [ref=e193] [cursor=pointer]:
+                          - generic [ref=e194]: =
+                        - cell
+                      - row "Gather Victim Org Information (4) =" [ref=e195]:
+                        - cell "Gather Victim Org Information (4)" [ref=e196]:
+                          - table [ref=e197]:
+                            - rowgroup [ref=e198]:
+                              - row "Gather Victim Org Information (4)" [ref=e199]:
+                                - cell "Gather Victim Org Information (4)" [ref=e200]:
+                                  - link "Gather Victim Org Information (4)" [ref=e202] [cursor=pointer]:
+                                    - /url: /techniques/T1591
+                                    - text: Gather Victim Org Information
+                                    - subscript [ref=e203]: (4)
+                        - cell "=" [ref=e204] [cursor=pointer]:
+                          - generic [ref=e205]: =
+                        - cell
+                      - row "Phishing for Information (4) =" [ref=e206]:
+                        - cell "Phishing for Information (4)" [ref=e207]:
+                          - table [ref=e208]:
+                            - rowgroup [ref=e209]:
+                              - row "Phishing for Information (4)" [ref=e210]:
+                                - cell "Phishing for Information (4)" [ref=e211]:
+                                  - link "Phishing for Information (4)" [ref=e213] [cursor=pointer]:
+                                    - /url: /techniques/T1598
+                                    - text: Phishing for Information
+                                    - subscript [ref=e214]: (4)
+                        - cell "=" [ref=e215] [cursor=pointer]:
+                          - generic [ref=e216]: =
+                        - cell
+                      - row "Search Closed Sources (2) =" [ref=e217]:
+                        - cell "Search Closed Sources (2)" [ref=e218]:
+                          - table [ref=e219]:
+                            - rowgroup [ref=e220]:
+                              - row "Search Closed Sources (2)" [ref=e221]:
+                                - cell "Search Closed Sources (2)" [ref=e222]:
+                                  - link "Search Closed Sources (2)" [ref=e224] [cursor=pointer]:
+                                    - /url: /techniques/T1597
+                                    - text: Search Closed Sources
+                                    - subscript [ref=e225]: (2)
+                        - cell "=" [ref=e226] [cursor=pointer]:
+                          - generic [ref=e227]: =
+                        - cell
+                      - row "Search Open Technical Databases (5) =" [ref=e228]:
+                        - cell "Search Open Technical Databases (5)" [ref=e229]:
+                          - table [ref=e230]:
+                            - rowgroup [ref=e231]:
+                              - row "Search Open Technical Databases (5)" [ref=e232]:
+                                - cell "Search Open Technical Databases (5)" [ref=e233]:
+                                  - link "Search Open Technical Databases (5)" [ref=e235] [cursor=pointer]:
+                                    - /url: /techniques/T1596
+                                    - text: Search Open Technical Databases
+                                    - subscript [ref=e236]: (5)
+                        - cell "=" [ref=e237] [cursor=pointer]:
+                          - generic [ref=e238]: =
+                        - cell
+                      - row "Search Open Websites/Domains (3) =" [ref=e239]:
+                        - cell "Search Open Websites/Domains (3)" [ref=e240]:
+                          - table [ref=e241]:
+                            - rowgroup [ref=e242]:
+                              - row "Search Open Websites/Domains (3)" [ref=e243]:
+                                - cell "Search Open Websites/Domains (3)" [ref=e244]:
+                                  - link "Search Open Websites/Domains (3)" [ref=e246] [cursor=pointer]:
+                                    - /url: /techniques/T1593
+                                    - text: Search Open Websites/Domains
+                                    - subscript [ref=e247]: (3)
+                        - cell "=" [ref=e248] [cursor=pointer]:
+                          - generic [ref=e249]: =
+                        - cell
+                      - row "Search Threat Vendor Data" [ref=e250]:
+                        - cell "Search Threat Vendor Data" [ref=e251]:
+                          - link "Search Threat Vendor Data" [ref=e253] [cursor=pointer]:
+                            - /url: /techniques/T1681
+                        - cell [ref=e254]
+                      - row "Search Victim-Owned Websites" [ref=e255]:
+                        - cell "Search Victim-Owned Websites" [ref=e256]:
+                          - link "Search Victim-Owned Websites" [ref=e258] [cursor=pointer]:
+                            - /url: /techniques/T1594
+                        - cell [ref=e259]
+                - cell "Acquire Access Acquire Infrastructure (8) = Compromise Accounts (3) = Compromise Infrastructure (8) = Develop Capabilities (4) = Establish Accounts (3) = Obtain Capabilities (7) = Stage Capabilities (6) =" [ref=e260]:
+                  - table [ref=e261]:
+                    - rowgroup [ref=e262]:
+                      - row "Acquire Access" [ref=e263]:
+                        - cell "Acquire Access" [ref=e264]:
+                          - link "Acquire Access" [ref=e266] [cursor=pointer]:
+                            - /url: /techniques/T1650
+                        - cell [ref=e267]
+                      - row "Acquire Infrastructure (8) =" [ref=e268]:
+                        - cell "Acquire Infrastructure (8)" [ref=e269]:
+                          - table [ref=e270]:
+                            - rowgroup [ref=e271]:
+                              - row "Acquire Infrastructure (8)" [ref=e272]:
+                                - cell "Acquire Infrastructure (8)" [ref=e273]:
+                                  - link "Acquire Infrastructure (8)" [ref=e275] [cursor=pointer]:
+                                    - /url: /techniques/T1583
+                                    - text: Acquire Infrastructure
+                                    - subscript [ref=e276]: (8)
+                        - cell "=" [ref=e277] [cursor=pointer]:
+                          - generic [ref=e278]: =
+                        - cell
+                      - row "Compromise Accounts (3) =" [ref=e279]:
+                        - cell "Compromise Accounts (3)" [ref=e280]:
+                          - table [ref=e281]:
+                            - rowgroup [ref=e282]:
+                              - row "Compromise Accounts (3)" [ref=e283]:
+                                - cell "Compromise Accounts (3)" [ref=e284]:
+                                  - link "Compromise Accounts (3)" [ref=e286] [cursor=pointer]:
+                                    - /url: /techniques/T1586
+                                    - text: Compromise Accounts
+                                    - subscript [ref=e287]: (3)
+                        - cell "=" [ref=e288] [cursor=pointer]:
+                          - generic [ref=e289]: =
+                        - cell
+                      - row "Compromise Infrastructure (8) =" [ref=e290]:
+                        - cell "Compromise Infrastructure (8)" [ref=e291]:
+                          - table [ref=e292]:
+                            - rowgroup [ref=e293]:
+                              - row "Compromise Infrastructure (8)" [ref=e294]:
+                                - cell "Compromise Infrastructure (8)" [ref=e295]:
+                                  - link "Compromise Infrastructure (8)" [ref=e297] [cursor=pointer]:
+                                    - /url: /techniques/T1584
+                                    - text: Compromise Infrastructure
+                                    - subscript [ref=e298]: (8)
+                        - cell "=" [ref=e299] [cursor=pointer]:
+                          - generic [ref=e300]: =
+                        - cell
+                      - row "Develop Capabilities (4) =" [ref=e301]:
+                        - cell "Develop Capabilities (4)" [ref=e302]:
+                          - table [ref=e303]:
+                            - rowgroup [ref=e304]:
+                              - row "Develop Capabilities (4)" [ref=e305]:
+                                - cell "Develop Capabilities (4)" [ref=e306]:
+                                  - link "Develop Capabilities (4)" [ref=e308] [cursor=pointer]:
+                                    - /url: /techniques/T1587
+                                    - text: Develop Capabilities
+                                    - subscript [ref=e309]: (4)
+                        - cell "=" [ref=e310] [cursor=pointer]:
+                          - generic [ref=e311]: =
+                        - cell
+                      - row "Establish Accounts (3) =" [ref=e312]:
+                        - cell "Establish Accounts (3)" [ref=e313]:
+                          - table [ref=e314]:
+                            - rowgroup [ref=e315]:
+                              - row "Establish Accounts (3)" [ref=e316]:
+                                - cell "Establish Accounts (3)" [ref=e317]:
+                                  - link "Establish Accounts (3)" [ref=e319] [cursor=pointer]:
+                                    - /url: /techniques/T1585
+                                    - text: Establish Accounts
+                                    - subscript [ref=e320]: (3)
+                        - cell "=" [ref=e321] [cursor=pointer]:
+                          - generic [ref=e322]: =
+                        - cell
+                      - row "Obtain Capabilities (7) =" [ref=e323]:
+                        - cell "Obtain Capabilities (7)" [ref=e324]:
+                          - table [ref=e325]:
+                            - rowgroup [ref=e326]:
+                              - row "Obtain Capabilities (7)" [ref=e327]:
+                                - cell "Obtain Capabilities (7)" [ref=e328]:
+                                  - link "Obtain Capabilities (7)" [ref=e330] [cursor=pointer]:
+                                    - /url: /techniques/T1588
+                                    - text: Obtain Capabilities
+                                    - subscript [ref=e331]: (7)
+                        - cell "=" [ref=e332] [cursor=pointer]:
+                          - generic [ref=e333]: =
+                        - cell
+                      - row "Stage Capabilities (6) =" [ref=e334]:
+                        - cell "Stage Capabilities (6)" [ref=e335]:
+                          - table [ref=e336]:
+                            - rowgroup [ref=e337]:
+                              - row "Stage Capabilities (6)" [ref=e338]:
+                                - cell "Stage Capabilities (6)" [ref=e339]:
+                                  - link "Stage Capabilities (6)" [ref=e341] [cursor=pointer]:
+                                    - /url: /techniques/T1608
+                                    - text: Stage Capabilities
+                                    - subscript [ref=e342]: (6)
+                        - cell "=" [ref=e343] [cursor=pointer]:
+                          - generic [ref=e344]: =
+                        - cell
+                - cell "Content Injection Drive-by Compromise Exploit Public-Facing Application External Remote Services Hardware Additions Phishing (4) = Replication Through Removable Media Supply Chain Compromise (3) = Trusted Relationship Valid Accounts (4) = Wi-Fi Networks" [ref=e345]:
+                  - table [ref=e346]:
+                    - rowgroup [ref=e347]:
+                      - row "Content Injection" [ref=e348]:
+                        - cell "Content Injection" [ref=e349]:
+                          - link "Content Injection" [ref=e351] [cursor=pointer]:
+                            - /url: /techniques/T1659
+                        - cell [ref=e352]
+                      - row "Drive-by Compromise" [ref=e353]:
+                        - cell "Drive-by Compromise" [ref=e354]:
+                          - link "Drive-by Compromise" [ref=e356] [cursor=pointer]:
+                            - /url: /techniques/T1189
+                        - cell [ref=e357]
+                      - row "Exploit Public-Facing Application" [ref=e358]:
+                        - cell "Exploit Public-Facing Application" [ref=e359]:
+                          - link "Exploit Public-Facing Application" [ref=e361] [cursor=pointer]:
+                            - /url: /techniques/T1190
+                        - cell [ref=e362]
+                      - row "External Remote Services" [ref=e363]:
+                        - cell "External Remote Services" [ref=e364]:
+                          - link "External Remote Services" [ref=e366] [cursor=pointer]:
+                            - /url: /techniques/T1133
+                        - cell [ref=e367]
+                      - row "Hardware Additions" [ref=e368]:
+                        - cell "Hardware Additions" [ref=e369]:
+                          - link "Hardware Additions" [ref=e371] [cursor=pointer]:
+                            - /url: /techniques/T1200
+                        - cell [ref=e372]
+                      - row "Phishing (4) =" [ref=e373]:
+                        - cell "Phishing (4)" [ref=e374]:
+                          - table [ref=e375]:
+                            - rowgroup [ref=e376]:
+                              - row "Phishing (4)" [ref=e377]:
+                                - cell "Phishing (4)" [ref=e378]:
+                                  - link "Phishing (4)" [ref=e380] [cursor=pointer]:
+                                    - /url: /techniques/T1566
+                                    - text: Phishing
+                                    - subscript [ref=e381]: (4)
+                        - cell "=" [ref=e382] [cursor=pointer]:
+                          - generic [ref=e383]: =
+                        - cell
+                      - row "Replication Through Removable Media" [ref=e384]:
+                        - cell "Replication Through Removable Media" [ref=e385]:
+                          - link "Replication Through Removable Media" [ref=e387] [cursor=pointer]:
+                            - /url: /techniques/T1091
+                        - cell [ref=e388]
+                      - row "Supply Chain Compromise (3) =" [ref=e389]:
+                        - cell "Supply Chain Compromise (3)" [ref=e390]:
+                          - table [ref=e391]:
+                            - rowgroup [ref=e392]:
+                              - row "Supply Chain Compromise (3)" [ref=e393]:
+                                - cell "Supply Chain Compromise (3)" [ref=e394]:
+                                  - link "Supply Chain Compromise (3)" [ref=e396] [cursor=pointer]:
+                                    - /url: /techniques/T1195
+                                    - text: Supply Chain Compromise
+                                    - subscript [ref=e397]: (3)
+                        - cell "=" [ref=e398] [cursor=pointer]:
+                          - generic [ref=e399]: =
+                        - cell
+                      - row "Trusted Relationship" [ref=e400]:
+                        - cell "Trusted Relationship" [ref=e401]:
+                          - link "Trusted Relationship" [ref=e403] [cursor=pointer]:
+                            - /url: /techniques/T1199
+                        - cell [ref=e404]
+                      - row "Valid Accounts (4) =" [ref=e405]:
+                        - cell "Valid Accounts (4)" [ref=e406]:
+                          - table [ref=e407]:
+                            - rowgroup [ref=e408]:
+                              - row "Valid Accounts (4)" [ref=e409]:
+                                - cell "Valid Accounts (4)" [ref=e410]:
+                                  - link "Valid Accounts (4)" [ref=e412] [cursor=pointer]:
+                                    - /url: /techniques/T1078
+                                    - text: Valid Accounts
+                                    - subscript [ref=e413]: (4)
+                        - cell "=" [ref=e414] [cursor=pointer]:
+                          - generic [ref=e415]: =
+                        - cell
+                      - row "Wi-Fi Networks" [ref=e416]:
+                        - cell "Wi-Fi Networks" [ref=e417]:
+                          - link "Wi-Fi Networks" [ref=e419] [cursor=pointer]:
+                            - /url: /techniques/T1669
+                        - cell [ref=e420]
+                - cell "Cloud Administration Command Command and Scripting Interpreter (13) = Container Administration Command Deploy Container ESXi Administration Command Exploitation for Client Execution Input Injection Inter-Process Communication (3) = Native API Poisoned Pipeline Execution Scheduled Task/Job (5) = Serverless Execution Shared Modules Software Deployment Tools System Services (3) = User Execution (5) = Windows Management Instrumentation" [ref=e421]:
+                  - table [ref=e422]:
+                    - rowgroup [ref=e423]:
+                      - row "Cloud Administration Command" [ref=e424]:
+                        - cell "Cloud Administration Command" [ref=e425]:
+                          - link "Cloud Administration Command" [ref=e427] [cursor=pointer]:
+                            - /url: /techniques/T1651
+                        - cell [ref=e428]
+                      - row "Command and Scripting Interpreter (13) =" [ref=e429]:
+                        - cell "Command and Scripting Interpreter (13)" [ref=e430]:
+                          - table [ref=e431]:
+                            - rowgroup [ref=e432]:
+                              - row "Command and Scripting Interpreter (13)" [ref=e433]:
+                                - cell "Command and Scripting Interpreter (13)" [ref=e434]:
+                                  - link "Command and Scripting Interpreter (13)" [ref=e436] [cursor=pointer]:
+                                    - /url: /techniques/T1059
+                                    - text: Command and Scripting Interpreter
+                                    - subscript [ref=e437]: (13)
+                        - cell "=" [ref=e438] [cursor=pointer]:
+                          - generic [ref=e439]: =
+                        - cell
+                      - row "Container Administration Command" [ref=e440]:
+                        - cell "Container Administration Command" [ref=e441]:
+                          - link "Container Administration Command" [ref=e443] [cursor=pointer]:
+                            - /url: /techniques/T1609
+                        - cell [ref=e444]
+                      - row "Deploy Container" [ref=e445]:
+                        - cell "Deploy Container" [ref=e446]:
+                          - link "Deploy Container" [ref=e448] [cursor=pointer]:
+                            - /url: /techniques/T1610
+                        - cell [ref=e449]
+                      - row "ESXi Administration Command" [ref=e450]:
+                        - cell "ESXi Administration Command" [ref=e451]:
+                          - link "ESXi Administration Command" [ref=e453] [cursor=pointer]:
+                            - /url: /techniques/T1675
+                        - cell [ref=e454]
+                      - row "Exploitation for Client Execution" [ref=e455]:
+                        - cell "Exploitation for Client Execution" [ref=e456]:
+                          - link "Exploitation for Client Execution" [ref=e458] [cursor=pointer]:
+                            - /url: /techniques/T1203
+                        - cell [ref=e459]
+                      - row "Input Injection" [ref=e460]:
+                        - cell "Input Injection" [ref=e461]:
+                          - link "Input Injection" [ref=e463] [cursor=pointer]:
+                            - /url: /techniques/T1674
+                        - cell [ref=e464]
+                      - row "Inter-Process Communication (3) =" [ref=e465]:
+                        - cell "Inter-Process Communication (3)" [ref=e466]:
+                          - table [ref=e467]:
+                            - rowgroup [ref=e468]:
+                              - row "Inter-Process Communication (3)" [ref=e469]:
+                                - cell "Inter-Process Communication (3)" [ref=e470]:
+                                  - link "Inter-Process Communication (3)" [ref=e472] [cursor=pointer]:
+                                    - /url: /techniques/T1559
+                                    - text: Inter-Process Communication
+                                    - subscript [ref=e473]: (3)
+                        - cell "=" [ref=e474] [cursor=pointer]:
+                          - generic [ref=e475]: =
+                        - cell
+                      - row "Native API" [ref=e476]:
+                        - cell "Native API" [ref=e477]:
+                          - link "Native API" [ref=e479] [cursor=pointer]:
+                            - /url: /techniques/T1106
+                        - cell [ref=e480]
+                      - row "Poisoned Pipeline Execution" [ref=e481]:
+                        - cell "Poisoned Pipeline Execution" [ref=e482]:
+                          - link "Poisoned Pipeline Execution" [ref=e484] [cursor=pointer]:
+                            - /url: /techniques/T1677
+                        - cell [ref=e485]
+                      - row "Scheduled Task/Job (5) =" [ref=e486]:
+                        - cell "Scheduled Task/Job (5)" [ref=e487]:
+                          - table [ref=e488]:
+                            - rowgroup [ref=e489]:
+                              - row "Scheduled Task/Job (5)" [ref=e490]:
+                                - cell "Scheduled Task/Job (5)" [ref=e491]:
+                                  - link "Scheduled Task/Job (5)" [ref=e493] [cursor=pointer]:
+                                    - /url: /techniques/T1053
+                                    - text: Scheduled Task/Job
+                                    - subscript [ref=e494]: (5)
+                        - cell "=" [ref=e495] [cursor=pointer]:
+                          - generic [ref=e496]: =
+                        - cell
+                      - row "Serverless Execution" [ref=e497]:
+                        - cell "Serverless Execution" [ref=e498]:
+                          - link "Serverless Execution" [ref=e500] [cursor=pointer]:
+                            - /url: /techniques/T1648
+                        - cell [ref=e501]
+                      - row "Shared Modules" [ref=e502]:
+                        - cell "Shared Modules" [ref=e503]:
+                          - link "Shared Modules" [ref=e505] [cursor=pointer]:
+                            - /url: /techniques/T1129
+                        - cell [ref=e506]
+                      - row "Software Deployment Tools" [ref=e507]:
+                        - cell "Software Deployment Tools" [ref=e508]:
+                          - link "Software Deployment Tools" [ref=e510] [cursor=pointer]:
+                            - /url: /techniques/T1072
+                        - cell [ref=e511]
+                      - row "System Services (3) =" [ref=e512]:
+                        - cell "System Services (3)" [ref=e513]:
+                          - table [ref=e514]:
+                            - rowgroup [ref=e515]:
+                              - row "System Services (3)" [ref=e516]:
+                                - cell "System Services (3)" [ref=e517]:
+                                  - link "System Services (3)" [ref=e519] [cursor=pointer]:
+                                    - /url: /techniques/T1569
+                                    - text: System Services
+                                    - subscript [ref=e520]: (3)
+                        - cell "=" [ref=e521] [cursor=pointer]:
+                          - generic [ref=e522]: =
+                        - cell
+                      - row "User Execution (5) =" [ref=e523]:
+                        - cell "User Execution (5)" [ref=e524]:
+                          - table [ref=e525]:
+                            - rowgroup [ref=e526]:
+                              - row "User Execution (5)" [ref=e527]:
+                                - cell "User Execution (5)" [ref=e528]:
+                                  - link "User Execution (5)" [ref=e530] [cursor=pointer]:
+                                    - /url: /techniques/T1204
+                                    - text: User Execution
+                                    - subscript [ref=e531]: (5)
+                        - cell "=" [ref=e532] [cursor=pointer]:
+                          - generic [ref=e533]: =
+                        - cell
+                      - row "Windows Management Instrumentation" [ref=e534]:
+                        - cell "Windows Management Instrumentation" [ref=e535]:
+                          - link "Windows Management Instrumentation" [ref=e537] [cursor=pointer]:
+                            - /url: /techniques/T1047
+                        - cell [ref=e538]
+                - cell "Account Manipulation (7) = BITS Jobs Boot or Logon Autostart Execution (14) = Boot or Logon Initialization Scripts (5) = Cloud Application Integration Compromise Host Software Binary Create Account (3) = Create or Modify System Process (5) = Event Triggered Execution (18) = Exclusive Control External Remote Services Hijack Execution Flow (12) = Implant Internal Image Modify Authentication Process (9) = Modify Registry Office Application Startup (6) = Power Settings Pre-OS Boot (5) = Scheduled Task/Job (5) = Server Software Component (6) = Software Extensions (2) = Traffic Signaling (2) = Valid Accounts (4) =" [ref=e539]:
+                  - table [ref=e540]:
+                    - rowgroup [ref=e541]:
+                      - row "Account Manipulation (7) =" [ref=e542]:
+                        - cell "Account Manipulation (7)" [ref=e543]:
+                          - table [ref=e544]:
+                            - rowgroup [ref=e545]:
+                              - row "Account Manipulation (7)" [ref=e546]:
+                                - cell "Account Manipulation (7)" [ref=e547]:
+                                  - link "Account Manipulation (7)" [ref=e549] [cursor=pointer]:
+                                    - /url: /techniques/T1098
+                                    - text: Account Manipulation
+                                    - subscript [ref=e550]: (7)
+                        - cell "=" [ref=e551] [cursor=pointer]:
+                          - generic [ref=e552]: =
+                        - cell
+                      - row "BITS Jobs" [ref=e553]:
+                        - cell "BITS Jobs" [ref=e554]:
+                          - link "BITS Jobs" [ref=e556] [cursor=pointer]:
+                            - /url: /techniques/T1197
+                        - cell [ref=e557]
+                      - row "Boot or Logon Autostart Execution (14) =" [ref=e558]:
+                        - cell "Boot or Logon Autostart Execution (14)" [ref=e559]:
+                          - table [ref=e560]:
+                            - rowgroup [ref=e561]:
+                              - row "Boot or Logon Autostart Execution (14)" [ref=e562]:
+                                - cell "Boot or Logon Autostart Execution (14)" [ref=e563]:
+                                  - link "Boot or Logon Autostart Execution (14)" [ref=e565] [cursor=pointer]:
+                                    - /url: /techniques/T1547
+                                    - text: Boot or Logon Autostart Execution
+                                    - subscript [ref=e566]: (14)
+                        - cell "=" [ref=e567] [cursor=pointer]:
+                          - generic [ref=e568]: =
+                        - cell
+                      - row "Boot or Logon Initialization Scripts (5) =" [ref=e569]:
+                        - cell "Boot or Logon Initialization Scripts (5)" [ref=e570]:
+                          - table [ref=e571]:
+                            - rowgroup [ref=e572]:
+                              - row "Boot or Logon Initialization Scripts (5)" [ref=e573]:
+                                - cell "Boot or Logon Initialization Scripts (5)" [ref=e574]:
+                                  - link "Boot or Logon Initialization Scripts (5)" [ref=e576] [cursor=pointer]:
+                                    - /url: /techniques/T1037
+                                    - text: Boot or Logon Initialization Scripts
+                                    - subscript [ref=e577]: (5)
+                        - cell "=" [ref=e578] [cursor=pointer]:
+                          - generic [ref=e579]: =
+                        - cell
+                      - row "Cloud Application Integration" [ref=e580]:
+                        - cell "Cloud Application Integration" [ref=e581]:
+                          - link "Cloud Application Integration" [ref=e583] [cursor=pointer]:
+                            - /url: /techniques/T1671
+                        - cell [ref=e584]
+                      - row "Compromise Host Software Binary" [ref=e585]:
+                        - cell "Compromise Host Software Binary" [ref=e586]:
+                          - link "Compromise Host Software Binary" [ref=e588] [cursor=pointer]:
+                            - /url: /techniques/T1554
+                        - cell [ref=e589]
+                      - row "Create Account (3) =" [ref=e590]:
+                        - cell "Create Account (3)" [ref=e591]:
+                          - table [ref=e592]:
+                            - rowgroup [ref=e593]:
+                              - row "Create Account (3)" [ref=e594]:
+                                - cell "Create Account (3)" [ref=e595]:
+                                  - link "Create Account (3)" [ref=e597] [cursor=pointer]:
+                                    - /url: /techniques/T1136
+                                    - text: Create Account
+                                    - subscript [ref=e598]: (3)
+                        - cell "=" [ref=e599] [cursor=pointer]:
+                          - generic [ref=e600]: =
+                        - cell
+                      - row "Create or Modify System Process (5) =" [ref=e601]:
+                        - cell "Create or Modify System Process (5)" [ref=e602]:
+                          - table [ref=e603]:
+                            - rowgroup [ref=e604]:
+                              - row "Create or Modify System Process (5)" [ref=e605]:
+                                - cell "Create or Modify System Process (5)" [ref=e606]:
+                                  - link "Create or Modify System Process (5)" [ref=e608] [cursor=pointer]:
+                                    - /url: /techniques/T1543
+                                    - text: Create or Modify System Process
+                                    - subscript [ref=e609]: (5)
+                        - cell "=" [ref=e610] [cursor=pointer]:
+                          - generic [ref=e611]: =
+                        - cell
+                      - row "Event Triggered Execution (18) =" [ref=e612]:
+                        - cell "Event Triggered Execution (18)" [ref=e613]:
+                          - table [ref=e614]:
+                            - rowgroup [ref=e615]:
+                              - row "Event Triggered Execution (18)" [ref=e616]:
+                                - cell "Event Triggered Execution (18)" [ref=e617]:
+                                  - link "Event Triggered Execution (18)" [ref=e619] [cursor=pointer]:
+                                    - /url: /techniques/T1546
+                                    - text: Event Triggered Execution
+                                    - subscript [ref=e620]: (18)
+                        - cell "=" [ref=e621] [cursor=pointer]:
+                          - generic [ref=e622]: =
+                        - cell
+                      - row "Exclusive Control" [ref=e623]:
+                        - cell "Exclusive Control" [ref=e624]:
+                          - link "Exclusive Control" [ref=e626] [cursor=pointer]:
+                            - /url: /techniques/T1668
+                        - cell [ref=e627]
+                      - row "External Remote Services" [ref=e628]:
+                        - cell "External Remote Services" [ref=e629]:
+                          - link "External Remote Services" [ref=e631] [cursor=pointer]:
+                            - /url: /techniques/T1133
+                        - cell [ref=e632]
+                      - row "Hijack Execution Flow (12) =" [ref=e633]:
+                        - cell "Hijack Execution Flow (12)" [ref=e634]:
+                          - table [ref=e635]:
+                            - rowgroup [ref=e636]:
+                              - row "Hijack Execution Flow (12)" [ref=e637]:
+                                - cell "Hijack Execution Flow (12)" [ref=e638]:
+                                  - link "Hijack Execution Flow (12)" [ref=e640] [cursor=pointer]:
+                                    - /url: /techniques/T1574
+                                    - text: Hijack Execution Flow
+                                    - subscript [ref=e641]: (12)
+                        - cell "=" [ref=e642] [cursor=pointer]:
+                          - generic [ref=e643]: =
+                        - cell
+                      - row "Implant Internal Image" [ref=e644]:
+                        - cell "Implant Internal Image" [ref=e645]:
+                          - link "Implant Internal Image" [ref=e647] [cursor=pointer]:
+                            - /url: /techniques/T1525
+                        - cell [ref=e648]
+                      - row "Modify Authentication Process (9) =" [ref=e649]:
+                        - cell "Modify Authentication Process (9)" [ref=e650]:
+                          - table [ref=e651]:
+                            - rowgroup [ref=e652]:
+                              - row "Modify Authentication Process (9)" [ref=e653]:
+                                - cell "Modify Authentication Process (9)" [ref=e654]:
+                                  - link "Modify Authentication Process (9)" [ref=e656] [cursor=pointer]:
+                                    - /url: /techniques/T1556
+                                    - text: Modify Authentication Process
+                                    - subscript [ref=e657]: (9)
+                        - cell "=" [ref=e658] [cursor=pointer]:
+                          - generic [ref=e659]: =
+                        - cell
+                      - row "Modify Registry" [ref=e660]:
+                        - cell "Modify Registry" [ref=e661]:
+                          - link "Modify Registry" [ref=e663] [cursor=pointer]:
+                            - /url: /techniques/T1112
+                        - cell [ref=e664]
+                      - row "Office Application Startup (6) =" [ref=e665]:
+                        - cell "Office Application Startup (6)" [ref=e666]:
+                          - table [ref=e667]:
+                            - rowgroup [ref=e668]:
+                              - row "Office Application Startup (6)" [ref=e669]:
+                                - cell "Office Application Startup (6)" [ref=e670]:
+                                  - link "Office Application Startup (6)" [ref=e672] [cursor=pointer]:
+                                    - /url: /techniques/T1137
+                                    - text: Office Application Startup
+                                    - subscript [ref=e673]: (6)
+                        - cell "=" [ref=e674] [cursor=pointer]:
+                          - generic [ref=e675]: =
+                        - cell
+                      - row "Power Settings" [ref=e676]:
+                        - cell "Power Settings" [ref=e677]:
+                          - link "Power Settings" [ref=e679] [cursor=pointer]:
+                            - /url: /techniques/T1653
+                        - cell [ref=e680]
+                      - row "Pre-OS Boot (5) =" [ref=e681]:
+                        - cell "Pre-OS Boot (5)" [ref=e682]:
+                          - table [ref=e683]:
+                            - rowgroup [ref=e684]:
+                              - row "Pre-OS Boot (5)" [ref=e685]:
+                                - cell "Pre-OS Boot (5)" [ref=e686]:
+                                  - link "Pre-OS Boot (5)" [ref=e688] [cursor=pointer]:
+                                    - /url: /techniques/T1542
+                                    - text: Pre-OS Boot
+                                    - subscript [ref=e689]: (5)
+                        - cell "=" [ref=e690] [cursor=pointer]:
+                          - generic [ref=e691]: =
+                        - cell
+                      - row "Scheduled Task/Job (5) =" [ref=e692]:
+                        - cell "Scheduled Task/Job (5)" [ref=e693]:
+                          - table [ref=e694]:
+                            - rowgroup [ref=e695]:
+                              - row "Scheduled Task/Job (5)" [ref=e696]:
+                                - cell "Scheduled Task/Job (5)" [ref=e697]:
+                                  - link "Scheduled Task/Job (5)" [ref=e699] [cursor=pointer]:
+                                    - /url: /techniques/T1053
+                                    - text: Scheduled Task/Job
+                                    - subscript [ref=e700]: (5)
+                        - cell "=" [ref=e701] [cursor=pointer]:
+                          - generic [ref=e702]: =
+                        - cell
+                      - row "Server Software Component (6) =" [ref=e703]:
+                        - cell "Server Software Component (6)" [ref=e704]:
+                          - table [ref=e705]:
+                            - rowgroup [ref=e706]:
+                              - row "Server Software Component (6)" [ref=e707]:
+                                - cell "Server Software Component (6)" [ref=e708]:
+                                  - link "Server Software Component (6)" [ref=e710] [cursor=pointer]:
+                                    - /url: /techniques/T1505
+                                    - text: Server Software Component
+                                    - subscript [ref=e711]: (6)
+                        - cell "=" [ref=e712] [cursor=pointer]:
+                          - generic [ref=e713]: =
+                        - cell
+                      - row "Software Extensions (2) =" [ref=e714]:
+                        - cell "Software Extensions (2)" [ref=e715]:
+                          - table [ref=e716]:
+                            - rowgroup [ref=e717]:
+                              - row "Software Extensions (2)" [ref=e718]:
+                                - cell "Software Extensions (2)" [ref=e719]:
+                                  - link "Software Extensions (2)" [ref=e721] [cursor=pointer]:
+                                    - /url: /techniques/T1176
+                                    - text: Software Extensions
+                                    - subscript [ref=e722]: (2)
+                        - cell "=" [ref=e723] [cursor=pointer]:
+                          - generic [ref=e724]: =
+                        - cell
+                      - row "Traffic Signaling (2) =" [ref=e725]:
+                        - cell "Traffic Signaling (2)" [ref=e726]:
+                          - table [ref=e727]:
+                            - rowgroup [ref=e728]:
+                              - row "Traffic Signaling (2)" [ref=e729]:
+                                - cell "Traffic Signaling (2)" [ref=e730]:
+                                  - link "Traffic Signaling (2)" [ref=e732] [cursor=pointer]:
+                                    - /url: /techniques/T1205
+                                    - text: Traffic Signaling
+                                    - subscript [ref=e733]: (2)
+                        - cell "=" [ref=e734] [cursor=pointer]:
+                          - generic [ref=e735]: =
+                        - cell
+                      - row "Valid Accounts (4) =" [ref=e736]:
+                        - cell "Valid Accounts (4)" [ref=e737]:
+                          - table [ref=e738]:
+                            - rowgroup [ref=e739]:
+                              - row "Valid Accounts (4)" [ref=e740]:
+                                - cell "Valid Accounts (4)" [ref=e741]:
+                                  - link "Valid Accounts (4)" [ref=e743] [cursor=pointer]:
+                                    - /url: /techniques/T1078
+                                    - text: Valid Accounts
+                                    - subscript [ref=e744]: (4)
+                        - cell "=" [ref=e745] [cursor=pointer]:
+                          - generic [ref=e746]: =
+                        - cell
+                - cell "Abuse Elevation Control Mechanism (6) = Access Token Manipulation (5) = Account Manipulation (7) = Boot or Logon Autostart Execution (14) = Boot or Logon Initialization Scripts (5) = Create or Modify System Process (5) = Domain or Tenant Policy Modification (2) = Escape to Host Event Triggered Execution (18) = Exploitation for Privilege Escalation Hijack Execution Flow (12) = Process Injection (12) = Scheduled Task/Job (5) = Valid Accounts (4) =" [ref=e747]:
+                  - table [ref=e748]:
+                    - rowgroup [ref=e749]:
+                      - row "Abuse Elevation Control Mechanism (6) =" [ref=e750]:
+                        - cell "Abuse Elevation Control Mechanism (6)" [ref=e751]:
+                          - table [ref=e752]:
+                            - rowgroup [ref=e753]:
+                              - row "Abuse Elevation Control Mechanism (6)" [ref=e754]:
+                                - cell "Abuse Elevation Control Mechanism (6)" [ref=e755]:
+                                  - link "Abuse Elevation Control Mechanism (6)" [ref=e757] [cursor=pointer]:
+                                    - /url: /techniques/T1548
+                                    - text: Abuse Elevation Control Mechanism
+                                    - subscript [ref=e758]: (6)
+                        - cell "=" [ref=e759] [cursor=pointer]:
+                          - generic [ref=e760]: =
+                        - cell
+                      - row "Access Token Manipulation (5) =" [ref=e761]:
+                        - cell "Access Token Manipulation (5)" [ref=e762]:
+                          - table [ref=e763]:
+                            - rowgroup [ref=e764]:
+                              - row "Access Token Manipulation (5)" [ref=e765]:
+                                - cell "Access Token Manipulation (5)" [ref=e766]:
+                                  - link "Access Token Manipulation (5)" [ref=e768] [cursor=pointer]:
+                                    - /url: /techniques/T1134
+                                    - text: Access Token Manipulation
+                                    - subscript [ref=e769]: (5)
+                        - cell "=" [ref=e770] [cursor=pointer]:
+                          - generic [ref=e771]: =
+                        - cell
+                      - row "Account Manipulation (7) =" [ref=e772]:
+                        - cell "Account Manipulation (7)" [ref=e773]:
+                          - table [ref=e774]:
+                            - rowgroup [ref=e775]:
+                              - row "Account Manipulation (7)" [ref=e776]:
+                                - cell "Account Manipulation (7)" [ref=e777]:
+                                  - link "Account Manipulation (7)" [ref=e779] [cursor=pointer]:
+                                    - /url: /techniques/T1098
+                                    - text: Account Manipulation
+                                    - subscript [ref=e780]: (7)
+                        - cell "=" [ref=e781] [cursor=pointer]:
+                          - generic [ref=e782]: =
+                        - cell
+                      - row "Boot or Logon Autostart Execution (14) =" [ref=e783]:
+                        - cell "Boot or Logon Autostart Execution (14)" [ref=e784]:
+                          - table [ref=e785]:
+                            - rowgroup [ref=e786]:
+                              - row "Boot or Logon Autostart Execution (14)" [ref=e787]:
+                                - cell "Boot or Logon Autostart Execution (14)" [ref=e788]:
+                                  - link "Boot or Logon Autostart Execution (14)" [ref=e790] [cursor=pointer]:
+                                    - /url: /techniques/T1547
+                                    - text: Boot or Logon Autostart Execution
+                                    - subscript [ref=e791]: (14)
+                        - cell "=" [ref=e792] [cursor=pointer]:
+                          - generic [ref=e793]: =
+                        - cell
+                      - row "Boot or Logon Initialization Scripts (5) =" [ref=e794]:
+                        - cell "Boot or Logon Initialization Scripts (5)" [ref=e795]:
+                          - table [ref=e796]:
+                            - rowgroup [ref=e797]:
+                              - row "Boot or Logon Initialization Scripts (5)" [ref=e798]:
+                                - cell "Boot or Logon Initialization Scripts (5)" [ref=e799]:
+                                  - link "Boot or Logon Initialization Scripts (5)" [ref=e801] [cursor=pointer]:
+                                    - /url: /techniques/T1037
+                                    - text: Boot or Logon Initialization Scripts
+                                    - subscript [ref=e802]: (5)
+                        - cell "=" [ref=e803] [cursor=pointer]:
+                          - generic [ref=e804]: =
+                        - cell
+                      - row "Create or Modify System Process (5) =" [ref=e805]:
+                        - cell "Create or Modify System Process (5)" [ref=e806]:
+                          - table [ref=e807]:
+                            - rowgroup [ref=e808]:
+                              - row "Create or Modify System Process (5)" [ref=e809]:
+                                - cell "Create or Modify System Process (5)" [ref=e810]:
+                                  - link "Create or Modify System Process (5)" [ref=e812] [cursor=pointer]:
+                                    - /url: /techniques/T1543
+                                    - text: Create or Modify System Process
+                                    - subscript [ref=e813]: (5)
+                        - cell "=" [ref=e814] [cursor=pointer]:
+                          - generic [ref=e815]: =
+                        - cell
+                      - row "Domain or Tenant Policy Modification (2) =" [ref=e816]:
+                        - cell "Domain or Tenant Policy Modification (2)" [ref=e817]:
+                          - table [ref=e818]:
+                            - rowgroup [ref=e819]:
+                              - row "Domain or Tenant Policy Modification (2)" [ref=e820]:
+                                - cell "Domain or Tenant Policy Modification (2)" [ref=e821]:
+                                  - link "Domain or Tenant Policy Modification (2)" [ref=e823] [cursor=pointer]:
+                                    - /url: /techniques/T1484
+                                    - text: Domain or Tenant Policy Modification
+                                    - subscript [ref=e824]: (2)
+                        - cell "=" [ref=e825] [cursor=pointer]:
+                          - generic [ref=e826]: =
+                        - cell
+                      - row "Escape to Host" [ref=e827]:
+                        - cell "Escape to Host" [ref=e828]:
+                          - link "Escape to Host" [ref=e830] [cursor=pointer]:
+                            - /url: /techniques/T1611
+                        - cell [ref=e831]
+                      - row "Event Triggered Execution (18) =" [ref=e832]:
+                        - cell "Event Triggered Execution (18)" [ref=e833]:
+                          - table [ref=e834]:
+                            - rowgroup [ref=e835]:
+                              - row "Event Triggered Execution (18)" [ref=e836]:
+                                - cell "Event Triggered Execution (18)" [ref=e837]:
+                                  - link "Event Triggered Execution (18)" [ref=e839] [cursor=pointer]:
+                                    - /url: /techniques/T1546
+                                    - text: Event Triggered Execution
+                                    - subscript [ref=e840]: (18)
+                        - cell "=" [ref=e841] [cursor=pointer]:
+                          - generic [ref=e842]: =
+                        - cell
+                      - row "Exploitation for Privilege Escalation" [ref=e843]:
+                        - cell "Exploitation for Privilege Escalation" [ref=e844]:
+                          - link "Exploitation for Privilege Escalation" [ref=e846] [cursor=pointer]:
+                            - /url: /techniques/T1068
+                        - cell [ref=e847]
+                      - row "Hijack Execution Flow (12) =" [ref=e848]:
+                        - cell "Hijack Execution Flow (12)" [ref=e849]:
+                          - table [ref=e850]:
+                            - rowgroup [ref=e851]:
+                              - row "Hijack Execution Flow (12)" [ref=e852]:
+                                - cell "Hijack Execution Flow (12)" [ref=e853]:
+                                  - link "Hijack Execution Flow (12)" [ref=e855] [cursor=pointer]:
+                                    - /url: /techniques/T1574
+                                    - text: Hijack Execution Flow
+                                    - subscript [ref=e856]: (12)
+                        - cell "=" [ref=e857] [cursor=pointer]:
+                          - generic [ref=e858]: =
+                        - cell
+                      - row "Process Injection (12) =" [ref=e859]:
+                        - cell "Process Injection (12)" [ref=e860]:
+                          - table [ref=e861]:
+                            - rowgroup [ref=e862]:
+                              - row "Process Injection (12)" [ref=e863]:
+                                - cell "Process Injection (12)" [ref=e864]:
+                                  - link "Process Injection (12)" [ref=e866] [cursor=pointer]:
+                                    - /url: /techniques/T1055
+                                    - text: Process Injection
+                                    - subscript [ref=e867]: (12)
+                        - cell "=" [ref=e868] [cursor=pointer]:
+                          - generic [ref=e869]: =
+                        - cell
+                      - row "Scheduled Task/Job (5) =" [ref=e870]:
+                        - cell "Scheduled Task/Job (5)" [ref=e871]:
+                          - table [ref=e872]:
+                            - rowgroup [ref=e873]:
+                              - row "Scheduled Task/Job (5)" [ref=e874]:
+                                - cell "Scheduled Task/Job (5)" [ref=e875]:
+                                  - link "Scheduled Task/Job (5)" [ref=e877] [cursor=pointer]:
+                                    - /url: /techniques/T1053
+                                    - text: Scheduled Task/Job
+                                    - subscript [ref=e878]: (5)
+                        - cell "=" [ref=e879] [cursor=pointer]:
+                          - generic [ref=e880]: =
+                        - cell
+                      - row "Valid Accounts (4) =" [ref=e881]:
+                        - cell "Valid Accounts (4)" [ref=e882]:
+                          - table [ref=e883]:
+                            - rowgroup [ref=e884]:
+                              - row "Valid Accounts (4)" [ref=e885]:
+                                - cell "Valid Accounts (4)" [ref=e886]:
+                                  - link "Valid Accounts (4)" [ref=e888] [cursor=pointer]:
+                                    - /url: /techniques/T1078
+                                    - text: Valid Accounts
+                                    - subscript [ref=e889]: (4)
+                        - cell "=" [ref=e890] [cursor=pointer]:
+                          - generic [ref=e891]: =
+                        - cell
+                - cell [ref=e892]:
+                  - table [ref=e893]:
+                    - rowgroup [ref=e894]:
+                      - row "Abuse Elevation Control Mechanism (6) =" [ref=e895]:
+                        - cell "Abuse Elevation Control Mechanism (6)" [ref=e896]:
+                          - table [ref=e897]:
+                            - rowgroup [ref=e898]:
+                              - row "Abuse Elevation Control Mechanism (6)" [ref=e899]:
+                                - cell "Abuse Elevation Control Mechanism (6)" [ref=e900]:
+                                  - link "Abuse Elevation Control Mechanism (6)" [ref=e902] [cursor=pointer]:
+                                    - /url: /techniques/T1548
+                                    - text: Abuse Elevation Control Mechanism
+                                    - subscript [ref=e903]: (6)
+                        - cell "=" [ref=e904] [cursor=pointer]:
+                          - generic [ref=e905]: =
+                        - cell
+                      - row "Access Token Manipulation (5) =" [ref=e906]:
+                        - cell "Access Token Manipulation (5)" [ref=e907]:
+                          - table [ref=e908]:
+                            - rowgroup [ref=e909]:
+                              - row "Access Token Manipulation (5)" [ref=e910]:
+                                - cell "Access Token Manipulation (5)" [ref=e911]:
+                                  - link "Access Token Manipulation (5)" [ref=e913] [cursor=pointer]:
+                                    - /url: /techniques/T1134
+                                    - text: Access Token Manipulation
+                                    - subscript [ref=e914]: (5)
+                        - cell "=" [ref=e915] [cursor=pointer]:
+                          - generic [ref=e916]: =
+                        - cell
+                      - row "BITS Jobs" [ref=e917]:
+                        - cell "BITS Jobs" [ref=e918]:
+                          - link "BITS Jobs" [ref=e920] [cursor=pointer]:
+                            - /url: /techniques/T1197
+                        - cell [ref=e921]
+                      - row "Build Image on Host" [ref=e922]:
+                        - cell "Build Image on Host" [ref=e923]:
+                          - link "Build Image on Host" [ref=e925] [cursor=pointer]:
+                            - /url: /techniques/T1612
+                        - cell [ref=e926]
+                      - row "Debugger Evasion" [ref=e927]:
+                        - cell "Debugger Evasion" [ref=e928]:
+                          - link "Debugger Evasion" [ref=e930] [cursor=pointer]:
+                            - /url: /techniques/T1622
+                        - cell [ref=e931]
+                      - row "Delay Execution" [ref=e932]:
+                        - cell "Delay Execution" [ref=e933]:
+                          - link "Delay Execution" [ref=e935] [cursor=pointer]:
+                            - /url: /techniques/T1678
+                        - cell [ref=e936]
+                      - row "Deobfuscate/Decode Files or Information" [ref=e937]:
+                        - cell "Deobfuscate/Decode Files or Information" [ref=e938]:
+                          - link "Deobfuscate/Decode Files or Information" [ref=e940] [cursor=pointer]:
+                            - /url: /techniques/T1140
+                        - cell [ref=e941]
+                      - row "Deploy Container" [ref=e942]:
+                        - cell "Deploy Container" [ref=e943]:
+                          - link "Deploy Container" [ref=e945] [cursor=pointer]:
+                            - /url: /techniques/T1610
+                        - cell [ref=e946]
+                      - row "Direct Volume Access" [ref=e947]:
+                        - cell "Direct Volume Access" [ref=e948]:
+                          - link "Direct Volume Access" [ref=e950] [cursor=pointer]:
+                            - /url: /techniques/T1006
+                        - cell [ref=e951]
+                      - row "Domain or Tenant Policy Modification (2) =" [ref=e952]:
+                        - cell "Domain or Tenant Policy Modification (2)" [ref=e953]:
+                          - table [ref=e954]:
+                            - rowgroup [ref=e955]:
+                              - row "Domain or Tenant Policy Modification (2)" [ref=e956]:
+                                - cell "Domain or Tenant Policy Modification (2)" [ref=e957]:
+                                  - link "Domain or Tenant Policy Modification (2)" [ref=e959] [cursor=pointer]:
+                                    - /url: /techniques/T1484
+                                    - text: Domain or Tenant Policy Modification
+                                    - subscript [ref=e960]: (2)
+                        - cell "=" [ref=e961] [cursor=pointer]:
+                          - generic [ref=e962]: =
+                        - cell
+                      - row "Email Spoofing" [ref=e963]:
+                        - cell "Email Spoofing" [ref=e964]:
+                          - link "Email Spoofing" [ref=e966] [cursor=pointer]:
+                            - /url: /techniques/T1672
+                        - cell [ref=e967]
+                      - row "Execution Guardrails (2) =" [ref=e968]:
+                        - cell "Execution Guardrails (2)" [ref=e969]:
+                          - table [ref=e970]:
+                            - rowgroup [ref=e971]:
+                              - row "Execution Guardrails (2)" [ref=e972]:
+                                - cell "Execution Guardrails (2)" [ref=e973]:
+                                  - link "Execution Guardrails (2)" [ref=e975] [cursor=pointer]:
+                                    - /url: /techniques/T1480
+                                    - text: Execution Guardrails
+                                    - subscript [ref=e976]: (2)
+                        - cell "=" [ref=e977] [cursor=pointer]:
+                          - generic [ref=e978]: =
+                        - cell
+                      - row "Exploitation for Defense Evasion" [ref=e979]:
+                        - cell "Exploitation for Defense Evasion" [ref=e980]:
+                          - link "Exploitation for Defense Evasion" [ref=e982] [cursor=pointer]:
+                            - /url: /techniques/T1211
+                        - cell [ref=e983]
+                      - row "File and Directory Permissions Modification (2) =" [ref=e984]:
+                        - cell "File and Directory Permissions Modification (2)" [ref=e985]:
+                          - table [ref=e986]:
+                            - rowgroup [ref=e987]:
+                              - row "File and Directory Permissions Modification (2)" [ref=e988]:
+                                - cell "File and Directory Permissions Modification (2)" [ref=e989]:
+                                  - link "File and Directory Permissions Modification (2)" [ref=e991] [cursor=pointer]:
+                                    - /url: /techniques/T1222
+                                    - text: File and Directory Permissions Modification
+                                    - subscript [ref=e992]: (2)
+                        - cell "=" [ref=e993] [cursor=pointer]:
+                          - generic [ref=e994]: =
+                        - cell
+                      - row "Hide Artifacts (14) =" [ref=e995]:
+                        - cell "Hide Artifacts (14)" [ref=e996]:
+                          - table [ref=e997]:
+                            - rowgroup [ref=e998]:
+                              - row "Hide Artifacts (14)" [ref=e999]:
+                                - cell "Hide Artifacts (14)" [ref=e1000]:
+                                  - link "Hide Artifacts (14)" [ref=e1002] [cursor=pointer]:
+                                    - /url: /techniques/T1564
+                                    - text: Hide Artifacts
+                                    - subscript [ref=e1003]: (14)
+                        - cell "=" [ref=e1004] [cursor=pointer]:
+                          - generic [ref=e1005]: =
+                        - cell
+                      - row "Hijack Execution Flow (12) =" [ref=e1006]:
+                        - cell "Hijack Execution Flow (12)" [ref=e1007]:
+                          - table [ref=e1008]:
+                            - rowgroup [ref=e1009]:
+                              - row "Hijack Execution Flow (12)" [ref=e1010]:
+                                - cell "Hijack Execution Flow (12)" [ref=e1011]:
+                                  - link "Hijack Execution Flow (12)" [ref=e1013] [cursor=pointer]:
+                                    - /url: /techniques/T1574
+                                    - text: Hijack Execution Flow
+                                    - subscript [ref=e1014]: (12)
+                        - cell "=" [ref=e1015] [cursor=pointer]:
+                          - generic [ref=e1016]: =
+                        - cell
+                      - row "Impair Defenses (12) =" [ref=e1017]:
+                        - cell "Impair Defenses (12)" [ref=e1018]:
+                          - table [ref=e1019]:
+                            - rowgroup [ref=e1020]:
+                              - row "Impair Defenses (12)" [ref=e1021]:
+                                - cell "Impair Defenses (12)" [ref=e1022]:
+                                  - link "Impair Defenses (12)" [ref=e1024] [cursor=pointer]:
+                                    - /url: /techniques/T1562
+                                    - text: Impair Defenses
+                                    - subscript [ref=e1025]: (12)
+                        - cell "=" [ref=e1026] [cursor=pointer]:
+                          - generic [ref=e1027]: =
+                        - cell
+                      - row "Impersonation" [ref=e1028]:
+                        - cell "Impersonation" [ref=e1029]:
+                          - link "Impersonation" [ref=e1031] [cursor=pointer]:
+                            - /url: /techniques/T1656
+                        - cell [ref=e1032]
+                      - row "Indicator Removal (10) =" [ref=e1033]:
+                        - cell "Indicator Removal (10)" [ref=e1034]:
+                          - table [ref=e1035]:
+                            - rowgroup [ref=e1036]:
+                              - row "Indicator Removal (10)" [ref=e1037]:
+                                - cell "Indicator Removal (10)" [ref=e1038]:
+                                  - link "Indicator Removal (10)" [ref=e1040] [cursor=pointer]:
+                                    - /url: /techniques/T1070
+                                    - text: Indicator Removal
+                                    - subscript [ref=e1041]: (10)
+                        - cell "=" [ref=e1042] [cursor=pointer]:
+                          - generic [ref=e1043]: =
+                        - cell
+                      - row "Indirect Command Execution" [ref=e1044]:
+                        - cell "Indirect Command Execution" [ref=e1045]:
+                          - link "Indirect Command Execution" [ref=e1047] [cursor=pointer]:
+                            - /url: /techniques/T1202
+                        - cell [ref=e1048]
+                      - row "Masquerading (12) =" [ref=e1049]:
+                        - cell "Masquerading (12)" [ref=e1050]:
+                          - table [ref=e1051]:
+                            - rowgroup [ref=e1052]:
+                              - row "Masquerading (12)" [ref=e1053]:
+                                - cell "Masquerading (12)" [ref=e1054]:
+                                  - link "Masquerading (12)" [ref=e1056] [cursor=pointer]:
+                                    - /url: /techniques/T1036
+                                    - text: Masquerading
+                                    - subscript [ref=e1057]: (12)
+                        - cell "=" [ref=e1058] [cursor=pointer]:
+                          - generic [ref=e1059]: =
+                        - cell
+                      - row "Modify Authentication Process (9) =" [ref=e1060]:
+                        - cell "Modify Authentication Process (9)" [ref=e1061]:
+                          - table [ref=e1062]:
+                            - rowgroup [ref=e1063]:
+                              - row "Modify Authentication Process (9)" [ref=e1064]:
+                                - cell "Modify Authentication Process (9)" [ref=e1065]:
+                                  - link "Modify Authentication Process (9)" [ref=e1067] [cursor=pointer]:
+                                    - /url: /techniques/T1556
+                                    - text: Modify Authentication Process
+                                    - subscript [ref=e1068]: (9)
+                        - cell "=" [ref=e1069] [cursor=pointer]:
+                          - generic [ref=e1070]: =
+                        - cell
+                      - row "Modify Cloud Compute Infrastructure (5) =" [ref=e1071]:
+                        - cell "Modify Cloud Compute Infrastructure (5)" [ref=e1072]:
+                          - table [ref=e1073]:
+                            - rowgroup [ref=e1074]:
+                              - row "Modify Cloud Compute Infrastructure (5)" [ref=e1075]:
+                                - cell "Modify Cloud Compute Infrastructure (5)" [ref=e1076]:
+                                  - link "Modify Cloud Compute Infrastructure (5)" [ref=e1078] [cursor=pointer]:
+                                    - /url: /techniques/T1578
+                                    - text: Modify Cloud Compute Infrastructure
+                                    - subscript [ref=e1079]: (5)
+                        - cell "=" [ref=e1080] [cursor=pointer]:
+                          - generic [ref=e1081]: =
+                        - cell
+                      - row "Modify Cloud Resource Hierarchy" [ref=e1082]:
+                        - cell "Modify Cloud Resource Hierarchy" [ref=e1083]:
+                          - link "Modify Cloud Resource Hierarchy" [ref=e1085] [cursor=pointer]:
+                            - /url: /techniques/T1666
+                        - cell [ref=e1086]
+                      - row "Modify Registry" [ref=e1087]:
+                        - cell "Modify Registry" [ref=e1088]:
+                          - link "Modify Registry" [ref=e1090] [cursor=pointer]:
+                            - /url: /techniques/T1112
+                        - cell [ref=e1091]
+                      - row "Modify System Image (2) =" [ref=e1092]:
+                        - cell "Modify System Image (2)" [ref=e1093]:
+                          - table [ref=e1094]:
+                            - rowgroup [ref=e1095]:
+                              - row "Modify System Image (2)" [ref=e1096]:
+                                - cell "Modify System Image (2)" [ref=e1097]:
+                                  - link "Modify System Image (2)" [ref=e1099] [cursor=pointer]:
+                                    - /url: /techniques/T1601
+                                    - text: Modify System Image
+                                    - subscript [ref=e1100]: (2)
+                        - cell "=" [ref=e1101] [cursor=pointer]:
+                          - generic [ref=e1102]: =
+                        - cell
+                      - row "Network Boundary Bridging (1) =" [ref=e1103]:
+                        - cell "Network Boundary Bridging (1)" [ref=e1104]:
+                          - table [ref=e1105]:
+                            - rowgroup [ref=e1106]:
+                              - row "Network Boundary Bridging (1)" [ref=e1107]:
+                                - cell "Network Boundary Bridging (1)" [ref=e1108]:
+                                  - link "Network Boundary Bridging (1)" [ref=e1110] [cursor=pointer]:
+                                    - /url: /techniques/T1599
+                                    - text: Network Boundary Bridging
+                                    - subscript [ref=e1111]: (1)
+                        - cell "=" [ref=e1112] [cursor=pointer]:
+                          - generic [ref=e1113]: =
+                        - cell
+                      - row "Obfuscated Files or Information (17) =" [ref=e1114]:
+                        - cell "Obfuscated Files or Information (17)" [ref=e1115]:
+                          - table [ref=e1116]:
+                            - rowgroup [ref=e1117]:
+                              - row "Obfuscated Files or Information (17)" [ref=e1118]:
+                                - cell "Obfuscated Files or Information (17)" [ref=e1119]:
+                                  - link "Obfuscated Files or Information (17)" [ref=e1121] [cursor=pointer]:
+                                    - /url: /techniques/T1027
+                                    - text: Obfuscated Files or Information
+                                    - subscript [ref=e1122]: (17)
+                        - cell "=" [ref=e1123] [cursor=pointer]:
+                          - generic [ref=e1124]: =
+                        - cell
+                      - row "Plist File Modification" [ref=e1125]:
+                        - cell "Plist File Modification" [ref=e1126]:
+                          - link "Plist File Modification" [ref=e1128] [cursor=pointer]:
+                            - /url: /techniques/T1647
+                        - cell [ref=e1129]
+                      - row "Pre-OS Boot (5) =" [ref=e1130]:
+                        - cell "Pre-OS Boot (5)" [ref=e1131]:
+                          - table [ref=e1132]:
+                            - rowgroup [ref=e1133]:
+                              - row "Pre-OS Boot (5)" [ref=e1134]:
+                                - cell "Pre-OS Boot (5)" [ref=e1135]:
+                                  - link "Pre-OS Boot (5)" [ref=e1137] [cursor=pointer]:
+                                    - /url: /techniques/T1542
+                                    - text: Pre-OS Boot
+                                    - subscript [ref=e1138]: (5)
+                        - cell "=" [ref=e1139] [cursor=pointer]:
+                          - generic [ref=e1140]: =
+                        - cell
+                      - row "Process Injection (12) =" [ref=e1141]:
+                        - cell "Process Injection (12)" [ref=e1142]:
+                          - table [ref=e1143]:
+                            - rowgroup [ref=e1144]:
+                              - row "Process Injection (12)" [ref=e1145]:
+                                - cell "Process Injection (12)" [ref=e1146]:
+                                  - link "Process Injection (12)" [ref=e1148] [cursor=pointer]:
+                                    - /url: /techniques/T1055
+                                    - text: Process Injection
+                                    - subscript [ref=e1149]: (12)
+                        - cell "=" [ref=e1150] [cursor=pointer]:
+                          - generic [ref=e1151]: =
+                        - cell
+                      - row "Reflective Code Loading" [ref=e1152]:
+                        - cell "Reflective Code Loading" [ref=e1153]:
+                          - link "Reflective Code Loading" [ref=e1155] [cursor=pointer]:
+                            - /url: /techniques/T1620
+                        - cell [ref=e1156]
+                      - row "Rogue Domain Controller" [ref=e1157]:
+                        - cell "Rogue Domain Controller" [ref=e1158]:
+                          - link "Rogue Domain Controller" [ref=e1160] [cursor=pointer]:
+                            - /url: /techniques/T1207
+                        - cell [ref=e1161]
+                      - row "Rootkit" [ref=e1162]:
+                        - cell "Rootkit" [ref=e1163]:
+                          - link "Rootkit" [ref=e1165] [cursor=pointer]:
+                            - /url: /techniques/T1014
+                        - cell [ref=e1166]
+                      - row "Selective Exclusion" [ref=e1167]:
+                        - cell "Selective Exclusion" [ref=e1168]:
+                          - link "Selective Exclusion" [ref=e1170] [cursor=pointer]:
+                            - /url: /techniques/T1679
+                        - cell [ref=e1171]
+                      - row "Subvert Trust Controls (6) =" [ref=e1172]:
+                        - cell "Subvert Trust Controls (6)" [ref=e1173]:
+                          - table [ref=e1174]:
+                            - rowgroup [ref=e1175]:
+                              - row "Subvert Trust Controls (6)" [ref=e1176]:
+                                - cell "Subvert Trust Controls (6)" [ref=e1177]:
+                                  - link "Subvert Trust Controls (6)" [ref=e1179] [cursor=pointer]:
+                                    - /url: /techniques/T1553
+                                    - text: Subvert Trust Controls
+                                    - subscript [ref=e1180]: (6)
+                        - cell "=" [ref=e1181] [cursor=pointer]:
+                          - generic [ref=e1182]: =
+                        - cell
+                      - row "System Binary Proxy Execution (14) =" [ref=e1183]:
+                        - cell "System Binary Proxy Execution (14)" [ref=e1184]:
+                          - table [ref=e1185]:
+                            - rowgroup [ref=e1186]:
+                              - row "System Binary Proxy Execution (14)" [ref=e1187]:
+                                - cell "System Binary Proxy Execution (14)" [ref=e1188]:
+                                  - link "System Binary Proxy Execution (14)" [ref=e1190] [cursor=pointer]:
+                                    - /url: /techniques/T1218
+                                    - text: System Binary Proxy Execution
+                                    - subscript [ref=e1191]: (14)
+                        - cell "=" [ref=e1192] [cursor=pointer]:
+                          - generic [ref=e1193]: =
+                        - cell
+                      - row "System Script Proxy Execution (2) =" [ref=e1194]:
+                        - cell "System Script Proxy Execution (2)" [ref=e1195]:
+                          - table [ref=e1196]:
+                            - rowgroup [ref=e1197]:
+                              - row "System Script Proxy Execution (2)" [ref=e1198]:
+                                - cell "System Script Proxy Execution (2)" [ref=e1199]:
+                                  - link "System Script Proxy Execution (2)" [ref=e1201] [cursor=pointer]:
+                                    - /url: /techniques/T1216
+                                    - text: System Script Proxy Execution
+                                    - subscript [ref=e1202]: (2)
+                        - cell "=" [ref=e1203] [cursor=pointer]:
+                          - generic [ref=e1204]: =
+                        - cell
+                      - row "Template Injection" [ref=e1205]:
+                        - cell "Template Injection" [ref=e1206]:
+                          - link "Template Injection" [ref=e1208] [cursor=pointer]:
+                            - /url: /techniques/T1221
+                        - cell [ref=e1209]
+                      - row "Traffic Signaling (2) =" [ref=e1210]:
+                        - cell "Traffic Signaling (2)" [ref=e1211]:
+                          - table [ref=e1212]:
+                            - rowgroup [ref=e1213]:
+                              - row "Traffic Signaling (2)" [ref=e1214]:
+                                - cell "Traffic Signaling (2)" [ref=e1215]:
+                                  - link "Traffic Signaling (2)" [ref=e1217] [cursor=pointer]:
+                                    - /url: /techniques/T1205
+                                    - text: Traffic Signaling
+                                    - subscript [ref=e1218]: (2)
+                        - cell "=" [ref=e1219] [cursor=pointer]:
+                          - generic [ref=e1220]: =
+                        - cell
+                      - row "Trusted Developer Utilities Proxy Execution (3) =" [ref=e1221]:
+                        - cell "Trusted Developer Utilities Proxy Execution (3)" [ref=e1222]:
+                          - table [ref=e1223]:
+                            - rowgroup [ref=e1224]:
+                              - row "Trusted Developer Utilities Proxy Execution (3)" [ref=e1225]:
+                                - cell "Trusted Developer Utilities Proxy Execution (3)" [ref=e1226]:
+                                  - link "Trusted Developer Utilities Proxy Execution (3)" [ref=e1228] [cursor=pointer]:
+                                    - /url: /techniques/T1127
+                                    - text: Trusted Developer Utilities Proxy Execution
+                                    - subscript [ref=e1229]: (3)
+                        - cell "=" [ref=e1230] [cursor=pointer]:
+                          - generic [ref=e1231]: =
+                        - cell
+                      - row "Unused/Unsupported Cloud Regions" [ref=e1232]:
+                        - cell "Unused/Unsupported Cloud Regions" [ref=e1233]:
+                          - link "Unused/Unsupported Cloud Regions" [ref=e1235] [cursor=pointer]:
+                            - /url: /techniques/T1535
+                        - cell [ref=e1236]
+                      - row "Use Alternate Authentication Material (4) =" [ref=e1237]:
+                        - cell "Use Alternate Authentication Material (4)" [ref=e1238]:
+                          - table [ref=e1239]:
+                            - rowgroup [ref=e1240]:
+                              - row "Use Alternate Authentication Material (4)" [ref=e1241]:
+                                - cell "Use Alternate Authentication Material (4)" [ref=e1242]:
+                                  - link "Use Alternate Authentication Material (4)" [ref=e1244] [cursor=pointer]:
+                                    - /url: /techniques/T1550
+                                    - text: Use Alternate Authentication Material
+                                    - subscript [ref=e1245]: (4)
+                        - cell "=" [ref=e1246] [cursor=pointer]:
+                          - generic [ref=e1247]: =
+                        - cell
+                      - row "Valid Accounts (4) =" [ref=e1248]:
+                        - cell "Valid Accounts (4)" [ref=e1249]:
+                          - table [ref=e1250]:
+                            - rowgroup [ref=e1251]:
+                              - row "Valid Accounts (4)" [ref=e1252]:
+                                - cell "Valid Accounts (4)" [ref=e1253]:
+                                  - link "Valid Accounts (4)" [ref=e1255] [cursor=pointer]:
+                                    - /url: /techniques/T1078
+                                    - text: Valid Accounts
+                                    - subscript [ref=e1256]: (4)
+                        - cell "=" [ref=e1257] [cursor=pointer]:
+                          - generic [ref=e1258]: =
+                        - cell
+                      - row "Virtualization/Sandbox Evasion (3) =" [ref=e1259]:
+                        - cell "Virtualization/Sandbox Evasion (3)" [ref=e1260]:
+                          - table [ref=e1261]:
+                            - rowgroup [ref=e1262]:
+                              - row "Virtualization/Sandbox Evasion (3)" [ref=e1263]:
+                                - cell "Virtualization/Sandbox Evasion (3)" [ref=e1264]:
+                                  - link "Virtualization/Sandbox Evasion (3)" [ref=e1266] [cursor=pointer]:
+                                    - /url: /techniques/T1497
+                                    - text: Virtualization/Sandbox Evasion
+                                    - subscript [ref=e1267]: (3)
+                        - cell "=" [ref=e1268] [cursor=pointer]:
+                          - generic [ref=e1269]: =
+                        - cell
+                      - row "Weaken Encryption (2) =" [ref=e1270]:
+                        - cell "Weaken Encryption (2)" [ref=e1271]:
+                          - table [ref=e1272]:
+                            - rowgroup [ref=e1273]:
+                              - row "Weaken Encryption (2)" [ref=e1274]:
+                                - cell "Weaken Encryption (2)" [ref=e1275]:
+                                  - link "Weaken Encryption (2)" [ref=e1277] [cursor=pointer]:
+                                    - /url: /techniques/T1600
+                                    - text: Weaken Encryption
+                                    - subscript [ref=e1278]: (2)
+                        - cell "=" [ref=e1279] [cursor=pointer]:
+                          - generic [ref=e1280]: =
+                        - cell
+                      - row "XSL Script Processing" [ref=e1281]:
+                        - cell "XSL Script Processing" [ref=e1282]:
+                          - link "XSL Script Processing" [ref=e1284] [cursor=pointer]:
+                            - /url: /techniques/T1220
+                        - cell [ref=e1285]
+                - cell "Adversary-in-the-Middle (4) = Brute Force (4) = Credentials from Password Stores (6) = Exploitation for Credential Access Forced Authentication Forge Web Credentials (2) = Input Capture (4) = Modify Authentication Process (9) = Multi-Factor Authentication Interception Multi-Factor Authentication Request Generation Network Sniffing OS Credential Dumping (8) = Steal Application Access Token Steal or Forge Authentication Certificates Steal or Forge Kerberos Tickets (5) = Steal Web Session Cookie Unsecured Credentials (8) =" [ref=e1286]:
+                  - table [ref=e1287]:
+                    - rowgroup [ref=e1288]:
+                      - row "Adversary-in-the-Middle (4) =" [ref=e1289]:
+                        - cell "Adversary-in-the-Middle (4)" [ref=e1290]:
+                          - table [ref=e1291]:
+                            - rowgroup [ref=e1292]:
+                              - row "Adversary-in-the-Middle (4)" [ref=e1293]:
+                                - cell "Adversary-in-the-Middle (4)" [ref=e1294]:
+                                  - link "Adversary-in-the-Middle (4)" [ref=e1296] [cursor=pointer]:
+                                    - /url: /techniques/T1557
+                                    - text: Adversary-in-the-Middle
+                                    - subscript [ref=e1297]: (4)
+                        - cell "=" [ref=e1298] [cursor=pointer]:
+                          - generic [ref=e1299]: =
+                        - cell
+                      - row "Brute Force (4) =" [ref=e1300]:
+                        - cell "Brute Force (4)" [ref=e1301]:
+                          - table [ref=e1302]:
+                            - rowgroup [ref=e1303]:
+                              - row "Brute Force (4)" [ref=e1304]:
+                                - cell "Brute Force (4)" [ref=e1305]:
+                                  - link "Brute Force (4)" [ref=e1307] [cursor=pointer]:
+                                    - /url: /techniques/T1110
+                                    - text: Brute Force
+                                    - subscript [ref=e1308]: (4)
+                        - cell "=" [ref=e1309] [cursor=pointer]:
+                          - generic [ref=e1310]: =
+                        - cell
+                      - row "Credentials from Password Stores (6) =" [ref=e1311]:
+                        - cell "Credentials from Password Stores (6)" [ref=e1312]:
+                          - table [ref=e1313]:
+                            - rowgroup [ref=e1314]:
+                              - row "Credentials from Password Stores (6)" [ref=e1315]:
+                                - cell "Credentials from Password Stores (6)" [ref=e1316]:
+                                  - link "Credentials from Password Stores (6)" [ref=e1318] [cursor=pointer]:
+                                    - /url: /techniques/T1555
+                                    - text: Credentials from Password Stores
+                                    - subscript [ref=e1319]: (6)
+                        - cell "=" [ref=e1320] [cursor=pointer]:
+                          - generic [ref=e1321]: =
+                        - cell
+                      - row "Exploitation for Credential Access" [ref=e1322]:
+                        - cell "Exploitation for Credential Access" [ref=e1323]:
+                          - link "Exploitation for Credential Access" [ref=e1325] [cursor=pointer]:
+                            - /url: /techniques/T1212
+                        - cell [ref=e1326]
+                      - row "Forced Authentication" [ref=e1327]:
+                        - cell "Forced Authentication" [ref=e1328]:
+                          - link "Forced Authentication" [ref=e1330] [cursor=pointer]:
+                            - /url: /techniques/T1187
+                        - cell [ref=e1331]
+                      - row "Forge Web Credentials (2) =" [ref=e1332]:
+                        - cell "Forge Web Credentials (2)" [ref=e1333]:
+                          - table [ref=e1334]:
+                            - rowgroup [ref=e1335]:
+                              - row "Forge Web Credentials (2)" [ref=e1336]:
+                                - cell "Forge Web Credentials (2)" [ref=e1337]:
+                                  - link "Forge Web Credentials (2)" [ref=e1339] [cursor=pointer]:
+                                    - /url: /techniques/T1606
+                                    - text: Forge Web Credentials
+                                    - subscript [ref=e1340]: (2)
+                        - cell "=" [ref=e1341] [cursor=pointer]:
+                          - generic [ref=e1342]: =
+                        - cell
+                      - row "Input Capture (4) =" [ref=e1343]:
+                        - cell "Input Capture (4)" [ref=e1344]:
+                          - table [ref=e1345]:
+                            - rowgroup [ref=e1346]:
+                              - row "Input Capture (4)" [ref=e1347]:
+                                - cell "Input Capture (4)" [ref=e1348]:
+                                  - link "Input Capture (4)" [ref=e1350] [cursor=pointer]:
+                                    - /url: /techniques/T1056
+                                    - text: Input Capture
+                                    - subscript [ref=e1351]: (4)
+                        - cell "=" [ref=e1352] [cursor=pointer]:
+                          - generic [ref=e1353]: =
+                        - cell
+                      - row "Modify Authentication Process (9) =" [ref=e1354]:
+                        - cell "Modify Authentication Process (9)" [ref=e1355]:
+                          - table [ref=e1356]:
+                            - rowgroup [ref=e1357]:
+                              - row "Modify Authentication Process (9)" [ref=e1358]:
+                                - cell "Modify Authentication Process (9)" [ref=e1359]:
+                                  - link "Modify Authentication Process (9)" [ref=e1361] [cursor=pointer]:
+                                    - /url: /techniques/T1556
+                                    - text: Modify Authentication Process
+                                    - subscript [ref=e1362]: (9)
+                        - cell "=" [ref=e1363] [cursor=pointer]:
+                          - generic [ref=e1364]: =
+                        - cell
+                      - row "Multi-Factor Authentication Interception" [ref=e1365]:
+                        - cell "Multi-Factor Authentication Interception" [ref=e1366]:
+                          - link "Multi-Factor Authentication Interception" [ref=e1368] [cursor=pointer]:
+                            - /url: /techniques/T1111
+                        - cell [ref=e1369]
+                      - row "Multi-Factor Authentication Request Generation" [ref=e1370]:
+                        - cell "Multi-Factor Authentication Request Generation" [ref=e1371]:
+                          - link "Multi-Factor Authentication Request Generation" [ref=e1373] [cursor=pointer]:
+                            - /url: /techniques/T1621
+                        - cell [ref=e1374]
+                      - row "Network Sniffing" [ref=e1375]:
+                        - cell "Network Sniffing" [ref=e1376]:
+                          - link "Network Sniffing" [ref=e1378] [cursor=pointer]:
+                            - /url: /techniques/T1040
+                        - cell [ref=e1379]
+                      - row "OS Credential Dumping (8) =" [ref=e1380]:
+                        - cell "OS Credential Dumping (8)" [ref=e1381]:
+                          - table [ref=e1382]:
+                            - rowgroup [ref=e1383]:
+                              - row "OS Credential Dumping (8)" [ref=e1384]:
+                                - cell "OS Credential Dumping (8)" [ref=e1385]:
+                                  - link "OS Credential Dumping (8)" [ref=e1387] [cursor=pointer]:
+                                    - /url: /techniques/T1003
+                                    - text: OS Credential Dumping
+                                    - subscript [ref=e1388]: (8)
+                        - cell "=" [ref=e1389] [cursor=pointer]:
+                          - generic [ref=e1390]: =
+                        - cell
+                      - row "Steal Application Access Token" [ref=e1391]:
+                        - cell "Steal Application Access Token" [ref=e1392]:
+                          - link "Steal Application Access Token" [ref=e1394] [cursor=pointer]:
+                            - /url: /techniques/T1528
+                        - cell [ref=e1395]
+                      - row "Steal or Forge Authentication Certificates" [ref=e1396]:
+                        - cell "Steal or Forge Authentication Certificates" [ref=e1397]:
+                          - link "Steal or Forge Authentication Certificates" [ref=e1399] [cursor=pointer]:
+                            - /url: /techniques/T1649
+                        - cell [ref=e1400]
+                      - row "Steal or Forge Kerberos Tickets (5) =" [ref=e1401]:
+                        - cell "Steal or Forge Kerberos Tickets (5)" [ref=e1402]:
+                          - table [ref=e1403]:
+                            - rowgroup [ref=e1404]:
+                              - row "Steal or Forge Kerberos Tickets (5)" [ref=e1405]:
+                                - cell "Steal or Forge Kerberos Tickets (5)" [ref=e1406]:
+                                  - link "Steal or Forge Kerberos Tickets (5)" [ref=e1408] [cursor=pointer]:
+                                    - /url: /techniques/T1558
+                                    - text: Steal or Forge Kerberos Tickets
+                                    - subscript [ref=e1409]: (5)
+                        - cell "=" [ref=e1410] [cursor=pointer]:
+                          - generic [ref=e1411]: =
+                        - cell
+                      - row "Steal Web Session Cookie" [ref=e1412]:
+                        - cell "Steal Web Session Cookie" [ref=e1413]:
+                          - link "Steal Web Session Cookie" [ref=e1415] [cursor=pointer]:
+                            - /url: /techniques/T1539
+                        - cell [ref=e1416]
+                      - row "Unsecured Credentials (8) =" [ref=e1417]:
+                        - cell "Unsecured Credentials (8)" [ref=e1418]:
+                          - table [ref=e1419]:
+                            - rowgroup [ref=e1420]:
+                              - row "Unsecured Credentials (8)" [ref=e1421]:
+                                - cell "Unsecured Credentials (8)" [ref=e1422]:
+                                  - link "Unsecured Credentials (8)" [ref=e1424] [cursor=pointer]:
+                                    - /url: /techniques/T1552
+                                    - text: Unsecured Credentials
+                                    - subscript [ref=e1425]: (8)
+                        - cell "=" [ref=e1426] [cursor=pointer]:
+                          - generic [ref=e1427]: =
+                        - cell
+                - cell "Account Discovery (4) = Application Window Discovery Browser Information Discovery Cloud Infrastructure Discovery Cloud Service Dashboard Cloud Service Discovery Cloud Storage Object Discovery Container and Resource Discovery Debugger Evasion Device Driver Discovery Domain Trust Discovery File and Directory Discovery Group Policy Discovery Local Storage Discovery Log Enumeration Network Service Discovery Network Share Discovery Network Sniffing Password Policy Discovery Peripheral Device Discovery Permission Groups Discovery (3) = Process Discovery Query Registry Remote System Discovery Software Discovery (2) = System Information Discovery System Location Discovery (1) = System Network Configuration Discovery (2) = System Network Connections Discovery System Owner/User Discovery System Service Discovery System Time Discovery Virtual Machine Discovery Virtualization/Sandbox Evasion (3) =" [ref=e1428]:
+                  - table [ref=e1429]:
+                    - rowgroup [ref=e1430]:
+                      - row "Account Discovery (4) =" [ref=e1431]:
+                        - cell "Account Discovery (4)" [ref=e1432]:
+                          - table [ref=e1433]:
+                            - rowgroup [ref=e1434]:
+                              - row "Account Discovery (4)" [ref=e1435]:
+                                - cell "Account Discovery (4)" [ref=e1436]:
+                                  - link "Account Discovery (4)" [ref=e1438] [cursor=pointer]:
+                                    - /url: /techniques/T1087
+                                    - text: Account Discovery
+                                    - subscript [ref=e1439]: (4)
+                        - cell "=" [ref=e1440] [cursor=pointer]:
+                          - generic [ref=e1441]: =
+                        - cell
+                      - row "Application Window Discovery" [ref=e1442]:
+                        - cell "Application Window Discovery" [ref=e1443]:
+                          - link "Application Window Discovery" [ref=e1445] [cursor=pointer]:
+                            - /url: /techniques/T1010
+                        - cell [ref=e1446]
+                      - row "Browser Information Discovery" [ref=e1447]:
+                        - cell "Browser Information Discovery" [ref=e1448]:
+                          - link "Browser Information Discovery" [ref=e1450] [cursor=pointer]:
+                            - /url: /techniques/T1217
+                        - cell [ref=e1451]
+                      - row "Cloud Infrastructure Discovery" [ref=e1452]:
+                        - cell "Cloud Infrastructure Discovery" [ref=e1453]:
+                          - link "Cloud Infrastructure Discovery" [ref=e1455] [cursor=pointer]:
+                            - /url: /techniques/T1580
+                        - cell [ref=e1456]
+                      - row "Cloud Service Dashboard" [ref=e1457]:
+                        - cell "Cloud Service Dashboard" [ref=e1458]:
+                          - link "Cloud Service Dashboard" [ref=e1460] [cursor=pointer]:
+                            - /url: /techniques/T1538
+                        - cell [ref=e1461]
+                      - row "Cloud Service Discovery" [ref=e1462]:
+                        - cell "Cloud Service Discovery" [ref=e1463]:
+                          - link "Cloud Service Discovery" [ref=e1465] [cursor=pointer]:
+                            - /url: /techniques/T1526
+                        - cell [ref=e1466]
+                      - row "Cloud Storage Object Discovery" [ref=e1467]:
+                        - cell "Cloud Storage Object Discovery" [ref=e1468]:
+                          - link "Cloud Storage Object Discovery" [ref=e1470] [cursor=pointer]:
+                            - /url: /techniques/T1619
+                        - cell [ref=e1471]
+                      - row "Container and Resource Discovery" [ref=e1472]:
+                        - cell "Container and Resource Discovery" [ref=e1473]:
+                          - link "Container and Resource Discovery" [ref=e1475] [cursor=pointer]:
+                            - /url: /techniques/T1613
+                        - cell [ref=e1476]
+                      - row "Debugger Evasion" [ref=e1477]:
+                        - cell "Debugger Evasion" [ref=e1478]:
+                          - link "Debugger Evasion" [ref=e1480] [cursor=pointer]:
+                            - /url: /techniques/T1622
+                        - cell [ref=e1481]
+                      - row "Device Driver Discovery" [ref=e1482]:
+                        - cell "Device Driver Discovery" [ref=e1483]:
+                          - link "Device Driver Discovery" [ref=e1485] [cursor=pointer]:
+                            - /url: /techniques/T1652
+                        - cell [ref=e1486]
+                      - row "Domain Trust Discovery" [ref=e1487]:
+                        - cell "Domain Trust Discovery" [ref=e1488]:
+                          - link "Domain Trust Discovery" [ref=e1490] [cursor=pointer]:
+                            - /url: /techniques/T1482
+                        - cell [ref=e1491]
+                      - row "File and Directory Discovery" [ref=e1492]:
+                        - cell "File and Directory Discovery" [ref=e1493]:
+                          - link "File and Directory Discovery" [ref=e1495] [cursor=pointer]:
+                            - /url: /techniques/T1083
+                        - cell [ref=e1496]
+                      - row "Group Policy Discovery" [ref=e1497]:
+                        - cell "Group Policy Discovery" [ref=e1498]:
+                          - link "Group Policy Discovery" [ref=e1500] [cursor=pointer]:
+                            - /url: /techniques/T1615
+                        - cell [ref=e1501]
+                      - row "Local Storage Discovery" [ref=e1502]:
+                        - cell "Local Storage Discovery" [ref=e1503]:
+                          - link "Local Storage Discovery" [ref=e1505] [cursor=pointer]:
+                            - /url: /techniques/T1680
+                        - cell [ref=e1506]
+                      - row "Log Enumeration" [ref=e1507]:
+                        - cell "Log Enumeration" [ref=e1508]:
+                          - link "Log Enumeration" [ref=e1510] [cursor=pointer]:
+                            - /url: /techniques/T1654
+                        - cell [ref=e1511]
+                      - row "Network Service Discovery" [ref=e1512]:
+                        - cell "Network Service Discovery" [ref=e1513]:
+                          - link "Network Service Discovery" [ref=e1515] [cursor=pointer]:
+                            - /url: /techniques/T1046
+                        - cell [ref=e1516]
+                      - row "Network Share Discovery" [ref=e1517]:
+                        - cell "Network Share Discovery" [ref=e1518]:
+                          - link "Network Share Discovery" [ref=e1520] [cursor=pointer]:
+                            - /url: /techniques/T1135
+                        - cell [ref=e1521]
+                      - row "Network Sniffing" [ref=e1522]:
+                        - cell "Network Sniffing" [ref=e1523]:
+                          - link "Network Sniffing" [ref=e1525] [cursor=pointer]:
+                            - /url: /techniques/T1040
+                        - cell [ref=e1526]
+                      - row "Password Policy Discovery" [ref=e1527]:
+                        - cell "Password Policy Discovery" [ref=e1528]:
+                          - link "Password Policy Discovery" [ref=e1530] [cursor=pointer]:
+                            - /url: /techniques/T1201
+                        - cell [ref=e1531]
+                      - row "Peripheral Device Discovery" [ref=e1532]:
+                        - cell "Peripheral Device Discovery" [ref=e1533]:
+                          - link "Peripheral Device Discovery" [ref=e1535] [cursor=pointer]:
+                            - /url: /techniques/T1120
+                        - cell [ref=e1536]
+                      - row "Permission Groups Discovery (3) =" [ref=e1537]:
+                        - cell "Permission Groups Discovery (3)" [ref=e1538]:
+                          - table [ref=e1539]:
+                            - rowgroup [ref=e1540]:
+                              - row "Permission Groups Discovery (3)" [ref=e1541]:
+                                - cell "Permission Groups Discovery (3)" [ref=e1542]:
+                                  - link "Permission Groups Discovery (3)" [ref=e1544] [cursor=pointer]:
+                                    - /url: /techniques/T1069
+                                    - text: Permission Groups Discovery
+                                    - subscript [ref=e1545]: (3)
+                        - cell "=" [ref=e1546] [cursor=pointer]:
+                          - generic [ref=e1547]: =
+                        - cell
+                      - row "Process Discovery" [ref=e1548]:
+                        - cell "Process Discovery" [ref=e1549]:
+                          - link "Process Discovery" [ref=e1551] [cursor=pointer]:
+                            - /url: /techniques/T1057
+                        - cell [ref=e1552]
+                      - row "Query Registry" [ref=e1553]:
+                        - cell "Query Registry" [ref=e1554]:
+                          - link "Query Registry" [ref=e1556] [cursor=pointer]:
+                            - /url: /techniques/T1012
+                        - cell [ref=e1557]
+                      - row "Remote System Discovery" [ref=e1558]:
+                        - cell "Remote System Discovery" [ref=e1559]:
+                          - link "Remote System Discovery" [ref=e1561] [cursor=pointer]:
+                            - /url: /techniques/T1018
+                        - cell [ref=e1562]
+                      - row "Software Discovery (2) =" [ref=e1563]:
+                        - cell "Software Discovery (2)" [ref=e1564]:
+                          - table [ref=e1565]:
+                            - rowgroup [ref=e1566]:
+                              - row "Software Discovery (2)" [ref=e1567]:
+                                - cell "Software Discovery (2)" [ref=e1568]:
+                                  - link "Software Discovery (2)" [ref=e1570] [cursor=pointer]:
+                                    - /url: /techniques/T1518
+                                    - text: Software Discovery
+                                    - subscript [ref=e1571]: (2)
+                        - cell "=" [ref=e1572] [cursor=pointer]:
+                          - generic [ref=e1573]: =
+                        - cell
+                      - row "System Information Discovery" [ref=e1574]:
+                        - cell "System Information Discovery" [ref=e1575]:
+                          - link "System Information Discovery" [ref=e1577] [cursor=pointer]:
+                            - /url: /techniques/T1082
+                        - cell [ref=e1578]
+                      - row "System Location Discovery (1) =" [ref=e1579]:
+                        - cell "System Location Discovery (1)" [ref=e1580]:
+                          - table [ref=e1581]:
+                            - rowgroup [ref=e1582]:
+                              - row "System Location Discovery (1)" [ref=e1583]:
+                                - cell "System Location Discovery (1)" [ref=e1584]:
+                                  - link "System Location Discovery (1)" [ref=e1586] [cursor=pointer]:
+                                    - /url: /techniques/T1614
+                                    - text: System Location Discovery
+                                    - subscript [ref=e1587]: (1)
+                        - cell "=" [ref=e1588] [cursor=pointer]:
+                          - generic [ref=e1589]: =
+                        - cell
+                      - row "System Network Configuration Discovery (2) =" [ref=e1590]:
+                        - cell "System Network Configuration Discovery (2)" [ref=e1591]:
+                          - table [ref=e1592]:
+                            - rowgroup [ref=e1593]:
+                              - row "System Network Configuration Discovery (2)" [ref=e1594]:
+                                - cell "System Network Configuration Discovery (2)" [ref=e1595]:
+                                  - link "System Network Configuration Discovery (2)" [ref=e1597] [cursor=pointer]:
+                                    - /url: /techniques/T1016
+                                    - text: System Network Configuration Discovery
+                                    - subscript [ref=e1598]: (2)
+                        - cell "=" [ref=e1599] [cursor=pointer]:
+                          - generic [ref=e1600]: =
+                        - cell
+                      - row "System Network Connections Discovery" [ref=e1601]:
+                        - cell "System Network Connections Discovery" [ref=e1602]:
+                          - link "System Network Connections Discovery" [ref=e1604] [cursor=pointer]:
+                            - /url: /techniques/T1049
+                        - cell [ref=e1605]
+                      - row "System Owner/User Discovery" [ref=e1606]:
+                        - cell "System Owner/User Discovery" [ref=e1607]:
+                          - link "System Owner/User Discovery" [ref=e1609] [cursor=pointer]:
+                            - /url: /techniques/T1033
+                        - cell [ref=e1610]
+                      - row "System Service Discovery" [ref=e1611]:
+                        - cell "System Service Discovery" [ref=e1612]:
+                          - link "System Service Discovery" [ref=e1614] [cursor=pointer]:
+                            - /url: /techniques/T1007
+                        - cell [ref=e1615]
+                      - row "System Time Discovery" [ref=e1616]:
+                        - cell "System Time Discovery" [ref=e1617]:
+                          - link "System Time Discovery" [ref=e1619] [cursor=pointer]:
+                            - /url: /techniques/T1124
+                        - cell [ref=e1620]
+                      - row "Virtual Machine Discovery" [ref=e1621]:
+                        - cell "Virtual Machine Discovery" [ref=e1622]:
+                          - link "Virtual Machine Discovery" [ref=e1624] [cursor=pointer]:
+                            - /url: /techniques/T1673
+                        - cell [ref=e1625]
+                      - row "Virtualization/Sandbox Evasion (3) =" [ref=e1626]:
+                        - cell "Virtualization/Sandbox Evasion (3)" [ref=e1627]:
+                          - table [ref=e1628]:
+                            - rowgroup [ref=e1629]:
+                              - row "Virtualization/Sandbox Evasion (3)" [ref=e1630]:
+                                - cell "Virtualization/Sandbox Evasion (3)" [ref=e1631]:
+                                  - link "Virtualization/Sandbox Evasion (3)" [ref=e1633] [cursor=pointer]:
+                                    - /url: /techniques/T1497
+                                    - text: Virtualization/Sandbox Evasion
+                                    - subscript [ref=e1634]: (3)
+                        - cell "=" [ref=e1635] [cursor=pointer]:
+                          - generic [ref=e1636]: =
+                        - cell
+                - cell "Exploitation of Remote Services Internal Spearphishing Lateral Tool Transfer Remote Service Session Hijacking (2) = Remote Services (8) = Replication Through Removable Media Software Deployment Tools Taint Shared Content Use Alternate Authentication Material (4) =" [ref=e1637]:
+                  - table [ref=e1638]:
+                    - rowgroup [ref=e1639]:
+                      - row "Exploitation of Remote Services" [ref=e1640]:
+                        - cell "Exploitation of Remote Services" [ref=e1641]:
+                          - link "Exploitation of Remote Services" [ref=e1643] [cursor=pointer]:
+                            - /url: /techniques/T1210
+                        - cell [ref=e1644]
+                      - row "Internal Spearphishing" [ref=e1645]:
+                        - cell "Internal Spearphishing" [ref=e1646]:
+                          - link "Internal Spearphishing" [ref=e1648] [cursor=pointer]:
+                            - /url: /techniques/T1534
+                        - cell [ref=e1649]
+                      - row "Lateral Tool Transfer" [ref=e1650]:
+                        - cell "Lateral Tool Transfer" [ref=e1651]:
+                          - link "Lateral Tool Transfer" [ref=e1653] [cursor=pointer]:
+                            - /url: /techniques/T1570
+                        - cell [ref=e1654]
+                      - row "Remote Service Session Hijacking (2) =" [ref=e1655]:
+                        - cell "Remote Service Session Hijacking (2)" [ref=e1656]:
+                          - table [ref=e1657]:
+                            - rowgroup [ref=e1658]:
+                              - row "Remote Service Session Hijacking (2)" [ref=e1659]:
+                                - cell "Remote Service Session Hijacking (2)" [ref=e1660]:
+                                  - link "Remote Service Session Hijacking (2)" [ref=e1662] [cursor=pointer]:
+                                    - /url: /techniques/T1563
+                                    - text: Remote Service Session Hijacking
+                                    - subscript [ref=e1663]: (2)
+                        - cell "=" [ref=e1664] [cursor=pointer]:
+                          - generic [ref=e1665]: =
+                        - cell
+                      - row "Remote Services (8) =" [ref=e1666]:
+                        - cell "Remote Services (8)" [ref=e1667]:
+                          - table [ref=e1668]:
+                            - rowgroup [ref=e1669]:
+                              - row "Remote Services (8)" [ref=e1670]:
+                                - cell "Remote Services (8)" [ref=e1671]:
+                                  - link "Remote Services (8)" [ref=e1673] [cursor=pointer]:
+                                    - /url: /techniques/T1021
+                                    - text: Remote Services
+                                    - subscript [ref=e1674]: (8)
+                        - cell "=" [ref=e1675] [cursor=pointer]:
+                          - generic [ref=e1676]: =
+                        - cell
+                      - row "Replication Through Removable Media" [ref=e1677]:
+                        - cell "Replication Through Removable Media" [ref=e1678]:
+                          - link "Replication Through Removable Media" [ref=e1680] [cursor=pointer]:
+                            - /url: /techniques/T1091
+                        - cell [ref=e1681]
+                      - row "Software Deployment Tools" [ref=e1682]:
+                        - cell "Software Deployment Tools" [ref=e1683]:
+                          - link "Software Deployment Tools" [ref=e1685] [cursor=pointer]:
+                            - /url: /techniques/T1072
+                        - cell [ref=e1686]
+                      - row "Taint Shared Content" [ref=e1687]:
+                        - cell "Taint Shared Content" [ref=e1688]:
+                          - link "Taint Shared Content" [ref=e1690] [cursor=pointer]:
+                            - /url: /techniques/T1080
+                        - cell [ref=e1691]
+                      - row "Use Alternate Authentication Material (4) =" [ref=e1692]:
+                        - cell "Use Alternate Authentication Material (4)" [ref=e1693]:
+                          - table [ref=e1694]:
+                            - rowgroup [ref=e1695]:
+                              - row "Use Alternate Authentication Material (4)" [ref=e1696]:
+                                - cell "Use Alternate Authentication Material (4)" [ref=e1697]:
+                                  - link "Use Alternate Authentication Material (4)" [ref=e1699] [cursor=pointer]:
+                                    - /url: /techniques/T1550
+                                    - text: Use Alternate Authentication Material
+                                    - subscript [ref=e1700]: (4)
+                        - cell "=" [ref=e1701] [cursor=pointer]:
+                          - generic [ref=e1702]: =
+                        - cell
+                - cell "Adversary-in-the-Middle (4) = Archive Collected Data (3) = Audio Capture Automated Collection Browser Session Hijacking Clipboard Data Data from Cloud Storage Data from Configuration Repository (2) = Data from Information Repositories (6) = Data from Local System Data from Network Shared Drive Data from Removable Media Data Staged (2) = Email Collection (3) = Input Capture (4) = Screen Capture Video Capture" [ref=e1703]:
+                  - table [ref=e1704]:
+                    - rowgroup [ref=e1705]:
+                      - row "Adversary-in-the-Middle (4) =" [ref=e1706]:
+                        - cell "Adversary-in-the-Middle (4)" [ref=e1707]:
+                          - table [ref=e1708]:
+                            - rowgroup [ref=e1709]:
+                              - row "Adversary-in-the-Middle (4)" [ref=e1710]:
+                                - cell "Adversary-in-the-Middle (4)" [ref=e1711]:
+                                  - link "Adversary-in-the-Middle (4)" [ref=e1713] [cursor=pointer]:
+                                    - /url: /techniques/T1557
+                                    - text: Adversary-in-the-Middle
+                                    - subscript [ref=e1714]: (4)
+                        - cell "=" [ref=e1715] [cursor=pointer]:
+                          - generic [ref=e1716]: =
+                        - cell
+                      - row "Archive Collected Data (3) =" [ref=e1717]:
+                        - cell "Archive Collected Data (3)" [ref=e1718]:
+                          - table [ref=e1719]:
+                            - rowgroup [ref=e1720]:
+                              - row "Archive Collected Data (3)" [ref=e1721]:
+                                - cell "Archive Collected Data (3)" [ref=e1722]:
+                                  - link "Archive Collected Data (3)" [ref=e1724] [cursor=pointer]:
+                                    - /url: /techniques/T1560
+                                    - text: Archive Collected Data
+                                    - subscript [ref=e1725]: (3)
+                        - cell "=" [ref=e1726] [cursor=pointer]:
+                          - generic [ref=e1727]: =
+                        - cell
+                      - row "Audio Capture" [ref=e1728]:
+                        - cell "Audio Capture" [ref=e1729]:
+                          - link "Audio Capture" [ref=e1731] [cursor=pointer]:
+                            - /url: /techniques/T1123
+                        - cell [ref=e1732]
+                      - row "Automated Collection" [ref=e1733]:
+                        - cell "Automated Collection" [ref=e1734]:
+                          - link "Automated Collection" [ref=e1736] [cursor=pointer]:
+                            - /url: /techniques/T1119
+                        - cell [ref=e1737]
+                      - row "Browser Session Hijacking" [ref=e1738]:
+                        - cell "Browser Session Hijacking" [ref=e1739]:
+                          - link "Browser Session Hijacking" [ref=e1741] [cursor=pointer]:
+                            - /url: /techniques/T1185
+                        - cell [ref=e1742]
+                      - row "Clipboard Data" [ref=e1743]:
+                        - cell "Clipboard Data" [ref=e1744]:
+                          - link "Clipboard Data" [ref=e1746] [cursor=pointer]:
+                            - /url: /techniques/T1115
+                        - cell [ref=e1747]
+                      - row "Data from Cloud Storage" [ref=e1748]:
+                        - cell "Data from Cloud Storage" [ref=e1749]:
+                          - link "Data from Cloud Storage" [ref=e1751] [cursor=pointer]:
+                            - /url: /techniques/T1530
+                        - cell [ref=e1752]
+                      - row "Data from Configuration Repository (2) =" [ref=e1753]:
+                        - cell "Data from Configuration Repository (2)" [ref=e1754]:
+                          - table [ref=e1755]:
+                            - rowgroup [ref=e1756]:
+                              - row "Data from Configuration Repository (2)" [ref=e1757]:
+                                - cell "Data from Configuration Repository (2)" [ref=e1758]:
+                                  - link "Data from Configuration Repository (2)" [ref=e1760] [cursor=pointer]:
+                                    - /url: /techniques/T1602
+                                    - text: Data from Configuration Repository
+                                    - subscript [ref=e1761]: (2)
+                        - cell "=" [ref=e1762] [cursor=pointer]:
+                          - generic [ref=e1763]: =
+                        - cell
+                      - row "Data from Information Repositories (6) =" [ref=e1764]:
+                        - cell "Data from Information Repositories (6)" [ref=e1765]:
+                          - table [ref=e1766]:
+                            - rowgroup [ref=e1767]:
+                              - row "Data from Information Repositories (6)" [ref=e1768]:
+                                - cell "Data from Information Repositories (6)" [ref=e1769]:
+                                  - link "Data from Information Repositories (6)" [ref=e1771] [cursor=pointer]:
+                                    - /url: /techniques/T1213
+                                    - text: Data from Information Repositories
+                                    - subscript [ref=e1772]: (6)
+                        - cell "=" [ref=e1773] [cursor=pointer]:
+                          - generic [ref=e1774]: =
+                        - cell
+                      - row "Data from Local System" [ref=e1775]:
+                        - cell "Data from Local System" [ref=e1776]:
+                          - link "Data from Local System" [ref=e1778] [cursor=pointer]:
+                            - /url: /techniques/T1005
+                        - cell [ref=e1779]
+                      - row "Data from Network Shared Drive" [ref=e1780]:
+                        - cell "Data from Network Shared Drive" [ref=e1781]:
+                          - link "Data from Network Shared Drive" [ref=e1783] [cursor=pointer]:
+                            - /url: /techniques/T1039
+                        - cell [ref=e1784]
+                      - row "Data from Removable Media" [ref=e1785]:
+                        - cell "Data from Removable Media" [ref=e1786]:
+                          - link "Data from Removable Media" [ref=e1788] [cursor=pointer]:
+                            - /url: /techniques/T1025
+                        - cell [ref=e1789]
+                      - row "Data Staged (2) =" [ref=e1790]:
+                        - cell "Data Staged (2)" [ref=e1791]:
+                          - table [ref=e1792]:
+                            - rowgroup [ref=e1793]:
+                              - row "Data Staged (2)" [ref=e1794]:
+                                - cell "Data Staged (2)" [ref=e1795]:
+                                  - link "Data Staged (2)" [ref=e1797] [cursor=pointer]:
+                                    - /url: /techniques/T1074
+                                    - text: Data Staged
+                                    - subscript [ref=e1798]: (2)
+                        - cell "=" [ref=e1799] [cursor=pointer]:
+                          - generic [ref=e1800]: =
+                        - cell
+                      - row "Email Collection (3) =" [ref=e1801]:
+                        - cell "Email Collection (3)" [ref=e1802]:
+                          - table [ref=e1803]:
+                            - rowgroup [ref=e1804]:
+                              - row "Email Collection (3)" [ref=e1805]:
+                                - cell "Email Collection (3)" [ref=e1806]:
+                                  - link "Email Collection (3)" [ref=e1808] [cursor=pointer]:
+                                    - /url: /techniques/T1114
+                                    - text: Email Collection
+                                    - subscript [ref=e1809]: (3)
+                        - cell "=" [ref=e1810] [cursor=pointer]:
+                          - generic [ref=e1811]: =
+                        - cell
+                      - row "Input Capture (4) =" [ref=e1812]:
+                        - cell "Input Capture (4)" [ref=e1813]:
+                          - table [ref=e1814]:
+                            - rowgroup [ref=e1815]:
+                              - row "Input Capture (4)" [ref=e1816]:
+                                - cell "Input Capture (4)" [ref=e1817]:
+                                  - link "Input Capture (4)" [ref=e1819] [cursor=pointer]:
+                                    - /url: /techniques/T1056
+                                    - text: Input Capture
+                                    - subscript [ref=e1820]: (4)
+                        - cell "=" [ref=e1821] [cursor=pointer]:
+                          - generic [ref=e1822]: =
+                        - cell
+                      - row "Screen Capture" [ref=e1823]:
+                        - cell "Screen Capture" [ref=e1824]:
+                          - link "Screen Capture" [ref=e1826] [cursor=pointer]:
+                            - /url: /techniques/T1113
+                        - cell [ref=e1827]
+                      - row "Video Capture" [ref=e1828]:
+                        - cell "Video Capture" [ref=e1829]:
+                          - link "Video Capture" [ref=e1831] [cursor=pointer]:
+                            - /url: /techniques/T1125
+                        - cell [ref=e1832]
+                - cell "Application Layer Protocol (5) = Communication Through Removable Media Content Injection Data Encoding (2) = Data Obfuscation (3) = Dynamic Resolution (3) = Encrypted Channel (2) = Fallback Channels Hide Infrastructure Ingress Tool Transfer Multi-Stage Channels Non-Application Layer Protocol Non-Standard Port Protocol Tunneling Proxy (4) = Remote Access Tools (3) = Traffic Signaling (2) = Web Service (3) =" [ref=e1833]:
+                  - table [ref=e1834]:
+                    - rowgroup [ref=e1835]:
+                      - row "Application Layer Protocol (5) =" [ref=e1836]:
+                        - cell "Application Layer Protocol (5)" [ref=e1837]:
+                          - table [ref=e1838]:
+                            - rowgroup [ref=e1839]:
+                              - row "Application Layer Protocol (5)" [ref=e1840]:
+                                - cell "Application Layer Protocol (5)" [ref=e1841]:
+                                  - link "Application Layer Protocol (5)" [ref=e1843] [cursor=pointer]:
+                                    - /url: /techniques/T1071
+                                    - text: Application Layer Protocol
+                                    - subscript [ref=e1844]: (5)
+                        - cell "=" [ref=e1845] [cursor=pointer]:
+                          - generic [ref=e1846]: =
+                        - cell
+                      - row "Communication Through Removable Media" [ref=e1847]:
+                        - cell "Communication Through Removable Media" [ref=e1848]:
+                          - link "Communication Through Removable Media" [ref=e1850] [cursor=pointer]:
+                            - /url: /techniques/T1092
+                        - cell [ref=e1851]
+                      - row "Content Injection" [ref=e1852]:
+                        - cell "Content Injection" [ref=e1853]:
+                          - link "Content Injection" [ref=e1855] [cursor=pointer]:
+                            - /url: /techniques/T1659
+                        - cell [ref=e1856]
+                      - row "Data Encoding (2) =" [ref=e1857]:
+                        - cell "Data Encoding (2)" [ref=e1858]:
+                          - table [ref=e1859]:
+                            - rowgroup [ref=e1860]:
+                              - row "Data Encoding (2)" [ref=e1861]:
+                                - cell "Data Encoding (2)" [ref=e1862]:
+                                  - link "Data Encoding (2)" [ref=e1864] [cursor=pointer]:
+                                    - /url: /techniques/T1132
+                                    - text: Data Encoding
+                                    - subscript [ref=e1865]: (2)
+                        - cell "=" [ref=e1866] [cursor=pointer]:
+                          - generic [ref=e1867]: =
+                        - cell
+                      - row "Data Obfuscation (3) =" [ref=e1868]:
+                        - cell "Data Obfuscation (3)" [ref=e1869]:
+                          - table [ref=e1870]:
+                            - rowgroup [ref=e1871]:
+                              - row "Data Obfuscation (3)" [ref=e1872]:
+                                - cell "Data Obfuscation (3)" [ref=e1873]:
+                                  - link "Data Obfuscation (3)" [ref=e1875] [cursor=pointer]:
+                                    - /url: /techniques/T1001
+                                    - text: Data Obfuscation
+                                    - subscript [ref=e1876]: (3)
+                        - cell "=" [ref=e1877] [cursor=pointer]:
+                          - generic [ref=e1878]: =
+                        - cell
+                      - row "Dynamic Resolution (3) =" [ref=e1879]:
+                        - cell "Dynamic Resolution (3)" [ref=e1880]:
+                          - table [ref=e1881]:
+                            - rowgroup [ref=e1882]:
+                              - row "Dynamic Resolution (3)" [ref=e1883]:
+                                - cell "Dynamic Resolution (3)" [ref=e1884]:
+                                  - link "Dynamic Resolution (3)" [ref=e1886] [cursor=pointer]:
+                                    - /url: /techniques/T1568
+                                    - text: Dynamic Resolution
+                                    - subscript [ref=e1887]: (3)
+                        - cell "=" [ref=e1888] [cursor=pointer]:
+                          - generic [ref=e1889]: =
+                        - cell
+                      - row "Encrypted Channel (2) =" [ref=e1890]:
+                        - cell "Encrypted Channel (2)" [ref=e1891]:
+                          - table [ref=e1892]:
+                            - rowgroup [ref=e1893]:
+                              - row "Encrypted Channel (2)" [ref=e1894]:
+                                - cell "Encrypted Channel (2)" [ref=e1895]:
+                                  - link "Encrypted Channel (2)" [ref=e1897] [cursor=pointer]:
+                                    - /url: /techniques/T1573
+                                    - text: Encrypted Channel
+                                    - subscript [ref=e1898]: (2)
+                        - cell "=" [ref=e1899] [cursor=pointer]:
+                          - generic [ref=e1900]: =
+                        - cell
+                      - row "Fallback Channels" [ref=e1901]:
+                        - cell "Fallback Channels" [ref=e1902]:
+                          - link "Fallback Channels" [ref=e1904] [cursor=pointer]:
+                            - /url: /techniques/T1008
+                        - cell [ref=e1905]
+                      - row "Hide Infrastructure" [ref=e1906]:
+                        - cell "Hide Infrastructure" [ref=e1907]:
+                          - link "Hide Infrastructure" [ref=e1909] [cursor=pointer]:
+                            - /url: /techniques/T1665
+                        - cell [ref=e1910]
+                      - row "Ingress Tool Transfer" [ref=e1911]:
+                        - cell "Ingress Tool Transfer" [ref=e1912]:
+                          - link "Ingress Tool Transfer" [ref=e1914] [cursor=pointer]:
+                            - /url: /techniques/T1105
+                        - cell [ref=e1915]
+                      - row "Multi-Stage Channels" [ref=e1916]:
+                        - cell "Multi-Stage Channels" [ref=e1917]:
+                          - link "Multi-Stage Channels" [ref=e1919] [cursor=pointer]:
+                            - /url: /techniques/T1104
+                        - cell [ref=e1920]
+                      - row "Non-Application Layer Protocol" [ref=e1921]:
+                        - cell "Non-Application Layer Protocol" [ref=e1922]:
+                          - link "Non-Application Layer Protocol" [ref=e1924] [cursor=pointer]:
+                            - /url: /techniques/T1095
+                        - cell [ref=e1925]
+                      - row "Non-Standard Port" [ref=e1926]:
+                        - cell "Non-Standard Port" [ref=e1927]:
+                          - link "Non-Standard Port" [ref=e1929] [cursor=pointer]:
+                            - /url: /techniques/T1571
+                        - cell [ref=e1930]
+                      - row "Protocol Tunneling" [ref=e1931]:
+                        - cell "Protocol Tunneling" [ref=e1932]:
+                          - link "Protocol Tunneling" [ref=e1934] [cursor=pointer]:
+                            - /url: /techniques/T1572
+                        - cell [ref=e1935]
+                      - row "Proxy (4) =" [ref=e1936]:
+                        - cell "Proxy (4)" [ref=e1937]:
+                          - table [ref=e1938]:
+                            - rowgroup [ref=e1939]:
+                              - row "Proxy (4)" [ref=e1940]:
+                                - cell "Proxy (4)" [ref=e1941]:
+                                  - link "Proxy (4)" [ref=e1943] [cursor=pointer]:
+                                    - /url: /techniques/T1090
+                                    - text: Proxy
+                                    - subscript [ref=e1944]: (4)
+                        - cell "=" [ref=e1945] [cursor=pointer]:
+                          - generic [ref=e1946]: =
+                        - cell
+                      - row "Remote Access Tools (3) =" [ref=e1947]:
+                        - cell "Remote Access Tools (3)" [ref=e1948]:
+                          - table [ref=e1949]:
+                            - rowgroup [ref=e1950]:
+                              - row "Remote Access Tools (3)" [ref=e1951]:
+                                - cell "Remote Access Tools (3)" [ref=e1952]:
+                                  - link "Remote Access Tools (3)" [ref=e1954] [cursor=pointer]:
+                                    - /url: /techniques/T1219
+                                    - text: Remote Access Tools
+                                    - subscript [ref=e1955]: (3)
+                        - cell "=" [ref=e1956] [cursor=pointer]:
+                          - generic [ref=e1957]: =
+                        - cell
+                      - row "Traffic Signaling (2) =" [ref=e1958]:
+                        - cell "Traffic Signaling (2)" [ref=e1959]:
+                          - table [ref=e1960]:
+                            - rowgroup [ref=e1961]:
+                              - row "Traffic Signaling (2)" [ref=e1962]:
+                                - cell "Traffic Signaling (2)" [ref=e1963]:
+                                  - link "Traffic Signaling (2)" [ref=e1965] [cursor=pointer]:
+                                    - /url: /techniques/T1205
+                                    - text: Traffic Signaling
+                                    - subscript [ref=e1966]: (2)
+                        - cell "=" [ref=e1967] [cursor=pointer]:
+                          - generic [ref=e1968]: =
+                        - cell
+                      - row "Web Service (3) =" [ref=e1969]:
+                        - cell "Web Service (3)" [ref=e1970]:
+                          - table [ref=e1971]:
+                            - rowgroup [ref=e1972]:
+                              - row "Web Service (3)" [ref=e1973]:
+                                - cell "Web Service (3)" [ref=e1974]:
+                                  - link "Web Service (3)" [ref=e1976] [cursor=pointer]:
+                                    - /url: /techniques/T1102
+                                    - text: Web Service
+                                    - subscript [ref=e1977]: (3)
+                        - cell "=" [ref=e1978] [cursor=pointer]:
+                          - generic [ref=e1979]: =
+                        - cell
+                - cell "Automated Exfiltration (1) = Data Transfer Size Limits Exfiltration Over Alternative Protocol (3) = Exfiltration Over C2 Channel Exfiltration Over Other Network Medium (1) = Exfiltration Over Physical Medium (1) = Exfiltration Over Web Service (4) = Scheduled Transfer Transfer Data to Cloud Account" [ref=e1980]:
+                  - table [ref=e1981]:
+                    - rowgroup [ref=e1982]:
+                      - row "Automated Exfiltration (1) =" [ref=e1983]:
+                        - cell "Automated Exfiltration (1)" [ref=e1984]:
+                          - table [ref=e1985]:
+                            - rowgroup [ref=e1986]:
+                              - row "Automated Exfiltration (1)" [ref=e1987]:
+                                - cell "Automated Exfiltration (1)" [ref=e1988]:
+                                  - link "Automated Exfiltration (1)" [ref=e1990] [cursor=pointer]:
+                                    - /url: /techniques/T1020
+                                    - text: Automated Exfiltration
+                                    - subscript [ref=e1991]: (1)
+                        - cell "=" [ref=e1992] [cursor=pointer]:
+                          - generic [ref=e1993]: =
+                        - cell
+                      - row "Data Transfer Size Limits" [ref=e1994]:
+                        - cell "Data Transfer Size Limits" [ref=e1995]:
+                          - link "Data Transfer Size Limits" [ref=e1997] [cursor=pointer]:
+                            - /url: /techniques/T1030
+                        - cell [ref=e1998]
+                      - row "Exfiltration Over Alternative Protocol (3) =" [ref=e1999]:
+                        - cell "Exfiltration Over Alternative Protocol (3)" [ref=e2000]:
+                          - table [ref=e2001]:
+                            - rowgroup [ref=e2002]:
+                              - row "Exfiltration Over Alternative Protocol (3)" [ref=e2003]:
+                                - cell "Exfiltration Over Alternative Protocol (3)" [ref=e2004]:
+                                  - link "Exfiltration Over Alternative Protocol (3)" [ref=e2006] [cursor=pointer]:
+                                    - /url: /techniques/T1048
+                                    - text: Exfiltration Over Alternative Protocol
+                                    - subscript [ref=e2007]: (3)
+                        - cell "=" [ref=e2008] [cursor=pointer]:
+                          - generic [ref=e2009]: =
+                        - cell
+                      - row "Exfiltration Over C2 Channel" [ref=e2010]:
+                        - cell "Exfiltration Over C2 Channel" [ref=e2011]:
+                          - link "Exfiltration Over C2 Channel" [ref=e2013] [cursor=pointer]:
+                            - /url: /techniques/T1041
+                        - cell [ref=e2014]
+                      - row "Exfiltration Over Other Network Medium (1) =" [ref=e2015]:
+                        - cell "Exfiltration Over Other Network Medium (1)" [ref=e2016]:
+                          - table [ref=e2017]:
+                            - rowgroup [ref=e2018]:
+                              - row "Exfiltration Over Other Network Medium (1)" [ref=e2019]:
+                                - cell "Exfiltration Over Other Network Medium (1)" [ref=e2020]:
+                                  - link "Exfiltration Over Other Network Medium (1)" [ref=e2022] [cursor=pointer]:
+                                    - /url: /techniques/T1011
+                                    - text: Exfiltration Over Other Network Medium
+                                    - subscript [ref=e2023]: (1)
+                        - cell "=" [ref=e2024] [cursor=pointer]:
+                          - generic [ref=e2025]: =
+                        - cell
+                      - row "Exfiltration Over Physical Medium (1) =" [ref=e2026]:
+                        - cell "Exfiltration Over Physical Medium (1)" [ref=e2027]:
+                          - table [ref=e2028]:
+                            - rowgroup [ref=e2029]:
+                              - row "Exfiltration Over Physical Medium (1)" [ref=e2030]:
+                                - cell "Exfiltration Over Physical Medium (1)" [ref=e2031]:
+                                  - link "Exfiltration Over Physical Medium (1)" [ref=e2033] [cursor=pointer]:
+                                    - /url: /techniques/T1052
+                                    - text: Exfiltration Over Physical Medium
+                                    - subscript [ref=e2034]: (1)
+                        - cell "=" [ref=e2035] [cursor=pointer]:
+                          - generic [ref=e2036]: =
+                        - cell
+                      - row "Exfiltration Over Web Service (4) =" [ref=e2037]:
+                        - cell "Exfiltration Over Web Service (4)" [ref=e2038]:
+                          - table [ref=e2039]:
+                            - rowgroup [ref=e2040]:
+                              - row "Exfiltration Over Web Service (4)" [ref=e2041]:
+                                - cell "Exfiltration Over Web Service (4)" [ref=e2042]:
+                                  - link "Exfiltration Over Web Service (4)" [ref=e2044] [cursor=pointer]:
+                                    - /url: /techniques/T1567
+                                    - text: Exfiltration Over Web Service
+                                    - subscript [ref=e2045]: (4)
+                        - cell "=" [ref=e2046] [cursor=pointer]:
+                          - generic [ref=e2047]: =
+                        - cell
+                      - row "Scheduled Transfer" [ref=e2048]:
+                        - cell "Scheduled Transfer" [ref=e2049]:
+                          - link "Scheduled Transfer" [ref=e2051] [cursor=pointer]:
+                            - /url: /techniques/T1029
+                        - cell [ref=e2052]
+                      - row "Transfer Data to Cloud Account" [ref=e2053]:
+                        - cell "Transfer Data to Cloud Account" [ref=e2054]:
+                          - link "Transfer Data to Cloud Account" [ref=e2056] [cursor=pointer]:
+                            - /url: /techniques/T1537
+                        - cell [ref=e2057]
+                - cell "Account Access Removal Data Destruction (1) = Data Encrypted for Impact Data Manipulation (3) = Defacement (2) = Disk Wipe (2) = Email Bombing Endpoint Denial of Service (4) = Financial Theft Firmware Corruption Inhibit System Recovery Network Denial of Service (2) = Resource Hijacking (4) = Service Stop System Shutdown/Reboot" [ref=e2058]:
+                  - table [ref=e2059]:
+                    - rowgroup [ref=e2060]:
+                      - row "Account Access Removal" [ref=e2061]:
+                        - cell "Account Access Removal" [ref=e2062]:
+                          - link "Account Access Removal" [ref=e2064] [cursor=pointer]:
+                            - /url: /techniques/T1531
+                        - cell [ref=e2065]
+                      - row "Data Destruction (1) =" [ref=e2066]:
+                        - cell "Data Destruction (1)" [ref=e2067]:
+                          - table [ref=e2068]:
+                            - rowgroup [ref=e2069]:
+                              - row "Data Destruction (1)" [ref=e2070]:
+                                - cell "Data Destruction (1)" [ref=e2071]:
+                                  - link "Data Destruction (1)" [ref=e2073] [cursor=pointer]:
+                                    - /url: /techniques/T1485
+                                    - text: Data Destruction
+                                    - subscript [ref=e2074]: (1)
+                        - cell "=" [ref=e2075] [cursor=pointer]:
+                          - generic [ref=e2076]: =
+                        - cell
+                      - row "Data Encrypted for Impact" [ref=e2077]:
+                        - cell "Data Encrypted for Impact" [ref=e2078]:
+                          - link "Data Encrypted for Impact" [ref=e2080] [cursor=pointer]:
+                            - /url: /techniques/T1486
+                        - cell [ref=e2081]
+                      - row "Data Manipulation (3) =" [ref=e2082]:
+                        - cell "Data Manipulation (3)" [ref=e2083]:
+                          - table [ref=e2084]:
+                            - rowgroup [ref=e2085]:
+                              - row "Data Manipulation (3)" [ref=e2086]:
+                                - cell "Data Manipulation (3)" [ref=e2087]:
+                                  - link "Data Manipulation (3)" [ref=e2089] [cursor=pointer]:
+                                    - /url: /techniques/T1565
+                                    - text: Data Manipulation
+                                    - subscript [ref=e2090]: (3)
+                        - cell "=" [ref=e2091] [cursor=pointer]:
+                          - generic [ref=e2092]: =
+                        - cell
+                      - row "Defacement (2) =" [ref=e2093]:
+                        - cell "Defacement (2)" [ref=e2094]:
+                          - table [ref=e2095]:
+                            - rowgroup [ref=e2096]:
+                              - row "Defacement (2)" [ref=e2097]:
+                                - cell "Defacement (2)" [ref=e2098]:
+                                  - link "Defacement (2)" [ref=e2100] [cursor=pointer]:
+                                    - /url: /techniques/T1491
+                                    - text: Defacement
+                                    - subscript [ref=e2101]: (2)
+                        - cell "=" [ref=e2102] [cursor=pointer]:
+                          - generic [ref=e2103]: =
+                        - cell
+                      - row "Disk Wipe (2) =" [ref=e2104]:
+                        - cell "Disk Wipe (2)" [ref=e2105]:
+                          - table [ref=e2106]:
+                            - rowgroup [ref=e2107]:
+                              - row "Disk Wipe (2)" [ref=e2108]:
+                                - cell "Disk Wipe (2)" [ref=e2109]:
+                                  - link "Disk Wipe (2)" [ref=e2111] [cursor=pointer]:
+                                    - /url: /techniques/T1561
+                                    - text: Disk Wipe
+                                    - subscript [ref=e2112]: (2)
+                        - cell "=" [ref=e2113] [cursor=pointer]:
+                          - generic [ref=e2114]: =
+                        - cell
+                      - row "Email Bombing" [ref=e2115]:
+                        - cell "Email Bombing" [ref=e2116]:
+                          - link "Email Bombing" [ref=e2118] [cursor=pointer]:
+                            - /url: /techniques/T1667
+                        - cell [ref=e2119]
+                      - row "Endpoint Denial of Service (4) =" [ref=e2120]:
+                        - cell "Endpoint Denial of Service (4)" [ref=e2121]:
+                          - table [ref=e2122]:
+                            - rowgroup [ref=e2123]:
+                              - row "Endpoint Denial of Service (4)" [ref=e2124]:
+                                - cell "Endpoint Denial of Service (4)" [ref=e2125]:
+                                  - link "Endpoint Denial of Service (4)" [ref=e2127] [cursor=pointer]:
+                                    - /url: /techniques/T1499
+                                    - text: Endpoint Denial of Service
+                                    - subscript [ref=e2128]: (4)
+                        - cell "=" [ref=e2129] [cursor=pointer]:
+                          - generic [ref=e2130]: =
+                        - cell
+                      - row "Financial Theft" [ref=e2131]:
+                        - cell "Financial Theft" [ref=e2132]:
+                          - link "Financial Theft" [ref=e2134] [cursor=pointer]:
+                            - /url: /techniques/T1657
+                        - cell [ref=e2135]
+                      - row "Firmware Corruption" [ref=e2136]:
+                        - cell "Firmware Corruption" [ref=e2137]:
+                          - link "Firmware Corruption" [ref=e2139] [cursor=pointer]:
+                            - /url: /techniques/T1495
+                        - cell [ref=e2140]
+                      - row "Inhibit System Recovery" [ref=e2141]:
+                        - cell "Inhibit System Recovery" [ref=e2142]:
+                          - link "Inhibit System Recovery" [ref=e2144] [cursor=pointer]:
+                            - /url: /techniques/T1490
+                        - cell [ref=e2145]
+                      - row "Network Denial of Service (2) =" [ref=e2146]:
+                        - cell "Network Denial of Service (2)" [ref=e2147]:
+                          - table [ref=e2148]:
+                            - rowgroup [ref=e2149]:
+                              - row "Network Denial of Service (2)" [ref=e2150]:
+                                - cell "Network Denial of Service (2)" [ref=e2151]:
+                                  - link "Network Denial of Service (2)" [ref=e2153] [cursor=pointer]:
+                                    - /url: /techniques/T1498
+                                    - text: Network Denial of Service
+                                    - subscript [ref=e2154]: (2)
+                        - cell "=" [ref=e2155] [cursor=pointer]:
+                          - generic [ref=e2156]: =
+                        - cell
+                      - row "Resource Hijacking (4) =" [ref=e2157]:
+                        - cell "Resource Hijacking (4)" [ref=e2158]:
+                          - table [ref=e2159]:
+                            - rowgroup [ref=e2160]:
+                              - row "Resource Hijacking (4)" [ref=e2161]:
+                                - cell "Resource Hijacking (4)" [ref=e2162]:
+                                  - link "Resource Hijacking (4)" [ref=e2164] [cursor=pointer]:
+                                    - /url: /techniques/T1496
+                                    - text: Resource Hijacking
+                                    - subscript [ref=e2165]: (4)
+                        - cell "=" [ref=e2166] [cursor=pointer]:
+                          - generic [ref=e2167]: =
+                        - cell
+                      - row "Service Stop" [ref=e2168]:
+                        - cell "Service Stop" [ref=e2169]:
+                          - link "Service Stop" [ref=e2171] [cursor=pointer]:
+                            - /url: /techniques/T1489
+                        - cell [ref=e2172]
+                      - row "System Shutdown/Reboot" [ref=e2173]:
+                        - cell "System Shutdown/Reboot" [ref=e2174]:
+                          - link "System Shutdown/Reboot" [ref=e2176] [cursor=pointer]:
+                            - /url: /techniques/T1529
+                        - cell [ref=e2177]
+  - contentinfo [ref=e2179]:
+    - generic [ref=e2181]:
+      - link "MITRE" [ref=e2184] [cursor=pointer]:
+        - /url: https://www.mitre.org
+        - img [ref=e2185]
+      - generic [ref=e2186]:
+        - generic [ref=e2187]:
+          - link "Contact Us" [ref=e2190] [cursor=pointer]:
+            - /url: /resources/engage-with-attack/contact
+          - link "Terms of Use" [ref=e2193] [cursor=pointer]:
+            - /url: /resources/legal-and-branding/terms-of-use
+          - link "Privacy Policy" [ref=e2196] [cursor=pointer]:
+            - /url: /resources/legal-and-branding/privacy
+          - link "Website Changelog" [ref=e2199] [cursor=pointer]:
+            - /url: /resources/changelog.html
+          - link "Cookie Preferences" [ref=e2202] [cursor=pointer]:
+            - /url: /resources/legal-and-branding/privacy/#
+        - generic [ref=e2204]: © 2015 - 2025, The MITRE Corporation. MITRE ATT&CK and ATT&CK are registered trademarks of The MITRE Corporation.
+      - generic [ref=e2208]:
+        - link "" [ref=e2209] [cursor=pointer]:
+          - /url: https://x.com/MITREattack
+          - generic [ref=e2210]: 
+        - link "" [ref=e2211] [cursor=pointer]:
+          - /url: https://github.com/mitre-attack
+          - generic [ref=e2212]: 

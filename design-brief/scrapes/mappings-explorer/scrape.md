@@ -1,0 +1,1192 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "Mappings Explorer" [ref=e4] [cursor=pointer]:
+        - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/
+        - img "Mappings Explorer" [ref=e5]
+      - text:  
+      - navigation [ref=e6]:
+        - list [ref=e7]:
+          - listitem [ref=e8]:
+            - link "ABOUT " [ref=e9] [cursor=pointer]:
+              - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/about/
+              - generic [ref=e10]: ABOUT
+              - generic [ref=e11]: 
+          - listitem [ref=e12]:
+            - link "ATT&CK OBJECTS " [ref=e13] [cursor=pointer]:
+              - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/matrix/
+              - generic [ref=e14]: ATT&CK OBJECTS
+              - generic [ref=e15]: 
+          - listitem [ref=e16]:
+            - link "MAPPING FRAMEWORKS " [ref=e17] [cursor=pointer]:
+              - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/external
+              - generic [ref=e18]: MAPPING FRAMEWORKS
+              - generic [ref=e19]: 
+          - listitem [ref=e20]:
+            - generic [ref=e21]:
+              - searchbox "Search" [ref=e22]
+              - img "search" [ref=e24]
+  - generic [ref=e25]:
+    - generic [ref=e27]:
+      - list [ref=e29]:
+        - listitem [ref=e30]:
+          - link "Home" [ref=e31] [cursor=pointer]:
+            - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/
+        - listitem [ref=e32]: › ATT&CK Matrix
+      - generic [ref=e33]:
+        - generic [ref=e34]:
+          - heading "ATT&CK MATRIX" [level=1] [ref=e35]
+          - paragraph [ref=e1625]: "ATT&CK for Enterprise provides a knowledge base of real-world adversary behavior targeting traditional enterprise networks. ATT&CK for Enterprise covers the following platforms: Windows, macOS, Linux, PRE, Office 365, Google Workspace, IaaS, Network, and Containers."
+          - paragraph [ref=e36]:
+            - text: View information about techniques, how techniques and tactics interact, and the
+            - link "Center for Threat-Informed Defense" [ref=e37] [cursor=pointer]:
+              - /url: https://ctid.mitre.org/
+            - text: "'s mappings coverage of"
+            - link "MITRE ATT&CK®" [ref=e38] [cursor=pointer]:
+              - /url: https://attack.mitre.org/
+            - text: techniques in the Mappings Explorer matrix view below.
+        - generic [ref=e39]:
+          - heading "Download Mapping Artifacts:" [level=6] [ref=e40]
+          - paragraph [ref=e42]:
+            - generic [ref=e43] [cursor=pointer]:
+              - img "download" [ref=e45]
+              - text: Navigator Layers
+    - generic [ref=e46]:
+      - generic [ref=e49]:
+        - heading "CHOOSE YOUR VERSIONS" [level=2] [ref=e50]
+        - generic [ref=e51]:
+          - generic [ref=e52]:
+            - paragraph [ref=e53]: ATT&CK Version
+            - generic [ref=e54] [cursor=pointer]: "16.1"
+          - generic [ref=e55]:
+            - paragraph [ref=e56]: ATT&CK Domain
+            - generic [ref=e57] [cursor=pointer]: Enterprise
+      - generic [ref=e61]:
+        - heading "ATT&CK v16.1 ENTERPRISE MAPPINGS MATRIX" [level=2] [ref=e62]
+        - generic [ref=e63]:
+          - generic [ref=e65]:
+            - button "Show All Sub-Techniques" [ref=e66] [cursor=pointer]
+            - button "Hide All Sub-Techniques" [ref=e67] [cursor=pointer]
+          - generic [ref=e69]:
+            - generic [ref=e70]:
+              - generic [ref=e72]:
+                - link "Reconnaissance" [ref=e73] [cursor=pointer]:
+                  - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/tactics/TA0043/
+                - text: (TA0043)
+              - generic [ref=e75]:
+                - link "Resource Development" [ref=e76] [cursor=pointer]:
+                  - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/tactics/TA0042/
+                - text: (TA0042)
+              - generic [ref=e78]:
+                - link "Initial Access" [ref=e79] [cursor=pointer]:
+                  - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/tactics/TA0001/
+                - text: (TA0001)
+              - generic [ref=e81]:
+                - link "Execution" [ref=e82] [cursor=pointer]:
+                  - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/tactics/TA0002/
+                - text: (TA0002)
+              - generic [ref=e84]:
+                - link "Persistence" [ref=e85] [cursor=pointer]:
+                  - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/tactics/TA0003/
+                - text: (TA0003)
+              - generic [ref=e87]:
+                - link "Privilege Escalation" [ref=e88] [cursor=pointer]:
+                  - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/tactics/TA0004/
+                - text: (TA0004)
+              - generic [ref=e90]:
+                - link "Defense Evasion" [ref=e91] [cursor=pointer]:
+                  - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/tactics/TA0005/
+                - text: (TA0005)
+              - generic [ref=e93]:
+                - link "Credential Access" [ref=e94] [cursor=pointer]:
+                  - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/tactics/TA0006/
+                - text: (TA0006)
+              - generic [ref=e96]:
+                - link "Discovery" [ref=e97] [cursor=pointer]:
+                  - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/tactics/TA0007/
+                - text: (TA0007)
+              - generic [ref=e99]:
+                - link "Lateral Movement" [ref=e100] [cursor=pointer]:
+                  - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/tactics/TA0008/
+                - text: (TA0008)
+              - generic [ref=e102]:
+                - link "Collection" [ref=e103] [cursor=pointer]:
+                  - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/tactics/TA0009/
+                - text: (TA0009)
+              - generic [ref=e105]:
+                - link "Command and Control" [ref=e106] [cursor=pointer]:
+                  - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/tactics/TA0011/
+                - text: (TA0011)
+              - generic [ref=e108]:
+                - link "Exfiltration" [ref=e109] [cursor=pointer]:
+                  - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/tactics/TA0010/
+                - text: (TA0010)
+              - generic [ref=e111]:
+                - link "Impact" [ref=e112] [cursor=pointer]:
+                  - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/tactics/TA0040/
+                - text: (TA0040)
+            - generic [ref=e113]:
+              - generic [ref=e114]:
+                - generic [ref=e119]:
+                  - link "Gather Victim Host Information" [ref=e120] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1592
+                  - text: ( T1592 ) (4)
+                - generic [ref=e125]:
+                  - link "Search Victim-Owned Websites" [ref=e126] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1594
+                  - text: ( T1594 )
+                - generic [ref=e131]:
+                  - link "Gather Victim Identity Information" [ref=e132] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1589
+                  - text: ( T1589 ) (3)
+                - generic [ref=e137]:
+                  - text: Search Open Technical Databases
+                  - text: ( T1596 ) (5)
+                - generic [ref=e142]:
+                  - link "Active Scanning" [ref=e143] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1595
+                  - text: ( T1595 ) (3)
+                - generic [ref=e148]:
+                  - link "Gather Victim Org Information" [ref=e149] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1591
+                  - text: ( T1591 ) (4)
+                - generic [ref=e154]:
+                  - link "Gather Victim Network Information" [ref=e155] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1590
+                  - text: ( T1590 ) (6)
+                - generic [ref=e160]:
+                  - link "Search Open Websites/Domains" [ref=e161] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1593
+                  - text: ( T1593 ) (3)
+                - generic [ref=e166]:
+                  - text: Search Closed Sources
+                  - text: ( T1597 ) (2)
+                - generic [ref=e171]:
+                  - link "Phishing for Information" [ref=e172] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1598
+                  - text: ( T1598 ) (4)
+              - generic [ref=e173]:
+                - generic [ref=e178]:
+                  - link "Acquire Infrastructure" [ref=e179] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1583
+                  - text: ( T1583 ) (8)
+                - generic [ref=e184]:
+                  - link "Compromise Infrastructure" [ref=e185] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1584
+                  - text: ( T1584 ) (8)
+                - generic [ref=e190]:
+                  - link "Compromise Accounts" [ref=e191] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1586
+                  - text: ( T1586 ) (3)
+                - generic [ref=e196]:
+                  - link "Stage Capabilities" [ref=e197] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1608
+                  - text: ( T1608 ) (6)
+                - generic [ref=e202]:
+                  - link "Establish Accounts" [ref=e203] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1585
+                  - text: ( T1585 ) (3)
+                - generic [ref=e208]:
+                  - link "Obtain Capabilities" [ref=e209] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1588
+                  - text: ( T1588 ) (7)
+                - generic [ref=e214]:
+                  - text: Acquire Access
+                  - text: ( T1650 )
+                - generic [ref=e219]:
+                  - link "Develop Capabilities" [ref=e220] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1587
+                  - text: ( T1587 ) (4)
+              - generic [ref=e221]:
+                - generic [ref=e226]:
+                  - link "External Remote Services" [ref=e227] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1133
+                  - text: ( T1133 )
+                - generic [ref=e232]:
+                  - link "Replication Through Removable Media" [ref=e233] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1091
+                  - text: ( T1091 )
+                - generic [ref=e238]:
+                  - link "Supply Chain Compromise" [ref=e239] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1195
+                  - text: ( T1195 ) (3)
+                - generic [ref=e244]:
+                  - link "Exploit Public-Facing Application" [ref=e245] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1190
+                  - text: ( T1190 )
+                - generic [ref=e250]:
+                  - link "Content Injection" [ref=e251] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1659
+                  - text: ( T1659 )
+                - generic [ref=e256]:
+                  - link "Trusted Relationship" [ref=e257] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1199
+                  - text: ( T1199 )
+                - generic [ref=e262]:
+                  - link "Phishing" [ref=e263] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1566
+                  - text: ( T1566 ) (4)
+                - generic [ref=e268]:
+                  - link "Valid Accounts" [ref=e269] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1078
+                  - text: ( T1078 ) (4)
+                - generic [ref=e274]:
+                  - link "Hardware Additions" [ref=e275] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1200
+                  - text: ( T1200 )
+                - generic [ref=e280]:
+                  - link "Drive-by Compromise" [ref=e281] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1189
+                  - text: ( T1189 )
+              - generic [ref=e282]:
+                - generic [ref=e287]:
+                  - link "Windows Management Instrumentation" [ref=e288] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1047
+                  - text: ( T1047 )
+                - generic [ref=e293]:
+                  - link "Shared Modules" [ref=e294] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1129
+                  - text: ( T1129 )
+                - generic [ref=e299]:
+                  - link "Scheduled Task/Job" [ref=e300] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1053
+                  - text: ( T1053 ) (5)
+                - generic [ref=e305]:
+                  - link "Native API" [ref=e306] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1106
+                  - text: ( T1106 )
+                - generic [ref=e311]:
+                  - link "Deploy Container" [ref=e312] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1610
+                  - text: ( T1610 )
+                - generic [ref=e317]:
+                  - link "Command and Scripting Interpreter" [ref=e318] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1059
+                  - text: ( T1059 ) (11)
+                - generic [ref=e323]:
+                  - link "Container Administration Command" [ref=e324] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1609
+                  - text: ( T1609 )
+                - generic [ref=e329]:
+                  - link "User Execution" [ref=e330] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1204
+                  - text: ( T1204 ) (3)
+                - generic [ref=e335]:
+                  - link "Software Deployment Tools" [ref=e336] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1072
+                  - text: ( T1072 )
+                - generic [ref=e341]:
+                  - link "Inter-Process Communication" [ref=e342] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1559
+                  - text: ( T1559 ) (3)
+                - generic [ref=e347]:
+                  - link "Exploitation for Client Execution" [ref=e348] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1203
+                  - text: ( T1203 )
+                - generic [ref=e353]:
+                  - link "System Services" [ref=e354] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1569
+                  - text: ( T1569 ) (2)
+                - generic [ref=e359]:
+                  - link "Cloud Administration Command" [ref=e360] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1651
+                  - text: ( T1651 )
+                - generic [ref=e365]:
+                  - link "Serverless Execution" [ref=e366] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1648
+                  - text: ( T1648 )
+              - generic [ref=e367]:
+                - generic [ref=e372]:
+                  - link "Boot or Logon Initialization Scripts" [ref=e373] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1037
+                  - text: ( T1037 ) (5)
+                - generic [ref=e378]:
+                  - link "Create or Modify System Process" [ref=e379] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1543
+                  - text: ( T1543 ) (5)
+                - generic [ref=e384]:
+                  - link "External Remote Services" [ref=e385] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1133
+                  - text: ( T1133 )
+                - generic [ref=e390]:
+                  - link "Boot or Logon Autostart Execution" [ref=e391] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1547
+                  - text: ( T1547 ) (14)
+                - generic [ref=e396]:
+                  - link "Office Application Startup" [ref=e397] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1137
+                  - text: ( T1137 ) (6)
+                - generic [ref=e402]:
+                  - link "Scheduled Task/Job" [ref=e403] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1053
+                  - text: ( T1053 ) (5)
+                - generic [ref=e408]:
+                  - link "Browser Extensions" [ref=e409] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1176
+                  - text: ( T1176 )
+                - generic [ref=e414]:
+                  - link "Traffic Signaling" [ref=e415] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1205
+                  - text: ( T1205 ) (2)
+                - generic [ref=e420]:
+                  - link "Implant Internal Image" [ref=e421] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1525
+                  - text: ( T1525 )
+                - generic [ref=e426]:
+                  - link "Pre-OS Boot" [ref=e427] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1542
+                  - text: ( T1542 ) (5)
+                - generic [ref=e432]:
+                  - link "Compromise Host Software Binary" [ref=e433] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1554
+                  - text: ( T1554 )
+                - generic [ref=e438]:
+                  - link "Account Manipulation" [ref=e439] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1098
+                  - text: ( T1098 ) (7)
+                - generic [ref=e444]:
+                  - link "Hijack Execution Flow" [ref=e445] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1574
+                  - text: ( T1574 ) (13)
+                - generic [ref=e450]:
+                  - link "Valid Accounts" [ref=e451] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1078
+                  - text: ( T1078 ) (4)
+                - generic [ref=e456]:
+                  - link "Event Triggered Execution" [ref=e457] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1546
+                  - text: ( T1546 ) (17)
+                - generic [ref=e462]:
+                  - link "BITS Jobs" [ref=e463] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1197
+                  - text: ( T1197 )
+                - generic [ref=e468]:
+                  - link "Server Software Component" [ref=e469] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1505
+                  - text: ( T1505 ) (5)
+                - generic [ref=e474]:
+                  - link "Create Account" [ref=e475] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1136
+                  - text: ( T1136 ) (3)
+                - generic [ref=e480]:
+                  - link "Power Settings" [ref=e481] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1653
+                  - text: ( T1653 )
+                - generic [ref=e486]:
+                  - link "Modify Authentication Process" [ref=e487] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1556
+                  - text: ( T1556 ) (9)
+              - generic [ref=e488]:
+                - generic [ref=e493]:
+                  - link "Boot or Logon Initialization Scripts" [ref=e494] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1037
+                  - text: ( T1037 ) (5)
+                - generic [ref=e499]:
+                  - link "Create or Modify System Process" [ref=e500] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1543
+                  - text: ( T1543 ) (5)
+                - generic [ref=e505]:
+                  - link "Boot or Logon Autostart Execution" [ref=e506] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1547
+                  - text: ( T1547 ) (14)
+                - generic [ref=e511]:
+                  - link "Scheduled Task/Job" [ref=e512] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1053
+                  - text: ( T1053 ) (5)
+                - generic [ref=e517]:
+                  - link "Process Injection" [ref=e518] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1055
+                  - text: ( T1055 ) (12)
+                - generic [ref=e523]:
+                  - link "Escape to Host" [ref=e524] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1611
+                  - text: ( T1611 )
+                - generic [ref=e529]:
+                  - link "Abuse Elevation Control Mechanism" [ref=e530] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1548
+                  - text: ( T1548 ) (6)
+                - generic [ref=e535]:
+                  - link "Account Manipulation" [ref=e536] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1098
+                  - text: ( T1098 ) (7)
+                - generic [ref=e541]:
+                  - link "Hijack Execution Flow" [ref=e542] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1574
+                  - text: ( T1574 ) (13)
+                - generic [ref=e547]:
+                  - link "Valid Accounts" [ref=e548] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1078
+                  - text: ( T1078 ) (4)
+                - generic [ref=e553]:
+                  - link "Exploitation for Privilege Escalation" [ref=e554] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1068
+                  - text: ( T1068 )
+                - generic [ref=e559]:
+                  - link "Event Triggered Execution" [ref=e560] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1546
+                  - text: ( T1546 ) (17)
+                - generic [ref=e565]:
+                  - link "Access Token Manipulation" [ref=e566] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1134
+                  - text: ( T1134 ) (5)
+                - generic [ref=e571]:
+                  - link "Domain or Tenant Policy Modification" [ref=e572] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1484
+                  - text: ( T1484 ) (2)
+              - generic [ref=e573]:
+                - generic [ref=e578]:
+                  - link "Direct Volume Access" [ref=e579] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1006
+                  - text: ( T1006 )
+                - generic [ref=e584]:
+                  - link "Modify Cloud Resource Hierarchy" [ref=e585] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1666
+                  - text: ( T1666 )
+                - generic [ref=e590]:
+                  - link "Rootkit" [ref=e591] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1014
+                  - text: ( T1014 )
+                - generic [ref=e596]:
+                  - link "Modify Cloud Compute Infrastructure" [ref=e597] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1578
+                  - text: ( T1578 ) (5)
+                - generic [ref=e602]:
+                  - link "Weaken Encryption" [ref=e603] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1600
+                  - text: ( T1600 ) (2)
+                - generic [ref=e608]:
+                  - link "Hide Artifacts" [ref=e609] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1564
+                  - text: ( T1564 ) (12)
+                - generic [ref=e614]:
+                  - link "Indirect Command Execution" [ref=e615] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1202
+                  - text: ( T1202 )
+                - generic [ref=e620]:
+                  - link "Deobfuscate/Decode Files or Information" [ref=e621] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1140
+                  - text: ( T1140 )
+                - generic [ref=e626]:
+                  - link "Impair Defenses" [ref=e627] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1562
+                  - text: ( T1562 ) (11)
+                - generic [ref=e632]:
+                  - link "Masquerading" [ref=e633] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1036
+                  - text: ( T1036 ) (10)
+                - generic [ref=e638]:
+                  - link "Process Injection" [ref=e639] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1055
+                  - text: ( T1055 ) (12)
+                - generic [ref=e644]:
+                  - link "Traffic Signaling" [ref=e645] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1205
+                  - text: ( T1205 ) (2)
+                - generic [ref=e650]:
+                  - link "System Binary Proxy Execution" [ref=e651] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1218
+                  - text: ( T1218 ) (14)
+                - generic [ref=e656]:
+                  - link "Reflective Code Loading" [ref=e657] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1620
+                  - text: ( T1620 )
+                - generic [ref=e662]:
+                  - link "Use Alternate Authentication Material" [ref=e663] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1550
+                  - text: ( T1550 ) (4)
+                - generic [ref=e668]:
+                  - link "Rogue Domain Controller" [ref=e669] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1207
+                  - text: ( T1207 )
+                - generic [ref=e674]:
+                  - link "Deploy Container" [ref=e675] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1610
+                  - text: ( T1610 )
+                - generic [ref=e680]:
+                  - link "Modify Registry" [ref=e681] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1112
+                  - text: ( T1112 )
+                - generic [ref=e686]:
+                  - link "Unused/Unsupported Cloud Regions" [ref=e687] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1535
+                  - text: ( T1535 )
+                - generic [ref=e692]:
+                  - link "File and Directory Permissions Modification" [ref=e693] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1222
+                  - text: ( T1222 ) (2)
+                - generic [ref=e698]:
+                  - link "Abuse Elevation Control Mechanism" [ref=e699] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1548
+                  - text: ( T1548 ) (6)
+                - generic [ref=e704]:
+                  - link "Indicator Removal" [ref=e705] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1070
+                  - text: ( T1070 ) (10)
+                - generic [ref=e710]:
+                  - link "Plist File Modification" [ref=e711] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1647
+                  - text: ( T1647 )
+                - generic [ref=e716]:
+                  - link "Pre-OS Boot" [ref=e717] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1542
+                  - text: ( T1542 ) (5)
+                - generic [ref=e722]:
+                  - link "Build Image on Host" [ref=e723] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1612
+                  - text: ( T1612 )
+                - generic [ref=e728]:
+                  - link "Virtualization/Sandbox Evasion" [ref=e729] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1497
+                  - text: ( T1497 ) (3)
+                - generic [ref=e734]:
+                  - link "Execution Guardrails" [ref=e735] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1480
+                  - text: ( T1480 ) (2)
+                - generic [ref=e740]:
+                  - link "Modify System Image" [ref=e741] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1601
+                  - text: ( T1601 ) (2)
+                - generic [ref=e746]:
+                  - link "Hijack Execution Flow" [ref=e747] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1574
+                  - text: ( T1574 ) (13)
+                - generic [ref=e752]:
+                  - link "Valid Accounts" [ref=e753] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1078
+                  - text: ( T1078 ) (4)
+                - generic [ref=e758]:
+                  - link "Obfuscated Files or Information" [ref=e759] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1027
+                  - text: ( T1027 ) (14)
+                - generic [ref=e764]:
+                  - link "Network Boundary Bridging" [ref=e765] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1599
+                  - text: ( T1599 ) (1)
+                - generic [ref=e770]:
+                  - link "Subvert Trust Controls" [ref=e771] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1553
+                  - text: ( T1553 ) (6)
+                - generic [ref=e776]:
+                  - link "BITS Jobs" [ref=e777] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1197
+                  - text: ( T1197 )
+                - generic [ref=e782]:
+                  - link "Impersonation" [ref=e783] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1656
+                  - text: ( T1656 )
+                - generic [ref=e788]:
+                  - link "Template Injection" [ref=e789] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1221
+                  - text: ( T1221 )
+                - generic [ref=e794]:
+                  - link "Access Token Manipulation" [ref=e795] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1134
+                  - text: ( T1134 ) (5)
+                - generic [ref=e800]:
+                  - link "Debugger Evasion" [ref=e801] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1622
+                  - text: ( T1622 )
+                - generic [ref=e806]:
+                  - link "Domain or Tenant Policy Modification" [ref=e807] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1484
+                  - text: ( T1484 ) (2)
+                - generic [ref=e812]:
+                  - link "XSL Script Processing" [ref=e813] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1220
+                  - text: ( T1220 )
+                - generic [ref=e818]:
+                  - link "Modify Authentication Process" [ref=e819] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1556
+                  - text: ( T1556 ) (9)
+                - generic [ref=e824]:
+                  - link "System Script Proxy Execution" [ref=e825] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1216
+                  - text: ( T1216 ) (2)
+                - generic [ref=e830]:
+                  - link "Exploitation for Defense Evasion" [ref=e831] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1211
+                  - text: ( T1211 )
+                - generic [ref=e836]:
+                  - link "Trusted Developer Utilities Proxy Execution" [ref=e837] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1127
+                  - text: ( T1127 ) (2)
+              - generic [ref=e838]:
+                - generic [ref=e843]:
+                  - link "Adversary-in-the-Middle" [ref=e844] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1557
+                  - text: ( T1557 ) (4)
+                - generic [ref=e849]:
+                  - link "OS Credential Dumping" [ref=e850] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1003
+                  - text: ( T1003 ) (8)
+                - generic [ref=e855]:
+                  - link "Steal Web Session Cookie" [ref=e856] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1539
+                  - text: ( T1539 )
+                - generic [ref=e861]:
+                  - link "Network Sniffing" [ref=e862] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1040
+                  - text: ( T1040 )
+                - generic [ref=e867]:
+                  - link "Steal or Forge Kerberos Tickets" [ref=e868] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1558
+                  - text: ( T1558 ) (5)
+                - generic [ref=e873]:
+                  - link "Credentials from Password Stores" [ref=e874] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1555
+                  - text: ( T1555 ) (6)
+                - generic [ref=e879]:
+                  - link "Unsecured Credentials" [ref=e880] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1552
+                  - text: ( T1552 ) (8)
+                - generic [ref=e885]:
+                  - link "Steal or Forge Authentication Certificates" [ref=e886] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1649
+                  - text: ( T1649 )
+                - generic [ref=e891]:
+                  - link "Steal Application Access Token" [ref=e892] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1528
+                  - text: ( T1528 )
+                - generic [ref=e897]:
+                  - link "Forge Web Credentials" [ref=e898] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1606
+                  - text: ( T1606 ) (2)
+                - generic [ref=e903]:
+                  - link "Multi-Factor Authentication Request Generation" [ref=e904] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1621
+                  - text: ( T1621 )
+                - generic [ref=e909]:
+                  - link "Exploitation for Credential Access" [ref=e910] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1212
+                  - text: ( T1212 )
+                - generic [ref=e915]:
+                  - link "Brute Force" [ref=e916] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1110
+                  - text: ( T1110 ) (4)
+                - generic [ref=e921]:
+                  - link "Forced Authentication" [ref=e922] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1187
+                  - text: ( T1187 )
+                - generic [ref=e927]:
+                  - link "Input Capture" [ref=e928] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1056
+                  - text: ( T1056 ) (4)
+                - generic [ref=e933]:
+                  - link "Multi-Factor Authentication Interception" [ref=e934] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1111
+                  - text: ( T1111 )
+                - generic [ref=e939]:
+                  - link "Modify Authentication Process" [ref=e940] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1556
+                  - text: ( T1556 ) (9)
+              - generic [ref=e941]:
+                - generic [ref=e946]:
+                  - link "System Owner/User Discovery" [ref=e947] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1033
+                  - text: ( T1033 )
+                - generic [ref=e952]:
+                  - link "Container and Resource Discovery" [ref=e953] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1613
+                  - text: ( T1613 )
+                - generic [ref=e958]:
+                  - link "Permission Groups Discovery" [ref=e959] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1069
+                  - text: ( T1069 ) (3)
+                - generic [ref=e964]:
+                  - text: Group Policy Discovery
+                  - text: ( T1615 )
+                - generic [ref=e969]:
+                  - link "Device Driver Discovery" [ref=e970] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1652
+                  - text: ( T1652 )
+                - generic [ref=e975]:
+                  - link "System Service Discovery" [ref=e976] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1007
+                  - text: ( T1007 )
+                - generic [ref=e981]:
+                  - link "Network Sniffing" [ref=e982] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1040
+                  - text: ( T1040 )
+                - generic [ref=e987]:
+                  - link "Network Share Discovery" [ref=e988] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1135
+                  - text: ( T1135 )
+                - generic [ref=e993]:
+                  - link "Peripheral Device Discovery" [ref=e994] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1120
+                  - text: ( T1120 )
+                - generic [ref=e999]:
+                  - link "System Information Discovery" [ref=e1000] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1082
+                  - text: ( T1082 )
+                - generic [ref=e1005]:
+                  - link "Application Window Discovery" [ref=e1006] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1010
+                  - text: ( T1010 )
+                - generic [ref=e1011]:
+                  - link "Cloud Infrastructure Discovery" [ref=e1012] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1580
+                  - text: ( T1580 )
+                - generic [ref=e1017]:
+                  - link "Browser Information Discovery" [ref=e1018] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1217
+                  - text: ( T1217 )
+                - generic [ref=e1023]:
+                  - link "System Network Configuration Discovery" [ref=e1024] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1016
+                  - text: ( T1016 ) (2)
+                - generic [ref=e1029]:
+                  - link "Account Discovery" [ref=e1030] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1087
+                  - text: ( T1087 ) (4)
+                - generic [ref=e1035]:
+                  - link "Domain Trust Discovery" [ref=e1036] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1482
+                  - text: ( T1482 )
+                - generic [ref=e1041]:
+                  - link "File and Directory Discovery" [ref=e1042] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1083
+                  - text: ( T1083 )
+                - generic [ref=e1047]:
+                  - link "System Network Connections Discovery" [ref=e1048] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1049
+                  - text: ( T1049 )
+                - generic [ref=e1053]:
+                  - link "Virtualization/Sandbox Evasion" [ref=e1054] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1497
+                  - text: ( T1497 ) (3)
+                - generic [ref=e1059]:
+                  - link "Cloud Storage Object Discovery" [ref=e1060] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1619
+                  - text: ( T1619 )
+                - generic [ref=e1065]:
+                  - link "Log Enumeration" [ref=e1066] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1654
+                  - text: ( T1654 )
+                - generic [ref=e1071]:
+                  - link "Process Discovery" [ref=e1072] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1057
+                  - text: ( T1057 )
+                - generic [ref=e1077]:
+                  - link "Password Policy Discovery" [ref=e1078] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1201
+                  - text: ( T1201 )
+                - generic [ref=e1083]:
+                  - link "Query Registry" [ref=e1084] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1012
+                  - text: ( T1012 )
+                - generic [ref=e1089]:
+                  - link "System Location Discovery" [ref=e1090] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1614
+                  - text: ( T1614 ) (1)
+                - generic [ref=e1095]:
+                  - link "Cloud Service Discovery" [ref=e1096] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1526
+                  - text: ( T1526 )
+                - generic [ref=e1101]:
+                  - link "Remote System Discovery" [ref=e1102] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1018
+                  - text: ( T1018 )
+                - generic [ref=e1107]:
+                  - link "Network Service Discovery" [ref=e1108] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1046
+                  - text: ( T1046 )
+                - generic [ref=e1113]:
+                  - link "Software Discovery" [ref=e1114] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1518
+                  - text: ( T1518 ) (1)
+                - generic [ref=e1119]:
+                  - link "Cloud Service Dashboard" [ref=e1120] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1538
+                  - text: ( T1538 )
+                - generic [ref=e1125]:
+                  - link "Debugger Evasion" [ref=e1126] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1622
+                  - text: ( T1622 )
+                - generic [ref=e1131]:
+                  - link "System Time Discovery" [ref=e1132] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1124
+                  - text: ( T1124 )
+              - generic [ref=e1133]:
+                - generic [ref=e1138]:
+                  - link "Taint Shared Content" [ref=e1139] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1080
+                  - text: ( T1080 )
+                - generic [ref=e1144]:
+                  - link "Replication Through Removable Media" [ref=e1145] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1091
+                  - text: ( T1091 )
+                - generic [ref=e1150]:
+                  - link "Use Alternate Authentication Material" [ref=e1151] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1550
+                  - text: ( T1550 ) (4)
+                - generic [ref=e1156]:
+                  - link "Remote Services" [ref=e1157] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1021
+                  - text: ( T1021 ) (8)
+                - generic [ref=e1162]:
+                  - link "Remote Service Session Hijacking" [ref=e1163] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1563
+                  - text: ( T1563 ) (2)
+                - generic [ref=e1168]:
+                  - link "Software Deployment Tools" [ref=e1169] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1072
+                  - text: ( T1072 )
+                - generic [ref=e1174]:
+                  - link "Exploitation of Remote Services" [ref=e1175] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1210
+                  - text: ( T1210 )
+                - generic [ref=e1180]:
+                  - link "Internal Spearphishing" [ref=e1181] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1534
+                  - text: ( T1534 )
+                - generic [ref=e1186]:
+                  - link "Lateral Tool Transfer" [ref=e1187] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1570
+                  - text: ( T1570 )
+              - generic [ref=e1188]:
+                - generic [ref=e1193]:
+                  - link "Screen Capture" [ref=e1194] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1113
+                  - text: ( T1113 )
+                - generic [ref=e1199]:
+                  - link "Adversary-in-the-Middle" [ref=e1200] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1557
+                  - text: ( T1557 ) (4)
+                - generic [ref=e1205]:
+                  - link "Data from Configuration Repository" [ref=e1206] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1602
+                  - text: ( T1602 ) (2)
+                - generic [ref=e1211]:
+                  - link "Audio Capture" [ref=e1212] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1123
+                  - text: ( T1123 )
+                - generic [ref=e1217]:
+                  - link "Email Collection" [ref=e1218] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1114
+                  - text: ( T1114 ) (3)
+                - generic [ref=e1223]:
+                  - link "Data from Removable Media" [ref=e1224] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1025
+                  - text: ( T1025 )
+                - generic [ref=e1229]:
+                  - link "Automated Collection" [ref=e1230] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1119
+                  - text: ( T1119 )
+                - generic [ref=e1235]:
+                  - link "Clipboard Data" [ref=e1236] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1115
+                  - text: ( T1115 )
+                - generic [ref=e1241]:
+                  - link "Data from Cloud Storage" [ref=e1242] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1530
+                  - text: ( T1530 )
+                - generic [ref=e1247]:
+                  - link "Data from Local System" [ref=e1248] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1005
+                  - text: ( T1005 )
+                - generic [ref=e1253]:
+                  - link "Archive Collected Data" [ref=e1254] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1560
+                  - text: ( T1560 ) (3)
+                - generic [ref=e1259]:
+                  - link "Browser Session Hijacking" [ref=e1260] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1185
+                  - text: ( T1185 )
+                - generic [ref=e1265]:
+                  - link "Video Capture" [ref=e1266] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1125
+                  - text: ( T1125 )
+                - generic [ref=e1271]:
+                  - link "Data Staged" [ref=e1272] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1074
+                  - text: ( T1074 ) (2)
+                - generic [ref=e1277]:
+                  - link "Data from Network Shared Drive" [ref=e1278] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1039
+                  - text: ( T1039 )
+                - generic [ref=e1283]:
+                  - link "Input Capture" [ref=e1284] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1056
+                  - text: ( T1056 ) (4)
+                - generic [ref=e1289]:
+                  - link "Data from Information Repositories" [ref=e1290] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1213
+                  - text: ( T1213 ) (5)
+              - generic [ref=e1291]:
+                - generic [ref=e1296]:
+                  - link "Application Layer Protocol" [ref=e1297] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1071
+                  - text: ( T1071 ) (5)
+                - generic [ref=e1302]:
+                  - link "Remote Access Software" [ref=e1303] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1219
+                  - text: ( T1219 )
+                - generic [ref=e1308]:
+                  - link "Content Injection" [ref=e1309] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1659
+                  - text: ( T1659 )
+                - generic [ref=e1314]:
+                  - link "Traffic Signaling" [ref=e1315] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1205
+                  - text: ( T1205 ) (2)
+                - generic [ref=e1320]:
+                  - link "Protocol Tunneling" [ref=e1321] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1572
+                  - text: ( T1572 )
+                - generic [ref=e1326]:
+                  - link "Communication Through Removable Media" [ref=e1327] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1092
+                  - text: ( T1092 )
+                - generic [ref=e1332]:
+                  - link "Proxy" [ref=e1333] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1090
+                  - text: ( T1090 ) (4)
+                - generic [ref=e1338]:
+                  - link "Dynamic Resolution" [ref=e1339] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1568
+                  - text: ( T1568 ) (3)
+                - generic [ref=e1344]:
+                  - link "Web Service" [ref=e1345] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1102
+                  - text: ( T1102 ) (3)
+                - generic [ref=e1350]:
+                  - link "Multi-Stage Channels" [ref=e1351] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1104
+                  - text: ( T1104 )
+                - generic [ref=e1356]:
+                  - link "Data Obfuscation" [ref=e1357] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1001
+                  - text: ( T1001 ) (3)
+                - generic [ref=e1362]:
+                  - link "Non-Standard Port" [ref=e1363] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1571
+                  - text: ( T1571 )
+                - generic [ref=e1368]:
+                  - link "Encrypted Channel" [ref=e1369] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1573
+                  - text: ( T1573 ) (2)
+                - generic [ref=e1374]:
+                  - link "Non-Application Layer Protocol" [ref=e1375] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1095
+                  - text: ( T1095 )
+                - generic [ref=e1380]:
+                  - link "Data Encoding" [ref=e1381] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1132
+                  - text: ( T1132 ) (2)
+                - generic [ref=e1386]:
+                  - link "Ingress Tool Transfer" [ref=e1387] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1105
+                  - text: ( T1105 )
+                - generic [ref=e1392]:
+                  - link "Hide Infrastructure" [ref=e1393] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1665
+                  - text: ( T1665 )
+                - generic [ref=e1398]:
+                  - link "Fallback Channels" [ref=e1399] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1008
+                  - text: ( T1008 )
+              - generic [ref=e1400]:
+                - generic [ref=e1405]:
+                  - link "Exfiltration Over Web Service" [ref=e1406] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1567
+                  - text: ( T1567 ) (4)
+                - generic [ref=e1411]:
+                  - link "Scheduled Transfer" [ref=e1412] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1029
+                  - text: ( T1029 )
+                - generic [ref=e1417]:
+                  - link "Exfiltration Over Other Network Medium" [ref=e1418] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1011
+                  - text: ( T1011 ) (1)
+                - generic [ref=e1423]:
+                  - link "Automated Exfiltration" [ref=e1424] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1020
+                  - text: ( T1020 ) (1)
+                - generic [ref=e1429]:
+                  - link "Exfiltration Over C2 Channel" [ref=e1430] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1041
+                  - text: ( T1041 )
+                - generic [ref=e1435]:
+                  - link "Exfiltration Over Alternative Protocol" [ref=e1436] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1048
+                  - text: ( T1048 ) (3)
+                - generic [ref=e1441]:
+                  - link "Data Transfer Size Limits" [ref=e1442] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1030
+                  - text: ( T1030 )
+                - generic [ref=e1447]:
+                  - link "Transfer Data to Cloud Account" [ref=e1448] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1537
+                  - text: ( T1537 )
+                - generic [ref=e1453]:
+                  - link "Exfiltration Over Physical Medium" [ref=e1454] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1052
+                  - text: ( T1052 ) (1)
+              - generic [ref=e1455]:
+                - generic [ref=e1460]:
+                  - link "Disk Wipe" [ref=e1461] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1561
+                  - text: ( T1561 ) (2)
+                - generic [ref=e1466]:
+                  - link "Service Stop" [ref=e1467] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1489
+                  - text: ( T1489 )
+                - generic [ref=e1472]:
+                  - link "Defacement" [ref=e1473] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1491
+                  - text: ( T1491 ) (2)
+                - generic [ref=e1478]:
+                  - link "Financial Theft" [ref=e1479] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1657
+                  - text: ( T1657 )
+                - generic [ref=e1484]:
+                  - link "Data Manipulation" [ref=e1485] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1565
+                  - text: ( T1565 ) (3)
+                - generic [ref=e1490]:
+                  - link "Account Access Removal" [ref=e1491] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1531
+                  - text: ( T1531 )
+                - generic [ref=e1496]:
+                  - link "Data Encrypted for Impact" [ref=e1497] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1486
+                  - text: ( T1486 )
+                - generic [ref=e1502]:
+                  - link "Endpoint Denial of Service" [ref=e1503] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1499
+                  - text: ( T1499 ) (4)
+                - generic [ref=e1508]:
+                  - link "Resource Hijacking" [ref=e1509] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1496
+                  - text: ( T1496 ) (4)
+                - generic [ref=e1514]:
+                  - link "Data Destruction" [ref=e1515] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1485
+                  - text: ( T1485 ) (1)
+                - generic [ref=e1520]:
+                  - link "Network Denial of Service" [ref=e1521] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1498
+                  - text: ( T1498 ) (2)
+                - generic [ref=e1526]:
+                  - link "Firmware Corruption" [ref=e1527] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1495
+                  - text: ( T1495 )
+                - generic [ref=e1532]:
+                  - link "Inhibit System Recovery" [ref=e1533] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1490
+                  - text: ( T1490 )
+                - generic [ref=e1538]:
+                  - link "System Shutdown/Reboot" [ref=e1539] [cursor=pointer]:
+                    - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/T1529
+                  - text: ( T1529 )
+  - contentinfo [ref=e1540]:
+    - contentinfo [ref=e1541]:
+      - generic [ref=e1544]:
+        - generic [ref=e1545]:
+          - link "Mappings Explorer" [ref=e1546] [cursor=pointer]:
+            - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/
+            - img "Mappings Explorer" [ref=e1547]
+          - paragraph [ref=e1548]:
+            - text: The
+            - link "Center for Threat-Informed Defense" [ref=e1549] [cursor=pointer]:
+              - /url: https://ctid.mitre.org/
+            - text: is a non-profit, privately funded research and development organization. Our mission is to advance the state of the art and the state of the practice in threat-informed defense globally.
+          - generic [ref=e1550]:
+            - link "center for threat informed defense logo" [ref=e1551] [cursor=pointer]:
+              - /url: https://ctid.mitre.org/
+              - img "center for threat informed defense logo" [ref=e1552]
+            - generic [ref=e1553]:
+              - link "" [ref=e1554] [cursor=pointer]:
+                - /url: mailto:ctid@mitre.org?subject=Mappings%20Explorer
+                - generic [ref=e1555]: 
+              - link "" [ref=e1556] [cursor=pointer]:
+                - /url: https://www.linkedin.com/showcase/center-for-threat-informed-defense/
+                - generic [ref=e1557]: 
+              - link "" [ref=e1558] [cursor=pointer]:
+                - /url: https://www.youtube.com/playlist?list=PLALq3Th79NnpUkRy8TUYVBKvysCp9xwNh
+                - generic [ref=e1559]: 
+              - link "" [ref=e1560] [cursor=pointer]:
+                - /url: https://github.com/center-for-threat-informed-defense/mappings-explorer
+                - generic [ref=e1561]: 
+        - generic [ref=e1562]:
+          - heading "About" [level=4] [ref=e1563]
+          - list [ref=e1564]:
+            - listitem [ref=e1565]:
+              - generic [ref=e1566]: 
+              - link "Overview" [ref=e1567] [cursor=pointer]:
+                - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/about/
+            - listitem [ref=e1568]:
+              - generic [ref=e1569]: 
+              - link "Methodology" [ref=e1570] [cursor=pointer]:
+                - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/about/methodology/
+            - listitem [ref=e1571]:
+              - generic [ref=e1572]: 
+              - link "Related Projects" [ref=e1573] [cursor=pointer]:
+                - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/about/related-projects/
+            - listitem [ref=e1574]:
+              - generic [ref=e1575]: 
+              - link "Scoring Rubric" [ref=e1576] [cursor=pointer]:
+                - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/about/scoring/
+            - listitem [ref=e1577]:
+              - generic [ref=e1578]: 
+              - link "Use Cases" [ref=e1579] [cursor=pointer]:
+                - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/about/use-cases/
+        - generic [ref=e1580]:
+          - heading "ATT&CK Objects" [level=4] [ref=e1581]
+          - list [ref=e1582]:
+            - listitem [ref=e1583]:
+              - generic [ref=e1584]: 
+              - link "Matrix" [ref=e1585] [cursor=pointer]:
+                - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/matrix/
+            - listitem [ref=e1586]:
+              - generic [ref=e1587]: 
+              - link "Tactics" [ref=e1588] [cursor=pointer]:
+                - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/tactics/
+            - listitem [ref=e1589]:
+              - generic [ref=e1590]: 
+              - link "Techniques" [ref=e1591] [cursor=pointer]:
+                - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/attack/attack-16.1/domain-enterprise/techniques/
+        - generic [ref=e1592]:
+          - heading "Mappings Frameworks" [level=4] [ref=e1593]
+          - list [ref=e1594]:
+            - listitem [ref=e1595]:
+              - generic [ref=e1596]: 
+              - link "About Mappings" [ref=e1597] [cursor=pointer]:
+                - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/external/
+            - listitem [ref=e1598]:
+              - generic [ref=e1599]: 
+              - link "Amazon Web Services (AWS)" [ref=e1600] [cursor=pointer]:
+                - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/external/aws/
+            - listitem [ref=e1601]:
+              - generic [ref=e1602]: 
+              - link "Azure" [ref=e1603] [cursor=pointer]:
+                - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/external/azure/
+            - listitem [ref=e1604]:
+              - generic [ref=e1605]: 
+              - link "CSA Cloud Controls Matrix (CCM)" [ref=e1606] [cursor=pointer]:
+                - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/external/csa_ccm/
+            - listitem [ref=e1607]:
+              - generic [ref=e1608]: 
+              - link "CRI Profile" [ref=e1609] [cursor=pointer]:
+                - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/external/cri_profile/
+            - listitem [ref=e1610]:
+              - generic [ref=e1611]: 
+              - link "Known Exploited Vulnerabilities" [ref=e1612] [cursor=pointer]:
+                - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/external/kev/
+            - listitem [ref=e1613]:
+              - generic [ref=e1614]: 
+              - link "Google Cloud Platform (GCP)" [ref=e1615] [cursor=pointer]:
+                - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/external/gcp/
+            - listitem [ref=e1616]:
+              - generic [ref=e1617]: 
+              - link "Intel vPro" [ref=e1618] [cursor=pointer]:
+                - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/external/intel-vpro/
+            - listitem [ref=e1619]:
+              - generic [ref=e1620]: 
+              - link "NIST 800-53" [ref=e1621] [cursor=pointer]:
+                - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/external/nist/
+            - listitem [ref=e1622]:
+              - generic [ref=e1623]: 
+              - link "VERIS" [ref=e1624] [cursor=pointer]:
+                - /url: https://center-for-threat-informed-defense.github.io/mappings-explorer/external/veris/

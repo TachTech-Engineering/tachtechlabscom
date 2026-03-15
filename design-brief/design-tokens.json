@@ -1,0 +1,47 @@
+{
+  "colors": {
+    "primary": "#005587",
+    "background": "#F5F7FA",
+    "surface": "#FFFFFF",
+    "textPrimary": "#1A1A1A",
+    "textSecondary": "#666666",
+    "divider": "#E0E0E0",
+    "coverage": {
+      "none": "#9E9E9E",
+      "low": "#FFC107",
+      "medium": "#FF9800",
+      "high": "#4CAF50",
+      "blocked": "#2196F3"
+    }
+  },
+  "typography": {
+    "fontFamily": "Inter",
+    "sizes": {
+      "h1": 24,
+      "h2": 20,
+      "h3": 16,
+      "body": 14,
+      "caption": 12
+    },
+    "weights": {
+      "regular": 400,
+      "medium": 500,
+      "bold": 700
+    }
+  },
+  "spacing": {
+    "xs": 4,
+    "sm": 8,
+    "md": 16,
+    "lg": 24,
+    "xl": 32
+  },
+  "radii": {
+    "sm": 4,
+    "md": 8,
+    "lg": 12
+  },
+  "elevation": {
+    "card": "0px 2px 4px rgba(0,0,0,0.05)"
+  }
+}

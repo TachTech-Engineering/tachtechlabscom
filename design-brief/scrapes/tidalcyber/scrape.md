@@ -1,0 +1,976 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - button "menu" [ref=e6] [cursor=pointer]:
+            - img [ref=e7]
+          - link "Logo Tidal" [ref=e9] [cursor=pointer]:
+            - /url: /
+            - img "Logo Tidal" [ref=e10]
+          - generic [ref=e12]: Community Edition
+        - generic [ref=e13]:
+          - button [ref=e14] [cursor=pointer]:
+            - img [ref=e15]
+          - generic [ref=e17]:
+            - button "LOGIN" [ref=e18] [cursor=pointer]:
+              - generic [ref=e19]: LOGIN
+            - button "SIGN UP" [ref=e20] [cursor=pointer]:
+              - generic [ref=e21]: SIGN UP
+    - generic [ref=e22]:
+      - generic [ref=e23]:
+        - button "Matrix has been saved" [ref=e24] [cursor=pointer]:
+          - img [ref=e25]
+        - generic [ref=e30]:
+          - button "Draft" [ref=e31] [cursor=pointer]:
+            - paragraph [ref=e32]: Draft
+          - button [ref=e33] [cursor=pointer]:
+            - img [ref=e34]
+      - 'button "You have already reached the limit : 50" [ref=e37] [cursor=pointer]':
+        - img [ref=e38]
+      - generic [ref=e40]:
+        - generic [ref=e43]:
+          - generic: Filter by Platform
+          - generic [ref=e44]:
+            - combobox "Filter by Platform" [ref=e45]
+            - button "Open" [ref=e47] [cursor=pointer]:
+              - img [ref=e48]
+            - group:
+              - generic: Filter by Platform
+        - button "more" [disabled]:
+          - img
+          - generic: "0"
+        - button "more" [ref=e50] [cursor=pointer]:
+          - img [ref=e51]
+    - generic [ref=e54]:
+      - generic [ref=e55]:
+        - heading "Reconnaissance" [level=2] [ref=e58] [cursor=pointer]
+        - heading "Resource Development" [level=2] [ref=e61] [cursor=pointer]
+        - heading "Initial Access" [level=2] [ref=e64] [cursor=pointer]
+        - heading "Execution" [level=2] [ref=e67] [cursor=pointer]
+        - heading "Persistence" [level=2] [ref=e70] [cursor=pointer]
+        - heading "Privilege Escalation" [level=2] [ref=e73] [cursor=pointer]
+        - heading "Defense Evasion" [level=2] [ref=e76] [cursor=pointer]
+        - heading "Credential Access" [level=2] [ref=e79] [cursor=pointer]
+        - heading "Discovery" [level=2] [ref=e82] [cursor=pointer]
+        - heading "Lateral Movement" [level=2] [ref=e85] [cursor=pointer]
+        - heading "Collection" [level=2] [ref=e88] [cursor=pointer]
+        - heading "Command and Control" [level=2] [ref=e91] [cursor=pointer]
+        - heading "Exfiltration" [level=2] [ref=e94] [cursor=pointer]
+        - heading "Impact" [level=2] [ref=e97] [cursor=pointer]
+      - generic [ref=e98]:
+        - generic [ref=e99]:
+          - generic [ref=e100]:
+            - button "Active Scanning (3)" [ref=e101] [cursor=pointer]:
+              - generic [ref=e102]: Active Scanning (3)
+            - button "Matrix Toggle" [ref=e105] [cursor=pointer]:
+              - img [ref=e106]
+          - generic [ref=e108]:
+            - button "Gather Victim Host Information (4)" [ref=e109] [cursor=pointer]:
+              - generic [ref=e110]: Gather Victim Host Information (4)
+            - button "Matrix Toggle" [ref=e113] [cursor=pointer]:
+              - img [ref=e114]
+          - generic [ref=e116]:
+            - button "Gather Victim Identity Information (3)" [ref=e117] [cursor=pointer]:
+              - generic [ref=e118]: Gather Victim Identity Information (3)
+            - button "Matrix Toggle" [ref=e121] [cursor=pointer]:
+              - img [ref=e122]
+          - generic [ref=e124]:
+            - button "Gather Victim Network Information (6)" [ref=e125] [cursor=pointer]:
+              - generic [ref=e126]: Gather Victim Network Information (6)
+            - button "Matrix Toggle" [ref=e129] [cursor=pointer]:
+              - img [ref=e130]
+          - generic [ref=e132]:
+            - button "Gather Victim Org Information (4)" [ref=e133] [cursor=pointer]:
+              - generic [ref=e134]: Gather Victim Org Information (4)
+            - button "Matrix Toggle" [ref=e137] [cursor=pointer]:
+              - img [ref=e138]
+          - generic [ref=e140]:
+            - button "Phishing for Information (4)" [ref=e141] [cursor=pointer]:
+              - generic [ref=e142]: Phishing for Information (4)
+            - button "Matrix Toggle" [ref=e145] [cursor=pointer]:
+              - img [ref=e146]
+          - generic [ref=e148]:
+            - button "Search Closed Sources (2)" [ref=e149] [cursor=pointer]:
+              - generic [ref=e150]: Search Closed Sources (2)
+            - button "Matrix Toggle" [ref=e153] [cursor=pointer]:
+              - img [ref=e154]
+          - generic [ref=e156]:
+            - button "Search Open Technical Databases (5)" [ref=e157] [cursor=pointer]:
+              - generic [ref=e158]: Search Open Technical Databases (5)
+            - button "Matrix Toggle" [ref=e161] [cursor=pointer]:
+              - img [ref=e162]
+          - generic [ref=e164]:
+            - button "Search Open Websites/Domains (3)" [ref=e165] [cursor=pointer]:
+              - generic [ref=e166]: Search Open Websites/Domains (3)
+            - button "Matrix Toggle" [ref=e169] [cursor=pointer]:
+              - img [ref=e170]
+          - button "Search Threat Vendor Data" [ref=e173] [cursor=pointer]:
+            - generic [ref=e174]: Search Threat Vendor Data
+          - button "Search Victim-Owned Websites" [ref=e176] [cursor=pointer]:
+            - generic [ref=e177]: Search Victim-Owned Websites
+        - generic [ref=e178]:
+          - button "Acquire Access" [ref=e180] [cursor=pointer]:
+            - generic [ref=e181]: Acquire Access
+          - generic [ref=e182]:
+            - button "Acquire Infrastructure (8)" [ref=e183] [cursor=pointer]:
+              - generic [ref=e184]: Acquire Infrastructure (8)
+            - button "Matrix Toggle" [ref=e187] [cursor=pointer]:
+              - img [ref=e188]
+          - generic [ref=e190]:
+            - button "Compromise Accounts (3)" [ref=e191] [cursor=pointer]:
+              - generic [ref=e192]: Compromise Accounts (3)
+            - button "Matrix Toggle" [ref=e195] [cursor=pointer]:
+              - img [ref=e196]
+          - generic [ref=e198]:
+            - button "Compromise Infrastructure (8)" [ref=e199] [cursor=pointer]:
+              - generic [ref=e200]: Compromise Infrastructure (8)
+            - button "Matrix Toggle" [ref=e203] [cursor=pointer]:
+              - img [ref=e204]
+          - generic [ref=e206]:
+            - button "Develop Capabilities (4)" [ref=e207] [cursor=pointer]:
+              - generic [ref=e208]: Develop Capabilities (4)
+            - button "Matrix Toggle" [ref=e211] [cursor=pointer]:
+              - img [ref=e212]
+          - generic [ref=e214]:
+            - button "Establish Accounts (3)" [ref=e215] [cursor=pointer]:
+              - generic [ref=e216]: Establish Accounts (3)
+            - button "Matrix Toggle" [ref=e219] [cursor=pointer]:
+              - img [ref=e220]
+          - generic [ref=e222]:
+            - button "Obtain Capabilities (7)" [ref=e223] [cursor=pointer]:
+              - generic [ref=e224]: Obtain Capabilities (7)
+            - button "Matrix Toggle" [ref=e227] [cursor=pointer]:
+              - img [ref=e228]
+          - generic [ref=e230]:
+            - button "Stage Capabilities (6)" [ref=e231] [cursor=pointer]:
+              - generic [ref=e232]: Stage Capabilities (6)
+            - button "Matrix Toggle" [ref=e235] [cursor=pointer]:
+              - img [ref=e236]
+        - generic [ref=e238]:
+          - button "Content Injection" [ref=e240] [cursor=pointer]:
+            - generic [ref=e241]: Content Injection
+          - button "Drive-by Compromise" [ref=e243] [cursor=pointer]:
+            - generic [ref=e244]: Drive-by Compromise
+          - button "Exploit Public-Facing Application" [ref=e246] [cursor=pointer]:
+            - generic [ref=e247]: Exploit Public-Facing Application
+          - button "External Remote Services" [ref=e249] [cursor=pointer]:
+            - generic [ref=e250]: External Remote Services
+          - button "Hardware Additions" [ref=e252] [cursor=pointer]:
+            - generic [ref=e253]: Hardware Additions
+          - generic [ref=e254]:
+            - button "Phishing (4)" [ref=e255] [cursor=pointer]:
+              - generic [ref=e256]: Phishing (4)
+            - button "Matrix Toggle" [ref=e259] [cursor=pointer]:
+              - img [ref=e260]
+          - button "Replication Through Removable Media" [ref=e263] [cursor=pointer]:
+            - generic [ref=e264]: Replication Through Removable Media
+          - generic [ref=e265]:
+            - button "Supply Chain Compromise (3)" [ref=e266] [cursor=pointer]:
+              - generic [ref=e267]: Supply Chain Compromise (3)
+            - button "Matrix Toggle" [ref=e270] [cursor=pointer]:
+              - img [ref=e271]
+          - button "Trusted Relationship" [ref=e274] [cursor=pointer]:
+            - generic [ref=e275]: Trusted Relationship
+          - generic [ref=e276]:
+            - button "Valid Accounts (4)" [ref=e277] [cursor=pointer]:
+              - generic [ref=e278]: Valid Accounts (4)
+            - button "Matrix Toggle" [ref=e281] [cursor=pointer]:
+              - img [ref=e282]
+          - button "Wi-Fi Networks" [ref=e285] [cursor=pointer]:
+            - generic [ref=e286]: Wi-Fi Networks
+        - generic [ref=e287]:
+          - button "Cloud Administration Command" [ref=e289] [cursor=pointer]:
+            - generic [ref=e290]: Cloud Administration Command
+          - generic [ref=e291]:
+            - button "Command and Scripting Interpreter (13)" [ref=e292] [cursor=pointer]:
+              - generic [ref=e293]: Command and Scripting Interpreter (13)
+            - button "Matrix Toggle" [ref=e296] [cursor=pointer]:
+              - img [ref=e297]
+          - button "Container Administration Command" [ref=e300] [cursor=pointer]:
+            - generic [ref=e301]: Container Administration Command
+          - button "Deploy Container" [ref=e303] [cursor=pointer]:
+            - generic [ref=e304]: Deploy Container
+          - button "ESXi Administration Command" [ref=e306] [cursor=pointer]:
+            - generic [ref=e307]: ESXi Administration Command
+          - button "Exploitation for Client Execution" [ref=e309] [cursor=pointer]:
+            - generic [ref=e310]: Exploitation for Client Execution
+          - button "Input Injection" [ref=e312] [cursor=pointer]:
+            - generic [ref=e313]: Input Injection
+          - generic [ref=e314]:
+            - button "Inter-Process Communication (3)" [ref=e315] [cursor=pointer]:
+              - generic [ref=e316]: Inter-Process Communication (3)
+            - button "Matrix Toggle" [ref=e319] [cursor=pointer]:
+              - img [ref=e320]
+          - button "Native API" [ref=e323] [cursor=pointer]:
+            - generic [ref=e324]: Native API
+          - button "Poisoned Pipeline Execution" [ref=e326] [cursor=pointer]:
+            - generic [ref=e327]: Poisoned Pipeline Execution
+          - generic [ref=e328]:
+            - button "Scheduled Task/Job (5)" [ref=e329] [cursor=pointer]:
+              - generic [ref=e330]: Scheduled Task/Job (5)
+            - button "Matrix Toggle" [ref=e333] [cursor=pointer]:
+              - img [ref=e334]
+          - button "Serverless Execution" [ref=e337] [cursor=pointer]:
+            - generic [ref=e338]: Serverless Execution
+          - button "Shared Modules" [ref=e340] [cursor=pointer]:
+            - generic [ref=e341]: Shared Modules
+          - button "Software Deployment Tools" [ref=e343] [cursor=pointer]:
+            - generic [ref=e344]: Software Deployment Tools
+          - generic [ref=e345]:
+            - button "System Services (3)" [ref=e346] [cursor=pointer]:
+              - generic [ref=e347]: System Services (3)
+            - button "Matrix Toggle" [ref=e350] [cursor=pointer]:
+              - img [ref=e351]
+          - generic [ref=e353]:
+            - button "User Execution (5)" [ref=e354] [cursor=pointer]:
+              - generic [ref=e355]: User Execution (5)
+            - button "Matrix Toggle" [ref=e358] [cursor=pointer]:
+              - img [ref=e359]
+          - button "Windows Management Instrumentation" [ref=e362] [cursor=pointer]:
+            - generic [ref=e363]: Windows Management Instrumentation
+        - generic [ref=e364]:
+          - generic [ref=e365]:
+            - button "Account Manipulation (7)" [ref=e366] [cursor=pointer]:
+              - generic [ref=e367]: Account Manipulation (7)
+            - button "Matrix Toggle" [ref=e370] [cursor=pointer]:
+              - img [ref=e371]
+          - button "BITS Jobs" [ref=e374] [cursor=pointer]:
+            - generic [ref=e375]: BITS Jobs
+          - generic [ref=e376]:
+            - button "Boot or Logon Autostart Execution (14)" [ref=e377] [cursor=pointer]:
+              - generic [ref=e378]: Boot or Logon Autostart Execution (14)
+            - button "Matrix Toggle" [ref=e381] [cursor=pointer]:
+              - img [ref=e382]
+          - generic [ref=e384]:
+            - button "Boot or Logon Initialization Scripts (5)" [ref=e385] [cursor=pointer]:
+              - generic [ref=e386]: Boot or Logon Initialization Scripts (5)
+            - button "Matrix Toggle" [ref=e389] [cursor=pointer]:
+              - img [ref=e390]
+          - button "Cloud Application Integration" [ref=e393] [cursor=pointer]:
+            - generic [ref=e394]: Cloud Application Integration
+          - button "Compromise Host Software Binary" [ref=e396] [cursor=pointer]:
+            - generic [ref=e397]: Compromise Host Software Binary
+          - generic [ref=e398]:
+            - button "Create Account (3)" [ref=e399] [cursor=pointer]:
+              - generic [ref=e400]: Create Account (3)
+            - button "Matrix Toggle" [ref=e403] [cursor=pointer]:
+              - img [ref=e404]
+          - generic [ref=e406]:
+            - button "Create or Modify System Process (5)" [ref=e407] [cursor=pointer]:
+              - generic [ref=e408]: Create or Modify System Process (5)
+            - button "Matrix Toggle" [ref=e411] [cursor=pointer]:
+              - img [ref=e412]
+          - generic [ref=e414]:
+            - button "Event Triggered Execution (18)" [ref=e415] [cursor=pointer]:
+              - generic [ref=e416]: Event Triggered Execution (18)
+            - button "Matrix Toggle" [ref=e419] [cursor=pointer]:
+              - img [ref=e420]
+          - button "Exclusive Control" [ref=e423] [cursor=pointer]:
+            - generic [ref=e424]: Exclusive Control
+          - button "External Remote Services" [ref=e426] [cursor=pointer]:
+            - generic [ref=e427]: External Remote Services
+          - generic [ref=e428]:
+            - button "Hijack Execution Flow (12)" [ref=e429] [cursor=pointer]:
+              - generic [ref=e430]: Hijack Execution Flow (12)
+            - button "Matrix Toggle" [ref=e433] [cursor=pointer]:
+              - img [ref=e434]
+          - button "Implant Internal Image" [ref=e437] [cursor=pointer]:
+            - generic [ref=e438]: Implant Internal Image
+          - generic [ref=e439]:
+            - button "Modify Authentication Process (9)" [ref=e440] [cursor=pointer]:
+              - generic [ref=e441]: Modify Authentication Process (9)
+            - button "Matrix Toggle" [ref=e444] [cursor=pointer]:
+              - img [ref=e445]
+          - button "Modify Registry" [ref=e448] [cursor=pointer]:
+            - generic [ref=e449]: Modify Registry
+          - generic [ref=e450]:
+            - button "Office Application Startup (6)" [ref=e451] [cursor=pointer]:
+              - generic [ref=e452]: Office Application Startup (6)
+            - button "Matrix Toggle" [ref=e455] [cursor=pointer]:
+              - img [ref=e456]
+          - button "Power Settings" [ref=e459] [cursor=pointer]:
+            - generic [ref=e460]: Power Settings
+          - generic [ref=e461]:
+            - button "Pre-OS Boot (5)" [ref=e462] [cursor=pointer]:
+              - generic [ref=e463]: Pre-OS Boot (5)
+            - button "Matrix Toggle" [ref=e466] [cursor=pointer]:
+              - img [ref=e467]
+          - generic [ref=e469]:
+            - button "Scheduled Task/Job (5)" [ref=e470] [cursor=pointer]:
+              - generic [ref=e471]: Scheduled Task/Job (5)
+            - button "Matrix Toggle" [ref=e474] [cursor=pointer]:
+              - img [ref=e475]
+          - generic [ref=e477]:
+            - button "Server Software Component (6)" [ref=e478] [cursor=pointer]:
+              - generic [ref=e479]: Server Software Component (6)
+            - button "Matrix Toggle" [ref=e482] [cursor=pointer]:
+              - img [ref=e483]
+          - generic [ref=e485]:
+            - button "Software Extensions (2)" [ref=e486] [cursor=pointer]:
+              - generic [ref=e487]: Software Extensions (2)
+            - button "Matrix Toggle" [ref=e490] [cursor=pointer]:
+              - img [ref=e491]
+          - generic [ref=e493]:
+            - button "Traffic Signaling (2)" [ref=e494] [cursor=pointer]:
+              - generic [ref=e495]: Traffic Signaling (2)
+            - button "Matrix Toggle" [ref=e498] [cursor=pointer]:
+              - img [ref=e499]
+          - generic [ref=e501]:
+            - button "Valid Accounts (4)" [ref=e502] [cursor=pointer]:
+              - generic [ref=e503]: Valid Accounts (4)
+            - button "Matrix Toggle" [ref=e506] [cursor=pointer]:
+              - img [ref=e507]
+        - generic [ref=e509]:
+          - generic [ref=e510]:
+            - button "Abuse Elevation Control Mechanism (6)" [ref=e511] [cursor=pointer]:
+              - generic [ref=e512]: Abuse Elevation Control Mechanism (6)
+            - button "Matrix Toggle" [ref=e515] [cursor=pointer]:
+              - img [ref=e516]
+          - generic [ref=e518]:
+            - button "Access Token Manipulation (5)" [ref=e519] [cursor=pointer]:
+              - generic [ref=e520]: Access Token Manipulation (5)
+            - button "Matrix Toggle" [ref=e523] [cursor=pointer]:
+              - img [ref=e524]
+          - generic [ref=e526]:
+            - button "Account Manipulation (7)" [ref=e527] [cursor=pointer]:
+              - generic [ref=e528]: Account Manipulation (7)
+            - button "Matrix Toggle" [ref=e531] [cursor=pointer]:
+              - img [ref=e532]
+          - generic [ref=e534]:
+            - button "Boot or Logon Autostart Execution (14)" [ref=e535] [cursor=pointer]:
+              - generic [ref=e536]: Boot or Logon Autostart Execution (14)
+            - button "Matrix Toggle" [ref=e539] [cursor=pointer]:
+              - img [ref=e540]
+          - generic [ref=e542]:
+            - button "Boot or Logon Initialization Scripts (5)" [ref=e543] [cursor=pointer]:
+              - generic [ref=e544]: Boot or Logon Initialization Scripts (5)
+            - button "Matrix Toggle" [ref=e547] [cursor=pointer]:
+              - img [ref=e548]
+          - generic [ref=e550]:
+            - button "Create or Modify System Process (5)" [ref=e551] [cursor=pointer]:
+              - generic [ref=e552]: Create or Modify System Process (5)
+            - button "Matrix Toggle" [ref=e555] [cursor=pointer]:
+              - img [ref=e556]
+          - generic [ref=e558]:
+            - button "Domain or Tenant Policy Modification (2)" [ref=e559] [cursor=pointer]:
+              - generic [ref=e560]: Domain or Tenant Policy Modification (2)
+            - button "Matrix Toggle" [ref=e563] [cursor=pointer]:
+              - img [ref=e564]
+          - button "Escape to Host" [ref=e567] [cursor=pointer]:
+            - generic [ref=e568]: Escape to Host
+          - generic [ref=e569]:
+            - button "Event Triggered Execution (18)" [ref=e570] [cursor=pointer]:
+              - generic [ref=e571]: Event Triggered Execution (18)
+            - button "Matrix Toggle" [ref=e574] [cursor=pointer]:
+              - img [ref=e575]
+          - button "Exploitation for Privilege Escalation" [ref=e578] [cursor=pointer]:
+            - generic [ref=e579]: Exploitation for Privilege Escalation
+          - generic [ref=e580]:
+            - button "Hijack Execution Flow (12)" [ref=e581] [cursor=pointer]:
+              - generic [ref=e582]: Hijack Execution Flow (12)
+            - button "Matrix Toggle" [ref=e585] [cursor=pointer]:
+              - img [ref=e586]
+          - generic [ref=e588]:
+            - button "Process Injection (12)" [ref=e589] [cursor=pointer]:
+              - generic [ref=e590]: Process Injection (12)
+            - button "Matrix Toggle" [ref=e593] [cursor=pointer]:
+              - img [ref=e594]
+          - generic [ref=e596]:
+            - button "Scheduled Task/Job (5)" [ref=e597] [cursor=pointer]:
+              - generic [ref=e598]: Scheduled Task/Job (5)
+            - button "Matrix Toggle" [ref=e601] [cursor=pointer]:
+              - img [ref=e602]
+          - generic [ref=e604]:
+            - button "Valid Accounts (4)" [ref=e605] [cursor=pointer]:
+              - generic [ref=e606]: Valid Accounts (4)
+            - button "Matrix Toggle" [ref=e609] [cursor=pointer]:
+              - img [ref=e610]
+        - generic [ref=e612]:
+          - generic [ref=e613]:
+            - button "Abuse Elevation Control Mechanism (6)" [ref=e614] [cursor=pointer]:
+              - generic [ref=e615]: Abuse Elevation Control Mechanism (6)
+            - button "Matrix Toggle" [ref=e618] [cursor=pointer]:
+              - img [ref=e619]
+          - generic [ref=e621]:
+            - button "Access Token Manipulation (5)" [ref=e622] [cursor=pointer]:
+              - generic [ref=e623]: Access Token Manipulation (5)
+            - button "Matrix Toggle" [ref=e626] [cursor=pointer]:
+              - img [ref=e627]
+          - button "BITS Jobs" [ref=e630] [cursor=pointer]:
+            - generic [ref=e631]: BITS Jobs
+          - button "Build Image on Host" [ref=e633] [cursor=pointer]:
+            - generic [ref=e634]: Build Image on Host
+          - button "Debugger Evasion" [ref=e636] [cursor=pointer]:
+            - generic [ref=e637]: Debugger Evasion
+          - button "Delay Execution" [ref=e639] [cursor=pointer]:
+            - generic [ref=e640]: Delay Execution
+          - button "Deobfuscate/Decode Files or Information" [ref=e642] [cursor=pointer]:
+            - generic [ref=e643]: Deobfuscate/Decode Files or Information
+          - button "Deploy Container" [ref=e645] [cursor=pointer]:
+            - generic [ref=e646]: Deploy Container
+          - button "Direct Volume Access" [ref=e648] [cursor=pointer]:
+            - generic [ref=e649]: Direct Volume Access
+          - generic [ref=e650]:
+            - button "Domain or Tenant Policy Modification (2)" [ref=e651] [cursor=pointer]:
+              - generic [ref=e652]: Domain or Tenant Policy Modification (2)
+            - button "Matrix Toggle" [ref=e655] [cursor=pointer]:
+              - img [ref=e656]
+          - button "Email Spoofing" [ref=e659] [cursor=pointer]:
+            - generic [ref=e660]: Email Spoofing
+          - generic [ref=e661]:
+            - button "Execution Guardrails (2)" [ref=e662] [cursor=pointer]:
+              - generic [ref=e663]: Execution Guardrails (2)
+            - button "Matrix Toggle" [ref=e666] [cursor=pointer]:
+              - img [ref=e667]
+          - button "Exploitation for Defense Evasion" [ref=e670] [cursor=pointer]:
+            - generic [ref=e671]: Exploitation for Defense Evasion
+          - generic [ref=e672]:
+            - button "File and Directory Permissions Modification (2)" [ref=e673] [cursor=pointer]:
+              - generic [ref=e674]: File and Directory Permissions Modification (2)
+            - button "Matrix Toggle" [ref=e677] [cursor=pointer]:
+              - img [ref=e678]
+          - generic [ref=e680]:
+            - button "Hide Artifacts (14)" [ref=e681] [cursor=pointer]:
+              - generic [ref=e682]: Hide Artifacts (14)
+            - button "Matrix Toggle" [ref=e685] [cursor=pointer]:
+              - img [ref=e686]
+          - generic [ref=e688]:
+            - button "Hijack Execution Flow (12)" [ref=e689] [cursor=pointer]:
+              - generic [ref=e690]: Hijack Execution Flow (12)
+            - button "Matrix Toggle" [ref=e693] [cursor=pointer]:
+              - img [ref=e694]
+          - generic [ref=e696]:
+            - button "Impair Defenses (12)" [ref=e697] [cursor=pointer]:
+              - generic [ref=e698]: Impair Defenses (12)
+            - button "Matrix Toggle" [ref=e701] [cursor=pointer]:
+              - img [ref=e702]
+          - button "Impersonation" [ref=e705] [cursor=pointer]:
+            - generic [ref=e706]: Impersonation
+          - generic [ref=e707]:
+            - button "Indicator Removal (10)" [ref=e708] [cursor=pointer]:
+              - generic [ref=e709]: Indicator Removal (10)
+            - button "Matrix Toggle" [ref=e712] [cursor=pointer]:
+              - img [ref=e713]
+          - button "Indirect Command Execution" [ref=e716] [cursor=pointer]:
+            - generic [ref=e717]: Indirect Command Execution
+          - generic [ref=e718]:
+            - button "Masquerading (12)" [ref=e719] [cursor=pointer]:
+              - generic [ref=e720]: Masquerading (12)
+            - button "Matrix Toggle" [ref=e723] [cursor=pointer]:
+              - img [ref=e724]
+          - generic [ref=e726]:
+            - button "Modify Authentication Process (9)" [ref=e727] [cursor=pointer]:
+              - generic [ref=e728]: Modify Authentication Process (9)
+            - button "Matrix Toggle" [ref=e731] [cursor=pointer]:
+              - img [ref=e732]
+          - generic [ref=e734]:
+            - button "Modify Cloud Compute Infrastructure (5)" [ref=e735] [cursor=pointer]:
+              - generic [ref=e736]: Modify Cloud Compute Infrastructure (5)
+            - button "Matrix Toggle" [ref=e739] [cursor=pointer]:
+              - img [ref=e740]
+          - button "Modify Cloud Resource Hierarchy" [ref=e743] [cursor=pointer]:
+            - generic [ref=e744]: Modify Cloud Resource Hierarchy
+          - button "Modify Registry" [ref=e746] [cursor=pointer]:
+            - generic [ref=e747]: Modify Registry
+          - generic [ref=e748]:
+            - button "Modify System Image (2)" [ref=e749] [cursor=pointer]:
+              - generic [ref=e750]: Modify System Image (2)
+            - button "Matrix Toggle" [ref=e753] [cursor=pointer]:
+              - img [ref=e754]
+          - generic [ref=e756]:
+            - button "Network Boundary Bridging (1)" [ref=e757] [cursor=pointer]:
+              - generic [ref=e758]: Network Boundary Bridging (1)
+            - button "Matrix Toggle" [ref=e761] [cursor=pointer]:
+              - img [ref=e762]
+          - generic [ref=e764]:
+            - button "Obfuscated Files or Information (17)" [ref=e765] [cursor=pointer]:
+              - generic [ref=e766]: Obfuscated Files or Information (17)
+            - button "Matrix Toggle" [ref=e769] [cursor=pointer]:
+              - img [ref=e770]
+          - button "Plist File Modification" [ref=e773] [cursor=pointer]:
+            - generic [ref=e774]: Plist File Modification
+          - generic [ref=e775]:
+            - button "Pre-OS Boot (5)" [ref=e776] [cursor=pointer]:
+              - generic [ref=e777]: Pre-OS Boot (5)
+            - button "Matrix Toggle" [ref=e780] [cursor=pointer]:
+              - img [ref=e781]
+          - generic [ref=e783]:
+            - button "Process Injection (12)" [ref=e784] [cursor=pointer]:
+              - generic [ref=e785]: Process Injection (12)
+            - button "Matrix Toggle" [ref=e788] [cursor=pointer]:
+              - img [ref=e789]
+          - button "Reflective Code Loading" [ref=e792] [cursor=pointer]:
+            - generic [ref=e793]: Reflective Code Loading
+          - button "Rogue Domain Controller" [ref=e795] [cursor=pointer]:
+            - generic [ref=e796]: Rogue Domain Controller
+          - button "Rootkit" [ref=e798] [cursor=pointer]:
+            - generic [ref=e799]: Rootkit
+          - button "Selective Exclusion" [ref=e801] [cursor=pointer]:
+            - generic [ref=e802]: Selective Exclusion
+          - generic [ref=e803]:
+            - button "Subvert Trust Controls (6)" [ref=e804] [cursor=pointer]:
+              - generic [ref=e805]: Subvert Trust Controls (6)
+            - button "Matrix Toggle" [ref=e808] [cursor=pointer]:
+              - img [ref=e809]
+          - generic [ref=e811]:
+            - button "System Binary Proxy Execution (14)" [ref=e812] [cursor=pointer]:
+              - generic [ref=e813]: System Binary Proxy Execution (14)
+            - button "Matrix Toggle" [ref=e816] [cursor=pointer]:
+              - img [ref=e817]
+          - generic [ref=e819]:
+            - button "System Script Proxy Execution (2)" [ref=e820] [cursor=pointer]:
+              - generic [ref=e821]: System Script Proxy Execution (2)
+            - button "Matrix Toggle" [ref=e824] [cursor=pointer]:
+              - img [ref=e825]
+          - button "Template Injection" [ref=e828] [cursor=pointer]:
+            - generic [ref=e829]: Template Injection
+          - generic [ref=e830]:
+            - button "Traffic Signaling (2)" [ref=e831] [cursor=pointer]:
+              - generic [ref=e832]: Traffic Signaling (2)
+            - button "Matrix Toggle" [ref=e835] [cursor=pointer]:
+              - img [ref=e836]
+          - generic [ref=e838]:
+            - button "Trusted Developer Utilities Proxy Execution (3)" [ref=e839] [cursor=pointer]:
+              - generic [ref=e840]: Trusted Developer Utilities Proxy Execution (3)
+            - button "Matrix Toggle" [ref=e843] [cursor=pointer]:
+              - img [ref=e844]
+          - button "Unused/Unsupported Cloud Regions" [ref=e847] [cursor=pointer]:
+            - generic [ref=e848]: Unused/Unsupported Cloud Regions
+          - generic [ref=e849]:
+            - button "Use Alternate Authentication Material (4)" [ref=e850] [cursor=pointer]:
+              - generic [ref=e851]: Use Alternate Authentication Material (4)
+            - button "Matrix Toggle" [ref=e854] [cursor=pointer]:
+              - img [ref=e855]
+          - generic [ref=e857]:
+            - button "Valid Accounts (4)" [ref=e858] [cursor=pointer]:
+              - generic [ref=e859]: Valid Accounts (4)
+            - button "Matrix Toggle" [ref=e862] [cursor=pointer]:
+              - img [ref=e863]
+          - generic [ref=e865]:
+            - button "Virtualization/Sandbox Evasion (3)" [ref=e866] [cursor=pointer]:
+              - generic [ref=e867]: Virtualization/Sandbox Evasion (3)
+            - button "Matrix Toggle" [ref=e870] [cursor=pointer]:
+              - img [ref=e871]
+          - generic [ref=e873]:
+            - button "Weaken Encryption (2)" [ref=e874] [cursor=pointer]:
+              - generic [ref=e875]: Weaken Encryption (2)
+            - button "Matrix Toggle" [ref=e878] [cursor=pointer]:
+              - img [ref=e879]
+          - button "XSL Script Processing" [ref=e882] [cursor=pointer]:
+            - generic [ref=e883]: XSL Script Processing
+        - generic [ref=e884]:
+          - generic [ref=e885]:
+            - button "Adversary-in-the-Middle (4)" [ref=e886] [cursor=pointer]:
+              - generic [ref=e887]: Adversary-in-the-Middle (4)
+            - button "Matrix Toggle" [ref=e890] [cursor=pointer]:
+              - img [ref=e891]
+          - generic [ref=e893]:
+            - button "Brute Force (4)" [ref=e894] [cursor=pointer]:
+              - generic [ref=e895]: Brute Force (4)
+            - button "Matrix Toggle" [ref=e898] [cursor=pointer]:
+              - img [ref=e899]
+          - generic [ref=e901]:
+            - button "Credentials from Password Stores (6)" [ref=e902] [cursor=pointer]:
+              - generic [ref=e903]: Credentials from Password Stores (6)
+            - button "Matrix Toggle" [ref=e906] [cursor=pointer]:
+              - img [ref=e907]
+          - button "Exploitation for Credential Access" [ref=e910] [cursor=pointer]:
+            - generic [ref=e911]: Exploitation for Credential Access
+          - button "Forced Authentication" [ref=e913] [cursor=pointer]:
+            - generic [ref=e914]: Forced Authentication
+          - generic [ref=e915]:
+            - button "Forge Web Credentials (2)" [ref=e916] [cursor=pointer]:
+              - generic [ref=e917]: Forge Web Credentials (2)
+            - button "Matrix Toggle" [ref=e920] [cursor=pointer]:
+              - img [ref=e921]
+          - generic [ref=e923]:
+            - button "Input Capture (4)" [ref=e924] [cursor=pointer]:
+              - generic [ref=e925]: Input Capture (4)
+            - button "Matrix Toggle" [ref=e928] [cursor=pointer]:
+              - img [ref=e929]
+          - generic [ref=e931]:
+            - button "Modify Authentication Process (9)" [ref=e932] [cursor=pointer]:
+              - generic [ref=e933]: Modify Authentication Process (9)
+            - button "Matrix Toggle" [ref=e936] [cursor=pointer]:
+              - img [ref=e937]
+          - button "Multi-Factor Authentication Interception" [ref=e940] [cursor=pointer]:
+            - generic [ref=e941]: Multi-Factor Authentication Interception
+          - button "Multi-Factor Authentication Request Generation" [ref=e943] [cursor=pointer]:
+            - generic [ref=e944]: Multi-Factor Authentication Request Generation
+          - button "Network Sniffing" [ref=e946] [cursor=pointer]:
+            - generic [ref=e947]: Network Sniffing
+          - generic [ref=e948]:
+            - button "OS Credential Dumping (8)" [ref=e949] [cursor=pointer]:
+              - generic [ref=e950]: OS Credential Dumping (8)
+            - button "Matrix Toggle" [ref=e953] [cursor=pointer]:
+              - img [ref=e954]
+          - button "Steal Application Access Token" [ref=e957] [cursor=pointer]:
+            - generic [ref=e958]: Steal Application Access Token
+          - button "Steal or Forge Authentication Certificates" [ref=e960] [cursor=pointer]:
+            - generic [ref=e961]: Steal or Forge Authentication Certificates
+          - generic [ref=e962]:
+            - button "Steal or Forge Kerberos Tickets (5)" [ref=e963] [cursor=pointer]:
+              - generic [ref=e964]: Steal or Forge Kerberos Tickets (5)
+            - button "Matrix Toggle" [ref=e967] [cursor=pointer]:
+              - img [ref=e968]
+          - button "Steal Web Session Cookie" [ref=e971] [cursor=pointer]:
+            - generic [ref=e972]: Steal Web Session Cookie
+          - generic [ref=e973]:
+            - button "Unsecured Credentials (8)" [ref=e974] [cursor=pointer]:
+              - generic [ref=e975]: Unsecured Credentials (8)
+            - button "Matrix Toggle" [ref=e978] [cursor=pointer]:
+              - img [ref=e979]
+        - generic [ref=e981]:
+          - generic [ref=e982]:
+            - button "Account Discovery (4)" [ref=e983] [cursor=pointer]:
+              - generic [ref=e984]: Account Discovery (4)
+            - button "Matrix Toggle" [ref=e987] [cursor=pointer]:
+              - img [ref=e988]
+          - button "Application Window Discovery" [ref=e991] [cursor=pointer]:
+            - generic [ref=e992]: Application Window Discovery
+          - button "Browser Information Discovery" [ref=e994] [cursor=pointer]:
+            - generic [ref=e995]: Browser Information Discovery
+          - button "Cloud Infrastructure Discovery" [ref=e997] [cursor=pointer]:
+            - generic [ref=e998]: Cloud Infrastructure Discovery
+          - button "Cloud Service Dashboard" [ref=e1000] [cursor=pointer]:
+            - generic [ref=e1001]: Cloud Service Dashboard
+          - button "Cloud Service Discovery" [ref=e1003] [cursor=pointer]:
+            - generic [ref=e1004]: Cloud Service Discovery
+          - button "Cloud Storage Object Discovery" [ref=e1006] [cursor=pointer]:
+            - generic [ref=e1007]: Cloud Storage Object Discovery
+          - button "Container and Resource Discovery" [ref=e1009] [cursor=pointer]:
+            - generic [ref=e1010]: Container and Resource Discovery
+          - button "Debugger Evasion" [ref=e1012] [cursor=pointer]:
+            - generic [ref=e1013]: Debugger Evasion
+          - button "Device Driver Discovery" [ref=e1015] [cursor=pointer]:
+            - generic [ref=e1016]: Device Driver Discovery
+          - button "Domain Trust Discovery" [ref=e1018] [cursor=pointer]:
+            - generic [ref=e1019]: Domain Trust Discovery
+          - button "File and Directory Discovery" [ref=e1021] [cursor=pointer]:
+            - generic [ref=e1022]: File and Directory Discovery
+          - button "Group Policy Discovery" [ref=e1024] [cursor=pointer]:
+            - generic [ref=e1025]: Group Policy Discovery
+          - button "Local Storage Discovery" [ref=e1027] [cursor=pointer]:
+            - generic [ref=e1028]: Local Storage Discovery
+          - button "Log Enumeration" [ref=e1030] [cursor=pointer]:
+            - generic [ref=e1031]: Log Enumeration
+          - button "Network Service Discovery" [ref=e1033] [cursor=pointer]:
+            - generic [ref=e1034]: Network Service Discovery
+          - button "Network Share Discovery" [ref=e1036] [cursor=pointer]:
+            - generic [ref=e1037]: Network Share Discovery
+          - button "Network Sniffing" [ref=e1039] [cursor=pointer]:
+            - generic [ref=e1040]: Network Sniffing
+          - button "Password Policy Discovery" [ref=e1042] [cursor=pointer]:
+            - generic [ref=e1043]: Password Policy Discovery
+          - button "Peripheral Device Discovery" [ref=e1045] [cursor=pointer]:
+            - generic [ref=e1046]: Peripheral Device Discovery
+          - generic [ref=e1047]:
+            - button "Permission Groups Discovery (3)" [ref=e1048] [cursor=pointer]:
+              - generic [ref=e1049]: Permission Groups Discovery (3)
+            - button "Matrix Toggle" [ref=e1052] [cursor=pointer]:
+              - img [ref=e1053]
+          - button "Process Discovery" [ref=e1056] [cursor=pointer]:
+            - generic [ref=e1057]: Process Discovery
+          - button "Query Registry" [ref=e1059] [cursor=pointer]:
+            - generic [ref=e1060]: Query Registry
+          - button "Remote System Discovery" [ref=e1062] [cursor=pointer]:
+            - generic [ref=e1063]: Remote System Discovery
+          - generic [ref=e1064]:
+            - button "Software Discovery (2)" [ref=e1065] [cursor=pointer]:
+              - generic [ref=e1066]: Software Discovery (2)
+            - button "Matrix Toggle" [ref=e1069] [cursor=pointer]:
+              - img [ref=e1070]
+          - button "System Information Discovery" [ref=e1073] [cursor=pointer]:
+            - generic [ref=e1074]: System Information Discovery
+          - generic [ref=e1075]:
+            - button "System Location Discovery (1)" [ref=e1076] [cursor=pointer]:
+              - generic [ref=e1077]: System Location Discovery (1)
+            - button "Matrix Toggle" [ref=e1080] [cursor=pointer]:
+              - img [ref=e1081]
+          - generic [ref=e1083]:
+            - button "System Network Configuration Discovery (2)" [ref=e1084] [cursor=pointer]:
+              - generic [ref=e1085]: System Network Configuration Discovery (2)
+            - button "Matrix Toggle" [ref=e1088] [cursor=pointer]:
+              - img [ref=e1089]
+          - button "System Network Connections Discovery" [ref=e1092] [cursor=pointer]:
+            - generic [ref=e1093]: System Network Connections Discovery
+          - button "System Owner/User Discovery" [ref=e1095] [cursor=pointer]:
+            - generic [ref=e1096]: System Owner/User Discovery
+          - button "System Service Discovery" [ref=e1098] [cursor=pointer]:
+            - generic [ref=e1099]: System Service Discovery
+          - button "System Time Discovery" [ref=e1101] [cursor=pointer]:
+            - generic [ref=e1102]: System Time Discovery
+          - generic [ref=e1103]:
+            - button "Virtualization/Sandbox Evasion (3)" [ref=e1104] [cursor=pointer]:
+              - generic [ref=e1105]: Virtualization/Sandbox Evasion (3)
+            - button "Matrix Toggle" [ref=e1108] [cursor=pointer]:
+              - img [ref=e1109]
+          - button "Virtual Machine Discovery" [ref=e1112] [cursor=pointer]:
+            - generic [ref=e1113]: Virtual Machine Discovery
+        - generic [ref=e1114]:
+          - button "Exploitation of Remote Services" [ref=e1116] [cursor=pointer]:
+            - generic [ref=e1117]: Exploitation of Remote Services
+          - button "Internal Spearphishing" [ref=e1119] [cursor=pointer]:
+            - generic [ref=e1120]: Internal Spearphishing
+          - button "Lateral Tool Transfer" [ref=e1122] [cursor=pointer]:
+            - generic [ref=e1123]: Lateral Tool Transfer
+          - generic [ref=e1124]:
+            - button "Remote Services (8)" [ref=e1125] [cursor=pointer]:
+              - generic [ref=e1126]: Remote Services (8)
+            - button "Matrix Toggle" [ref=e1129] [cursor=pointer]:
+              - img [ref=e1130]
+          - generic [ref=e1132]:
+            - button "Remote Service Session Hijacking (2)" [ref=e1133] [cursor=pointer]:
+              - generic [ref=e1134]: Remote Service Session Hijacking (2)
+            - button "Matrix Toggle" [ref=e1137] [cursor=pointer]:
+              - img [ref=e1138]
+          - button "Replication Through Removable Media" [ref=e1141] [cursor=pointer]:
+            - generic [ref=e1142]: Replication Through Removable Media
+          - button "Software Deployment Tools" [ref=e1144] [cursor=pointer]:
+            - generic [ref=e1145]: Software Deployment Tools
+          - button "Taint Shared Content" [ref=e1147] [cursor=pointer]:
+            - generic [ref=e1148]: Taint Shared Content
+          - generic [ref=e1149]:
+            - button "Use Alternate Authentication Material (4)" [ref=e1150] [cursor=pointer]:
+              - generic [ref=e1151]: Use Alternate Authentication Material (4)
+            - button "Matrix Toggle" [ref=e1154] [cursor=pointer]:
+              - img [ref=e1155]
+        - generic [ref=e1157]:
+          - generic [ref=e1158]:
+            - button "Adversary-in-the-Middle (4)" [ref=e1159] [cursor=pointer]:
+              - generic [ref=e1160]: Adversary-in-the-Middle (4)
+            - button "Matrix Toggle" [ref=e1163] [cursor=pointer]:
+              - img [ref=e1164]
+          - generic [ref=e1166]:
+            - button "Archive Collected Data (3)" [ref=e1167] [cursor=pointer]:
+              - generic [ref=e1168]: Archive Collected Data (3)
+            - button "Matrix Toggle" [ref=e1171] [cursor=pointer]:
+              - img [ref=e1172]
+          - button "Audio Capture" [ref=e1175] [cursor=pointer]:
+            - generic [ref=e1176]: Audio Capture
+          - button "Automated Collection" [ref=e1178] [cursor=pointer]:
+            - generic [ref=e1179]: Automated Collection
+          - button "Browser Session Hijacking" [ref=e1181] [cursor=pointer]:
+            - generic [ref=e1182]: Browser Session Hijacking
+          - button "Clipboard Data" [ref=e1184] [cursor=pointer]:
+            - generic [ref=e1185]: Clipboard Data
+          - button "Data from Cloud Storage" [ref=e1187] [cursor=pointer]:
+            - generic [ref=e1188]: Data from Cloud Storage
+          - generic [ref=e1189]:
+            - button "Data from Configuration Repository (2)" [ref=e1190] [cursor=pointer]:
+              - generic [ref=e1191]: Data from Configuration Repository (2)
+            - button "Matrix Toggle" [ref=e1194] [cursor=pointer]:
+              - img [ref=e1195]
+          - generic [ref=e1197]:
+            - button "Data from Information Repositories (6)" [ref=e1198] [cursor=pointer]:
+              - generic [ref=e1199]: Data from Information Repositories (6)
+            - button "Matrix Toggle" [ref=e1202] [cursor=pointer]:
+              - img [ref=e1203]
+          - button "Data from Local System" [ref=e1206] [cursor=pointer]:
+            - generic [ref=e1207]: Data from Local System
+          - button "Data from Network Shared Drive" [ref=e1209] [cursor=pointer]:
+            - generic [ref=e1210]: Data from Network Shared Drive
+          - button "Data from Removable Media" [ref=e1212] [cursor=pointer]:
+            - generic [ref=e1213]: Data from Removable Media
+          - generic [ref=e1214]:
+            - button "Data Staged (2)" [ref=e1215] [cursor=pointer]:
+              - generic [ref=e1216]: Data Staged (2)
+            - button "Matrix Toggle" [ref=e1219] [cursor=pointer]:
+              - img [ref=e1220]
+          - generic [ref=e1222]:
+            - button "Email Collection (3)" [ref=e1223] [cursor=pointer]:
+              - generic [ref=e1224]: Email Collection (3)
+            - button "Matrix Toggle" [ref=e1227] [cursor=pointer]:
+              - img [ref=e1228]
+          - generic [ref=e1230]:
+            - button "Input Capture (4)" [ref=e1231] [cursor=pointer]:
+              - generic [ref=e1232]: Input Capture (4)
+            - button "Matrix Toggle" [ref=e1235] [cursor=pointer]:
+              - img [ref=e1236]
+          - button "Screen Capture" [ref=e1239] [cursor=pointer]:
+            - generic [ref=e1240]: Screen Capture
+          - button "Video Capture" [ref=e1242] [cursor=pointer]:
+            - generic [ref=e1243]: Video Capture
+        - generic [ref=e1244]:
+          - generic [ref=e1245]:
+            - button "Application Layer Protocol (5)" [ref=e1246] [cursor=pointer]:
+              - generic [ref=e1247]: Application Layer Protocol (5)
+            - button "Matrix Toggle" [ref=e1250] [cursor=pointer]:
+              - img [ref=e1251]
+          - button "Communication Through Removable Media" [ref=e1254] [cursor=pointer]:
+            - generic [ref=e1255]: Communication Through Removable Media
+          - button "Content Injection" [ref=e1257] [cursor=pointer]:
+            - generic [ref=e1258]: Content Injection
+          - generic [ref=e1259]:
+            - button "Data Encoding (2)" [ref=e1260] [cursor=pointer]:
+              - generic [ref=e1261]: Data Encoding (2)
+            - button "Matrix Toggle" [ref=e1264] [cursor=pointer]:
+              - img [ref=e1265]
+          - generic [ref=e1267]:
+            - button "Data Obfuscation (3)" [ref=e1268] [cursor=pointer]:
+              - generic [ref=e1269]: Data Obfuscation (3)
+            - button "Matrix Toggle" [ref=e1272] [cursor=pointer]:
+              - img [ref=e1273]
+          - generic [ref=e1275]:
+            - button "Dynamic Resolution (3)" [ref=e1276] [cursor=pointer]:
+              - generic [ref=e1277]: Dynamic Resolution (3)
+            - button "Matrix Toggle" [ref=e1280] [cursor=pointer]:
+              - img [ref=e1281]
+          - generic [ref=e1283]:
+            - button "Encrypted Channel (2)" [ref=e1284] [cursor=pointer]:
+              - generic [ref=e1285]: Encrypted Channel (2)
+            - button "Matrix Toggle" [ref=e1288] [cursor=pointer]:
+              - img [ref=e1289]
+          - button "Fallback Channels" [ref=e1292] [cursor=pointer]:
+            - generic [ref=e1293]: Fallback Channels
+          - button "Hide Infrastructure" [ref=e1295] [cursor=pointer]:
+            - generic [ref=e1296]: Hide Infrastructure
+          - button "Ingress Tool Transfer" [ref=e1298] [cursor=pointer]:
+            - generic [ref=e1299]: Ingress Tool Transfer
+          - button "Multi-Stage Channels" [ref=e1301] [cursor=pointer]:
+            - generic [ref=e1302]: Multi-Stage Channels
+          - button "Non-Application Layer Protocol" [ref=e1304] [cursor=pointer]:
+            - generic [ref=e1305]: Non-Application Layer Protocol
+          - button "Non-Standard Port" [ref=e1307] [cursor=pointer]:
+            - generic [ref=e1308]: Non-Standard Port
+          - button "Protocol Tunneling" [ref=e1310] [cursor=pointer]:
+            - generic [ref=e1311]: Protocol Tunneling
+          - generic [ref=e1312]:
+            - button "Proxy (4)" [ref=e1313] [cursor=pointer]:
+              - generic [ref=e1314]: Proxy (4)
+            - button "Matrix Toggle" [ref=e1317] [cursor=pointer]:
+              - img [ref=e1318]
+          - generic [ref=e1320]:
+            - button "Remote Access Tools (3)" [ref=e1321] [cursor=pointer]:
+              - generic [ref=e1322]: Remote Access Tools (3)
+            - button "Matrix Toggle" [ref=e1325] [cursor=pointer]:
+              - img [ref=e1326]
+          - generic [ref=e1328]:
+            - button "Traffic Signaling (2)" [ref=e1329] [cursor=pointer]:
+              - generic [ref=e1330]: Traffic Signaling (2)
+            - button "Matrix Toggle" [ref=e1333] [cursor=pointer]:
+              - img [ref=e1334]
+          - generic [ref=e1336]:
+            - button "Web Service (3)" [ref=e1337] [cursor=pointer]:
+              - generic [ref=e1338]: Web Service (3)
+            - button "Matrix Toggle" [ref=e1341] [cursor=pointer]:
+              - img [ref=e1342]
+        - generic [ref=e1344]:
+          - generic [ref=e1345]:
+            - button "Automated Exfiltration (1)" [ref=e1346] [cursor=pointer]:
+              - generic [ref=e1347]: Automated Exfiltration (1)
+            - button "Matrix Toggle" [ref=e1350] [cursor=pointer]:
+              - img [ref=e1351]
+          - button "Data Transfer Size Limits" [ref=e1354] [cursor=pointer]:
+            - generic [ref=e1355]: Data Transfer Size Limits
+          - generic [ref=e1356]:
+            - button "Exfiltration Over Alternative Protocol (3)" [ref=e1357] [cursor=pointer]:
+              - generic [ref=e1358]: Exfiltration Over Alternative Protocol (3)
+            - button "Matrix Toggle" [ref=e1361] [cursor=pointer]:
+              - img [ref=e1362]
+          - button "Exfiltration Over C2 Channel" [ref=e1365] [cursor=pointer]:
+            - generic [ref=e1366]: Exfiltration Over C2 Channel
+          - generic [ref=e1367]:
+            - button "Exfiltration Over Other Network Medium (1)" [ref=e1368] [cursor=pointer]:
+              - generic [ref=e1369]: Exfiltration Over Other Network Medium (1)
+            - button "Matrix Toggle" [ref=e1372] [cursor=pointer]:
+              - img [ref=e1373]
+          - generic [ref=e1375]:
+            - button "Exfiltration Over Physical Medium (1)" [ref=e1376] [cursor=pointer]:
+              - generic [ref=e1377]: Exfiltration Over Physical Medium (1)
+            - button "Matrix Toggle" [ref=e1380] [cursor=pointer]:
+              - img [ref=e1381]
+          - generic [ref=e1383]:
+            - button "Exfiltration Over Web Service (4)" [ref=e1384] [cursor=pointer]:
+              - generic [ref=e1385]: Exfiltration Over Web Service (4)
+            - button "Matrix Toggle" [ref=e1388] [cursor=pointer]:
+              - img [ref=e1389]
+          - button "Scheduled Transfer" [ref=e1392] [cursor=pointer]:
+            - generic [ref=e1393]: Scheduled Transfer
+          - button "Transfer Data to Cloud Account" [ref=e1395] [cursor=pointer]:
+            - generic [ref=e1396]: Transfer Data to Cloud Account
+        - generic [ref=e1397]:
+          - button "Account Access Removal" [ref=e1399] [cursor=pointer]:
+            - generic [ref=e1400]: Account Access Removal
+          - generic [ref=e1401]:
+            - button "Data Destruction (1)" [ref=e1402] [cursor=pointer]:
+              - generic [ref=e1403]: Data Destruction (1)
+            - button "Matrix Toggle" [ref=e1406] [cursor=pointer]:
+              - img [ref=e1407]
+          - button "Data Encrypted for Impact" [ref=e1410] [cursor=pointer]:
+            - generic [ref=e1411]: Data Encrypted for Impact
+          - generic [ref=e1412]:
+            - button "Data Manipulation (3)" [ref=e1413] [cursor=pointer]:
+              - generic [ref=e1414]: Data Manipulation (3)
+            - button "Matrix Toggle" [ref=e1417] [cursor=pointer]:
+              - img [ref=e1418]
+          - generic [ref=e1420]:
+            - button "Defacement (2)" [ref=e1421] [cursor=pointer]:
+              - generic [ref=e1422]: Defacement (2)
+            - button "Matrix Toggle" [ref=e1425] [cursor=pointer]:
+              - img [ref=e1426]
+          - generic [ref=e1428]:
+            - button "Disk Wipe (2)" [ref=e1429] [cursor=pointer]:
+              - generic [ref=e1430]: Disk Wipe (2)
+            - button "Matrix Toggle" [ref=e1433] [cursor=pointer]:
+              - img [ref=e1434]
+          - button "Email Bombing" [ref=e1437] [cursor=pointer]:
+            - generic [ref=e1438]: Email Bombing
+          - generic [ref=e1439]:
+            - button "Endpoint Denial of Service (4)" [ref=e1440] [cursor=pointer]:
+              - generic [ref=e1441]: Endpoint Denial of Service (4)
+            - button "Matrix Toggle" [ref=e1444] [cursor=pointer]:
+              - img [ref=e1445]
+          - button "Financial Theft" [ref=e1448] [cursor=pointer]:
+            - generic [ref=e1449]: Financial Theft
+          - button "Firmware Corruption" [ref=e1451] [cursor=pointer]:
+            - generic [ref=e1452]: Firmware Corruption
+          - button "Inhibit System Recovery" [ref=e1454] [cursor=pointer]:
+            - generic [ref=e1455]: Inhibit System Recovery
+          - generic [ref=e1456]:
+            - button "Network Denial of Service (2)" [ref=e1457] [cursor=pointer]:
+              - generic [ref=e1458]: Network Denial of Service (2)
+            - button "Matrix Toggle" [ref=e1461] [cursor=pointer]:
+              - img [ref=e1462]
+          - generic [ref=e1464]:
+            - button "Resource Hijacking (4)" [ref=e1465] [cursor=pointer]:
+              - generic [ref=e1466]: Resource Hijacking (4)
+            - button "Matrix Toggle" [ref=e1469] [cursor=pointer]:
+              - img [ref=e1470]
+          - button "Service Stop" [ref=e1473] [cursor=pointer]:
+            - generic [ref=e1474]: Service Stop
+          - button "System Shutdown/Reboot" [ref=e1476] [cursor=pointer]:
+            - generic [ref=e1477]: System Shutdown/Reboot
+    - contentinfo [ref=e1478]:
+      - paragraph [ref=e1479]: © 2026 Tidal Cyber Inc. All rights reserved.
+      - generic [ref=e1480]:
+        - link "Terms of Use" [ref=e1481] [cursor=pointer]:
+          - /url: https://www.tidalcyber.com/terms-of-use?hsLang=en
+        - text: "|"
+        - 'link "MITRE ATT&CK® is a registered trademark of The MITRE Corporation. Current ATT&CK Version: v18" [ref=e1482] [cursor=pointer]':
+          - /url: https://attack.mitre.org/resources/legal-and-branding/terms-of-use/
+          - text: MITRE ATT&CK®
+  - generic:
+    - generic:
+      - generic:
+        - generic:
+          - generic:
+            - generic:
+              - button "Feedback - Show survey" [ref=e1484] [cursor=pointer]:
+                - img [ref=e1486]
+                - generic [ref=e1488]: Feedback
+              - dialog:
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - heading [level=2]: How would you rate your experience with Community Edition?
+                          - radiogroup:
+                            - generic:
+                              - generic: Hate
+                              - generic: Love
+                        - generic:
+                          - generic:
+                            - button [disabled]: Next
