@@ -17,12 +17,12 @@ class MatrixService {
           return Technique(
             id: techJson['id'],
             name: techJson['name'],
-            coverage: CoverageLevel.none, 
+            coverage: CoverageLevel.loading,  // Grey initially until API data arrives
             subTechniques: (techJson['subTechniques'] as List).map((subJson) {
               return SubTechnique(
                 id: subJson['id'],
                 name: subJson['name'],
-                coverage: CoverageLevel.none,
+                coverage: CoverageLevel.loading,
               );
             }).toList(),
           );
