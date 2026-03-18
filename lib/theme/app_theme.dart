@@ -18,11 +18,12 @@ class AppTheme {
   static const Color darkDivider = Color(0xFF333333);
 
   // Coverage Colors
-  static const Color coverageNone = Color(0xFF9E9E9E);
-  static const Color coverageLow = Color(0xFFFFC107);
-  static const Color coverageMedium = Color(0xFFFF9800);
-  static const Color coverageHigh = Color(0xFF4CAF50);
-  static const Color coverageBlocked = Color(0xFF2196F3);
+  static const Color coverageLoading = Color(0xFF9E9E9E);  // Grey - initial/loading state
+  static const Color coverageNone = Color(0xFFF44336);     // Red - no detection/mapping
+  static const Color coverageLow = Color(0xFFFF9800);      // Orange - inactive rules
+  static const Color coverageMedium = Color(0xFFFFC107);   // Yellow - partial coverage
+  static const Color coverageHigh = Color(0xFF4CAF50);     // Green - has detection
+  static const Color coverageBlocked = Color(0xFF9E9E9E); // Grey - not applicable
 
   // Spacing
   static const double spacingXs = 4.0;
