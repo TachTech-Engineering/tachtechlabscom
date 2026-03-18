@@ -14,17 +14,12 @@ class SearchAndFilterBar extends ConsumerWidget {
     final currentFilter = ref.watch(coverageFilterProvider);
     final resultsAsync = ref.watch(filteredMatrixProvider);
     final themeMode = ref.watch(themeModeProvider);
-    final screenWidth = MediaQuery.of(context).size.width;
-    final isMobile = screenWidth < 600;
-    final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
-    final borderColor = isDark ? Colors.grey[700]! : AppTheme.divider;
 
     return Container(
-      color: theme.cardTheme.color ?? theme.cardColor,
-      padding: EdgeInsets.symmetric(
-        horizontal: isMobile ? AppTheme.spacingMd : AppTheme.spacingLg,
-        vertical: isMobile ? AppTheme.spacingSm : AppTheme.spacingMd,
+      color: Theme.of(context).cardTheme.color,
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppTheme.spacingLg,
+        vertical: AppTheme.spacingMd,
       ),
       child: Center(
         child: ConstrainedBox(
@@ -39,54 +34,40 @@ class SearchAndFilterBar extends ConsumerWidget {
                   Row(
                     children: [
                       Expanded(
-                        child: SizedBox(
-                          height: isMobile ? 48 : null, // Ensure touch target on mobile
-                          child: TextField(
-                            onChanged: (value) => ref.read(searchQueryProvider.notifier).state = value,
-                            style: TextStyle(fontSize: isMobile ? 14 : 16),
-                            decoration: InputDecoration(
-                              hintText: isDesktop
-                                  ? 'Search by Technique Name or ID (e.g. T1078)'
-                                  : 'Search techniques...',
-                              prefixIcon: Icon(Icons.search, color: theme.hintColor),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(AppTheme.radiusMd),
-                                borderSide: BorderSide(color: borderColor),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(AppTheme.radiusMd),
-                                borderSide: BorderSide(color: borderColor),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(AppTheme.radiusMd),
-                                borderSide: BorderSide(color: theme.colorScheme.primary),
-                              ),
-                              filled: true,
-                              fillColor: theme.scaffoldBackgroundColor,
-                              contentPadding: EdgeInsets.symmetric(
-                                vertical: isMobile ? 12 : 0,
-                                horizontal: AppTheme.spacingMd,
-                              ),
+                        child: TextField(
+                          onChanged: (value) => ref.read(searchQueryProvider.notifier).state = value,
+                          decoration: InputDecoration(
+                            hintText: isDesktop 
+                                ? 'Search by Technique Name or ID (e.g. T1078)' 
+                                : 'Search by ID/Name...',
+                            prefixIcon: const Icon(Icons.search, color: AppTheme.textSecondary),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(AppTheme.radiusMd),
+                              borderSide: const BorderSide(color: AppTheme.divider),
                             ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(AppTheme.radiusMd),
+                              borderSide: const BorderSide(color: AppTheme.divider),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(AppTheme.radiusMd),
+                              borderSide: const BorderSide(color: AppTheme.primary),
+                            ),
+                            filled: true,
+                            fillColor: Theme.of(context).scaffoldBackgroundColor,
+                            contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: AppTheme.spacingMd),
                           ),
                         ),
                       ),
-                      SizedBox(width: isMobile ? AppTheme.spacingSm : AppTheme.spacingMd),
-                      SizedBox(
-                        width: 48,
-                        height: 48,
-                        child: IconButton(
-                          onPressed: () => ref.read(themeModeProvider.notifier).toggle(),
-                          icon: Icon(
-                            themeMode == ThemeMode.light ? Icons.dark_mode : Icons.light_mode,
-                            size: isMobile ? 22 : 24,
-                          ),
-                          tooltip: 'Toggle Theme',
-                        ),
+                      const SizedBox(width: AppTheme.spacingMd),
+                      IconButton(
+                        onPressed: () => ref.read(themeModeProvider.notifier).toggle(),
+                        icon: Icon(themeMode == ThemeMode.light ? Icons.dark_mode : Icons.light_mode),
+                        tooltip: 'Toggle Theme',
                       ),
                       if (isDesktop) ...[
                         const SizedBox(width: AppTheme.spacingMd),
-                        _buildFilterDropdown(context, ref, currentFilter, isMobile: false),
+                        _buildFilterDropdown(context, ref, currentFilter),
                         const SizedBox(width: AppTheme.spacingMd),
                         ElevatedButton.icon(
                           onPressed: () => _handleExport(ref),
@@ -100,67 +81,68 @@ class SearchAndFilterBar extends ConsumerWidget {
                       ],
                     ],
                   ),
+                  const SizedBox(height: AppTheme.spacingSm),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Wrap(
+                        spacing: AppTheme.spacingSm,
+                        runSpacing: isDesktop ? 0 : AppTheme.spacingSm,
+                        children: [
+                          FilterChip(
+                            label: const Text('Windows'),
+                            selected: true,
+                            onSelected: (_) {},
+                            selectedColor: AppTheme.primary.withValues(alpha: 0.1),
+                            checkmarkColor: AppTheme.primary,
+                          ),
+                          FilterChip(
+                            label: const Text('Linux'),
+                            selected: false,
+                            onSelected: (_) {},
+                          ),
+                          FilterChip(
+                            label: const Text('macOS'),
+                            selected: false,
+                            onSelected: (_) {},
+                          ),
+                          FilterChip(
+                            label: const Text('Cloud'),
+                            selected: false,
+                            onSelected: (_) {},
+                          ),
+                        ],
+                      ),
+                      resultsAsync.when(
+                        data: (tactics) {
+                          final uniqueIds = <String>{};
+                          for (var t in tactics) {
+                            for (var tech in t.techniques) {
+                              uniqueIds.add(tech.id);
+                            }
+                          }
+                          return Text(
+                            '${uniqueIds.length} techniques match',
+                            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              fontStyle: FontStyle.italic,
+                            ),
+                          );
+                        },
+                        loading: () => const SizedBox.shrink(),
+                        error: (_, stack) => const SizedBox.shrink(),
+                      ),
+                    ],
+                  ),
                   if (!isDesktop) ...[
                     const SizedBox(height: AppTheme.spacingSm),
                     Row(
                       children: [
-                        Expanded(child: _buildFilterDropdown(context, ref, currentFilter, isMobile: true)),
-                        const SizedBox(width: AppTheme.spacingSm),
-                        SizedBox(
-                          width: 48,
-                          height: 48,
-                          child: IconButton(
-                            onPressed: () => _handleExport(ref),
-                            icon: const Icon(Icons.download),
-                            tooltip: 'Export JSON',
-                          ),
-                        ),
-                        resultsAsync.when(
-                          data: (tactics) {
-                            final uniqueIds = <String>{};
-                            for (var t in tactics) {
-                              for (var tech in t.techniques) {
-                                uniqueIds.add(tech.id);
-                              }
-                            }
-                            return Padding(
-                              padding: const EdgeInsets.only(left: AppTheme.spacingSm),
-                              child: Text(
-                                '${uniqueIds.length} found',
-                                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                  fontStyle: FontStyle.italic,
-                                ),
-                              ),
-                            );
-                          },
-                          loading: () => const SizedBox.shrink(),
-                          error: (_, stack) => const SizedBox.shrink(),
-                        ),
-                      ],
-                    ),
-                  ],
-                  if (isDesktop) ...[
-                    const SizedBox(height: AppTheme.spacingSm),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        resultsAsync.when(
-                          data: (tactics) {
-                            final uniqueIds = <String>{};
-                            for (var t in tactics) {
-                              for (var tech in t.techniques) {
-                                uniqueIds.add(tech.id);
-                              }
-                            }
-                            return Text(
-                              '${uniqueIds.length} techniques match',
-                              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                fontStyle: FontStyle.italic,
-                              ),
-                            );
-                          },
-                          loading: () => const SizedBox.shrink(),
-                          error: (_, stack) => const SizedBox.shrink(),
+                        Expanded(child: _buildFilterDropdown(context, ref, currentFilter)),
+                        const SizedBox(width: AppTheme.spacingMd),
+                        IconButton(
+                          onPressed: () => _handleExport(ref),
+                          icon: const Icon(Icons.download),
+                          tooltip: 'Export JSON',
                         ),
                       ],
                     ),
@@ -174,52 +156,27 @@ class SearchAndFilterBar extends ConsumerWidget {
     );
   }
 
-  Widget _buildFilterDropdown(BuildContext context, WidgetRef ref, CoverageFilter currentFilter, {required bool isMobile}) {
-    final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
-    final borderColor = isDark ? Colors.grey[700]! : AppTheme.divider;
-
+  Widget _buildFilterDropdown(BuildContext context, WidgetRef ref, CoverageFilter currentFilter) {
     return Container(
-      height: isMobile ? 48 : null, // Ensure touch target on mobile
-      padding: EdgeInsets.symmetric(
-        horizontal: isMobile ? AppTheme.spacingSm : AppTheme.spacingMd,
-        vertical: isMobile ? 4 : 0,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: AppTheme.spacingMd),
       decoration: BoxDecoration(
-        color: theme.scaffoldBackgroundColor,
+        color: Theme.of(context).scaffoldBackgroundColor,
         borderRadius: BorderRadius.circular(AppTheme.radiusMd),
-        border: Border.all(color: borderColor),
+        border: Border.all(color: AppTheme.divider),
       ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton<CoverageFilter>(
           value: currentFilter,
-          isExpanded: isMobile,
-          style: TextStyle(
-            fontSize: isMobile ? 14 : 16,
-            color: Theme.of(context).textTheme.bodyMedium?.color,
-          ),
           onChanged: (value) {
             if (value != null) {
               ref.read(coverageFilterProvider.notifier).state = value;
             }
           },
-          items: [
-            DropdownMenuItem(
-              value: CoverageFilter.all,
-              child: Text(isMobile ? 'All' : 'Show All'),
-            ),
-            DropdownMenuItem(
-              value: CoverageFilter.covered,
-              child: Text(isMobile ? 'Covered' : 'Covered Only'),
-            ),
-            DropdownMenuItem(
-              value: CoverageFilter.partial,
-              child: Text(isMobile ? 'Partial' : 'Partial Coverage'),
-            ),
-            DropdownMenuItem(
-              value: CoverageFilter.gaps,
-              child: Text(isMobile ? 'Gaps' : 'Gaps Only'),
-            ),
+          items: const [
+            DropdownMenuItem(value: CoverageFilter.all, child: Text('Show All')),
+            DropdownMenuItem(value: CoverageFilter.covered, child: Text('Covered Only')),
+            DropdownMenuItem(value: CoverageFilter.partial, child: Text('Partial Coverage')),
+            DropdownMenuItem(value: CoverageFilter.gaps, child: Text('Gaps Only')),
           ],
         ),
       ),

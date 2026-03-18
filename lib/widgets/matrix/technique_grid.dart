@@ -35,28 +35,25 @@ class TechniqueGrid extends ConsumerWidget {
         LayoutBuilder(
           builder: (context, constraints) {
             // Determine column count based on width
-            final spacing = AppTheme.spacingSm;
-            int columns;
+            int columns = 2; // Mobile
             if (Breakpoints.isDesktop(constraints.maxWidth)) {
               columns = 6;
             } else if (Breakpoints.isTablet(constraints.maxWidth)) {
               columns = 4;
-            } else if (constraints.maxWidth > 300) {
-              columns = 2;
-            } else {
-              columns = 1; // Very narrow screens
             }
 
-            final availableWidth = constraints.maxWidth - (spacing * (columns - 1));
-            final cellWidth = (availableWidth / columns).clamp(100.0, double.infinity);
+            final spacing = AppTheme.spacingSm;
+            final cellWidth = (constraints.maxWidth - (spacing * (columns - 1))) / columns;
 
             return Wrap(
               spacing: spacing,
               runSpacing: spacing,
               children: techniques.map((technique) {
+                // Ensure width doesn't fall below a minimum or exceed container
+                final safeWidth = cellWidth.floorToDouble() - 0.1; 
                 return TechniqueCell(
                   technique: technique,
-                  width: cellWidth,
+                  width: safeWidth,
                 );
               }).toList(),
             );
