@@ -32,9 +32,30 @@ final attackMatrixProvider = FutureProvider<List<Tactic>>((ref) async {
   final baseMatrix = await ref.watch(baseMatrixProvider.future);
   final coverageData = await ref.watch(coverageDataProvider.future);
 
-  // If no coverage data, return base matrix (all techniques show as "none")
+  // If no coverage data, set all techniques to "none" (red) to indicate no detection
   if (coverageData == null) {
-    return baseMatrix;
+    return baseMatrix.map((tactic) {
+      final updatedTechniques = tactic.techniques.map((technique) {
+        final updatedSubTechniques = technique.subTechniques.map((sub) {
+          return SubTechnique(
+            id: sub.id,
+            name: sub.name,
+            coverage: CoverageLevel.none,
+          );
+        }).toList();
+        return Technique(
+          id: technique.id,
+          name: technique.name,
+          coverage: CoverageLevel.none,
+          subTechniques: updatedSubTechniques,
+        );
+      }).toList();
+      return Tactic(
+        id: tactic.id,
+        name: tactic.name,
+        techniques: updatedTechniques,
+      );
+    }).toList();
   }
 
   // Merge coverage into the matrix
@@ -48,14 +69,17 @@ final attackMatrixProvider = FutureProvider<List<Tactic>>((ref) async {
         hasApiData: true,
       );
 
-      // Also update sub-techniques
+      // Also update sub-techniques - inherit from parent if no direct coverage
       final updatedSubTechniques = technique.subTechniques.map((sub) {
         final subCoverage = coverageData.coverage[sub.id];
+        // If sub-technique has its own coverage, use it
+        // Otherwise, inherit from parent technique (CrowdStrike often only reports parent IDs)
+        final effectiveCoverage = subCoverage?.coverageLevel ?? coverage?.coverageLevel;
         return SubTechnique(
           id: sub.id,
           name: sub.name,
           coverage: _mapCoverageLevel(
-            subCoverage?.coverageLevel,
+            effectiveCoverage,
             hasApiData: true,
           ),
         );

@@ -136,9 +136,9 @@ class CoverageService {
     if (kDebugMode) {
       // Check if we're on Android (emulator uses 10.0.2.2 to reach host)
       if (defaultTargetPlatform == TargetPlatform.android) {
-        return 'http://10.0.2.2:9000/tachtechlabscom/us-central1';
+        return 'http://10.0.2.2:5055/tachtechlabscom/us-central1';
       }
-      return 'http://127.0.0.1:9000/tachtechlabscom/us-central1';
+      return 'http://127.0.0.1:5055/tachtechlabscom/us-central1';
     }
     return '/api';
   }

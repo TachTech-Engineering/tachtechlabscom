@@ -211,12 +211,8 @@ class _TechniqueCellState extends ConsumerState<TechniqueCell> {
     final hasSubTechniques = widget.technique.subTechniques.isNotEmpty;
     final coverageData = ref.watch(techniqueDetailProvider(widget.technique.id));
 
-    // Adaptive text truncation based on cell width
-    String truncatedName = widget.technique.name;
-    final maxChars = (widget.width / 8).floor().clamp(12, 30);
-    if (truncatedName.length > maxChars) {
-      truncatedName = '${truncatedName.substring(0, maxChars - 2)}...';
-    }
+    // Use full name - let overflow handle truncation naturally
+    final displayName = widget.technique.name;
 
     final textColor = _getTextColor(widget.technique.coverage.color);
 
@@ -248,8 +244,8 @@ class _TechniqueCellState extends ConsumerState<TechniqueCell> {
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 200),
             width: widget.width,
-            constraints: const BoxConstraints(minHeight: 56), // Minimum touch target
-            padding: const EdgeInsets.all(AppTheme.spacingMd),
+            height: 90, // Fixed height for uniform grid alignment
+            padding: const EdgeInsets.symmetric(horizontal: AppTheme.spacingSm, vertical: 6),
             decoration: BoxDecoration(
               color: widget.technique.coverage.color,
               borderRadius: BorderRadius.circular(AppTheme.radiusMd),
@@ -271,7 +267,7 @@ class _TechniqueCellState extends ConsumerState<TechniqueCell> {
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         widget.technique.id,
@@ -280,16 +276,21 @@ class _TechniqueCellState extends ConsumerState<TechniqueCell> {
                               fontFamily: 'monospace',
                               color: textColor,
                             ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        truncatedName,
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              fontSize: 11,
-                              color: textColor.withValues(alpha: 0.9),
-                            ),
-                        maxLines: 2,
+                        maxLines: 1,
                         overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(height: 2),
+                      Expanded(
+                        child: Text(
+                          displayName,
+                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                fontSize: 10,
+                                height: 1.2,
+                                color: textColor.withValues(alpha: 0.9),
+                              ),
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
                     ],
                   ),

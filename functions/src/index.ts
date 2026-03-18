@@ -352,8 +352,8 @@ export const getCoverage = functions.https.onRequest((req, res) => {
         }
       }
 
-      // Fetch rules and alerts in parallel
-      const [correlationRules, ioaRules, alertsData] = await Promise.all([
+      // Fetch rules, detections, and alerts in parallel
+      const [correlationRules, ioaRules, alertsData, detectionsData] = await Promise.all([
         // Use combined endpoint for correlation rules (includes full details)
         csApiRequest("/correlation-rules/combined/rules/v1?limit=500")
           .then((res) => res.resources || [])
@@ -376,14 +376,16 @@ export const getCoverage = functions.https.onRequest((req, res) => {
             return [];
           }),
 
-        // Fetch endpoint alerts with ATT&CK data (last 30 days)
-        csApiRequest("/alerts/queries/alerts/v2?limit=500&sort=created_timestamp.desc")
+        // Fetch unified alerts - filter for endpoint product (epp) which has ATT&CK data
+        // Also try idp_detection and mobile products which may have ATT&CK mappings
+        csApiRequest("/alerts/queries/alerts/v2?limit=500&sort=created_timestamp.desc&filter=product:['epp','idp_detection','mobile','falcon']")
           .then(async (queryRes) => {
             const totalAlerts = queryRes.meta?.pagination?.total || 0;
+            console.log(`Found ${totalAlerts} endpoint alerts`);
             if (!queryRes.resources?.length) return { alerts: [], total: totalAlerts };
 
-            // Fetch alert details (up to 100 for technique extraction)
-            const alertIds = queryRes.resources.slice(0, 100);
+            // Fetch alert details
+            const alertIds = queryRes.resources.slice(0, 200);
             const details = await csApiRequest(
               "/alerts/entities/alerts/v2",
               {
@@ -394,8 +396,46 @@ export const getCoverage = functions.https.onRequest((req, res) => {
             return { alerts: details.resources || [], total: totalAlerts };
           })
           .catch((e) => {
-            console.error("Alerts error:", e);
-            return { alerts: [], total: 0 };
+            console.error("Endpoint alerts error:", e);
+            // Fallback: try without filter
+            return csApiRequest("/alerts/queries/alerts/v2?limit=500&sort=created_timestamp.desc")
+              .then(async (queryRes) => {
+                const totalAlerts = queryRes.meta?.pagination?.total || 0;
+                if (!queryRes.resources?.length) return { alerts: [], total: totalAlerts };
+                const alertIds = queryRes.resources.slice(0, 200);
+                const details = await csApiRequest(
+                  "/alerts/entities/alerts/v2",
+                  {
+                    method: "POST",
+                    body: JSON.stringify({ composite_ids: alertIds }),
+                  }
+                );
+                return { alerts: details.resources || [], total: totalAlerts };
+              })
+              .catch(() => ({ alerts: [], total: 0 }));
+          }),
+
+        // Try incidents API as fallback - incidents often have ATT&CK technique data
+        csApiRequest("/incidents/queries/incidents/v1?limit=500&sort=start.desc")
+          .then(async (queryRes) => {
+            const totalIncidents = queryRes.meta?.pagination?.total || 0;
+            console.log(`Found ${totalIncidents} incidents`);
+            if (!queryRes.resources?.length) return { detections: [], total: totalIncidents };
+
+            // Fetch incident details
+            const incidentIds = queryRes.resources.slice(0, 200);
+            const details = await csApiRequest(
+              "/incidents/entities/incidents/GET/v1",
+              {
+                method: "POST",
+                body: JSON.stringify({ ids: incidentIds }),
+              }
+            );
+            return { detections: details.resources || [], total: totalIncidents };
+          })
+          .catch((e) => {
+            console.error("Incidents error:", e);
+            return { detections: [], total: 0 };
           }),
       ]);
 
@@ -520,35 +560,90 @@ export const getCoverage = functions.https.onRequest((req, res) => {
       // Merge alert data into coverage
       for (const [techId, count] of Object.entries(alertTechniqueCounts)) {
         ensureTechnique(techId);
-        coverage[techId].alertCount = count;
+        coverage[techId].alertCount += count;
         coverage[techId].hasAlerts = true;
       }
 
-      // Calculate coverage levels (rules + alerts)
+      // Process incidents/detections - these often have ATT&CK mappings via behaviors/techniques
+      console.log(`Processing ${detectionsData.detections.length} incidents (total: ${detectionsData.total})`);
+      for (const incident of detectionsData.detections) {
+        const techniqueIds: string[] = [];
+
+        // Incidents have techniques array directly
+        if (incident.techniques && Array.isArray(incident.techniques)) {
+          for (const tech of incident.techniques) {
+            if (typeof tech === 'string' && !techniqueIds.includes(tech)) {
+              techniqueIds.push(tech);
+            } else if (tech.technique_id && !techniqueIds.includes(tech.technique_id)) {
+              techniqueIds.push(tech.technique_id);
+            }
+          }
+        }
+
+        // Also check tactics (may contain technique references)
+        if (incident.tactics && Array.isArray(incident.tactics)) {
+          // Tactics don't directly give us techniques, but log for debugging
+          console.log(`Incident tactics: ${incident.tactics.join(', ')}`);
+        }
+
+        // Check fine_score which may have technique breakdown
+        if (incident.fine_score_details) {
+          // This might have technique-level scores
+          console.log(`Fine score details available for incident`);
+        }
+
+        // Count incidents per technique
+        for (const techId of techniqueIds) {
+          ensureTechnique(techId);
+          coverage[techId].alertCount += 1;
+          coverage[techId].hasAlerts = true;
+        }
+      }
+
+      // Log technique extraction summary
+      const extractedTechniques = Object.keys(coverage).filter(id => coverage[id].hasAlerts);
+      console.log(`Extracted ${extractedTechniques.length} techniques from incidents: ${extractedTechniques.join(', ')}`);
+
+      // Also try to extract from alert behaviors (endpoint alerts have these)
+      for (const alert of alertsData.alerts) {
+        if (alert.behaviors && Array.isArray(alert.behaviors)) {
+          for (const behavior of alert.behaviors) {
+            if (behavior.technique_id) {
+              ensureTechnique(behavior.technique_id);
+              coverage[behavior.technique_id].alertCount += 1;
+              coverage[behavior.technique_id].hasAlerts = true;
+            }
+            if (behavior.technique && behavior.technique !== behavior.technique_id) {
+              ensureTechnique(behavior.technique);
+              coverage[behavior.technique].alertCount += 1;
+              coverage[behavior.technique].hasAlerts = true;
+            }
+          }
+        }
+      }
+
+      // Calculate coverage levels (rules + detections + alerts)
       for (const techId of Object.keys(coverage)) {
         const tech = coverage[techId];
         const hasRules = tech.totalRules > 0;
         const hasEnabledRules = tech.enabledRules > 0;
-        const hasAlerts = tech.hasAlerts;
+        const hasDetections = tech.hasAlerts && tech.alertCount > 0;
 
         // Coverage logic:
-        // - Green (full): Has ANY active/enabled detection rule
+        // - Green (full): Has detections OR has enabled rules (technique is being detected)
+        // - Yellow (partial): Has alerts but no enabled rules
         // - Orange (inactive): Has rules but all disabled
-        // - Red (none): No rules or alerts
-        if (hasEnabledRules) {
-          // Any enabled rule = covered (green)
+        // - Red (none): No rules, no detections
+        if (hasDetections || hasEnabledRules) {
+          // Any detection or enabled rule = full coverage (green)
           tech.coverageLevel = "full";
-          tech.covered = true;
-        } else if (hasAlerts) {
-          // Has alerts but no rules = partial coverage
-          tech.coverageLevel = "partial";
           tech.covered = true;
         } else if (hasRules && !hasEnabledRules) {
           // Rules exist but disabled = inactive (orange)
           tech.coverageLevel = "inactive";
           tech.covered = false;
         } else {
-          // No rules, no alerts = no coverage (red)
+          // No rules, no detections = no coverage (red)
           tech.coverageLevel = "none";
           tech.covered = false;
         }
@@ -557,6 +652,12 @@ export const getCoverage = functions.https.onRequest((req, res) => {
       // Calculate summary stats
       const techniquesWithAlerts = Object.values(coverage).filter((c) => c.hasAlerts).length;
       const techniquesWithRules = Object.values(coverage).filter((c) => c.totalRules > 0).length;
+      const totalDetectionCount = Object.values(coverage).reduce((sum, c) => sum + c.alertCount, 0);
+
+      console.log(`Coverage summary: ${Object.values(coverage).filter((c) => c.covered).length} techniques covered`);
+      console.log(`  - Techniques with detections: ${techniquesWithAlerts}`);
+      console.log(`  - Techniques with rules: ${techniquesWithRules}`);
+      console.log(`  - Total detections: ${totalDetectionCount}`);
 
       const result: CoverageData = {
         coverage,
@@ -564,7 +665,7 @@ export const getCoverage = functions.https.onRequest((req, res) => {
           totalTechniquesCovered: Object.values(coverage).filter((c) => c.covered).length,
           totalCorrelationRules: correlationRules.length,
           totalIOARules: ioaRules.length,
-          totalAlerts: alertsData.total,
+          totalAlerts: alertsData.total + detectionsData.total,
           techniquesWithAlerts,
           techniquesWithRules,
           timestamp: new Date().toISOString(),
