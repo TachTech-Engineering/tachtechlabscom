@@ -63,9 +63,29 @@ final attackMatrixProvider = FutureProvider<List<Tactic>>((ref) async {
   return baseMatrix.map((tactic) {
     final updatedTechniques = tactic.techniques.map((technique) {
       // Check if we have coverage for this technique
-      final coverage = coverageData.coverage[technique.id];
+      final parentCoverage = coverageData.coverage[technique.id];
+
+      // Also check if any sub-techniques have coverage (propagate upward)
+      String? bestSubCoverage;
+      for (final sub in technique.subTechniques) {
+        final subCoverage = coverageData.coverage[sub.id];
+        if (subCoverage != null && subCoverage.covered) {
+          // Prioritize: full > partial > inactive > none
+          if (subCoverage.coverageLevel == 'full') {
+            bestSubCoverage = 'full';
+            break; // Can't get better than full
+          } else if (subCoverage.coverageLevel == 'partial' && bestSubCoverage != 'full') {
+            bestSubCoverage = 'partial';
+          } else if (subCoverage.coverageLevel == 'inactive' && bestSubCoverage == null) {
+            bestSubCoverage = 'inactive';
+          }
+        }
+      }
+
+      // Use parent coverage if available, otherwise propagate from best sub-technique
+      final effectiveParentLevel = parentCoverage?.coverageLevel ?? bestSubCoverage;
       final newCoverageLevel = _mapCoverageLevel(
-        coverage?.coverageLevel,
+        effectiveParentLevel,
         hasApiData: true,
       );
 
@@ -74,7 +94,7 @@ final attackMatrixProvider = FutureProvider<List<Tactic>>((ref) async {
         final subCoverage = coverageData.coverage[sub.id];
         // If sub-technique has its own coverage, use it
         // Otherwise, inherit from parent technique (CrowdStrike often only reports parent IDs)
-        final effectiveCoverage = subCoverage?.coverageLevel ?? coverage?.coverageLevel;
+        final effectiveCoverage = subCoverage?.coverageLevel ?? parentCoverage?.coverageLevel;
         return SubTechnique(
           id: sub.id,
           name: sub.name,

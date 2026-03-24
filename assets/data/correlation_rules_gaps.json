@@ -1,0 +1,1054 @@
+{
+  "metadata": {
+    "description": "CrowdStrike Next-Gen SIEM Correlation Rules for ATT&CK Coverage Gaps",
+    "generated": "2026-03-24",
+    "total_rules": 120,
+    "author": "TachTech Labs"
+  },
+  "rules": [
+    {
+      "name": "T1007 - System Service Discovery",
+      "technique_id": "T1007",
+      "tactic": "Discovery",
+      "description": "Detects enumeration of system services using native tools",
+      "severity": "medium",
+      "query": "event_platform=Win AND (event_type=ProcessRollup2 OR event_type=SyntheticProcessRollup2) AND (CommandLine CONTAINS 'sc query' OR CommandLine CONTAINS 'Get-Service' OR CommandLine CONTAINS 'wmic service' OR CommandLine CONTAINS 'net start')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1007/"
+    },
+    {
+      "name": "T1010 - Application Window Discovery",
+      "technique_id": "T1010",
+      "tactic": "Discovery",
+      "description": "Detects enumeration of open application windows",
+      "severity": "low",
+      "query": "event_platform=Win AND event_type=ProcessRollup2 AND (CommandLine CONTAINS 'Get-Process' AND CommandLine CONTAINS 'MainWindowTitle' OR ImageFileName CONTAINS 'tasklist.exe' AND CommandLine CONTAINS '/v')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1010/"
+    },
+    {
+      "name": "T1012 - Query Registry",
+      "technique_id": "T1012",
+      "tactic": "Discovery",
+      "description": "Detects suspicious registry queries for system information",
+      "severity": "low",
+      "query": "event_platform=Win AND (event_type=ProcessRollup2 AND (ImageFileName CONTAINS 'reg.exe' AND CommandLine CONTAINS 'query') OR (CommandLine CONTAINS 'Get-ItemProperty' AND CommandLine CONTAINS 'HKLM') OR (CommandLine CONTAINS 'REG QUERY'))",
+      "mitre_url": "https://attack.mitre.org/techniques/T1012/"
+    },
+    {
+      "name": "T1016 - System Network Configuration Discovery",
+      "technique_id": "T1016",
+      "tactic": "Discovery",
+      "description": "Detects network configuration enumeration",
+      "severity": "medium",
+      "query": "event_platform=Win AND event_type=ProcessRollup2 AND (ImageFileName CONTAINS 'ipconfig.exe' OR ImageFileName CONTAINS 'netsh.exe' OR CommandLine CONTAINS 'Get-NetIPConfiguration' OR CommandLine CONTAINS 'Get-NetAdapter' OR ImageFileName CONTAINS 'route.exe' AND CommandLine CONTAINS 'print')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1016/"
+    },
+    {
+      "name": "T1018 - Remote System Discovery",
+      "technique_id": "T1018",
+      "tactic": "Discovery",
+      "description": "Detects discovery of remote systems on the network",
+      "severity": "medium",
+      "query": "event_platform=Win AND event_type=ProcessRollup2 AND (ImageFileName CONTAINS 'net.exe' AND (CommandLine CONTAINS 'view' OR CommandLine CONTAINS 'group') OR ImageFileName CONTAINS 'nltest.exe' OR ImageFileName CONTAINS 'dsquery.exe' OR CommandLine CONTAINS 'Get-ADComputer' OR ImageFileName CONTAINS 'arp.exe' AND CommandLine CONTAINS '-a')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1018/"
+    },
+    {
+      "name": "T1033 - System Owner/User Discovery",
+      "technique_id": "T1033",
+      "tactic": "Discovery",
+      "description": "Detects discovery of system owner or current user",
+      "severity": "low",
+      "query": "event_platform=Win AND event_type=ProcessRollup2 AND (ImageFileName CONTAINS 'whoami.exe' OR CommandLine CONTAINS 'echo %username%' OR CommandLine CONTAINS '$env:USERNAME' OR CommandLine CONTAINS 'query user' OR ImageFileName CONTAINS 'quser.exe')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1033/"
+    },
+    {
+      "name": "T1046 - Network Service Discovery",
+      "technique_id": "T1046",
+      "tactic": "Discovery",
+      "description": "Detects network service scanning and port enumeration",
+      "severity": "high",
+      "query": "(event_platform=Win AND event_type=ProcessRollup2 AND (ImageFileName CONTAINS 'nmap' OR ImageFileName CONTAINS 'masscan' OR CommandLine CONTAINS 'Test-NetConnection' OR CommandLine CONTAINS 'tnc ' OR CommandLine CONTAINS 'portqry')) OR (event_type=NetworkConnect AND ConnectionCount > 50 AND RemotePort IN (21,22,23,25,80,443,445,3389,5985))",
+      "mitre_url": "https://attack.mitre.org/techniques/T1046/"
+    },
+    {
+      "name": "T1049 - System Network Connections Discovery",
+      "technique_id": "T1049",
+      "tactic": "Discovery",
+      "description": "Detects enumeration of active network connections",
+      "severity": "medium",
+      "query": "event_platform=Win AND event_type=ProcessRollup2 AND (ImageFileName CONTAINS 'netstat.exe' OR CommandLine CONTAINS 'Get-NetTCPConnection' OR CommandLine CONTAINS 'Get-NetUDPEndpoint' OR ImageFileName CONTAINS 'ss.exe')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1049/"
+    },
+    {
+      "name": "T1057 - Process Discovery",
+      "technique_id": "T1057",
+      "tactic": "Discovery",
+      "description": "Detects enumeration of running processes",
+      "severity": "low",
+      "query": "event_platform=Win AND event_type=ProcessRollup2 AND (ImageFileName CONTAINS 'tasklist.exe' OR CommandLine CONTAINS 'Get-Process' OR CommandLine CONTAINS 'wmic process' OR CommandLine CONTAINS 'ps aux' OR CommandLine CONTAINS 'ps -ef')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1057/"
+    },
+    {
+      "name": "T1069 - Permission Groups Discovery",
+      "technique_id": "T1069",
+      "tactic": "Discovery",
+      "description": "Detects enumeration of local or domain permission groups",
+      "severity": "medium",
+      "query": "event_platform=Win AND event_type=ProcessRollup2 AND (ImageFileName CONTAINS 'net.exe' AND (CommandLine CONTAINS 'localgroup' OR CommandLine CONTAINS 'group /domain') OR CommandLine CONTAINS 'Get-LocalGroup' OR CommandLine CONTAINS 'Get-ADGroup' OR ImageFileName CONTAINS 'gpresult.exe')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1069/"
+    },
+    {
+      "name": "T1082 - System Information Discovery",
+      "technique_id": "T1082",
+      "tactic": "Discovery",
+      "description": "Detects collection of detailed system information",
+      "severity": "medium",
+      "query": "event_platform=Win AND event_type=ProcessRollup2 AND (ImageFileName CONTAINS 'systeminfo.exe' OR ImageFileName CONTAINS 'hostname.exe' OR CommandLine CONTAINS 'Get-ComputerInfo' OR CommandLine CONTAINS 'wmic os get' OR CommandLine CONTAINS 'wmic computersystem' OR CommandLine CONTAINS 'ver')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1082/"
+    },
+    {
+      "name": "T1083 - File and Directory Discovery",
+      "technique_id": "T1083",
+      "tactic": "Discovery",
+      "description": "Detects enumeration of files and directories",
+      "severity": "low",
+      "query": "event_platform=Win AND event_type=ProcessRollup2 AND ((ImageFileName CONTAINS 'dir' OR ImageFileName CONTAINS 'tree.exe') AND (CommandLine CONTAINS '/s' OR CommandLine CONTAINS '/r') OR CommandLine CONTAINS 'Get-ChildItem -Recurse' OR CommandLine CONTAINS 'gci -r' OR CommandLine CONTAINS 'ls -la')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1083/"
+    },
+    {
+      "name": "T1120 - Peripheral Device Discovery",
+      "technique_id": "T1120",
+      "tactic": "Discovery",
+      "description": "Detects enumeration of peripheral devices",
+      "severity": "low",
+      "query": "event_platform=Win AND event_type=ProcessRollup2 AND (CommandLine CONTAINS 'wmic path win32_pnpentity' OR CommandLine CONTAINS 'Get-PnpDevice' OR CommandLine CONTAINS 'devcon.exe' OR CommandLine CONTAINS 'pnputil')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1120/"
+    },
+    {
+      "name": "T1124 - System Time Discovery",
+      "technique_id": "T1124",
+      "tactic": "Discovery",
+      "description": "Detects enumeration of system time for evasion or scheduling",
+      "severity": "low",
+      "query": "event_platform=Win AND event_type=ProcessRollup2 AND (ImageFileName CONTAINS 'w32tm.exe' OR ImageFileName CONTAINS 'time.exe' OR CommandLine CONTAINS 'Get-Date' OR CommandLine CONTAINS 'net time')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1124/"
+    },
+    {
+      "name": "T1135 - Network Share Discovery",
+      "technique_id": "T1135",
+      "tactic": "Discovery",
+      "description": "Detects enumeration of network shares",
+      "severity": "medium",
+      "query": "event_platform=Win AND event_type=ProcessRollup2 AND (ImageFileName CONTAINS 'net.exe' AND CommandLine CONTAINS 'share' OR CommandLine CONTAINS 'Get-SmbShare' OR CommandLine CONTAINS 'Get-WmiObject Win32_Share' OR ImageFileName CONTAINS 'shareenum')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1135/"
+    },
+    {
+      "name": "T1201 - Password Policy Discovery",
+      "technique_id": "T1201",
+      "tactic": "Discovery",
+      "description": "Detects enumeration of password policies",
+      "severity": "medium",
+      "query": "event_platform=Win AND event_type=ProcessRollup2 AND (ImageFileName CONTAINS 'net.exe' AND CommandLine CONTAINS 'accounts' OR CommandLine CONTAINS 'Get-ADDefaultDomainPasswordPolicy' OR CommandLine CONTAINS 'secedit /export')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1201/"
+    },
+    {
+      "name": "T1217 - Browser Information Discovery",
+      "technique_id": "T1217",
+      "tactic": "Discovery",
+      "description": "Detects enumeration of browser bookmarks and history",
+      "severity": "medium",
+      "query": "event_platform=Win AND (event_type=ProcessRollup2 OR event_type=FileRead) AND (FilePath CONTAINS 'Bookmarks' OR FilePath CONTAINS 'History' OR FilePath CONTAINS 'places.sqlite' OR FilePath CONTAINS 'Login Data' OR FilePath CONTAINS 'Cookies')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1217/"
+    },
+    {
+      "name": "T1482 - Domain Trust Discovery",
+      "technique_id": "T1482",
+      "tactic": "Discovery",
+      "description": "Detects enumeration of domain trust relationships",
+      "severity": "high",
+      "query": "event_platform=Win AND event_type=ProcessRollup2 AND (ImageFileName CONTAINS 'nltest.exe' AND CommandLine CONTAINS 'trusted_domains' OR CommandLine CONTAINS 'Get-ADTrust' OR ImageFileName CONTAINS 'dsquery.exe' AND CommandLine CONTAINS 'trust' OR CommandLine CONTAINS 'netdom trust')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1482/"
+    },
+    {
+      "name": "T1518 - Software Discovery",
+      "technique_id": "T1518",
+      "tactic": "Discovery",
+      "description": "Detects enumeration of installed software",
+      "severity": "low",
+      "query": "event_platform=Win AND event_type=ProcessRollup2 AND (CommandLine CONTAINS 'wmic product get' OR CommandLine CONTAINS 'Get-WmiObject Win32_Product' OR CommandLine CONTAINS 'Get-Package' OR CommandLine CONTAINS 'reg query' AND CommandLine CONTAINS 'Uninstall')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1518/"
+    },
+    {
+      "name": "T1526 - Cloud Service Discovery",
+      "technique_id": "T1526",
+      "tactic": "Discovery",
+      "description": "Detects enumeration of cloud services and resources",
+      "severity": "medium",
+      "query": "(event_type=ProcessRollup2 AND (CommandLine CONTAINS 'az account' OR CommandLine CONTAINS 'aws sts' OR CommandLine CONTAINS 'gcloud' OR CommandLine CONTAINS 'Get-AzResource')) OR (event_type=CloudApiActivity AND Operation CONTAINS 'List' OR Operation CONTAINS 'Describe')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1526/"
+    },
+    {
+      "name": "T1538 - Cloud Service Dashboard",
+      "technique_id": "T1538",
+      "tactic": "Discovery",
+      "description": "Detects access to cloud service dashboards for reconnaissance",
+      "severity": "medium",
+      "query": "event_type=CloudApiActivity AND (UserAgent CONTAINS 'console' OR Operation CONTAINS 'Console' OR Operation CONTAINS 'Dashboard') AND SourceIpAddress NOT IN (known_corporate_ips)",
+      "mitre_url": "https://attack.mitre.org/techniques/T1538/"
+    },
+    {
+      "name": "T1580 - Cloud Infrastructure Discovery",
+      "technique_id": "T1580",
+      "tactic": "Discovery",
+      "description": "Detects enumeration of cloud infrastructure components",
+      "severity": "medium",
+      "query": "event_type=CloudApiActivity AND (Operation CONTAINS 'DescribeInstances' OR Operation CONTAINS 'ListBuckets' OR Operation CONTAINS 'DescribeVpcs' OR Operation CONTAINS 'az vm list' OR Operation CONTAINS 'compute.instances.list')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1580/"
+    },
+    {
+      "name": "T1613 - Container and Resource Discovery",
+      "technique_id": "T1613",
+      "tactic": "Discovery",
+      "description": "Detects enumeration of containers and orchestration resources",
+      "severity": "medium",
+      "query": "event_type=ProcessRollup2 AND (CommandLine CONTAINS 'docker ps' OR CommandLine CONTAINS 'docker images' OR CommandLine CONTAINS 'kubectl get' OR CommandLine CONTAINS 'crictl' OR CommandLine CONTAINS 'podman ps')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1613/"
+    },
+    {
+      "name": "T1614 - System Location Discovery",
+      "technique_id": "T1614",
+      "tactic": "Discovery",
+      "description": "Detects discovery of system geographic location or language",
+      "severity": "low",
+      "query": "event_platform=Win AND event_type=ProcessRollup2 AND (CommandLine CONTAINS 'Get-WinSystemLocale' OR CommandLine CONTAINS 'Get-Culture' OR CommandLine CONTAINS 'chcp' OR CommandLine CONTAINS 'systeminfo' AND CommandLine CONTAINS 'locale')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1614/"
+    },
+    {
+      "name": "T1615 - Group Policy Discovery",
+      "technique_id": "T1615",
+      "tactic": "Discovery",
+      "description": "Detects enumeration of group policy settings",
+      "severity": "medium",
+      "query": "event_platform=Win AND event_type=ProcessRollup2 AND (ImageFileName CONTAINS 'gpresult.exe' OR CommandLine CONTAINS 'Get-GPO' OR CommandLine CONTAINS 'Get-GPResultantSetOfPolicy' OR ImageFileName CONTAINS 'secedit.exe')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1615/"
+    },
+    {
+      "name": "T1619 - Cloud Storage Object Discovery",
+      "technique_id": "T1619",
+      "tactic": "Discovery",
+      "description": "Detects enumeration of cloud storage objects",
+      "severity": "medium",
+      "query": "event_type=CloudApiActivity AND (Operation CONTAINS 'ListObjects' OR Operation CONTAINS 's3:ListBucket' OR Operation CONTAINS 'storage.objects.list' OR Operation CONTAINS 'ListBlobs')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1619/"
+    },
+    {
+      "name": "T1652 - Device Driver Discovery",
+      "technique_id": "T1652",
+      "tactic": "Discovery",
+      "description": "Detects enumeration of device drivers",
+      "severity": "low",
+      "query": "event_platform=Win AND event_type=ProcessRollup2 AND (CommandLine CONTAINS 'driverquery' OR CommandLine CONTAINS 'Get-WindowsDriver' OR CommandLine CONTAINS 'wmic sysdriver' OR CommandLine CONTAINS 'pnputil /enum-drivers')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1652/"
+    },
+    {
+      "name": "T1654 - Log Enumeration",
+      "technique_id": "T1654",
+      "tactic": "Discovery",
+      "description": "Detects enumeration of security and system logs",
+      "severity": "medium",
+      "query": "event_platform=Win AND event_type=ProcessRollup2 AND (CommandLine CONTAINS 'wevtutil' AND (CommandLine CONTAINS 'qe' OR CommandLine CONTAINS 'query-events') OR CommandLine CONTAINS 'Get-WinEvent' OR CommandLine CONTAINS 'Get-EventLog')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1654/"
+    },
+    {
+      "name": "T1673 - Virtual Machine Discovery",
+      "technique_id": "T1673",
+      "tactic": "Discovery",
+      "description": "Detects discovery of virtual machine environments",
+      "severity": "low",
+      "query": "event_platform=Win AND event_type=ProcessRollup2 AND (CommandLine CONTAINS 'systeminfo' OR CommandLine CONTAINS 'wmic bios' OR CommandLine CONTAINS 'dmidecode' OR CommandLine CONTAINS 'vboxmanage' OR CommandLine CONTAINS 'vmrun')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1673/"
+    },
+    {
+      "name": "T1680 - Local Storage Discovery",
+      "technique_id": "T1680",
+      "tactic": "Discovery",
+      "description": "Detects enumeration of local storage devices and volumes",
+      "severity": "low",
+      "query": "event_platform=Win AND event_type=ProcessRollup2 AND (CommandLine CONTAINS 'wmic diskdrive' OR CommandLine CONTAINS 'Get-Volume' OR CommandLine CONTAINS 'Get-PhysicalDisk' OR CommandLine CONTAINS 'fsutil' OR CommandLine CONTAINS 'diskpart')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1680/"
+    },
+    {
+      "name": "T1197 - BITS Jobs",
+      "technique_id": "T1197",
+      "tactic": "Defense Evasion",
+      "description": "Detects abuse of BITS for persistence or transfer",
+      "severity": "high",
+      "query": "event_platform=Win AND event_type=ProcessRollup2 AND (ImageFileName CONTAINS 'bitsadmin.exe' AND (CommandLine CONTAINS '/transfer' OR CommandLine CONTAINS '/create' OR CommandLine CONTAINS '/addfile' OR CommandLine CONTAINS '/SetNotifyCmdLine') OR CommandLine CONTAINS 'Start-BitsTransfer')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1197/"
+    },
+    {
+      "name": "T1480 - Execution Guardrails",
+      "technique_id": "T1480",
+      "tactic": "Defense Evasion",
+      "description": "Detects malware checking environment before execution",
+      "severity": "medium",
+      "query": "event_platform=Win AND event_type=ProcessRollup2 AND (CommandLine CONTAINS 'hostname' OR CommandLine CONTAINS 'whoami') AND ParentProcessId IN (SELECT ProcessId FROM suspicious_processes)",
+      "mitre_url": "https://attack.mitre.org/techniques/T1480/"
+    },
+    {
+      "name": "T1535 - Unused/Unsupported Cloud Regions",
+      "technique_id": "T1535",
+      "tactic": "Defense Evasion",
+      "description": "Detects resource creation in unusual cloud regions",
+      "severity": "high",
+      "query": "event_type=CloudApiActivity AND (Operation CONTAINS 'Create' OR Operation CONTAINS 'Run') AND Region NOT IN (approved_regions_list)",
+      "mitre_url": "https://attack.mitre.org/techniques/T1535/"
+    },
+    {
+      "name": "T1542 - Pre-OS Boot",
+      "technique_id": "T1542",
+      "tactic": "Defense Evasion",
+      "description": "Detects modification of boot processes or firmware",
+      "severity": "critical",
+      "query": "event_platform=Win AND (event_type=ProcessRollup2 AND (ImageFileName CONTAINS 'bcdedit.exe' OR ImageFileName CONTAINS 'bootrec.exe' OR CommandLine CONTAINS 'firmware') OR event_type=FirmwareUpdate)",
+      "mitre_url": "https://attack.mitre.org/techniques/T1542/"
+    },
+    {
+      "name": "T1578 - Modify Cloud Compute Infrastructure",
+      "technique_id": "T1578",
+      "tactic": "Defense Evasion",
+      "description": "Detects modification of cloud compute resources",
+      "severity": "high",
+      "query": "event_type=CloudApiActivity AND (Operation CONTAINS 'CreateSnapshot' OR Operation CONTAINS 'CreateImage' OR Operation CONTAINS 'ModifyInstance' OR Operation CONTAINS 'StopInstances' OR Operation CONTAINS 'TerminateInstances')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1578/"
+    },
+    {
+      "name": "T1599 - Network Boundary Bridging",
+      "technique_id": "T1599",
+      "tactic": "Defense Evasion",
+      "description": "Detects network boundary bypass attempts",
+      "severity": "high",
+      "query": "event_type=NetworkConnect AND (DestinationPort IN (1080,8080,3128) OR Protocol='SOCKS') AND SourceZone='internal' AND DestinationZone='external'",
+      "mitre_url": "https://attack.mitre.org/techniques/T1599/"
+    },
+    {
+      "name": "T1600 - Weaken Encryption",
+      "technique_id": "T1600",
+      "tactic": "Defense Evasion",
+      "description": "Detects attempts to weaken encryption settings",
+      "severity": "high",
+      "query": "event_platform=Win AND event_type=RegistryOperationDetectInfo AND (RegistryPath CONTAINS 'Cryptography' OR RegistryPath CONTAINS 'SSL' OR RegistryPath CONTAINS 'TLS') AND RegistryValueName CONTAINS 'Enabled'",
+      "mitre_url": "https://attack.mitre.org/techniques/T1600/"
+    },
+    {
+      "name": "T1601 - Modify System Image",
+      "technique_id": "T1601",
+      "tactic": "Defense Evasion",
+      "description": "Detects modification of system images or firmware",
+      "severity": "critical",
+      "query": "event_type=ProcessRollup2 AND (CommandLine CONTAINS 'dd if=' OR CommandLine CONTAINS 'flashrom' OR CommandLine CONTAINS 'fwupdmgr' OR ImageFileName CONTAINS 'firmware')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1601/"
+    },
+    {
+      "name": "T1610 - Deploy Container",
+      "technique_id": "T1610",
+      "tactic": "Defense Evasion",
+      "description": "Detects deployment of potentially malicious containers",
+      "severity": "medium",
+      "query": "event_type=ProcessRollup2 AND (CommandLine CONTAINS 'docker run' OR CommandLine CONTAINS 'kubectl run' OR CommandLine CONTAINS 'podman run') AND (CommandLine CONTAINS '--privileged' OR CommandLine CONTAINS 'hostPID' OR CommandLine CONTAINS 'hostNetwork')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1610/"
+    },
+    {
+      "name": "T1612 - Build Image on Host",
+      "technique_id": "T1612",
+      "tactic": "Defense Evasion",
+      "description": "Detects building container images on compromised hosts",
+      "severity": "medium",
+      "query": "event_type=ProcessRollup2 AND (CommandLine CONTAINS 'docker build' OR CommandLine CONTAINS 'podman build' OR CommandLine CONTAINS 'buildah')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1612/"
+    },
+    {
+      "name": "T1647 - Plist File Modification",
+      "technique_id": "T1647",
+      "tactic": "Defense Evasion",
+      "description": "Detects modification of macOS plist files for evasion",
+      "severity": "medium",
+      "query": "event_platform=Mac AND (event_type=FileWritten OR event_type=ProcessRollup2) AND (FilePath CONTAINS '.plist' OR CommandLine CONTAINS 'defaults write' OR CommandLine CONTAINS 'plutil')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1647/"
+    },
+    {
+      "name": "T1656 - Impersonation",
+      "technique_id": "T1656",
+      "tactic": "Defense Evasion",
+      "description": "Detects social engineering impersonation attempts",
+      "severity": "medium",
+      "query": "event_type=EmailReceived AND (SenderDisplayName CONTAINS 'IT Support' OR SenderDisplayName CONTAINS 'Help Desk' OR SenderDisplayName CONTAINS 'CEO' OR SenderDisplayName CONTAINS 'CFO') AND SenderDomain NOT IN (internal_domains)",
+      "mitre_url": "https://attack.mitre.org/techniques/T1656/"
+    },
+    {
+      "name": "T1666 - Modify Cloud Resource Hierarchy",
+      "technique_id": "T1666",
+      "tactic": "Defense Evasion",
+      "description": "Detects modification of cloud organizational structure",
+      "severity": "high",
+      "query": "event_type=CloudApiActivity AND (Operation CONTAINS 'MoveAccount' OR Operation CONTAINS 'UpdateOrganization' OR Operation CONTAINS 'organizations.folders' OR Operation CONTAINS 'resourcemanager')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1666/"
+    },
+    {
+      "name": "T1672 - Email Spoofing",
+      "technique_id": "T1672",
+      "tactic": "Defense Evasion",
+      "description": "Detects spoofed email headers",
+      "severity": "high",
+      "query": "event_type=EmailReceived AND (SPFResult='fail' OR DKIMResult='fail' OR DMARCResult='fail') AND SenderDomain IN (internal_domains)",
+      "mitre_url": "https://attack.mitre.org/techniques/T1672/"
+    },
+    {
+      "name": "T1678 - Delay Execution",
+      "technique_id": "T1678",
+      "tactic": "Defense Evasion",
+      "description": "Detects use of sleep or delay commands for evasion",
+      "severity": "low",
+      "query": "event_platform=Win AND event_type=ProcessRollup2 AND (CommandLine CONTAINS 'Start-Sleep' OR CommandLine CONTAINS 'timeout /t' OR CommandLine CONTAINS 'ping -n' AND CommandLine CONTAINS '127.0.0.1' OR CommandLine CONTAINS 'sleep')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1678/"
+    },
+    {
+      "name": "T1679 - Selective Exclusion",
+      "technique_id": "T1679",
+      "tactic": "Defense Evasion",
+      "description": "Detects attempts to exclude files from security scanning",
+      "severity": "high",
+      "query": "event_platform=Win AND event_type=ProcessRollup2 AND (CommandLine CONTAINS 'Add-MpPreference' AND CommandLine CONTAINS 'ExclusionPath' OR CommandLine CONTAINS 'Set-MpPreference' AND CommandLine CONTAINS 'Exclusion')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1679/"
+    },
+    {
+      "name": "T1106 - Native API",
+      "technique_id": "T1106",
+      "tactic": "Execution",
+      "description": "Detects direct use of Windows Native API for execution",
+      "severity": "medium",
+      "query": "event_platform=Win AND event_type=ProcessRollup2 AND (CommandLine CONTAINS 'NtCreateProcess' OR CommandLine CONTAINS 'RtlCreateUserThread' OR CommandLine CONTAINS 'ZwCreateThread' OR CallStackContains='ntdll.dll')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1106/"
+    },
+    {
+      "name": "T1129 - Shared Modules",
+      "technique_id": "T1129",
+      "tactic": "Execution",
+      "description": "Detects execution via shared modules or DLLs",
+      "severity": "medium",
+      "query": "event_platform=Win AND event_type=ModuleLoad AND (ModulePath NOT CONTAINS 'System32' AND ModulePath NOT CONTAINS 'SysWOW64' AND ModulePath NOT CONTAINS 'Program Files') AND LoadedByProcess NOT IN (trusted_processes)",
+      "mitre_url": "https://attack.mitre.org/techniques/T1129/"
+    },
+    {
+      "name": "T1203 - Exploitation for Client Execution",
+      "technique_id": "T1203",
+      "tactic": "Execution",
+      "description": "Detects client-side exploitation leading to code execution",
+      "severity": "critical",
+      "query": "event_platform=Win AND event_type=ProcessRollup2 AND ParentImageFileName IN ('WINWORD.EXE','EXCEL.EXE','POWERPNT.EXE','OUTLOOK.EXE','AcroRd32.exe','chrome.exe','firefox.exe','msedge.exe') AND ImageFileName IN ('cmd.exe','powershell.exe','wscript.exe','cscript.exe','mshta.exe','regsvr32.exe')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1203/"
+    },
+    {
+      "name": "T1204 - User Execution",
+      "technique_id": "T1204",
+      "tactic": "Execution",
+      "description": "Detects malicious execution initiated by user action",
+      "severity": "high",
+      "query": "event_platform=Win AND event_type=ProcessRollup2 AND (ParentImageFileName CONTAINS 'explorer.exe' OR ParentImageFileName CONTAINS 'outlook.exe') AND (ImageFileName CONTAINS '.exe' AND FilePath CONTAINS 'Downloads' OR FilePath CONTAINS 'Temp' OR FilePath CONTAINS 'AppData')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1204/"
+    },
+    {
+      "name": "T1559 - Inter-Process Communication",
+      "technique_id": "T1559",
+      "tactic": "Execution",
+      "description": "Detects execution via COM or DDE",
+      "severity": "high",
+      "query": "event_platform=Win AND event_type=ProcessRollup2 AND (CommandLine CONTAINS 'DDE' OR CommandLine CONTAINS 'CreateObject' OR CommandLine CONTAINS 'GetObject' OR CommandLine CONTAINS '-ComObject')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1559/"
+    },
+    {
+      "name": "T1569 - System Services",
+      "technique_id": "T1569",
+      "tactic": "Execution",
+      "description": "Detects execution via system services",
+      "severity": "high",
+      "query": "event_platform=Win AND event_type=ProcessRollup2 AND (ImageFileName CONTAINS 'sc.exe' AND (CommandLine CONTAINS 'create' OR CommandLine CONTAINS 'start') OR ImageFileName CONTAINS 'net.exe' AND CommandLine CONTAINS 'start' OR CommandLine CONTAINS 'New-Service')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1569/"
+    },
+    {
+      "name": "T1609 - Container Administration Command",
+      "technique_id": "T1609",
+      "tactic": "Execution",
+      "description": "Detects malicious container administration commands",
+      "severity": "high",
+      "query": "event_type=ProcessRollup2 AND (CommandLine CONTAINS 'docker exec' OR CommandLine CONTAINS 'kubectl exec' OR CommandLine CONTAINS 'crictl exec') AND (CommandLine CONTAINS '/bin/sh' OR CommandLine CONTAINS '/bin/bash' OR CommandLine CONTAINS 'cmd.exe')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1609/"
+    },
+    {
+      "name": "T1648 - Serverless Execution",
+      "technique_id": "T1648",
+      "tactic": "Execution",
+      "description": "Detects malicious serverless function execution",
+      "severity": "medium",
+      "query": "event_type=CloudApiActivity AND (Operation CONTAINS 'InvokeFunction' OR Operation CONTAINS 'lambda:Invoke' OR Operation CONTAINS 'functions.call') AND SourceIpAddress NOT IN (known_automation_ips)",
+      "mitre_url": "https://attack.mitre.org/techniques/T1648/"
+    },
+    {
+      "name": "T1651 - Cloud Administration Command",
+      "technique_id": "T1651",
+      "tactic": "Execution",
+      "description": "Detects execution via cloud administration interfaces",
+      "severity": "high",
+      "query": "event_type=CloudApiActivity AND (Operation CONTAINS 'RunCommand' OR Operation CONTAINS 'ssm:SendCommand' OR Operation CONTAINS 'compute.instances.setMetadata') AND SourceIpAddress NOT IN (known_admin_ips)",
+      "mitre_url": "https://attack.mitre.org/techniques/T1651/"
+    },
+    {
+      "name": "T1674 - Input Injection",
+      "technique_id": "T1674",
+      "tactic": "Execution",
+      "description": "Detects input injection for code execution",
+      "severity": "high",
+      "query": "event_platform=Win AND event_type=ProcessRollup2 AND (CommandLine CONTAINS 'SendKeys' OR CommandLine CONTAINS 'keybd_event' OR CommandLine CONTAINS 'mouse_event' OR ImageFileName CONTAINS 'AutoHotkey' OR ImageFileName CONTAINS 'AutoIt')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1674/"
+    },
+    {
+      "name": "T1675 - ESXi Administration Command",
+      "technique_id": "T1675",
+      "tactic": "Execution",
+      "description": "Detects malicious ESXi administration commands",
+      "severity": "critical",
+      "query": "event_type=ProcessRollup2 AND (CommandLine CONTAINS 'esxcli' OR CommandLine CONTAINS 'vim-cmd' OR CommandLine CONTAINS 'vmware-cmd') AND (CommandLine CONTAINS 'kill' OR CommandLine CONTAINS 'power off' OR CommandLine CONTAINS 'unregister')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1675/"
+    },
+    {
+      "name": "T1677 - Poisoned Pipeline Execution",
+      "technique_id": "T1677",
+      "tactic": "Execution",
+      "description": "Detects malicious CI/CD pipeline execution",
+      "severity": "high",
+      "query": "event_type=ProcessRollup2 AND ParentImageFileName IN ('jenkins.exe','gitlab-runner','github-actions','azure-pipelines') AND (CommandLine CONTAINS 'curl' OR CommandLine CONTAINS 'wget' OR CommandLine CONTAINS 'Invoke-WebRequest')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1677/"
+    },
+    {
+      "name": "T1005 - Data from Local System",
+      "technique_id": "T1005",
+      "tactic": "Collection",
+      "description": "Detects collection of sensitive local data",
+      "severity": "medium",
+      "query": "event_platform=Win AND event_type=FileRead AND (FilePath CONTAINS 'Documents' OR FilePath CONTAINS 'Desktop' OR FilePath CONTAINS '.ssh' OR FilePath CONTAINS '.aws' OR FilePath CONTAINS 'wallet.dat') AND ProcessName NOT IN (trusted_processes)",
+      "mitre_url": "https://attack.mitre.org/techniques/T1005/"
+    },
+    {
+      "name": "T1025 - Data from Removable Media",
+      "technique_id": "T1025",
+      "tactic": "Collection",
+      "description": "Detects collection of data from removable media",
+      "severity": "medium",
+      "query": "event_platform=Win AND event_type=FileRead AND (FilePath MATCHES '^[D-Z]:' AND FilePath NOT CONTAINS 'Program Files') AND DriveType='Removable'",
+      "mitre_url": "https://attack.mitre.org/techniques/T1025/"
+    },
+    {
+      "name": "T1039 - Data from Network Shared Drive",
+      "technique_id": "T1039",
+      "tactic": "Collection",
+      "description": "Detects collection of data from network shares",
+      "severity": "medium",
+      "query": "event_platform=Win AND event_type=FileRead AND (FilePath CONTAINS '\\\\\\\\' OR FilePath MATCHES '^\\\\\\\\') AND FileExtension IN ('docx','xlsx','pdf','pptx','txt','csv') AND ReadCount > 10",
+      "mitre_url": "https://attack.mitre.org/techniques/T1039/"
+    },
+    {
+      "name": "T1074 - Data Staged",
+      "technique_id": "T1074",
+      "tactic": "Collection",
+      "description": "Detects staging of collected data for exfiltration",
+      "severity": "high",
+      "query": "event_platform=Win AND event_type=FileWritten AND (FilePath CONTAINS 'Temp' OR FilePath CONTAINS 'AppData\\\\Local') AND FileExtension IN ('zip','7z','rar','tar','gz') AND FileSize > 10000000",
+      "mitre_url": "https://attack.mitre.org/techniques/T1074/"
+    },
+    {
+      "name": "T1114 - Email Collection",
+      "technique_id": "T1114",
+      "tactic": "Collection",
+      "description": "Detects collection of email data",
+      "severity": "high",
+      "query": "event_platform=Win AND (event_type=FileRead AND (FilePath CONTAINS '.pst' OR FilePath CONTAINS '.ost' OR FilePath CONTAINS '.eml' OR FilePath CONTAINS '.msg')) OR (event_type=ProcessRollup2 AND CommandLine CONTAINS 'New-MailboxExportRequest')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1114/"
+    },
+    {
+      "name": "T1115 - Clipboard Data",
+      "technique_id": "T1115",
+      "tactic": "Collection",
+      "description": "Detects collection of clipboard contents",
+      "severity": "medium",
+      "query": "event_platform=Win AND event_type=ProcessRollup2 AND (CommandLine CONTAINS 'Get-Clipboard' OR CommandLine CONTAINS 'clip.exe' OR CommandLine CONTAINS 'GetClipboardData' OR CommandLine CONTAINS 'pbpaste')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1115/"
+    },
+    {
+      "name": "T1119 - Automated Collection",
+      "technique_id": "T1119",
+      "tactic": "Collection",
+      "description": "Detects automated data collection scripts",
+      "severity": "high",
+      "query": "event_platform=Win AND event_type=ProcessRollup2 AND (CommandLine CONTAINS 'for /r' AND CommandLine CONTAINS 'copy' OR CommandLine CONTAINS 'Get-ChildItem -Recurse' AND CommandLine CONTAINS 'Copy-Item' OR CommandLine CONTAINS 'find' AND CommandLine CONTAINS '-exec')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1119/"
+    },
+    {
+      "name": "T1123 - Audio Capture",
+      "technique_id": "T1123",
+      "tactic": "Collection",
+      "description": "Detects audio recording activity",
+      "severity": "high",
+      "query": "event_platform=Win AND (event_type=ProcessRollup2 AND (CommandLine CONTAINS 'SoundRecorder' OR CommandLine CONTAINS 'ffmpeg' AND CommandLine CONTAINS 'audio' OR CommandLine CONTAINS 'sox')) OR (event_type=DeviceAccess AND DeviceType='Microphone')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1123/"
+    },
+    {
+      "name": "T1125 - Video Capture",
+      "technique_id": "T1125",
+      "tactic": "Collection",
+      "description": "Detects video recording activity",
+      "severity": "high",
+      "query": "event_platform=Win AND (event_type=ProcessRollup2 AND (CommandLine CONTAINS 'ffmpeg' AND CommandLine CONTAINS 'video' OR CommandLine CONTAINS 'OBS' OR CommandLine CONTAINS 'webcam')) OR (event_type=DeviceAccess AND DeviceType='Camera')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1125/"
+    },
+    {
+      "name": "T1185 - Browser Session Hijacking",
+      "technique_id": "T1185",
+      "tactic": "Collection",
+      "description": "Detects browser session hijacking attempts",
+      "severity": "high",
+      "query": "event_platform=Win AND event_type=FileRead AND (FilePath CONTAINS 'Cookies' OR FilePath CONTAINS 'Session' OR FilePath CONTAINS 'Login Data') AND ProcessName NOT IN ('chrome.exe','firefox.exe','msedge.exe')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1185/"
+    },
+    {
+      "name": "T1213 - Data from Information Repositories",
+      "technique_id": "T1213",
+      "tactic": "Collection",
+      "description": "Detects collection from information repositories",
+      "severity": "medium",
+      "query": "event_type=CloudApiActivity AND (Operation CONTAINS 'confluence' OR Operation CONTAINS 'sharepoint' OR Operation CONTAINS 'github' OR Operation CONTAINS 'gitlab') AND (Operation CONTAINS 'download' OR Operation CONTAINS 'export' OR Operation CONTAINS 'clone')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1213/"
+    },
+    {
+      "name": "T1530 - Data from Cloud Storage",
+      "technique_id": "T1530",
+      "tactic": "Collection",
+      "description": "Detects collection of data from cloud storage",
+      "severity": "high",
+      "query": "event_type=CloudApiActivity AND (Operation CONTAINS 'GetObject' OR Operation CONTAINS 's3:GetObject' OR Operation CONTAINS 'storage.objects.get' OR Operation CONTAINS 'DownloadBlob') AND BytesTransferred > 100000000",
+      "mitre_url": "https://attack.mitre.org/techniques/T1530/"
+    },
+    {
+      "name": "T1602 - Data from Configuration Repository",
+      "technique_id": "T1602",
+      "tactic": "Collection",
+      "description": "Detects collection of network device configurations",
+      "severity": "high",
+      "query": "event_type=NetworkDeviceActivity AND (Operation CONTAINS 'show running-config' OR Operation CONTAINS 'show startup-config' OR Protocol='SNMP' AND SNMPOperation='GET')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1602/"
+    },
+    {
+      "name": "T1485 - Data Destruction",
+      "technique_id": "T1485",
+      "tactic": "Impact",
+      "description": "Detects data destruction activities",
+      "severity": "critical",
+      "query": "event_platform=Win AND event_type=ProcessRollup2 AND (CommandLine CONTAINS 'format' AND CommandLine CONTAINS '/y' OR CommandLine CONTAINS 'cipher /w' OR CommandLine CONTAINS 'sdelete' OR CommandLine CONTAINS 'shred' OR CommandLine CONTAINS 'rm -rf')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1485/"
+    },
+    {
+      "name": "T1491 - Defacement",
+      "technique_id": "T1491",
+      "tactic": "Impact",
+      "description": "Detects website or system defacement",
+      "severity": "high",
+      "query": "(event_type=FileWritten AND FilePath CONTAINS 'wwwroot' OR FilePath CONTAINS 'htdocs' OR FilePath CONTAINS 'html' AND FileExtension IN ('html','htm','php','asp','aspx','jsp')) OR (event_type=ProcessRollup2 AND CommandLine CONTAINS 'echo' AND CommandLine CONTAINS '>' AND CommandLine CONTAINS 'index')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1491/"
+    },
+    {
+      "name": "T1495 - Firmware Corruption",
+      "technique_id": "T1495",
+      "tactic": "Impact",
+      "description": "Detects firmware corruption attempts",
+      "severity": "critical",
+      "query": "event_type=ProcessRollup2 AND (CommandLine CONTAINS 'flashrom' OR CommandLine CONTAINS 'fwupd' OR CommandLine CONTAINS 'bcdedit' AND CommandLine CONTAINS 'firmware' OR CommandLine CONTAINS 'dd' AND CommandLine CONTAINS '/dev/')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1495/"
+    },
+    {
+      "name": "T1498 - Network Denial of Service",
+      "technique_id": "T1498",
+      "tactic": "Impact",
+      "description": "Detects network DoS attacks",
+      "severity": "critical",
+      "query": "event_type=NetworkConnect AND (ConnectionCount > 1000 AND TimeWindow < 60 OR Protocol IN ('UDP','ICMP') AND PacketCount > 10000)",
+      "mitre_url": "https://attack.mitre.org/techniques/T1498/"
+    },
+    {
+      "name": "T1499 - Endpoint Denial of Service",
+      "technique_id": "T1499",
+      "tactic": "Impact",
+      "description": "Detects endpoint DoS attacks",
+      "severity": "high",
+      "query": "event_type=ProcessRollup2 AND (CommandLine CONTAINS 'fork bomb' OR CommandLine CONTAINS ':(){ :|:& };:' OR CommandLine CONTAINS '%0|%0' OR ProcessCount > 1000)",
+      "mitre_url": "https://attack.mitre.org/techniques/T1499/"
+    },
+    {
+      "name": "T1529 - System Shutdown/Reboot",
+      "technique_id": "T1529",
+      "tactic": "Impact",
+      "description": "Detects unexpected system shutdown or reboot",
+      "severity": "medium",
+      "query": "event_platform=Win AND event_type=ProcessRollup2 AND (ImageFileName CONTAINS 'shutdown.exe' OR ImageFileName CONTAINS 'restart.exe' OR CommandLine CONTAINS 'Restart-Computer' OR CommandLine CONTAINS 'Stop-Computer') AND UserName NOT IN (admin_users)",
+      "mitre_url": "https://attack.mitre.org/techniques/T1529/"
+    },
+    {
+      "name": "T1531 - Account Access Removal",
+      "technique_id": "T1531",
+      "tactic": "Impact",
+      "description": "Detects removal of user account access",
+      "severity": "high",
+      "query": "event_platform=Win AND event_type=ProcessRollup2 AND (ImageFileName CONTAINS 'net.exe' AND CommandLine CONTAINS 'user' AND (CommandLine CONTAINS '/delete' OR CommandLine CONTAINS '/active:no') OR CommandLine CONTAINS 'Remove-LocalUser' OR CommandLine CONTAINS 'Remove-ADUser')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1531/"
+    },
+    {
+      "name": "T1561 - Disk Wipe",
+      "technique_id": "T1561",
+      "tactic": "Impact",
+      "description": "Detects disk wiping activities",
+      "severity": "critical",
+      "query": "event_platform=Win AND event_type=ProcessRollup2 AND (CommandLine CONTAINS 'format' AND CommandLine CONTAINS '/q' OR CommandLine CONTAINS 'diskpart' AND CommandLine CONTAINS 'clean' OR CommandLine CONTAINS 'dd' AND CommandLine CONTAINS 'of=' OR ImageFileName CONTAINS 'sdelete')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1561/"
+    },
+    {
+      "name": "T1565 - Data Manipulation",
+      "technique_id": "T1565",
+      "tactic": "Impact",
+      "description": "Detects manipulation of stored or transmitted data",
+      "severity": "high",
+      "query": "event_type=FileWritten AND FilePath CONTAINS 'database' OR FilePath CONTAINS '.db' OR FilePath CONTAINS '.sql' AND ProcessName NOT IN (trusted_database_processes)",
+      "mitre_url": "https://attack.mitre.org/techniques/T1565/"
+    },
+    {
+      "name": "T1657 - Financial Theft",
+      "technique_id": "T1657",
+      "tactic": "Impact",
+      "description": "Detects financial theft activities",
+      "severity": "critical",
+      "query": "event_type=ProcessRollup2 AND (CommandLine CONTAINS 'wallet' OR CommandLine CONTAINS 'bitcoin' OR CommandLine CONTAINS 'crypto' OR CommandLine CONTAINS 'bank') AND (CommandLine CONTAINS 'transfer' OR CommandLine CONTAINS 'send' OR CommandLine CONTAINS 'export')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1657/"
+    },
+    {
+      "name": "T1667 - Email Bombing",
+      "technique_id": "T1667",
+      "tactic": "Impact",
+      "description": "Detects email bombing attacks",
+      "severity": "medium",
+      "query": "event_type=EmailReceived AND RecipientAddress=single_recipient AND EmailCount > 100 AND TimeWindow < 3600",
+      "mitre_url": "https://attack.mitre.org/techniques/T1667/"
+    },
+    {
+      "name": "T1589 - Gather Victim Identity Information",
+      "technique_id": "T1589",
+      "tactic": "Reconnaissance",
+      "description": "Detects gathering of victim identity information",
+      "severity": "low",
+      "query": "event_type=DnsRequest AND QueryName CONTAINS (target_domain) AND QueryType IN ('MX','TXT','SOA') AND SourceIpAddress NOT IN (internal_ips)",
+      "mitre_url": "https://attack.mitre.org/techniques/T1589/"
+    },
+    {
+      "name": "T1590 - Gather Victim Network Information",
+      "technique_id": "T1590",
+      "tactic": "Reconnaissance",
+      "description": "Detects gathering of victim network information",
+      "severity": "low",
+      "query": "event_type=DnsRequest AND (QueryName CONTAINS 'version.bind' OR QueryType='ANY' OR QueryType='AXFR') AND SourceIpAddress NOT IN (internal_dns_servers)",
+      "mitre_url": "https://attack.mitre.org/techniques/T1590/"
+    },
+    {
+      "name": "T1591 - Gather Victim Org Information",
+      "technique_id": "T1591",
+      "tactic": "Reconnaissance",
+      "description": "Detects gathering of victim organization information",
+      "severity": "low",
+      "query": "event_type=WebRequest AND (URL CONTAINS 'linkedin.com/company' OR URL CONTAINS 'glassdoor.com' OR URL CONTAINS 'crunchbase.com') AND SourceIpAddress IN (monitored_ips)",
+      "mitre_url": "https://attack.mitre.org/techniques/T1591/"
+    },
+    {
+      "name": "T1592 - Gather Victim Host Information",
+      "technique_id": "T1592",
+      "tactic": "Reconnaissance",
+      "description": "Detects gathering of victim host information",
+      "severity": "low",
+      "query": "event_type=WebRequest AND (UserAgent CONTAINS 'scanner' OR UserAgent CONTAINS 'nikto' OR UserAgent CONTAINS 'nmap' OR URL CONTAINS 'robots.txt')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1592/"
+    },
+    {
+      "name": "T1593 - Search Open Websites/Domains",
+      "technique_id": "T1593",
+      "tactic": "Reconnaissance",
+      "description": "Detects searches for target information on public sites",
+      "severity": "low",
+      "query": "event_type=WebRequest AND (URL CONTAINS 'github.com' OR URL CONTAINS 'pastebin.com' OR URL CONTAINS 'shodan.io') AND QueryString CONTAINS (target_domain)",
+      "mitre_url": "https://attack.mitre.org/techniques/T1593/"
+    },
+    {
+      "name": "T1594 - Search Victim-Owned Websites",
+      "technique_id": "T1594",
+      "tactic": "Reconnaissance",
+      "description": "Detects reconnaissance of victim-owned websites",
+      "severity": "low",
+      "query": "event_type=WebRequest AND DestinationDomain IN (owned_domains) AND (URL CONTAINS 'admin' OR URL CONTAINS 'login' OR URL CONTAINS 'config' OR URL CONTAINS '.git')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1594/"
+    },
+    {
+      "name": "T1596 - Search Open Technical Databases",
+      "technique_id": "T1596",
+      "tactic": "Reconnaissance",
+      "description": "Detects searches in technical databases for target info",
+      "severity": "low",
+      "query": "event_type=WebRequest AND (URL CONTAINS 'shodan.io' OR URL CONTAINS 'censys.io' OR URL CONTAINS 'zoomeye.org' OR URL CONTAINS 'crt.sh')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1596/"
+    },
+    {
+      "name": "T1597 - Search Closed Sources",
+      "technique_id": "T1597",
+      "tactic": "Reconnaissance",
+      "description": "Detects access to closed/paid threat intelligence sources",
+      "severity": "low",
+      "query": "event_type=WebRequest AND (URL CONTAINS 'recorded future' OR URL CONTAINS 'flashpoint' OR URL CONTAINS 'intel471') AND UserAccount NOT IN (authorized_threat_intel_users)",
+      "mitre_url": "https://attack.mitre.org/techniques/T1597/"
+    },
+    {
+      "name": "T1598 - Phishing for Information",
+      "technique_id": "T1598",
+      "tactic": "Reconnaissance",
+      "description": "Detects phishing attempts to gather information",
+      "severity": "medium",
+      "query": "event_type=EmailReceived AND (Subject CONTAINS 'verify' OR Subject CONTAINS 'confirm' OR Subject CONTAINS 'update' OR Subject CONTAINS 'expire') AND SenderDomain NOT IN (trusted_domains) AND ContainsLink=true",
+      "mitre_url": "https://attack.mitre.org/techniques/T1598/"
+    },
+    {
+      "name": "T1681 - Search Threat Vendor Data",
+      "technique_id": "T1681",
+      "tactic": "Reconnaissance",
+      "description": "Detects searches in threat vendor data for target info",
+      "severity": "low",
+      "query": "event_type=WebRequest AND (URL CONTAINS 'virustotal.com' OR URL CONTAINS 'hybrid-analysis.com' OR URL CONTAINS 'any.run') AND QueryString CONTAINS (internal_file_hashes OR internal_domains)",
+      "mitre_url": "https://attack.mitre.org/techniques/T1681/"
+    },
+    {
+      "name": "T1583 - Acquire Infrastructure",
+      "technique_id": "T1583",
+      "tactic": "Resource Development",
+      "description": "Detects acquisition of attacker infrastructure",
+      "severity": "medium",
+      "query": "event_type=DnsRequest AND QueryName IN (newly_registered_domains) AND RegistrationAge < 30",
+      "mitre_url": "https://attack.mitre.org/techniques/T1583/"
+    },
+    {
+      "name": "T1584 - Compromise Infrastructure",
+      "technique_id": "T1584",
+      "tactic": "Resource Development",
+      "description": "Detects use of compromised infrastructure",
+      "severity": "medium",
+      "query": "event_type=NetworkConnect AND DestinationIpAddress IN (known_compromised_ips) OR DestinationDomain IN (known_compromised_domains)",
+      "mitre_url": "https://attack.mitre.org/techniques/T1584/"
+    },
+    {
+      "name": "T1585 - Establish Accounts",
+      "technique_id": "T1585",
+      "tactic": "Resource Development",
+      "description": "Detects creation of attacker accounts",
+      "severity": "low",
+      "query": "event_type=AccountCreated AND (EmailDomain IN (disposable_email_domains) OR AccountAge < 7)",
+      "mitre_url": "https://attack.mitre.org/techniques/T1585/"
+    },
+    {
+      "name": "T1586 - Compromise Accounts",
+      "technique_id": "T1586",
+      "tactic": "Resource Development",
+      "description": "Detects use of compromised accounts",
+      "severity": "high",
+      "query": "event_type=AuthenticationSuccess AND SourceIpAddress NOT IN (user_typical_locations) AND (SourceCountry != user_typical_country OR ImpossibleTravel=true)",
+      "mitre_url": "https://attack.mitre.org/techniques/T1586/"
+    },
+    {
+      "name": "T1587 - Develop Capabilities",
+      "technique_id": "T1587",
+      "tactic": "Resource Development",
+      "description": "Detects development of attacker capabilities",
+      "severity": "medium",
+      "query": "event_type=ProcessRollup2 AND (CommandLine CONTAINS 'msfvenom' OR CommandLine CONTAINS 'Covenant' OR CommandLine CONTAINS 'Empire' OR CommandLine CONTAINS 'Cobalt')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1587/"
+    },
+    {
+      "name": "T1608 - Stage Capabilities",
+      "technique_id": "T1608",
+      "tactic": "Resource Development",
+      "description": "Detects staging of attacker capabilities",
+      "severity": "medium",
+      "query": "event_type=FileWritten AND (FilePath CONTAINS 'wwwroot' OR FilePath CONTAINS 'public_html') AND FileExtension IN ('exe','dll','ps1','bat','sh','py')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1608/"
+    },
+    {
+      "name": "T1650 - Acquire Access",
+      "technique_id": "T1650",
+      "tactic": "Resource Development",
+      "description": "Detects acquisition of access through brokers",
+      "severity": "high",
+      "query": "event_type=AuthenticationSuccess AND SourceIpAddress IN (known_access_broker_ips) OR UserAccount IN (recently_sold_accounts)",
+      "mitre_url": "https://attack.mitre.org/techniques/T1650/"
+    },
+    {
+      "name": "T1011 - Exfiltration Over Other Network Medium",
+      "technique_id": "T1011",
+      "tactic": "Exfiltration",
+      "description": "Detects exfiltration over alternative network mediums",
+      "severity": "high",
+      "query": "event_type=NetworkConnect AND Protocol IN ('Bluetooth','WiFi-Direct','Infrared') AND DataTransferred > 1000000",
+      "mitre_url": "https://attack.mitre.org/techniques/T1011/"
+    },
+    {
+      "name": "T1020 - Automated Exfiltration",
+      "technique_id": "T1020",
+      "tactic": "Exfiltration",
+      "description": "Detects automated data exfiltration",
+      "severity": "high",
+      "query": "event_type=NetworkConnect AND DestinationPort IN (443,80,8080) AND BytesSent > 50000000 AND ConnectionDuration < 300 AND IsScheduledTask=true",
+      "mitre_url": "https://attack.mitre.org/techniques/T1020/"
+    },
+    {
+      "name": "T1029 - Scheduled Transfer",
+      "technique_id": "T1029",
+      "tactic": "Exfiltration",
+      "description": "Detects scheduled data transfers for exfiltration",
+      "severity": "high",
+      "query": "event_type=ScheduledTaskCreated AND (TaskAction CONTAINS 'curl' OR TaskAction CONTAINS 'wget' OR TaskAction CONTAINS 'ftp' OR TaskAction CONTAINS 'scp') AND TaskAction CONTAINS 'upload' OR TaskAction CONTAINS 'put'",
+      "mitre_url": "https://attack.mitre.org/techniques/T1029/"
+    },
+    {
+      "name": "T1030 - Data Transfer Size Limits",
+      "technique_id": "T1030",
+      "tactic": "Exfiltration",
+      "description": "Detects chunked data exfiltration to avoid detection",
+      "severity": "medium",
+      "query": "event_type=NetworkConnect AND DestinationIpAddress=same_ip AND ConnectionCount > 20 AND BytesSentPerConnection < 1000000 AND TotalBytesSent > 50000000",
+      "mitre_url": "https://attack.mitre.org/techniques/T1030/"
+    },
+    {
+      "name": "T1041 - Exfiltration Over C2 Channel",
+      "technique_id": "T1041",
+      "tactic": "Exfiltration",
+      "description": "Detects exfiltration over command and control channel",
+      "severity": "high",
+      "query": "event_type=NetworkConnect AND DestinationIpAddress IN (known_c2_ips) AND BytesSent > BytesReceived * 10 AND BytesSent > 10000000",
+      "mitre_url": "https://attack.mitre.org/techniques/T1041/"
+    },
+    {
+      "name": "T1052 - Exfiltration Over Physical Medium",
+      "technique_id": "T1052",
+      "tactic": "Exfiltration",
+      "description": "Detects exfiltration via physical media",
+      "severity": "high",
+      "query": "event_platform=Win AND event_type=RemovableMediaInserted AND (event_type=FileWritten AND FilePath CONTAINS removable_drive AND FileSize > 10000000)",
+      "mitre_url": "https://attack.mitre.org/techniques/T1052/"
+    },
+    {
+      "name": "T1537 - Transfer Data to Cloud Account",
+      "technique_id": "T1537",
+      "tactic": "Exfiltration",
+      "description": "Detects data transfer to cloud storage accounts",
+      "severity": "high",
+      "query": "event_type=CloudApiActivity AND (Operation CONTAINS 'PutObject' OR Operation CONTAINS 'UploadBlob' OR Operation CONTAINS 'storage.objects.create') AND DestinationBucket NOT IN (approved_buckets) AND BytesTransferred > 50000000",
+      "mitre_url": "https://attack.mitre.org/techniques/T1537/"
+    },
+    {
+      "name": "T1525 - Implant Internal Image",
+      "technique_id": "T1525",
+      "tactic": "Persistence",
+      "description": "Detects implanting malicious code in container images",
+      "severity": "high",
+      "query": "event_type=ProcessRollup2 AND (CommandLine CONTAINS 'docker commit' OR CommandLine CONTAINS 'docker push') AND ImageName NOT IN (approved_images)",
+      "mitre_url": "https://attack.mitre.org/techniques/T1525/"
+    },
+    {
+      "name": "T1653 - Power Settings",
+      "technique_id": "T1653",
+      "tactic": "Persistence",
+      "description": "Detects modification of power settings for persistence",
+      "severity": "low",
+      "query": "event_platform=Win AND event_type=ProcessRollup2 AND (CommandLine CONTAINS 'powercfg' AND (CommandLine CONTAINS '/change' OR CommandLine CONTAINS '/setactive') OR CommandLine CONTAINS 'Set-PowerPlan')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1653/"
+    },
+    {
+      "name": "T1668 - Exclusive Control",
+      "technique_id": "T1668",
+      "tactic": "Persistence",
+      "description": "Detects establishing exclusive control over resources",
+      "severity": "high",
+      "query": "event_platform=Win AND event_type=ProcessRollup2 AND (CommandLine CONTAINS 'takeown' OR CommandLine CONTAINS 'icacls' AND CommandLine CONTAINS '/deny' OR CommandLine CONTAINS 'chmod 000')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1668/"
+    },
+    {
+      "name": "T1671 - Cloud Application Integration",
+      "technique_id": "T1671",
+      "tactic": "Persistence",
+      "description": "Detects malicious cloud application integrations",
+      "severity": "high",
+      "query": "event_type=CloudApiActivity AND (Operation CONTAINS 'CreateApplication' OR Operation CONTAINS 'UpdateApplication' OR Operation CONTAINS 'AddPermission') AND RequestedPermissions CONTAINS 'admin' OR RequestedPermissions CONTAINS 'full_access'",
+      "mitre_url": "https://attack.mitre.org/techniques/T1671/"
+    },
+    {
+      "name": "T1200 - Hardware Additions",
+      "technique_id": "T1200",
+      "tactic": "Initial Access",
+      "description": "Detects unauthorized hardware device connections",
+      "severity": "high",
+      "query": "event_platform=Win AND event_type=DeviceConnected AND (DeviceType='USB' OR DeviceType='Network') AND DeviceId NOT IN (approved_devices)",
+      "mitre_url": "https://attack.mitre.org/techniques/T1200/"
+    },
+    {
+      "name": "T1659 - Content Injection",
+      "technique_id": "T1659",
+      "tactic": "Initial Access",
+      "description": "Detects content injection for initial access",
+      "severity": "high",
+      "query": "event_type=WebRequest AND (RequestBody CONTAINS '<script' OR RequestBody CONTAINS 'javascript:' OR RequestBody CONTAINS 'onerror=' OR RequestBody CONTAINS 'onload=')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1659/"
+    },
+    {
+      "name": "T1669 - Wi-Fi Networks",
+      "technique_id": "T1669",
+      "tactic": "Initial Access",
+      "description": "Detects rogue WiFi access for initial access",
+      "severity": "high",
+      "query": "event_type=WifiConnection AND (SSID IN (evil_twin_ssids) OR BSSID NOT IN (approved_access_points) OR SecurityType='Open')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1669/"
+    },
+    {
+      "name": "T1212 - Exploitation for Credential Access",
+      "technique_id": "T1212",
+      "tactic": "Credential Access",
+      "description": "Detects exploitation to obtain credentials",
+      "severity": "critical",
+      "query": "event_platform=Win AND event_type=ProcessRollup2 AND (CommandLine CONTAINS 'mimikatz' OR CommandLine CONTAINS 'sekurlsa' OR CommandLine CONTAINS 'lsadump' OR ProcessName='lsass.exe' AND ParentProcessName NOT IN ('wininit.exe','services.exe'))",
+      "mitre_url": "https://attack.mitre.org/techniques/T1212/"
+    },
+    {
+      "name": "T1649 - Steal or Forge Authentication Certificates",
+      "technique_id": "T1649",
+      "tactic": "Credential Access",
+      "description": "Detects theft or forgery of authentication certificates",
+      "severity": "critical",
+      "query": "event_platform=Win AND (event_type=ProcessRollup2 AND (CommandLine CONTAINS 'certutil' AND CommandLine CONTAINS 'exportPFX' OR CommandLine CONTAINS 'Export-PfxCertificate' OR CommandLine CONTAINS 'certipy') OR event_type=FileRead AND FilePath CONTAINS '.pfx' OR FilePath CONTAINS '.p12')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1649/"
+    },
+    {
+      "name": "T1665 - Hide Infrastructure",
+      "technique_id": "T1665",
+      "tactic": "Command and Control",
+      "description": "Detects attempts to hide C2 infrastructure",
+      "severity": "medium",
+      "query": "event_type=NetworkConnect AND (DestinationIpAddress IN (tor_exit_nodes) OR DestinationIpAddress IN (vpn_endpoints) OR DestinationDomain MATCHES '\\.onion$')",
+      "mitre_url": "https://attack.mitre.org/techniques/T1665/"
+    }
+  ]
+}

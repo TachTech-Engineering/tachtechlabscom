@@ -1,0 +1,939 @@
+{
+  "metadata": {
+    "description": "CrowdStrike Next-Gen SIEM CQL Rules for ATT&CK Coverage Gaps",
+    "generated": "2026-03-24",
+    "total_rules": 120,
+    "author": "TachTech Labs",
+    "format": "CrowdStrike CQL (LogScale)"
+  },
+  "rules": [
+    {
+      "name": "T1007 - System Service Discovery",
+      "technique_id": "T1007",
+      "tactic": "Discovery",
+      "severity": "Medium",
+      "objective": "Detect enumeration of system services using native tools",
+      "query": "#event_simpleName=ProcessRollup2\n| ImageFileName=/(sc|net|wmic|powershell)\\.exe$/i\n| CommandLine=/(sc\\s+query|Get-Service|wmic\\s+service|net\\s+start)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=ExecCount),\n    collect([CommandLine], limit=10),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(ExecCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, ExecCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1010 - Application Window Discovery",
+      "technique_id": "T1010",
+      "tactic": "Discovery",
+      "severity": "Low",
+      "objective": "Detect enumeration of open application windows",
+      "query": "#event_simpleName=ProcessRollup2\n| ImageFileName=/(powershell|tasklist)\\.exe$/i\n| CommandLine=/(Get-Process.*MainWindowTitle|tasklist\\s+\\/v)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=ExecCount),\n    collect([CommandLine], limit=10),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(ExecCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, ExecCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1012 - Query Registry",
+      "technique_id": "T1012",
+      "tactic": "Discovery",
+      "severity": "Low",
+      "objective": "Detect suspicious registry queries for system information",
+      "query": "#event_simpleName=ProcessRollup2\n| ImageFileName=/(reg|powershell)\\.exe$/i\n| CommandLine=/(reg\\s+query|Get-ItemProperty.*HKLM|Get-ItemProperty.*HKCU)/i\n| CommandLine!=/(Google|Microsoft|Windows\\\\CurrentVersion\\\\Run)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=QueryCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| QueryCount > 5\n| sort(QueryCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, QueryCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1016 - System Network Configuration Discovery",
+      "technique_id": "T1016",
+      "tactic": "Discovery",
+      "severity": "Medium",
+      "objective": "Detect network configuration enumeration",
+      "query": "#event_simpleName=ProcessRollup2\n| ImageFileName=/(ipconfig|netsh|route|arp|powershell)\\.exe$/i\n| CommandLine=/(ipconfig|netsh\\s+interface|route\\s+print|arp\\s+-a|Get-NetIPConfiguration|Get-NetAdapter)/i\n| groupBy([ComputerName, UserName], function=[\n    count(as=EnumCount),\n    count(ImageFileName, distinct=true, as=UniqueTools),\n    collect([ImageFileName, CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| UniqueTools > 2\n| sort(EnumCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, EnumCount, UniqueTools, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1018 - Remote System Discovery",
+      "technique_id": "T1018",
+      "tactic": "Discovery",
+      "severity": "Medium",
+      "objective": "Detect discovery of remote systems on the network",
+      "query": "#event_simpleName=ProcessRollup2\n| ImageFileName=/(net|nltest|dsquery|arp|ping|powershell)\\.exe$/i\n| CommandLine=/(net\\s+view|net\\s+group|nltest|dsquery\\s+computer|Get-ADComputer|arp\\s+-a|ping\\s+-)/i\n| groupBy([ComputerName, UserName], function=[\n    count(as=DiscoveryCount),\n    count(ImageFileName, distinct=true, as=UniqueTools),\n    collect([ImageFileName, CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(DiscoveryCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, DiscoveryCount, UniqueTools, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1033 - System Owner/User Discovery",
+      "technique_id": "T1033",
+      "tactic": "Discovery",
+      "severity": "Low",
+      "objective": "Detect discovery of system owner or current user",
+      "query": "#event_simpleName=ProcessRollup2\n| ImageFileName=/(whoami|quser|query|powershell|cmd)\\.exe$/i\n| CommandLine=/(whoami|query\\s+user|quser|\\$env:USERNAME|echo\\s+%username%)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=ExecCount),\n    collect([CommandLine], limit=10),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(ExecCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, ExecCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1046 - Network Service Discovery",
+      "technique_id": "T1046",
+      "tactic": "Discovery",
+      "severity": "High",
+      "objective": "Detect network service scanning and port enumeration",
+      "query": "#event_simpleName=ProcessRollup2\n| ImageFileName=/(nmap|masscan|zenmap|powershell)\\.exe$/i OR CommandLine=/(Test-NetConnection|tnc\\s|portqry|nmap|masscan)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=ScanCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(ScanCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, ScanCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1049 - System Network Connections Discovery",
+      "technique_id": "T1049",
+      "tactic": "Discovery",
+      "severity": "Medium",
+      "objective": "Detect enumeration of active network connections",
+      "query": "#event_simpleName=ProcessRollup2\n| ImageFileName=/(netstat|powershell)\\.exe$/i\n| CommandLine=/(netstat|Get-NetTCPConnection|Get-NetUDPEndpoint)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=ExecCount),\n    collect([CommandLine], limit=10),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(ExecCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, ExecCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1057 - Process Discovery",
+      "technique_id": "T1057",
+      "tactic": "Discovery",
+      "severity": "Low",
+      "objective": "Detect enumeration of running processes",
+      "query": "#event_simpleName=ProcessRollup2\n| ImageFileName=/(tasklist|wmic|powershell)\\.exe$/i\n| CommandLine=/(tasklist|Get-Process|wmic\\s+process|ps\\s+aux)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=ExecCount),\n    collect([CommandLine], limit=10),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(ExecCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, ExecCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1069 - Permission Groups Discovery",
+      "technique_id": "T1069",
+      "tactic": "Discovery",
+      "severity": "Medium",
+      "objective": "Detect enumeration of local or domain permission groups",
+      "query": "#event_simpleName=ProcessRollup2\n| ImageFileName=/(net|powershell|gpresult)\\.exe$/i\n| CommandLine=/(net\\s+localgroup|net\\s+group\\s+\\/domain|Get-LocalGroup|Get-ADGroup|gpresult)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=QueryCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(QueryCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, QueryCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1082 - System Information Discovery",
+      "technique_id": "T1082",
+      "tactic": "Discovery",
+      "severity": "Medium",
+      "objective": "Detect collection of detailed system information",
+      "query": "#event_simpleName=ProcessRollup2\n| ImageFileName=/(systeminfo|hostname|ver|wmic|powershell)\\.exe$/i\n| CommandLine=/(systeminfo|hostname|wmic\\s+os|wmic\\s+computersystem|Get-ComputerInfo|ver)/i\n| groupBy([ComputerName, UserName], function=[\n    count(as=EnumCount),\n    count(ImageFileName, distinct=true, as=UniqueTools),\n    collect([ImageFileName, CommandLine], limit=20),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| UniqueTools > 2\n| sort(EnumCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, EnumCount, UniqueTools, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1083 - File and Directory Discovery",
+      "technique_id": "T1083",
+      "tactic": "Discovery",
+      "severity": "Low",
+      "objective": "Detect enumeration of files and directories",
+      "query": "#event_simpleName=ProcessRollup2\n| ImageFileName=/(cmd|powershell|tree)\\.exe$/i\n| CommandLine=/(dir\\s+\\/s|tree\\s+\\/f|Get-ChildItem.*-Recurse|gci.*-r|ls\\s+-la)/i\n| CommandLine!=/(Program Files|Windows\\\\System32)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=SearchCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| SearchCount > 3\n| sort(SearchCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, SearchCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1120 - Peripheral Device Discovery",
+      "technique_id": "T1120",
+      "tactic": "Discovery",
+      "severity": "Low",
+      "objective": "Detect enumeration of peripheral devices",
+      "query": "#event_simpleName=ProcessRollup2\n| ImageFileName=/(wmic|powershell|pnputil)\\.exe$/i\n| CommandLine=/(wmic\\s+path\\s+win32_pnpentity|Get-PnpDevice|pnputil\\s+\\/enum-devices|devcon)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=ExecCount),\n    collect([CommandLine], limit=10),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(ExecCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, ExecCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1124 - System Time Discovery",
+      "technique_id": "T1124",
+      "tactic": "Discovery",
+      "severity": "Low",
+      "objective": "Detect enumeration of system time",
+      "query": "#event_simpleName=ProcessRollup2\n| ImageFileName=/(w32tm|time|net|powershell)\\.exe$/i\n| CommandLine=/(w32tm|net\\s+time|Get-Date|time\\s+\\/t)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=ExecCount),\n    collect([CommandLine], limit=10),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(ExecCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, ExecCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1135 - Network Share Discovery",
+      "technique_id": "T1135",
+      "tactic": "Discovery",
+      "severity": "Medium",
+      "objective": "Detect enumeration of network shares",
+      "query": "#event_simpleName=ProcessRollup2\n| ImageFileName=/(net|powershell|wmic)\\.exe$/i\n| CommandLine=/(net\\s+share|Get-SmbShare|Get-WmiObject.*Win32_Share|wmic\\s+share)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=QueryCount),\n    collect([CommandLine], limit=10),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(QueryCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, QueryCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1201 - Password Policy Discovery",
+      "technique_id": "T1201",
+      "tactic": "Discovery",
+      "severity": "Medium",
+      "objective": "Detect enumeration of password policies",
+      "query": "#event_simpleName=ProcessRollup2\n| ImageFileName=/(net|secedit|powershell)\\.exe$/i\n| CommandLine=/(net\\s+accounts|secedit\\s+\\/export|Get-ADDefaultDomainPasswordPolicy)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=QueryCount),\n    collect([CommandLine], limit=10),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(QueryCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, QueryCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1217 - Browser Information Discovery",
+      "technique_id": "T1217",
+      "tactic": "Discovery",
+      "severity": "Medium",
+      "objective": "Detect access to browser bookmarks and history",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(Bookmarks|History|places\\.sqlite|Login\\s+Data|Cookies)/i\n| ImageFileName!=/(chrome|firefox|msedge|brave)\\.exe$/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=AccessCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(AccessCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, AccessCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1482 - Domain Trust Discovery",
+      "technique_id": "T1482",
+      "tactic": "Discovery",
+      "severity": "High",
+      "objective": "Detect enumeration of domain trust relationships",
+      "query": "#event_simpleName=ProcessRollup2\n| ImageFileName=/(nltest|dsquery|netdom|powershell)\\.exe$/i\n| CommandLine=/(nltest.*trusted_domains|Get-ADTrust|dsquery.*trust|netdom\\s+trust)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=QueryCount),\n    collect([CommandLine], limit=10),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(QueryCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, QueryCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1518 - Software Discovery",
+      "technique_id": "T1518",
+      "tactic": "Discovery",
+      "severity": "Low",
+      "objective": "Detect enumeration of installed software",
+      "query": "#event_simpleName=ProcessRollup2\n| ImageFileName=/(wmic|reg|powershell)\\.exe$/i\n| CommandLine=/(wmic\\s+product\\s+get|Get-WmiObject.*Win32_Product|Get-Package|reg\\s+query.*Uninstall)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=QueryCount),\n    collect([CommandLine], limit=10),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(QueryCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, QueryCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1526 - Cloud Service Discovery",
+      "technique_id": "T1526",
+      "tactic": "Discovery",
+      "severity": "Medium",
+      "objective": "Detect enumeration of cloud services and resources",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(az\\s+account|aws\\s+sts|gcloud\\s+|Get-AzResource|Get-AzureAD)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=QueryCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(QueryCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, QueryCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1538 - Cloud Service Dashboard",
+      "technique_id": "T1538",
+      "tactic": "Discovery",
+      "severity": "Medium",
+      "objective": "Detect unusual access to cloud service dashboards",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(console\\.aws|portal\\.azure|console\\.cloud\\.google)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=AccessCount),\n    collect([CommandLine], limit=10),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(AccessCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, AccessCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1580 - Cloud Infrastructure Discovery",
+      "technique_id": "T1580",
+      "tactic": "Discovery",
+      "severity": "Medium",
+      "objective": "Detect enumeration of cloud infrastructure components",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(aws\\s+ec2\\s+describe|az\\s+vm\\s+list|gcloud\\s+compute\\s+instances|Get-AzVM)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=QueryCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(QueryCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, QueryCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1613 - Container and Resource Discovery",
+      "technique_id": "T1613",
+      "tactic": "Discovery",
+      "severity": "Medium",
+      "objective": "Detect enumeration of containers and orchestration resources",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(docker\\s+ps|docker\\s+images|kubectl\\s+get|crictl|podman\\s+ps)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=QueryCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(QueryCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, QueryCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1614 - System Location Discovery",
+      "technique_id": "T1614",
+      "tactic": "Discovery",
+      "severity": "Low",
+      "objective": "Detect discovery of system geographic location or language",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(Get-WinSystemLocale|Get-Culture|chcp|systeminfo.*locale)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=ExecCount),\n    collect([CommandLine], limit=10),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(ExecCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, ExecCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1615 - Group Policy Discovery",
+      "technique_id": "T1615",
+      "tactic": "Discovery",
+      "severity": "Medium",
+      "objective": "Detect enumeration of group policy settings",
+      "query": "#event_simpleName=ProcessRollup2\n| ImageFileName=/(gpresult|secedit|powershell)\\.exe$/i\n| CommandLine=/(gpresult|Get-GPO|Get-GPResultantSetOfPolicy|secedit\\s+\\/export)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=QueryCount),\n    collect([CommandLine], limit=10),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(QueryCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, QueryCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1619 - Cloud Storage Object Discovery",
+      "technique_id": "T1619",
+      "tactic": "Discovery",
+      "severity": "Medium",
+      "objective": "Detect enumeration of cloud storage objects",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(aws\\s+s3\\s+ls|az\\s+storage\\s+blob\\s+list|gsutil\\s+ls)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=QueryCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(QueryCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, QueryCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1652 - Device Driver Discovery",
+      "technique_id": "T1652",
+      "tactic": "Discovery",
+      "severity": "Low",
+      "objective": "Detect enumeration of device drivers",
+      "query": "#event_simpleName=ProcessRollup2\n| ImageFileName=/(driverquery|wmic|powershell|pnputil)\\.exe$/i\n| CommandLine=/(driverquery|wmic\\s+sysdriver|Get-WindowsDriver|pnputil\\s+\\/enum-drivers)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=QueryCount),\n    collect([CommandLine], limit=10),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(QueryCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, QueryCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1654 - Log Enumeration",
+      "technique_id": "T1654",
+      "tactic": "Discovery",
+      "severity": "Medium",
+      "objective": "Detect enumeration of security and system logs",
+      "query": "#event_simpleName=ProcessRollup2\n| ImageFileName=/(wevtutil|powershell)\\.exe$/i\n| CommandLine=/(wevtutil\\s+(qe|query-events)|Get-WinEvent|Get-EventLog)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=QueryCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(QueryCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, QueryCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1673 - Virtual Machine Discovery",
+      "technique_id": "T1673",
+      "tactic": "Discovery",
+      "severity": "Low",
+      "objective": "Detect discovery of virtual machine environments",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(vboxmanage|vmrun|vmware-cmd|Get-VM|wmic\\s+bios.*vmware|dmidecode)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=QueryCount),\n    collect([CommandLine], limit=10),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(QueryCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, QueryCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1680 - Local Storage Discovery",
+      "technique_id": "T1680",
+      "tactic": "Discovery",
+      "severity": "Low",
+      "objective": "Detect enumeration of local storage devices and volumes",
+      "query": "#event_simpleName=ProcessRollup2\n| ImageFileName=/(wmic|diskpart|fsutil|powershell)\\.exe$/i\n| CommandLine=/(wmic\\s+diskdrive|Get-Volume|Get-PhysicalDisk|fsutil|diskpart)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=QueryCount),\n    collect([CommandLine], limit=10),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(QueryCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, QueryCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1197 - BITS Jobs",
+      "technique_id": "T1197",
+      "tactic": "Defense Evasion",
+      "severity": "High",
+      "objective": "Detect abuse of BITS for persistence or transfer",
+      "query": "#event_simpleName=ProcessRollup2\n| ImageFileName=/(bitsadmin|powershell)\\.exe$/i\n| CommandLine=/(bitsadmin\\s+\\/(transfer|create|addfile|SetNotifyCmdLine)|Start-BitsTransfer)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=ExecCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(ExecCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, ExecCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1480 - Execution Guardrails",
+      "technique_id": "T1480",
+      "tactic": "Defense Evasion",
+      "severity": "Medium",
+      "objective": "Detect malware checking environment before execution",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(hostname|whoami|systeminfo|Get-WmiObject.*Win32_ComputerSystem)/i\n| ParentBaseFileName!=/(explorer|services|svchost)\\.exe$/i\n| groupBy([ComputerName, UserName, ParentBaseFileName, ImageFileName], function=[\n    count(as=CheckCount),\n    collect([CommandLine], limit=10),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| CheckCount > 3\n| sort(CheckCount, order=desc)\n| table([ComputerName, UserName, ParentBaseFileName, ImageFileName, CommandLine, CheckCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1535 - Unused/Unsupported Cloud Regions",
+      "technique_id": "T1535",
+      "tactic": "Defense Evasion",
+      "severity": "High",
+      "objective": "Detect resource creation in unusual cloud regions",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(aws.*--region|az.*--location|gcloud.*--region)/i\n| CommandLine!=/(us-east|us-west|eu-west|eu-central)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=ExecCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(ExecCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, ExecCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1542 - Pre-OS Boot",
+      "technique_id": "T1542",
+      "tactic": "Defense Evasion",
+      "severity": "Critical",
+      "objective": "Detect modification of boot processes or firmware",
+      "query": "#event_simpleName=ProcessRollup2\n| ImageFileName=/(bcdedit|bootrec|bcdboot)\\.exe$/i\n| CommandLine!=/(\\-\\?|\\/\\?|help)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=ModCount),\n    collect([CommandLine], limit=10),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(ModCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, ModCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1578 - Modify Cloud Compute Infrastructure",
+      "technique_id": "T1578",
+      "tactic": "Defense Evasion",
+      "severity": "High",
+      "objective": "Detect modification of cloud compute resources",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(aws\\s+ec2\\s+(create-snapshot|create-image|stop-instances|terminate)|az\\s+vm\\s+(deallocate|delete)|gcloud\\s+compute.*delete)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=ModCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(ModCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, ModCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1599 - Network Boundary Bridging",
+      "technique_id": "T1599",
+      "tactic": "Defense Evasion",
+      "severity": "High",
+      "objective": "Detect network boundary bypass attempts",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(ssh\\s+-D|ssh.*-R|ssh.*-L|proxychains|chisel|ngrok|cloudflared)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=TunnelCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(TunnelCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, TunnelCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1600 - Weaken Encryption",
+      "technique_id": "T1600",
+      "tactic": "Defense Evasion",
+      "severity": "High",
+      "objective": "Detect attempts to weaken encryption settings",
+      "query": "#event_simpleName=AsepValueUpdate\n| AsepValueName=/(SSL|TLS|Cryptography|SchUseStrongCrypto|Enabled)/i\n| groupBy([ComputerName, UserName, AsepClass], function=[\n    count(as=ModCount),\n    collect([AsepValueName, AsepValueData], limit=10),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(ModCount, order=desc)\n| table([ComputerName, UserName, AsepClass, AsepValueName, AsepValueData, ModCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1601 - Modify System Image",
+      "technique_id": "T1601",
+      "tactic": "Defense Evasion",
+      "severity": "Critical",
+      "objective": "Detect modification of system images or firmware",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(dd\\s+if=|flashrom|fwupdmgr|firmware)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=ModCount),\n    collect([CommandLine], limit=10),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(ModCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, ModCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1610 - Deploy Container",
+      "technique_id": "T1610",
+      "tactic": "Defense Evasion",
+      "severity": "Medium",
+      "objective": "Detect deployment of potentially malicious containers",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(docker\\s+run|kubectl\\s+run|podman\\s+run)/i\n| CommandLine=/(--privileged|hostPID|hostNetwork|--cap-add)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=DeployCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(DeployCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, DeployCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1612 - Build Image on Host",
+      "technique_id": "T1612",
+      "tactic": "Defense Evasion",
+      "severity": "Medium",
+      "objective": "Detect building container images on compromised hosts",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(docker\\s+build|podman\\s+build|buildah)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=BuildCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(BuildCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, BuildCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1647 - Plist File Modification",
+      "technique_id": "T1647",
+      "tactic": "Defense Evasion",
+      "severity": "Medium",
+      "objective": "Detect modification of macOS plist files for evasion",
+      "query": "#event_simpleName=ProcessRollup2\n| event_platform=Mac\n| CommandLine=/(defaults\\s+write|plutil|PlistBuddy)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=ModCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(ModCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, ModCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1656 - Impersonation",
+      "technique_id": "T1656",
+      "tactic": "Defense Evasion",
+      "severity": "Medium",
+      "objective": "Detect account impersonation attempts",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(runas|Start-Process.*-Credential|Invoke-Command.*-Credential)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=ImpersonateCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(ImpersonateCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, ImpersonateCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1666 - Modify Cloud Resource Hierarchy",
+      "technique_id": "T1666",
+      "tactic": "Defense Evasion",
+      "severity": "High",
+      "objective": "Detect modification of cloud organizational structure",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(aws\\s+organizations|az\\s+account.*management-group|gcloud.*resource-manager)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=ModCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(ModCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, ModCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1672 - Email Spoofing",
+      "technique_id": "T1672",
+      "tactic": "Defense Evasion",
+      "severity": "High",
+      "objective": "Detect email spoofing attempts",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(Send-MailMessage|smtp|swaks|sendEmail)/i\n| CommandLine=/(From:|\\-f\\s|\\-from)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=SendCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(SendCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, SendCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1678 - Delay Execution",
+      "technique_id": "T1678",
+      "tactic": "Defense Evasion",
+      "severity": "Low",
+      "objective": "Detect use of sleep or delay commands for evasion",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(Start-Sleep|timeout\\s+\\/t|ping\\s+-n.*127\\.0\\.0\\.1|sleep\\s+\\d)/i\n| ParentBaseFileName!=/(explorer|services|svchost)\\.exe$/i\n| groupBy([ComputerName, UserName, ParentBaseFileName, ImageFileName], function=[\n    count(as=DelayCount),\n    collect([CommandLine], limit=10),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| DelayCount > 2\n| sort(DelayCount, order=desc)\n| table([ComputerName, UserName, ParentBaseFileName, ImageFileName, CommandLine, DelayCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1679 - Selective Exclusion",
+      "technique_id": "T1679",
+      "tactic": "Defense Evasion",
+      "severity": "High",
+      "objective": "Detect attempts to exclude files from security scanning",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(Add-MpPreference.*ExclusionPath|Set-MpPreference.*Exclusion|ExclusionExtension)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=ExclusionCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(ExclusionCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, ExclusionCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1106 - Native API",
+      "technique_id": "T1106",
+      "tactic": "Execution",
+      "severity": "Medium",
+      "objective": "Detect direct use of Windows Native API for execution",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(NtCreateProcess|RtlCreateUserThread|ZwCreateThread|CreateRemoteThread)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=ApiCallCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(ApiCallCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, ApiCallCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1129 - Shared Modules",
+      "technique_id": "T1129",
+      "tactic": "Execution",
+      "severity": "Medium",
+      "objective": "Detect execution via shared modules or DLLs",
+      "query": "#event_simpleName=ModuleLoad\n| ImageFileName!=/(System32|SysWOW64|Program\\s+Files|Windows\\\\assembly)/i\n| groupBy([ComputerName, ImageFileName, ModuleName], function=[\n    count(as=LoadCount),\n    collect([SHA256HashData], limit=5),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(LoadCount, order=desc)\n| table([ComputerName, ImageFileName, ModuleName, SHA256HashData, LoadCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1203 - Exploitation for Client Execution",
+      "technique_id": "T1203",
+      "tactic": "Execution",
+      "severity": "Critical",
+      "objective": "Detect client-side exploitation leading to code execution",
+      "query": "#event_simpleName=ProcessRollup2\n| ParentBaseFileName=/(WINWORD|EXCEL|POWERPNT|OUTLOOK|AcroRd32|chrome|firefox|msedge)\\.exe$/i\n| ImageFileName=/(cmd|powershell|wscript|cscript|mshta|regsvr32|rundll32)\\.exe$/i\n| groupBy([ComputerName, UserName, ParentBaseFileName, ImageFileName], function=[\n    count(as=ExecCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(ExecCount, order=desc)\n| table([ComputerName, UserName, ParentBaseFileName, ImageFileName, CommandLine, ExecCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1204 - User Execution",
+      "technique_id": "T1204",
+      "tactic": "Execution",
+      "severity": "High",
+      "objective": "Detect malicious execution initiated by user action",
+      "query": "#event_simpleName=ProcessRollup2\n| ParentBaseFileName=/(explorer|outlook)\\.exe$/i\n| ImageFileName=/.+\\.exe$/i\n| ImageFileName=/(Downloads|Temp|AppData)/i\n| groupBy([ComputerName, UserName, ParentBaseFileName, ImageFileName], function=[\n    count(as=ExecCount),\n    collect([CommandLine, SHA256HashData], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(ExecCount, order=desc)\n| table([ComputerName, UserName, ParentBaseFileName, ImageFileName, CommandLine, SHA256HashData, ExecCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1559 - Inter-Process Communication",
+      "technique_id": "T1559",
+      "tactic": "Execution",
+      "severity": "High",
+      "objective": "Detect execution via COM or DDE",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(DDE|CreateObject|GetObject|\\-ComObject|Activator::CreateInstance)/i\n| groupBy([ComputerName, UserName, ParentBaseFileName, ImageFileName], function=[\n    count(as=ExecCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(ExecCount, order=desc)\n| table([ComputerName, UserName, ParentBaseFileName, ImageFileName, CommandLine, ExecCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1569 - System Services",
+      "technique_id": "T1569",
+      "tactic": "Execution",
+      "severity": "High",
+      "objective": "Detect execution via system services",
+      "query": "#event_simpleName=ProcessRollup2\n| ImageFileName=/(sc|net|powershell)\\.exe$/i\n| CommandLine=/(sc\\s+(create|start|config)|net\\s+start|New-Service|Start-Service)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=ServiceCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(ServiceCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, ServiceCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1609 - Container Administration Command",
+      "technique_id": "T1609",
+      "tactic": "Execution",
+      "severity": "High",
+      "objective": "Detect malicious container administration commands",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(docker\\s+exec|kubectl\\s+exec|crictl\\s+exec)/i\n| CommandLine=/(\\/bin\\/sh|\\/bin\\/bash|cmd\\.exe|powershell)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=ExecCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(ExecCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, ExecCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1648 - Serverless Execution",
+      "technique_id": "T1648",
+      "tactic": "Execution",
+      "severity": "Medium",
+      "objective": "Detect malicious serverless function execution",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(aws\\s+lambda\\s+invoke|az\\s+functionapp|gcloud\\s+functions\\s+call)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=InvokeCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(InvokeCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, InvokeCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1651 - Cloud Administration Command",
+      "technique_id": "T1651",
+      "tactic": "Execution",
+      "severity": "High",
+      "objective": "Detect execution via cloud administration interfaces",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(aws\\s+ssm\\s+send-command|az\\s+vm\\s+run-command|gcloud\\s+compute.*ssh)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=CmdCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(CmdCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, CmdCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1674 - Input Injection",
+      "technique_id": "T1674",
+      "tactic": "Execution",
+      "severity": "High",
+      "objective": "Detect input injection for code execution",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(SendKeys|keybd_event|mouse_event)/i OR ImageFileName=/(AutoHotkey|AutoIt)\\.exe$/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=InjectionCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(InjectionCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, InjectionCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1675 - ESXi Administration Command",
+      "technique_id": "T1675",
+      "tactic": "Execution",
+      "severity": "Critical",
+      "objective": "Detect malicious ESXi administration commands",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(esxcli|vim-cmd|vmware-cmd)/i\n| CommandLine=/(kill|power\\s+off|unregister|destroy)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=CmdCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(CmdCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, CmdCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1677 - Poisoned Pipeline Execution",
+      "technique_id": "T1677",
+      "tactic": "Execution",
+      "severity": "High",
+      "objective": "Detect malicious CI/CD pipeline execution",
+      "query": "#event_simpleName=ProcessRollup2\n| ParentBaseFileName=/(jenkins|gitlab-runner|github-actions|azure-pipelines)/i\n| CommandLine=/(curl|wget|Invoke-WebRequest|iwr\\s)/i\n| groupBy([ComputerName, UserName, ParentBaseFileName, ImageFileName], function=[\n    count(as=PipelineExecCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(PipelineExecCount, order=desc)\n| table([ComputerName, UserName, ParentBaseFileName, ImageFileName, CommandLine, PipelineExecCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1005 - Data from Local System",
+      "technique_id": "T1005",
+      "tactic": "Collection",
+      "severity": "Medium",
+      "objective": "Detect collection of sensitive local data",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(Documents|Desktop|\\.ssh|\\.aws|wallet\\.dat|\\.kdbx)/i\n| CommandLine=/(copy|xcopy|robocopy|Copy-Item|type|cat)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=CopyCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(CopyCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, CopyCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1025 - Data from Removable Media",
+      "technique_id": "T1025",
+      "tactic": "Collection",
+      "severity": "Medium",
+      "objective": "Detect collection of data from removable media",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/[D-Z]:\\\\/i\n| CommandLine=/(copy|xcopy|robocopy|Copy-Item)/i\n| CommandLine!=/C:\\\\/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=CopyCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(CopyCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, CopyCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1039 - Data from Network Shared Drive",
+      "technique_id": "T1039",
+      "tactic": "Collection",
+      "severity": "Medium",
+      "objective": "Detect collection of data from network shares",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/\\\\\\\\.+\\\\/i\n| CommandLine=/(copy|xcopy|robocopy|Copy-Item)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=CopyCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| CopyCount > 5\n| sort(CopyCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, CopyCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1074 - Data Staged",
+      "technique_id": "T1074",
+      "tactic": "Collection",
+      "severity": "High",
+      "objective": "Detect staging of collected data for exfiltration",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(Temp|AppData\\\\Local)/i\n| CommandLine=/(compress|zip|7z|rar|tar|Compress-Archive)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=StageCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(StageCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, StageCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1114 - Email Collection",
+      "technique_id": "T1114",
+      "tactic": "Collection",
+      "severity": "High",
+      "objective": "Detect collection of email data",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(\\.pst|\\.ost|\\.eml|\\.msg|New-MailboxExportRequest)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=EmailCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(EmailCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, EmailCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1115 - Clipboard Data",
+      "technique_id": "T1115",
+      "tactic": "Collection",
+      "severity": "Medium",
+      "objective": "Detect collection of clipboard contents",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(Get-Clipboard|clip\\.exe|GetClipboardData|pbpaste)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=ClipCount),\n    collect([CommandLine], limit=10),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(ClipCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, ClipCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1119 - Automated Collection",
+      "technique_id": "T1119",
+      "tactic": "Collection",
+      "severity": "High",
+      "objective": "Detect automated data collection scripts",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(for\\s+\\/r.*copy|Get-ChildItem.*-Recurse.*Copy-Item|find.*-exec.*cp)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=CollectCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(CollectCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, CollectCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1123 - Audio Capture",
+      "technique_id": "T1123",
+      "tactic": "Collection",
+      "severity": "High",
+      "objective": "Detect audio recording activity",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(SoundRecorder|ffmpeg.*audio|sox|arecord)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=RecordCount),\n    collect([CommandLine], limit=10),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(RecordCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, RecordCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1125 - Video Capture",
+      "technique_id": "T1125",
+      "tactic": "Collection",
+      "severity": "High",
+      "objective": "Detect video recording activity",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(ffmpeg.*video|OBS|webcam|avfoundation)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=RecordCount),\n    collect([CommandLine], limit=10),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(RecordCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, RecordCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1185 - Browser Session Hijacking",
+      "technique_id": "T1185",
+      "tactic": "Collection",
+      "severity": "High",
+      "objective": "Detect browser session hijacking attempts",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(Cookies|Session|Login\\s+Data)/i\n| ImageFileName!=/(chrome|firefox|msedge|brave)\\.exe$/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=AccessCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(AccessCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, AccessCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1213 - Data from Information Repositories",
+      "technique_id": "T1213",
+      "tactic": "Collection",
+      "severity": "Medium",
+      "objective": "Detect collection from information repositories",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(confluence|sharepoint|github|gitlab|git\\s+clone)/i\n| CommandLine=/(download|export|clone|pull)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=RepoAccessCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(RepoAccessCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, RepoAccessCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1530 - Data from Cloud Storage",
+      "technique_id": "T1530",
+      "tactic": "Collection",
+      "severity": "High",
+      "objective": "Detect collection of data from cloud storage",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(aws\\s+s3\\s+(cp|sync)|az\\s+storage\\s+blob\\s+download|gsutil\\s+cp)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=DownloadCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(DownloadCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, DownloadCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1602 - Data from Configuration Repository",
+      "technique_id": "T1602",
+      "tactic": "Collection",
+      "severity": "High",
+      "objective": "Detect collection of network device configurations",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(show\\s+running-config|show\\s+startup-config|snmpwalk|snmpget)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=ConfigCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(ConfigCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, ConfigCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1485 - Data Destruction",
+      "technique_id": "T1485",
+      "tactic": "Impact",
+      "severity": "Critical",
+      "objective": "Detect data destruction activities",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(format.*\\/y|cipher\\s+\\/w|sdelete|shred|rm\\s+-rf)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=DestroyCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(DestroyCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, DestroyCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1491 - Defacement",
+      "technique_id": "T1491",
+      "tactic": "Impact",
+      "severity": "High",
+      "objective": "Detect website or system defacement",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(wwwroot|htdocs|public_html|inetpub)/i\n| CommandLine=/(echo.*>|copy|move|Set-Content)/i\n| CommandLine=/(index\\.html|index\\.php|index\\.asp)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=DefaceCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(DefaceCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, DefaceCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1495 - Firmware Corruption",
+      "technique_id": "T1495",
+      "tactic": "Impact",
+      "severity": "Critical",
+      "objective": "Detect firmware corruption attempts",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(flashrom|fwupd|bcdedit.*firmware|dd.*of=\\/dev)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=FirmwareCount),\n    collect([CommandLine], limit=10),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(FirmwareCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, FirmwareCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1498 - Network Denial of Service",
+      "technique_id": "T1498",
+      "tactic": "Impact",
+      "severity": "Critical",
+      "objective": "Detect network DoS attacks",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(hping|slowloris|LOIC|torshammer)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=DosCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(DosCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, DosCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1499 - Endpoint Denial of Service",
+      "technique_id": "T1499",
+      "tactic": "Impact",
+      "severity": "High",
+      "objective": "Detect endpoint DoS attacks",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(fork\\s+bomb|:\\(\\)\\{|%0\\|%0)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=DosCount),\n    collect([CommandLine], limit=10),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(DosCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, DosCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1529 - System Shutdown/Reboot",
+      "technique_id": "T1529",
+      "tactic": "Impact",
+      "severity": "Medium",
+      "objective": "Detect unexpected system shutdown or reboot",
+      "query": "#event_simpleName=ProcessRollup2\n| ImageFileName=/(shutdown|restart)\\.exe$/i OR CommandLine=/(Restart-Computer|Stop-Computer|shutdown\\s+\\/)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=ShutdownCount),\n    collect([CommandLine], limit=10),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(ShutdownCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, ShutdownCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1531 - Account Access Removal",
+      "technique_id": "T1531",
+      "tactic": "Impact",
+      "severity": "High",
+      "objective": "Detect removal of user account access",
+      "query": "#event_simpleName=ProcessRollup2\n| ImageFileName=/(net|powershell)\\.exe$/i\n| CommandLine=/(net\\s+user.*\\/delete|net\\s+user.*\\/active:no|Remove-LocalUser|Remove-ADUser|Disable-ADAccount)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=RemovalCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(RemovalCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, RemovalCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1561 - Disk Wipe",
+      "technique_id": "T1561",
+      "tactic": "Impact",
+      "severity": "Critical",
+      "objective": "Detect disk wiping activities",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(format.*\\/q|diskpart.*clean|dd.*of=|sdelete.*-z)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=WipeCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(WipeCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, WipeCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1565 - Data Manipulation",
+      "technique_id": "T1565",
+      "tactic": "Impact",
+      "severity": "High",
+      "objective": "Detect manipulation of stored or transmitted data",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(database|\\.db|\\.sql|\\.mdb)/i\n| CommandLine=/(UPDATE|DELETE|INSERT|DROP|ALTER)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=ManipCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(ManipCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, ManipCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1657 - Financial Theft",
+      "technique_id": "T1657",
+      "tactic": "Impact",
+      "severity": "Critical",
+      "objective": "Detect financial theft activities",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(wallet|bitcoin|crypto|ethereum|\\.dat)/i\n| CommandLine=/(transfer|send|export|copy)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=TheftCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(TheftCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, TheftCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1667 - Email Bombing",
+      "technique_id": "T1667",
+      "tactic": "Impact",
+      "severity": "Medium",
+      "objective": "Detect email bombing attacks",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(Send-MailMessage|smtp|mail\\s+-s)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=EmailCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| EmailCount > 50\n| sort(EmailCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, EmailCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1589 - Gather Victim Identity Information",
+      "technique_id": "T1589",
+      "tactic": "Reconnaissance",
+      "severity": "Low",
+      "objective": "Detect gathering of victim identity information",
+      "query": "#event_simpleName=DnsRequest\n| QueryType=/(MX|TXT|SOA)/i\n| groupBy([ComputerName, ContextBaseFileName, QueryName, QueryType], function=[\n    count(as=QueryCount),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(QueryCount, order=desc)\n| table([ComputerName, ContextBaseFileName, QueryName, QueryType, QueryCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1590 - Gather Victim Network Information",
+      "technique_id": "T1590",
+      "tactic": "Reconnaissance",
+      "severity": "Low",
+      "objective": "Detect gathering of victim network information",
+      "query": "#event_simpleName=DnsRequest\n| QueryName=/(version\\.bind|chaos)/i OR QueryType=/(ANY|AXFR)/i\n| groupBy([ComputerName, ContextBaseFileName, QueryName], function=[\n    count(as=QueryCount),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(QueryCount, order=desc)\n| table([ComputerName, ContextBaseFileName, QueryName, QueryCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1591 - Gather Victim Org Information",
+      "technique_id": "T1591",
+      "tactic": "Reconnaissance",
+      "severity": "Low",
+      "objective": "Detect gathering of victim organization information",
+      "query": "#event_simpleName=DnsRequest\n| QueryName=/(linkedin|glassdoor|crunchbase|zoominfo)/i\n| groupBy([ComputerName, ContextBaseFileName, QueryName], function=[\n    count(as=QueryCount),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(QueryCount, order=desc)\n| table([ComputerName, ContextBaseFileName, QueryName, QueryCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1592 - Gather Victim Host Information",
+      "technique_id": "T1592",
+      "tactic": "Reconnaissance",
+      "severity": "Low",
+      "objective": "Detect gathering of victim host information",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(nikto|nmap.*-sV|whatweb|wappalyzer)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=ScanCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(ScanCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, ScanCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1593 - Search Open Websites/Domains",
+      "technique_id": "T1593",
+      "tactic": "Reconnaissance",
+      "severity": "Low",
+      "objective": "Detect searches for target information on public sites",
+      "query": "#event_simpleName=DnsRequest\n| QueryName=/(github\\.com|pastebin\\.com|shodan\\.io|censys\\.io)/i\n| groupBy([ComputerName, ContextBaseFileName, QueryName], function=[\n    count(as=QueryCount),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(QueryCount, order=desc)\n| table([ComputerName, ContextBaseFileName, QueryName, QueryCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1594 - Search Victim-Owned Websites",
+      "technique_id": "T1594",
+      "tactic": "Reconnaissance",
+      "severity": "Low",
+      "objective": "Detect reconnaissance of victim-owned websites",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(dirb|gobuster|dirbuster|wfuzz|ffuf)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=BruteCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(BruteCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, BruteCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1596 - Search Open Technical Databases",
+      "technique_id": "T1596",
+      "tactic": "Reconnaissance",
+      "severity": "Low",
+      "objective": "Detect searches in technical databases for target info",
+      "query": "#event_simpleName=DnsRequest\n| QueryName=/(shodan\\.io|censys\\.io|zoomeye\\.org|crt\\.sh|securitytrails)/i\n| groupBy([ComputerName, ContextBaseFileName, QueryName], function=[\n    count(as=QueryCount),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(QueryCount, order=desc)\n| table([ComputerName, ContextBaseFileName, QueryName, QueryCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1597 - Search Closed Sources",
+      "technique_id": "T1597",
+      "tactic": "Reconnaissance",
+      "severity": "Low",
+      "objective": "Detect access to closed/paid threat intelligence sources",
+      "query": "#event_simpleName=DnsRequest\n| QueryName=/(recordedfuture|flashpoint|intel471|mandiant)/i\n| groupBy([ComputerName, ContextBaseFileName, QueryName], function=[\n    count(as=QueryCount),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(QueryCount, order=desc)\n| table([ComputerName, ContextBaseFileName, QueryName, QueryCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1598 - Phishing for Information",
+      "technique_id": "T1598",
+      "tactic": "Reconnaissance",
+      "severity": "Medium",
+      "objective": "Detect phishing attempts to gather information",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(gophish|setoolkit|king-phisher|evilginx)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=PhishCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(PhishCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, PhishCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1681 - Search Threat Vendor Data",
+      "technique_id": "T1681",
+      "tactic": "Reconnaissance",
+      "severity": "Low",
+      "objective": "Detect searches in threat vendor data for target info",
+      "query": "#event_simpleName=DnsRequest\n| QueryName=/(virustotal|hybrid-analysis|any\\.run|joe.*sandbox)/i\n| groupBy([ComputerName, ContextBaseFileName, QueryName], function=[\n    count(as=QueryCount),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(QueryCount, order=desc)\n| table([ComputerName, ContextBaseFileName, QueryName, QueryCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1583 - Acquire Infrastructure",
+      "technique_id": "T1583",
+      "tactic": "Resource Development",
+      "severity": "Medium",
+      "objective": "Detect use of newly acquired attacker infrastructure",
+      "query": "#event_simpleName=DnsRequest\n| DomainAge < 30\n| groupBy([ComputerName, ContextBaseFileName, QueryName], function=[\n    count(as=QueryCount),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(QueryCount, order=desc)\n| table([ComputerName, ContextBaseFileName, QueryName, QueryCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1584 - Compromise Infrastructure",
+      "technique_id": "T1584",
+      "tactic": "Resource Development",
+      "severity": "Medium",
+      "objective": "Detect use of compromised infrastructure",
+      "query": "#event_simpleName=DnsRequest\n| QueryName=/(duckdns|no-ip|dynu|freedns)/i\n| groupBy([ComputerName, ContextBaseFileName, QueryName], function=[\n    count(as=QueryCount),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(QueryCount, order=desc)\n| table([ComputerName, ContextBaseFileName, QueryName, QueryCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1585 - Establish Accounts",
+      "technique_id": "T1585",
+      "tactic": "Resource Development",
+      "severity": "Low",
+      "objective": "Detect creation of attacker accounts via disposable email",
+      "query": "#event_simpleName=DnsRequest\n| QueryName=/(tempmail|guerrillamail|10minutemail|mailinator|throwaway)/i\n| groupBy([ComputerName, ContextBaseFileName, QueryName], function=[\n    count(as=QueryCount),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(QueryCount, order=desc)\n| table([ComputerName, ContextBaseFileName, QueryName, QueryCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1586 - Compromise Accounts",
+      "technique_id": "T1586",
+      "tactic": "Resource Development",
+      "severity": "High",
+      "objective": "Detect use of compromised accounts",
+      "query": "#event_simpleName=UserLogon\n| UserIsAdmin=1\n| groupBy([UserName, RemoteAddressIP4], function=[\n    count(as=LogonCount),\n    count(aid, distinct=true, as=UniqueHosts),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| UniqueHosts > 5\n| sort(LogonCount, order=desc)\n| table([UserName, RemoteAddressIP4, LogonCount, UniqueHosts, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1587 - Develop Capabilities",
+      "technique_id": "T1587",
+      "tactic": "Resource Development",
+      "severity": "Medium",
+      "objective": "Detect development of attacker capabilities",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(msfvenom|Covenant|Empire|Cobalt.*Strike|Brute.*Ratel)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=DevCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(DevCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, DevCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1608 - Stage Capabilities",
+      "technique_id": "T1608",
+      "tactic": "Resource Development",
+      "severity": "Medium",
+      "objective": "Detect staging of attacker capabilities on web servers",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(wwwroot|public_html|htdocs)/i\n| CommandLine=/(\\.exe|\\.dll|\\.ps1|\\.bat|\\.sh)/i\n| CommandLine=/(copy|move|upload|scp|ftp)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=StageCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(StageCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, StageCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1650 - Acquire Access",
+      "technique_id": "T1650",
+      "tactic": "Resource Development",
+      "severity": "High",
+      "objective": "Detect acquisition of access through brokers",
+      "query": "#event_simpleName=UserLogon\n| UserIsAdmin=1\n| groupBy([UserName, RemoteAddressIP4, ComputerName], function=[\n    count(as=LogonCount),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(LogonCount, order=desc)\n| table([UserName, RemoteAddressIP4, ComputerName, LogonCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1011 - Exfiltration Over Other Network Medium",
+      "technique_id": "T1011",
+      "tactic": "Exfiltration",
+      "severity": "High",
+      "objective": "Detect exfiltration over alternative network mediums",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(bluetooth|hcitool|btmgmt|wifi.*direct)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=ExfilCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(ExfilCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, ExfilCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1020 - Automated Exfiltration",
+      "technique_id": "T1020",
+      "tactic": "Exfiltration",
+      "severity": "High",
+      "objective": "Detect automated data exfiltration",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(curl|wget|Invoke-WebRequest|iwr).*(-d|-X\\s+POST|--data|--upload)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=UploadCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| UploadCount > 5\n| sort(UploadCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, UploadCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1029 - Scheduled Transfer",
+      "technique_id": "T1029",
+      "tactic": "Exfiltration",
+      "severity": "High",
+      "objective": "Detect scheduled data transfers for exfiltration",
+      "query": "#event_simpleName=ScheduledTaskRegistered\n| TaskName!=/(Microsoft|Windows|Google|Adobe)/i\n| TaskAction=/(curl|wget|ftp|scp|Invoke-WebRequest)/i\n| groupBy([ComputerName, UserName, TaskName], function=[\n    count(as=TaskCount),\n    collect([TaskAction], limit=10),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(TaskCount, order=desc)\n| table([ComputerName, UserName, TaskName, TaskAction, TaskCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1030 - Data Transfer Size Limits",
+      "technique_id": "T1030",
+      "tactic": "Exfiltration",
+      "severity": "Medium",
+      "objective": "Detect chunked data exfiltration to avoid detection",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(split|dd.*bs=|head.*-c|tail.*-c)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=SplitCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| SplitCount > 3\n| sort(SplitCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, SplitCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1041 - Exfiltration Over C2 Channel",
+      "technique_id": "T1041",
+      "tactic": "Exfiltration",
+      "severity": "High",
+      "objective": "Detect exfiltration over command and control channel",
+      "query": "#event_simpleName=NetworkConnectIP4\n| BytesSent > 10000000\n| groupBy([ComputerName, ContextBaseFileName, RemoteAddressIP4, RemotePort], function=[\n    sum(BytesSent, as=TotalBytesSent),\n    count(as=ConnectionCount),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| TotalBytesSent > 50000000\n| sort(TotalBytesSent, order=desc)\n| table([ComputerName, ContextBaseFileName, RemoteAddressIP4, RemotePort, TotalBytesSent, ConnectionCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1052 - Exfiltration Over Physical Medium",
+      "technique_id": "T1052",
+      "tactic": "Exfiltration",
+      "severity": "High",
+      "objective": "Detect exfiltration via physical media",
+      "query": "#event_simpleName=RemovableMediaVolumeMounted\n| groupBy([ComputerName, UserName, VolumeName, VolumeDriveLetter], function=[\n    count(as=MountCount),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(MountCount, order=desc)\n| table([ComputerName, UserName, VolumeName, VolumeDriveLetter, MountCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1537 - Transfer Data to Cloud Account",
+      "technique_id": "T1537",
+      "tactic": "Exfiltration",
+      "severity": "High",
+      "objective": "Detect data transfer to cloud storage accounts",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(aws\\s+s3\\s+(cp|sync|mv).*s3:\\/\\/|az\\s+storage\\s+blob\\s+upload|gsutil\\s+(cp|mv).*gs:\\/\\/)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=UploadCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(UploadCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, UploadCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1525 - Implant Internal Image",
+      "technique_id": "T1525",
+      "tactic": "Persistence",
+      "severity": "High",
+      "objective": "Detect implanting malicious code in container images",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(docker\\s+commit|docker\\s+push|podman\\s+commit)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=ImplantCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(ImplantCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, ImplantCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1653 - Power Settings",
+      "technique_id": "T1653",
+      "tactic": "Persistence",
+      "severity": "Low",
+      "objective": "Detect modification of power settings for persistence",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(powercfg\\s+\\/change|powercfg\\s+\\/setactive|Set-PowerPlan)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=PowerCount),\n    collect([CommandLine], limit=10),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(PowerCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, PowerCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1668 - Exclusive Control",
+      "technique_id": "T1668",
+      "tactic": "Persistence",
+      "severity": "High",
+      "objective": "Detect establishing exclusive control over resources",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(takeown|icacls.*\\/deny|chmod\\s+000|attrib\\s+\\+h\\s+\\+s)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=ControlCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(ControlCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, ControlCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1671 - Cloud Application Integration",
+      "technique_id": "T1671",
+      "tactic": "Persistence",
+      "severity": "High",
+      "objective": "Detect malicious cloud application integrations",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(az\\s+ad\\s+app|New-AzureADApplication|gcloud.*iam.*service-accounts)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=AppCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(AppCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, AppCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1200 - Hardware Additions",
+      "technique_id": "T1200",
+      "tactic": "Initial Access",
+      "severity": "High",
+      "objective": "Detect unauthorized hardware device connections",
+      "query": "#event_simpleName=RemovableMediaVolumeMounted\n| groupBy([ComputerName, UserName, VolumeName, DeviceSerialNumber], function=[\n    count(as=MountCount),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(MountCount, order=desc)\n| table([ComputerName, UserName, VolumeName, DeviceSerialNumber, MountCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1659 - Content Injection",
+      "technique_id": "T1659",
+      "tactic": "Initial Access",
+      "severity": "High",
+      "objective": "Detect content injection for initial access",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(<script|javascript:|onerror=|onload=|eval\\()/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=InjectionCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(InjectionCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, InjectionCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1669 - Wi-Fi Networks",
+      "technique_id": "T1669",
+      "tactic": "Initial Access",
+      "severity": "High",
+      "objective": "Detect rogue WiFi access for initial access",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(hostapd|airbase-ng|wifi.*pumpkin|fluxion|wifiphisher)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=WiFiCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(WiFiCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, WiFiCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1212 - Exploitation for Credential Access",
+      "technique_id": "T1212",
+      "tactic": "Credential Access",
+      "severity": "Critical",
+      "objective": "Detect exploitation to obtain credentials",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(mimikatz|sekurlsa|lsadump|pypykatz|safetykatz)/i OR (TargetFileName=/lsass\\.exe/i AND ImageFileName!=/csrss|wininit|services/i)\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=ExploitCount),\n    collect([CommandLine, ParentBaseFileName], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(ExploitCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, ParentBaseFileName, CommandLine, ExploitCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1649 - Steal or Forge Authentication Certificates",
+      "technique_id": "T1649",
+      "tactic": "Credential Access",
+      "severity": "Critical",
+      "objective": "Detect theft or forgery of authentication certificates",
+      "query": "#event_simpleName=ProcessRollup2\n| CommandLine=/(certutil.*-exportPFX|Export-PfxCertificate|certipy|Certify\\.exe|SharpDPAPI)/i\n| groupBy([ComputerName, UserName, ImageFileName], function=[\n    count(as=CertCount),\n    collect([CommandLine], limit=15),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(CertCount, order=desc)\n| table([ComputerName, UserName, ImageFileName, CommandLine, CertCount, FirstSeen, LastSeen])\n| head(100)"
+    },
+    {
+      "name": "T1665 - Hide Infrastructure",
+      "technique_id": "T1665",
+      "tactic": "Command and Control",
+      "severity": "Medium",
+      "objective": "Detect attempts to hide C2 infrastructure",
+      "query": "#event_simpleName=DnsRequest\n| QueryName=/(\\.onion|tor2web|\\.i2p)/i\n| groupBy([ComputerName, ContextBaseFileName, QueryName], function=[\n    count(as=QueryCount),\n    min(@timestamp, as=FirstSeen),\n    max(@timestamp, as=LastSeen)\n  ])\n| sort(QueryCount, order=desc)\n| table([ComputerName, ContextBaseFileName, QueryName, QueryCount, FirstSeen, LastSeen])\n| head(100)"
+    }
+  ]
+}

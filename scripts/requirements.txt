@@ -1,0 +1,2 @@
+# FalconPy - CrowdStrike Falcon SDK for Python
+crowdstrike-falconpy>=1.4.0
