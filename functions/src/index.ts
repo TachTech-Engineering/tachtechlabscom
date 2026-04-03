@@ -1,15 +1,18 @@
-import * as functions from "firebase-functions";
+import { onRequest } from "firebase-functions/v2/https";
+import { defineSecret } from "firebase-functions/params";
 import * as admin from "firebase-admin";
-import cors from "cors";
 import * as dotenv from "dotenv";
 
-// Load .env file for local development
-dotenv.config();
+// Load .env.local file for local development (not deployed)
+dotenv.config({ path: ".env.local" });
+
+// Define secrets for production (Cloud Secret Manager)
+const csClientIdSecret = defineSecret("CROWDSTRIKE_CLIENT_ID");
+const csClientSecretSecret = defineSecret("CROWDSTRIKE_CLIENT_SECRET");
 
 admin.initializeApp();
 
 const db = admin.firestore();
-const corsHandler = cors({ origin: true });
 
 // Cache configuration
 const CACHE_TTL_MS = 15 * 60 * 1000; // 15 minutes
@@ -123,6 +126,16 @@ interface CachedToken {
 let tokenCache: CachedToken | null = null;
 
 /**
+ * Get CrowdStrike credentials from either environment (local) or secrets (production)
+ */
+function getCredentials(): { clientId: string; clientSecret: string } {
+  // Try secrets first (production), fall back to env vars (local dev)
+  const clientId = csClientIdSecret.value() || process.env.CROWDSTRIKE_CLIENT_ID || "";
+  const clientSecret = csClientSecretSecret.value() || process.env.CROWDSTRIKE_CLIENT_SECRET || "";
+  return { clientId, clientSecret };
+}
+
+/**
  * Get OAuth2 token from CrowdStrike
  */
 async function getAccessToken(): Promise<string> {
@@ -131,8 +144,7 @@ async function getAccessToken(): Promise<string> {
     return tokenCache.token;
   }
 
-  const clientId = process.env.CROWDSTRIKE_CLIENT_ID;
-  const clientSecret = process.env.CROWDSTRIKE_CLIENT_SECRET;
+  const { clientId, clientSecret } = getCredentials();
 
   if (!clientId || !clientSecret) {
     throw new Error("CrowdStrike credentials not configured");
@@ -196,12 +208,17 @@ function extractTechniqueIds(text: string): string[] {
   return [...new Set(matches)]; // Remove duplicates
 }
 
+// v2 function options with CORS and secrets
+const functionOpts = {
+  cors: true,
+  secrets: [csClientIdSecret, csClientSecretSecret],
+};
+
 /**
  * Get Correlation Rules from CrowdStrike Next-Gen SIEM
  */
-export const getCorrelationRules = functions.https.onRequest((req, res) => {
-  corsHandler(req, res, async () => {
-    try {
+export const getCorrelationRules = onRequest(functionOpts, async (req, res) => {
+  try {
       // Get all correlation rules
       const rulesResponse = await csApiRequest(
         "/correlation-rules/queries/rules/v1?limit=500"
@@ -257,19 +274,17 @@ export const getCorrelationRules = functions.https.onRequest((req, res) => {
         totalRules: rules.length,
         mappedTechniques: Object.keys(techniqueMapping).length,
       });
-    } catch (error) {
-      console.error("Error fetching correlation rules:", error);
-      res.status(500).json({ error: String(error) });
-    }
-  });
+  } catch (error) {
+    console.error("Error fetching correlation rules:", error);
+    res.status(500).json({ error: String(error) });
+  }
 });
 
 /**
  * Get Custom IOA Rules
  */
-export const getCustomIOARules = functions.https.onRequest((req, res) => {
-  corsHandler(req, res, async () => {
-    try {
+export const getCustomIOARules = onRequest(functionOpts, async (req, res) => {
+  try {
       // Get all IOA rule groups
       const groupsResponse = await csApiRequest(
         "/ioarules/queries/rule-groups/v1?limit=500"
@@ -328,20 +343,18 @@ export const getCustomIOARules = functions.https.onRequest((req, res) => {
         totalRules: allRules.length,
         mappedTechniques: Object.keys(techniqueMapping).length,
       });
-    } catch (error) {
-      console.error("Error fetching IOA rules:", error);
-      res.status(500).json({ error: String(error) });
-    }
-  });
+  } catch (error) {
+    console.error("Error fetching IOA rules:", error);
+    res.status(500).json({ error: String(error) });
+  }
 });
 
 /**
  * Get combined coverage data for the ATT&CK matrix
  * This is the main endpoint the Flutter app will call
  */
-export const getCoverage = functions.https.onRequest((req, res) => {
-  corsHandler(req, res, async () => {
-    try {
+export const getCoverage = onRequest(functionOpts, async (req, res) => {
+  try {
       // Check for fresh cache first (skip if ?refresh=true)
       const forceRefresh = req.query.refresh === "true";
       if (!forceRefresh) {
@@ -676,19 +689,17 @@ export const getCoverage = functions.https.onRequest((req, res) => {
       await setCachedCoverage(result);
 
       res.json({ ...result, fromCache: false });
-    } catch (error) {
-      console.error("Error fetching coverage:", error);
-      res.status(500).json({ error: String(error) });
-    }
-  });
+  } catch (error) {
+    console.error("Error fetching coverage:", error);
+    res.status(500).json({ error: String(error) });
+  }
 });
 
 /**
  * Debug endpoint - shows raw API responses
  */
-export const debug = functions.https.onRequest((req, res) => {
-  corsHandler(req, res, async () => {
-    try {
+export const debug = onRequest(functionOpts, async (req, res) => {
+  try {
       const results: Record<string, unknown> = {};
 
       // Test correlation rules endpoint
@@ -882,33 +893,30 @@ export const debug = functions.https.onRequest((req, res) => {
         tokenInfo,
         results,
       });
-    } catch (error) {
-      res.status(500).json({ error: String(error) });
-    }
-  });
+  } catch (error) {
+    res.status(500).json({ error: String(error) });
+  }
 });
 
 /**
  * Health check endpoint
  */
-export const health = functions.https.onRequest((req, res) => {
-  corsHandler(req, res, async () => {
-    try {
-      // Try to get a token to verify credentials work
-      await getAccessToken();
-      res.json({
-        status: "healthy",
-        crowdstrike: "connected",
-        region: "us-1",
-        timestamp: new Date().toISOString(),
-      });
-    } catch (error) {
-      res.status(500).json({
-        status: "unhealthy",
-        crowdstrike: "disconnected",
-        error: String(error),
-        timestamp: new Date().toISOString(),
-      });
-    }
-  });
+export const health = onRequest(functionOpts, async (req, res) => {
+  try {
+    // Try to get a token to verify credentials work
+    await getAccessToken();
+    res.json({
+      status: "healthy",
+      crowdstrike: "connected",
+      region: "us-1",
+      timestamp: new Date().toISOString(),
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "unhealthy",
+      crowdstrike: "disconnected",
+      error: String(error),
+      timestamp: new Date().toISOString(),
+    });
+  }
 });

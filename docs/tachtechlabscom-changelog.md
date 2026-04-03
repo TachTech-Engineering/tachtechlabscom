@@ -4,6 +4,54 @@ All notable changes to this project are documented here.
 
 ---
 
+## [v0.4] - 2026-04-03
+
+### Phase 2: Cloud Functions Deployment & Flutter Integration
+
+**Summary:** Attempted Cloud Functions deployment to production. BLOCKED by IAM permissions. Flutter app deployed to hosting. Enhanced error handling UI.
+
+**Completed:**
+- Environment re-validated (all systems operational)
+- Cloud Functions migrated to v2 syntax with Secret Manager
+- firebase-functions upgraded to v7.2.3
+- Node.js runtime upgraded to 22
+- Firebase Secrets configured (CROWDSTRIKE_CLIENT_ID, CROWDSTRIKE_CLIENT_SECRET)
+- Flutter app error handling enhanced (loading/error states)
+- Firebase Hosting deployed: https://tachtechlabscom.web.app
+
+**BLOCKER - IAM Permissions:**
+```
+DENIED: Permission 'artifactregistry.repositories.uploadArtifacts' denied
+Service Account: 778909110974-compute@developer.gserviceaccount.com
+Required Role: roles/artifactregistry.writer
+```
+
+**Resolution Command (requires project admin):**
+```bash
+gcloud projects add-iam-policy-binding tachtechlabscom \
+  --member="serviceAccount:778909110974-compute@developer.gserviceaccount.com" \
+  --role="roles/artifactregistry.writer"
+```
+
+**Code Changes:**
+- functions/src/index.ts - v2 syntax, defineSecret(), CORS
+- functions/package.json - node 22, firebase-functions 7.2.3
+- firebase.json - nodejs22 runtime
+- lib/pages/matrix_page.dart - enhanced error handling UI
+
+**Artifacts Produced:**
+1. docs/tachtechlabscom-build-v0.4.md (updated)
+2. docs/tachtechlabscom-report-v0.4.md (updated)
+3. docs/tachtechlabscom-changelog.md (updated)
+4. docs/archive/tachtechlabscom-build-v0.3.md (archived)
+5. docs/archive/tachtechlabscom-report-v0.3.md (archived)
+
+**Interventions:** 1 (IAM permission fix required)
+
+**Next Steps:** After IAM fix, run `firebase deploy` to complete Phase 2
+
+---
+
 ## [v0.3] - 2026-04-02
 
 ### Phase 1: CrowdStrike API Discovery

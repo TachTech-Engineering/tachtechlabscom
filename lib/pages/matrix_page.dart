@@ -104,14 +104,57 @@ class _MatrixPageState extends ConsumerState<MatrixPage> {
                     ),
                   ),
                 ),
-                loading: () => const Center(child: CircularProgressIndicator()),
+                loading: () => const Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircularProgressIndicator(),
+                      SizedBox(height: AppTheme.spacingMd),
+                      Text('Loading coverage data...'),
+                    ],
+                  ),
+                ),
                 error: (err, stack) => RefreshIndicator(
                   onRefresh: _handleRefresh,
                   child: ListView(
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(AppTheme.spacingXl),
-                        child: Center(child: Text('Error loading ATT&CK data: $err')),
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.cloud_off_outlined,
+                                size: 64,
+                                color: AppTheme.coverageNone,
+                              ),
+                              const SizedBox(height: AppTheme.spacingMd),
+                              Text(
+                                'Unable to load coverage data',
+                                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const SizedBox(height: AppTheme.spacingSm),
+                              Text(
+                                'The API may be temporarily unavailable.',
+                                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                  color: AppTheme.textSecondary,
+                                ),
+                              ),
+                              const SizedBox(height: AppTheme.spacingLg),
+                              ElevatedButton.icon(
+                                onPressed: () {
+                                  ref.invalidate(coverageDataProvider);
+                                  ref.invalidate(attackMatrixProvider);
+                                },
+                                icon: const Icon(Icons.refresh),
+                                label: const Text('Retry'),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     ],
                   ),
