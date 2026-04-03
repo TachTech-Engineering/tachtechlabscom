@@ -1,47 +1,55 @@
-# Project: [Client Name] ([domain])
+# tachtechlabscom - Agent Instructions (Claude Code)
 
-## Objective
-Build a Flutter Web brochure site using MCP-extracted design intelligence.
+## Read Order
 
-## Role
-You are the sole agent for all phases:
-- Phase 1: Discovery (Firecrawl scraping, Playwright screenshots)
-- Phase 2: Synthesis (analyze scraped data, produce design system)
-- Phase 3: Implementation (build the Flutter site from design tokens)
-- Phase 4: Quality Assurance (Playwright visual review, Lighthouse audits)
+1. docs/tachtechlabscom-design-v0.2.md (architecture + environment spec)
+2. docs/tachtechlabscom-plan-v0.2.md (execute Section B)
 
-## Design System (READ FIRST — available after Phase 2)
-1. design-brief/design-tokens.json — colors, fonts, spacing (maps to ThemeData)
-2. design-brief/design-brief.md — creative direction
-3. design-brief/component-patterns.md — widget composition blueprints
+## Context
 
-## Available Assets
-- assets/logos/ — Logo files (SVG preferred)
-- assets/images/ — Product photos and stock images
-- assets/fonts/ — Custom font files (if any)
+ATT&CK Detection Coverage Dashboard - Flutter Web app with MITRE ATT&CK
+Enterprise matrix visualization, coverage heatmapping, and CrowdStrike
+detection gap analysis.
 
-## Free Design Resources (USE FREELY)
-- design-resources/flutter-theme-presets.dart
-- design-resources/font-pairings.md
-- design-resources/color-theory.md
-- design-resources/layout-patterns.md
-- design-resources/widget-patterns.md
+Firebase project: tachtechlabscom (TachTech-Engineering GCP org)
+Repo: https://github.com/TachTech-Engineering/tachtechlabscom
+
+## Shell - MANDATORY
+
+- All commands in fish shell (or bash on Windows)
+- NEVER cat config.fish or SA JSON files (G1)
+
+## Security
+
+- grep -rnI "AIzaSy" . before completion
+- grep -rnI "client_secret" . before completion
+- NEVER print SA credentials, API keys, or CrowdStrike client secrets
+- Print only SET/NOT SET for key checks
 
 ## Tech Stack
-Flutter Web + Dart → Firebase Hosting
-Single-page brochure, mobile-first
-Use google_fonts package for typography
-Use LayoutBuilder and MediaQuery for responsive design
 
-## MCP Rules
-- Firecrawl: Phase 1 branding scrapes ONLY
-- Playwright: Phase 1 screenshots and Phase 4 visual review ONLY
-- Context7: Flutter/Dart/Firebase docs during any phase
-- Lighthouse: Phase 4 audits ONLY
-- Do NOT call Firecrawl or Playwright during Phase 2 or Phase 3
+- Flutter Web + Dart (stable channel, Dart 3.9+)
+- Riverpod 3.0 (modern Notifier/AsyncNotifier - no legacy StateProvider)
+- GoRouter 17.1 (deep linking)
+- Firebase Hosting + Cloud Functions (nodejs20)
+- Pre-processed STIX data (assets/data/attack_matrix.json)
 
-## Git and Deploy Rules
-- NEVER run git push, git commit, or firebase deploy
-- NEVER create pull requests or merge branches
-- Present all code changes for my review
-- I execute all git and deploy commands manually
+## Permissions
+
+- CANNOT: git add / commit / push
+- CANNOT: sudo
+- CANNOT: firebase deploy (human executes deploys)
+
+## Artifact Rules - MANDATORY
+
+Every iteration produces:
+1. docs/tachtechlabscom-build-v{X.Y}.md (agent writes after execution)
+2. docs/tachtechlabscom-report-v{X.Y}.md (agent writes after execution)
+3. docs/tachtechlabscom-changelog.md (append new version at top)
+
+Design and plan docs are provided by the human before agent launch.
+
+## Formatting
+
+- No em-dashes. Use " - " instead.
+- Use "->" for arrows.
