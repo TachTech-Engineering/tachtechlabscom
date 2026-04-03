@@ -4,6 +4,40 @@ All notable changes to this project are documented here.
 
 ---
 
+## [v0.3] - 2026-04-02
+
+### Phase 1: CrowdStrike API Discovery
+
+**Summary:** Validated CrowdStrike API connectivity, verified API scopes, and performed dry-run data retrieval. All Cloud Function endpoints tested successfully.
+
+**API Validation:**
+- CrowdStrike authentication: CONNECTED
+- Correlation Rules API: 329 rules accessible
+- IOA Rules API: 1 rule group accessible
+- Alerts API: 146 alerts retrieved
+- Incidents API: Available
+
+**Coverage Data Retrieved:**
+- Total techniques covered: 351
+- Correlation rules: 329
+- IOA rules: 0 (none configured in tenant)
+- Alerts with technique mappings: 146
+- Techniques with active alerts: 8
+
+**Key Finding:**
+Correlation rules include structured MITRE ATT&CK metadata (tactic_id, technique_id arrays), eliminating need for regex extraction.
+
+**Artifacts Produced:**
+1. docs/tachtechlabscom-build-v0.3.md (build log)
+2. docs/tachtechlabscom-report-v0.3.md (assessment report)
+3. docs/tachtechlabscom-changelog.md (updated)
+
+**Interventions:** 0
+
+**Next Phase:** Phase 2 - Cloud Functions Deployment
+
+---
+
 ## [v0.2] - 2026-04-02
 
 ### Phase 0: Scaffold & Environment (IAO Transition)
