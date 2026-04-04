@@ -1,14 +1,14 @@
-import { onRequest } from "firebase-functions/v2/https";
-import { defineSecret } from "firebase-functions/params";
+import * as functions from "firebase-functions/v1";
 import * as admin from "firebase-admin";
 import * as dotenv from "dotenv";
 
 // Load .env.local file for local development (not deployed)
 dotenv.config({ path: ".env.local" });
 
-// Define secrets for production (Cloud Secret Manager)
-const csClientIdSecret = defineSecret("CROWDSTRIKE_CLIENT_ID");
-const csClientSecretSecret = defineSecret("CROWDSTRIKE_CLIENT_SECRET");
+// v1 function runtime options with secrets
+const runtimeOpts: functions.RuntimeOptions = {
+  secrets: ["CROWDSTRIKE_CLIENT_ID", "CROWDSTRIKE_CLIENT_SECRET"],
+};
 
 admin.initializeApp();
 
@@ -126,12 +126,12 @@ interface CachedToken {
 let tokenCache: CachedToken | null = null;
 
 /**
- * Get CrowdStrike credentials from either environment (local) or secrets (production)
+ * Get CrowdStrike credentials from environment variables
+ * In production, secrets are injected as env vars via runtimeOpts.secrets
  */
 function getCredentials(): { clientId: string; clientSecret: string } {
-  // Try secrets first (production), fall back to env vars (local dev)
-  const clientId = csClientIdSecret.value() || process.env.CROWDSTRIKE_CLIENT_ID || "";
-  const clientSecret = csClientSecretSecret.value() || process.env.CROWDSTRIKE_CLIENT_SECRET || "";
+  const clientId = process.env.CROWDSTRIKE_CLIENT_ID || "";
+  const clientSecret = process.env.CROWDSTRIKE_CLIENT_SECRET || "";
   return { clientId, clientSecret };
 }
 
@@ -208,16 +208,23 @@ function extractTechniqueIds(text: string): string[] {
   return [...new Set(matches)]; // Remove duplicates
 }
 
-// v2 function options with CORS and secrets
-const functionOpts = {
-  cors: true,
-  secrets: [csClientIdSecret, csClientSecretSecret],
-};
+// CORS handler for v1 functions
+function handleCors(req: functions.https.Request, res: functions.Response): boolean {
+  res.set("Access-Control-Allow-Origin", "*");
+  res.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  res.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  if (req.method === "OPTIONS") {
+    res.status(204).send("");
+    return true;
+  }
+  return false;
+}
 
 /**
  * Get Correlation Rules from CrowdStrike Next-Gen SIEM
  */
-export const getCorrelationRules = onRequest(functionOpts, async (req, res) => {
+export const getCorrelationRules = functions.runWith(runtimeOpts).https.onRequest(async (req, res) => {
+  if (handleCors(req, res)) return;
   try {
       // Get all correlation rules
       const rulesResponse = await csApiRequest(
@@ -283,7 +290,8 @@ export const getCorrelationRules = onRequest(functionOpts, async (req, res) => {
 /**
  * Get Custom IOA Rules
  */
-export const getCustomIOARules = onRequest(functionOpts, async (req, res) => {
+export const getCustomIOARules = functions.runWith(runtimeOpts).https.onRequest(async (req, res) => {
+  if (handleCors(req, res)) return;
   try {
       // Get all IOA rule groups
       const groupsResponse = await csApiRequest(
@@ -353,7 +361,8 @@ export const getCustomIOARules = onRequest(functionOpts, async (req, res) => {
  * Get combined coverage data for the ATT&CK matrix
  * This is the main endpoint the Flutter app will call
  */
-export const getCoverage = onRequest(functionOpts, async (req, res) => {
+export const getCoverage = functions.runWith(runtimeOpts).https.onRequest(async (req, res) => {
+  if (handleCors(req, res)) return;
   try {
       // Check for fresh cache first (skip if ?refresh=true)
       const forceRefresh = req.query.refresh === "true";
@@ -698,7 +707,8 @@ export const getCoverage = onRequest(functionOpts, async (req, res) => {
 /**
  * Debug endpoint - shows raw API responses
  */
-export const debug = onRequest(functionOpts, async (req, res) => {
+export const debug = functions.runWith(runtimeOpts).https.onRequest(async (req, res) => {
+  if (handleCors(req, res)) return;
   try {
       const results: Record<string, unknown> = {};
 
@@ -901,7 +911,8 @@ export const debug = onRequest(functionOpts, async (req, res) => {
 /**
  * Health check endpoint
  */
-export const health = onRequest(functionOpts, async (req, res) => {
+export const health = functions.runWith(runtimeOpts).https.onRequest(async (req, res) => {
+  if (handleCors(req, res)) return;
   try {
     // Try to get a token to verify credentials work
     await getAccessToken();

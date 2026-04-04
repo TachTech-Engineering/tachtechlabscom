@@ -4,6 +4,59 @@ All notable changes to this project are documented here.
 
 ---
 
+## [v0.5] - 2026-04-04
+
+### Phase 2 Completion: Cloud Functions Deployed, Org Policy Blocker
+
+**Summary:** Cloud Functions deployed successfully. CrowdStrike integration verified. BLOCKED by GCP org policy preventing public function access - hosting rewrites return 403.
+
+**Completed:**
+- IAM fix applied (artifactregistry.writer granted)
+- Cloud Functions deployed (5 functions, v1 syntax, Node 20)
+- CrowdStrike OAuth2 authentication working
+- Secrets configured and tested (no Windows line endings)
+- Firebase Hosting deployed
+- SA JSON configured (~/.config/gcloud/tachtechlabscom-sa.json)
+- CLAUDE.md updated with new gotchas (G15, G16, G17)
+
+**BLOCKER - Org Policy:**
+```
+ERROR: FAILED_PRECONDITION: One or more users named in the policy do not belong to a permitted customer
+- allUsers blocked
+- allAuthenticatedUsers blocked
+- Hosting rewrites cannot invoke functions without public access
+```
+
+**Workaround (authenticated access):**
+```bash
+curl -H "Authorization: Bearer $(gcloud auth print-identity-token)" \
+  https://us-central1-tachtechlabscom.cloudfunctions.net/health
+```
+
+**Code Changes:**
+- functions/src/index.ts - Converted to v1 syntax with runWith secrets
+- functions/package.json - Node 20 engine
+- firebase.json - nodejs20 runtime
+- CLAUDE.md - Added G15, G16, G17 gotchas and blocker section
+
+**Function URLs:**
+- https://us-central1-tachtechlabscom.cloudfunctions.net/health
+- https://us-central1-tachtechlabscom.cloudfunctions.net/getCoverage
+- https://us-central1-tachtechlabscom.cloudfunctions.net/getCorrelationRules
+- https://us-central1-tachtechlabscom.cloudfunctions.net/getCustomIOARules
+- https://us-central1-tachtechlabscom.cloudfunctions.net/debug
+
+**Artifacts Produced:**
+1. docs/tachtechlabscom-report-v0.5.md (with post-flight table)
+2. docs/tachtechlabscom-changelog.md (updated)
+3. CLAUDE.md (updated with blocker and gotchas)
+
+**Interventions:** 1 (org policy exception required)
+
+**Next Steps:** Request IT to add org policy exception for project tachtechlabscom
+
+---
+
 ## [v0.4] - 2026-04-03
 
 ### Phase 2: Cloud Functions Deployment & Flutter Integration

@@ -43,7 +43,7 @@ Previous iteration artifacts go to docs/archive/ before execution begins.
 | lib/services/coverage_service.dart | Coverage data fetching (mock -> live) |
 | lib/providers/dashboard_providers.dart | Riverpod state management |
 | lib/pages/matrix_page.dart | Main UI page (error handling added v0.4) |
-| functions/src/index.ts | Cloud Functions (v2 syntax, defineSecret) |
+| functions/src/index.ts | Cloud Functions (v1 syntax, runWith secrets) |
 | functions/.env.local | Local dev CrowdStrike credentials (gitignored) |
 
 ### Gotchas
@@ -55,6 +55,21 @@ Previous iteration artifacts go to docs/archive/ before execution begins.
 | G7 | npm cache corruption | npm cache clean --force && rm -rf node_modules && npm install |
 | G13 | IAM artifactregistry.writer | Verify with gcloud before deploy |
 | G14 | gcloud not installed | winget install Google.CloudSDK |
+| G15 | Windows line endings in secrets | Use `echo -n` or `tr -d '\r\n'` when setting secrets |
+| G16 | Org policy blocks allUsers | Functions require identity token auth - request IT exception |
+| G17 | Hosting rewrites 403 | Org policy blocks public Cloud Functions - use direct URLs with auth |
+
+### v0.5 Blocker
+
+**Org Policy Restriction:** GCP org policy blocks `allUsers` and `allAuthenticatedUsers` on Cloud Functions/Cloud Run. Firebase Hosting rewrites cannot invoke functions without public access.
+
+**Workaround:** Functions work with authenticated access:
+```bash
+curl -H "Authorization: Bearer $(gcloud auth print-identity-token)" \
+  https://us-central1-tachtechlabscom.cloudfunctions.net/health
+```
+
+**Resolution:** Request IT to add exception for project `tachtechlabscom` to allow `allUsers` on Cloud Functions.
 
 ### Design Documents
 
