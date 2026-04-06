@@ -135,7 +135,8 @@ class CoverageService {
   Future<CoverageResponse> fetchCoverage({bool refresh = false}) async {
     try {
       // Read directly from Firestore - no Cloud Function call
-      final doc = await _firestore.collection('coverage').doc('current').get();
+      // Functions write to cache/coverage, not coverage/current
+      final doc = await _firestore.collection('cache').doc('coverage').get();
 
       if (!doc.exists) {
         debugPrint('No coverage data in Firestore yet - waiting for scheduled refresh');
@@ -154,8 +155,8 @@ class CoverageService {
   /// Useful if we want the UI to update when data changes
   Stream<CoverageResponse> streamCoverage() {
     return _firestore
-        .collection('coverage')
-        .doc('current')
+        .collection('cache')
+        .doc('coverage')
         .snapshots()
         .where((snapshot) => snapshot.exists)
         .map((snapshot) => CoverageResponse.fromJson(snapshot.data()!));
@@ -164,7 +165,7 @@ class CoverageService {
   /// Check if coverage data is available
   Future<bool> checkHealth() async {
     try {
-      final doc = await _firestore.collection('coverage').doc('current').get();
+      final doc = await _firestore.collection('cache').doc('coverage').get();
       return doc.exists;
     } catch (e) {
       debugPrint('Health check error: $e');
@@ -175,7 +176,7 @@ class CoverageService {
   /// Get last update timestamp
   Future<DateTime?> getLastUpdate() async {
     try {
-      final doc = await _firestore.collection('coverage').doc('current').get();
+      final doc = await _firestore.collection('cache').doc('coverage').get();
       if (doc.exists) {
         final updatedAt = doc.data()?['updatedAt'] as Timestamp?;
         return updatedAt?.toDate();
