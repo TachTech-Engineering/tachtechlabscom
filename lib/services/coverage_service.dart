@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
+import 'package:firebase_auth/firebase_auth.dart';
 
 /// Coverage data for a single technique from the API
 class TechniqueCoverage {
@@ -143,12 +144,40 @@ class CoverageService {
     return '/api';
   }
 
+  /// Get Firebase Auth token for authenticated requests
+  Future<String?> _getAuthToken() async {
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        return await user.getIdToken();
+      }
+    } catch (e) {
+      debugPrint('Failed to get auth token: $e');
+    }
+    return null;
+  }
+
+  /// Build headers with optional auth token
+  Future<Map<String, String>> _buildHeaders() async {
+    final headers = <String, String>{
+      'Content-Type': 'application/json',
+    };
+
+    final token = await _getAuthToken();
+    if (token != null) {
+      headers['Authorization'] = 'Bearer $token';
+    }
+
+    return headers;
+  }
+
   /// Fetch coverage data from the API
   Future<CoverageResponse> fetchCoverage({bool refresh = false}) async {
     final url = Uri.parse('$_baseUrl/getCoverage${refresh ? '?refresh=true' : ''}');
 
     try {
-      final response = await http.get(url).timeout(
+      final headers = await _buildHeaders();
+      final response = await http.get(url, headers: headers).timeout(
         const Duration(seconds: 30),
         onTimeout: () {
           throw Exception('Request timed out');
@@ -172,7 +201,8 @@ class CoverageService {
     final url = Uri.parse('$_baseUrl/health');
 
     try {
-      final response = await http.get(url).timeout(
+      final headers = await _buildHeaders();
+      final response = await http.get(url, headers: headers).timeout(
         const Duration(seconds: 10),
       );
 

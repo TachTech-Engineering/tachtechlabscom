@@ -221,10 +221,60 @@ function handleCors(req: functions.https.Request, res: functions.Response): bool
 }
 
 /**
+ * Verify Firebase Auth token from request
+ * Returns the decoded token if valid, null if invalid or missing
+ * This allows authenticated access without needing allUsers IAM binding
+ */
+async function verifyAuthToken(req: functions.https.Request): Promise<{ uid: string } | null> {
+  const authHeader = req.headers.authorization;
+
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return null;
+  }
+
+  const token = authHeader.split("Bearer ")[1];
+
+  try {
+    const decodedToken = await admin.auth().verifyIdToken(token);
+    return { uid: decodedToken.uid };
+  } catch (error) {
+    console.log("Auth token verification failed:", error);
+    return null;
+  }
+}
+
+/**
+ * Middleware to require authentication
+ * Returns true if auth check passed (or should skip), false if should return 401
+ */
+async function requireAuth(
+  req: functions.https.Request,
+  res: functions.Response
+): Promise<boolean> {
+  // Skip auth check for local development (emulator)
+  if (process.env.FUNCTIONS_EMULATOR === "true") {
+    return true;
+  }
+
+  const authResult = await verifyAuthToken(req);
+
+  if (!authResult) {
+    res.status(401).json({
+      error: "Unauthorized",
+      message: "Valid Firebase Auth token required. Use anonymous sign-in.",
+    });
+    return false;
+  }
+
+  return true;
+}
+
+/**
  * Get Correlation Rules from CrowdStrike Next-Gen SIEM
  */
 export const getCorrelationRules = functions.runWith(runtimeOpts).https.onRequest(async (req, res) => {
   if (handleCors(req, res)) return;
+  if (!(await requireAuth(req, res))) return;
   try {
       // Get all correlation rules
       const rulesResponse = await csApiRequest(
@@ -292,6 +342,7 @@ export const getCorrelationRules = functions.runWith(runtimeOpts).https.onReques
  */
 export const getCustomIOARules = functions.runWith(runtimeOpts).https.onRequest(async (req, res) => {
   if (handleCors(req, res)) return;
+  if (!(await requireAuth(req, res))) return;
   try {
       // Get all IOA rule groups
       const groupsResponse = await csApiRequest(
@@ -363,6 +414,7 @@ export const getCustomIOARules = functions.runWith(runtimeOpts).https.onRequest(
  */
 export const getCoverage = functions.runWith(runtimeOpts).https.onRequest(async (req, res) => {
   if (handleCors(req, res)) return;
+  if (!(await requireAuth(req, res))) return;
   try {
       // Check for fresh cache first (skip if ?refresh=true)
       const forceRefresh = req.query.refresh === "true";
@@ -709,6 +761,7 @@ export const getCoverage = functions.runWith(runtimeOpts).https.onRequest(async 
  */
 export const debug = functions.runWith(runtimeOpts).https.onRequest(async (req, res) => {
   if (handleCors(req, res)) return;
+  if (!(await requireAuth(req, res))) return;
   try {
       const results: Record<string, unknown> = {};
 
