@@ -8,6 +8,7 @@ dotenv.config({ path: ".env.local" });
 // v1 function runtime options with secrets
 const runtimeOpts: functions.RuntimeOptions = {
   secrets: ["CROWDSTRIKE_CLIENT_ID", "CROWDSTRIKE_CLIENT_SECRET"],
+  serviceAccount: "778909110974-compute@developer.gserviceaccount.com",
 };
 
 admin.initializeApp();
