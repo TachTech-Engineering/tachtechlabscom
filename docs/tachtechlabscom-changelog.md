@@ -45,16 +45,24 @@ Browser (separate flow)
 - Flutter build: PASS (29.7s)
 - Functions build: PASS
 
-**Pending Setup:**
+**Deployed:**
+- Hosting: https://tachtechlabscom.web.app (Firestore-First code live)
+- Functions: 7 deployed (health, getCoverage, getCorrelationRules, getCustomIOARules, debug, refreshCoverage, triggerRefresh)
+- Firestore: Database created (nam5 region)
+
+**Admin Blockers (Kyle):**
 ```bash
-# Admin creates web app
-firebase apps:create WEB "ATT&CK Dashboard" --project tachtechlabscom
+# Option 1: Grant Firestore write permission to functions
+gcloud projects add-iam-policy-binding tachtechlabscom \
+  --member="serviceAccount:tachtechlabscom@appspot.gserviceaccount.com" \
+  --role="roles/datastore.user"
 
-# Generate config
-flutterfire configure --project=tachtechlabscom --platforms=web --yes
+# Option 2: Deploy Firestore rules via Firebase Console
+# Go to: Firebase Console > Firestore > Rules
 
-# Deploy
-firebase deploy --project tachtechlabscom
+# After either option, trigger initial data load:
+curl -H "Authorization: Bearer $(gcloud auth print-identity-token)" \
+  https://us-central1-tachtechlabscom.cloudfunctions.net/triggerRefresh
 ```
 
 **Artifacts Produced:**
@@ -67,6 +75,8 @@ firebase deploy --project tachtechlabscom
 - G20: Firebase web app creation requires admin
 - G21: flutterfire configure fails without web app
 - G22: Initial Firestore empty until first scheduled run or triggerRefresh call
+- G23: Firestore write requires datastore.user role on App Engine SA
+- G24: Firebase auto-config (`/__/firebase/init.js`) works without explicit firebase_options.dart
 
 **Interventions:** 1 (permission blocker - requires admin for web app creation)
 
