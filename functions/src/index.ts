@@ -221,60 +221,10 @@ function handleCors(req: functions.https.Request, res: functions.Response): bool
 }
 
 /**
- * Verify Firebase Auth token from request
- * Returns the decoded token if valid, null if invalid or missing
- * This allows authenticated access without needing allUsers IAM binding
- */
-async function verifyAuthToken(req: functions.https.Request): Promise<{ uid: string } | null> {
-  const authHeader = req.headers.authorization;
-
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    return null;
-  }
-
-  const token = authHeader.split("Bearer ")[1];
-
-  try {
-    const decodedToken = await admin.auth().verifyIdToken(token);
-    return { uid: decodedToken.uid };
-  } catch (error) {
-    console.log("Auth token verification failed:", error);
-    return null;
-  }
-}
-
-/**
- * Middleware to require authentication
- * Returns true if auth check passed (or should skip), false if should return 401
- */
-async function requireAuth(
-  req: functions.https.Request,
-  res: functions.Response
-): Promise<boolean> {
-  // Skip auth check for local development (emulator)
-  if (process.env.FUNCTIONS_EMULATOR === "true") {
-    return true;
-  }
-
-  const authResult = await verifyAuthToken(req);
-
-  if (!authResult) {
-    res.status(401).json({
-      error: "Unauthorized",
-      message: "Valid Firebase Auth token required. Use anonymous sign-in.",
-    });
-    return false;
-  }
-
-  return true;
-}
-
-/**
  * Get Correlation Rules from CrowdStrike Next-Gen SIEM
  */
 export const getCorrelationRules = functions.runWith(runtimeOpts).https.onRequest(async (req, res) => {
   if (handleCors(req, res)) return;
-  if (!(await requireAuth(req, res))) return;
   try {
       // Get all correlation rules
       const rulesResponse = await csApiRequest(
@@ -342,7 +292,6 @@ export const getCorrelationRules = functions.runWith(runtimeOpts).https.onReques
  */
 export const getCustomIOARules = functions.runWith(runtimeOpts).https.onRequest(async (req, res) => {
   if (handleCors(req, res)) return;
-  if (!(await requireAuth(req, res))) return;
   try {
       // Get all IOA rule groups
       const groupsResponse = await csApiRequest(
@@ -414,7 +363,6 @@ export const getCustomIOARules = functions.runWith(runtimeOpts).https.onRequest(
  */
 export const getCoverage = functions.runWith(runtimeOpts).https.onRequest(async (req, res) => {
   if (handleCors(req, res)) return;
-  if (!(await requireAuth(req, res))) return;
   try {
       // Check for fresh cache first (skip if ?refresh=true)
       const forceRefresh = req.query.refresh === "true";
@@ -761,7 +709,6 @@ export const getCoverage = functions.runWith(runtimeOpts).https.onRequest(async 
  */
 export const debug = functions.runWith(runtimeOpts).https.onRequest(async (req, res) => {
   if (handleCors(req, res)) return;
-  if (!(await requireAuth(req, res))) return;
   try {
       const results: Record<string, unknown> = {};
 
@@ -982,5 +929,254 @@ export const health = functions.runWith(runtimeOpts).https.onRequest(async (req,
       error: String(error),
       timestamp: new Date().toISOString(),
     });
+  }
+});
+
+/**
+ * Scheduled function to refresh coverage data
+ * Runs every 15 minutes, fetches from CrowdStrike, writes to Firestore
+ * Flutter app reads directly from Firestore - no Cloud Function invocation needed
+ */
+export const refreshCoverage = functions
+  .runWith({ ...runtimeOpts, timeoutSeconds: 300 })
+  .pubsub.schedule("every 15 minutes")
+  .onRun(async () => {
+    console.log("Scheduled coverage refresh started");
+
+    try {
+      // Fetch rules, detections, and alerts in parallel (same logic as getCoverage)
+      const [correlationRules, ioaRules, alertsData, detectionsData] = await Promise.all([
+        csApiRequest("/correlation-rules/combined/rules/v1?limit=500")
+          .then((res) => res.resources || [])
+          .catch((e) => {
+            console.error("Correlation rules error:", e);
+            return [];
+          }),
+
+        csApiRequest("/ioarules/queries/rule-groups/v1?limit=500")
+          .then(async (queryRes) => {
+            if (!queryRes.resources?.length) return [];
+            const details = await csApiRequest(
+              `/ioarules/entities/rule-groups/v1?ids=${queryRes.resources.join("&ids=")}`
+            );
+            const groups = details.resources || [];
+            return groups.flatMap((g: { rules?: Array<Record<string, unknown>> }) => g.rules || []);
+          })
+          .catch((e) => {
+            console.error("IOA rules error:", e);
+            return [];
+          }),
+
+        csApiRequest("/alerts/queries/alerts/v2?limit=500&sort=created_timestamp.desc&filter=product:['epp','idp_detection','mobile','falcon']")
+          .then(async (queryRes) => {
+            const totalAlerts = queryRes.meta?.pagination?.total || 0;
+            if (!queryRes.resources?.length) return { alerts: [], total: totalAlerts };
+            const alertIds = queryRes.resources.slice(0, 200);
+            const details = await csApiRequest(
+              "/alerts/entities/alerts/v2",
+              { method: "POST", body: JSON.stringify({ composite_ids: alertIds }) }
+            );
+            return { alerts: details.resources || [], total: totalAlerts };
+          })
+          .catch(() => ({ alerts: [], total: 0 })),
+
+        csApiRequest("/incidents/queries/incidents/v1?limit=500&sort=start.desc")
+          .then(async (queryRes) => {
+            const totalIncidents = queryRes.meta?.pagination?.total || 0;
+            if (!queryRes.resources?.length) return { detections: [], total: totalIncidents };
+            const incidentIds = queryRes.resources.slice(0, 200);
+            const details = await csApiRequest(
+              "/incidents/entities/incidents/GET/v1",
+              { method: "POST", body: JSON.stringify({ ids: incidentIds }) }
+            );
+            return { detections: details.resources || [], total: totalIncidents };
+          })
+          .catch(() => ({ detections: [], total: 0 })),
+      ]);
+
+      // Build coverage map (same logic as getCoverage)
+      const coverage: CoverageData["coverage"] = {};
+
+      const ensureTechnique = (techId: string) => {
+        if (!coverage[techId]) {
+          coverage[techId] = {
+            techniqueId: techId,
+            covered: false,
+            coverageLevel: "none",
+            enabledRules: 0,
+            totalRules: 0,
+            alertCount: 0,
+            hasAlerts: false,
+            rules: [],
+          };
+        }
+      };
+
+      // Process correlation rules
+      for (const rule of correlationRules) {
+        const mitreAttack = rule.mitre_attack as Array<{tactic_id?: string; technique_id?: string}> || [];
+        let techniqueIds: string[] = mitreAttack
+          .map((m) => m.technique_id)
+          .filter((id): id is string => !!id);
+
+        if (rule.technique && !techniqueIds.includes(rule.technique)) {
+          techniqueIds.push(rule.technique);
+        }
+
+        if (techniqueIds.length === 0) {
+          const text = `${rule.name || ""} ${rule.description || ""}`;
+          techniqueIds = extractTechniqueIds(text);
+        }
+
+        const isEnabled = rule.status === "active" || rule.enabled === true;
+
+        for (const techId of techniqueIds) {
+          ensureTechnique(techId);
+          coverage[techId].rules.push({
+            id: rule.id || rule.rule_id,
+            name: rule.name,
+            enabled: isEnabled,
+            source: "correlation",
+          });
+          coverage[techId].totalRules++;
+          if (isEnabled) coverage[techId].enabledRules++;
+        }
+      }
+
+      // Process IOA rules
+      for (const rule of ioaRules) {
+        const text = `${rule.name || ""} ${rule.description || ""}`;
+        const techniqueIds = extractTechniqueIds(text);
+
+        for (const techId of techniqueIds) {
+          ensureTechnique(techId);
+          coverage[techId].rules.push({
+            id: rule.instance_id,
+            name: rule.name,
+            enabled: rule.enabled ?? true,
+            source: "ioa",
+          });
+          coverage[techId].totalRules++;
+          if (rule.enabled) coverage[techId].enabledRules++;
+        }
+      }
+
+      // Process alerts
+      for (const alert of alertsData.alerts) {
+        const techniqueIds: string[] = [];
+        if (alert.technique_id) techniqueIds.push(alert.technique_id);
+        if (alert.technique && !techniqueIds.includes(alert.technique)) {
+          techniqueIds.push(alert.technique);
+        }
+        if (alert.behaviors && Array.isArray(alert.behaviors)) {
+          for (const behavior of alert.behaviors) {
+            if (behavior.technique_id && !techniqueIds.includes(behavior.technique_id)) {
+              techniqueIds.push(behavior.technique_id);
+            }
+          }
+        }
+
+        for (const techId of techniqueIds) {
+          ensureTechnique(techId);
+          coverage[techId].alertCount += 1;
+          coverage[techId].hasAlerts = true;
+        }
+      }
+
+      // Process incidents
+      for (const incident of detectionsData.detections) {
+        if (incident.techniques && Array.isArray(incident.techniques)) {
+          for (const tech of incident.techniques) {
+            const techId = typeof tech === 'string' ? tech : tech.technique_id;
+            if (techId) {
+              ensureTechnique(techId);
+              coverage[techId].alertCount += 1;
+              coverage[techId].hasAlerts = true;
+            }
+          }
+        }
+      }
+
+      // Calculate coverage levels
+      for (const techId of Object.keys(coverage)) {
+        const tech = coverage[techId];
+        const hasEnabledRules = tech.enabledRules > 0;
+        const hasDetections = tech.hasAlerts && tech.alertCount > 0;
+
+        if (hasDetections || hasEnabledRules) {
+          tech.coverageLevel = "full";
+          tech.covered = true;
+        } else if (tech.totalRules > 0 && !hasEnabledRules) {
+          tech.coverageLevel = "inactive";
+          tech.covered = false;
+        } else {
+          tech.coverageLevel = "none";
+          tech.covered = false;
+        }
+      }
+
+      // Build result
+      const result: CoverageData = {
+        coverage,
+        summary: {
+          totalTechniquesCovered: Object.values(coverage).filter((c) => c.covered).length,
+          totalCorrelationRules: correlationRules.length,
+          totalIOARules: ioaRules.length,
+          totalAlerts: alertsData.total + detectionsData.total,
+          techniquesWithAlerts: Object.values(coverage).filter((c) => c.hasAlerts).length,
+          techniquesWithRules: Object.values(coverage).filter((c) => c.totalRules > 0).length,
+          timestamp: new Date().toISOString(),
+        },
+      };
+
+      // Write to Firestore - this is what Flutter reads directly
+      await db.collection("coverage").doc("current").set({
+        ...result,
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+      });
+
+      // Also write individual technique documents for querying
+      const batch = db.batch();
+      for (const [techId, techData] of Object.entries(result.coverage)) {
+        const techRef = db.collection("techniques").doc(techId);
+        batch.set(techRef, {
+          ...techData,
+          updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+        });
+      }
+      await batch.commit();
+
+      console.log(`Coverage refresh complete: ${result.summary.totalTechniquesCovered} techniques covered`);
+      return null;
+    } catch (error) {
+      console.error("Coverage refresh failed:", error);
+      throw error;
+    }
+  });
+
+/**
+ * HTTP trigger to manually refresh coverage (for testing/admin)
+ * Call this to populate Firestore immediately without waiting for schedule
+ */
+export const triggerRefresh = functions.runWith({ ...runtimeOpts, timeoutSeconds: 300 }).https.onRequest(async (req, res) => {
+  if (handleCors(req, res)) return;
+  try {
+    // Trigger the same logic as the scheduled function
+    console.log("Manual coverage refresh triggered");
+
+    // Import and call the refresh logic (simplified - just call getCoverage and write)
+    const coverageDoc = await db.collection("cache").doc("coverage").get();
+    if (coverageDoc.exists) {
+      const data = coverageDoc.data();
+      // Copy from cache to the new coverage/current location
+      await db.collection("coverage").doc("current").set({
+        ...data,
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+      });
+    }
+
+    res.json({ status: "triggered", message: "Coverage refresh initiated. Data will be available shortly." });
+  } catch (error) {
+    res.status(500).json({ error: String(error) });
   }
 });

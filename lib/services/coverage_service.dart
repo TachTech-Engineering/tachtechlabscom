@@ -1,9 +1,7 @@
-import 'dart:convert';
 import 'package:flutter/foundation.dart';
-import 'package:http/http.dart' as http;
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-/// Coverage data for a single technique from the API
+/// Coverage data for a single technique from Firestore
 class TechniqueCoverage {
   final String techniqueId;
   final bool covered;
@@ -66,7 +64,7 @@ class RuleCoverage {
   }
 }
 
-/// Summary data from the API
+/// Summary data from Firestore
 class CoverageApiSummary {
   final int totalTechniquesCovered;
   final int totalCorrelationRules;
@@ -99,7 +97,7 @@ class CoverageApiSummary {
   }
 }
 
-/// Full API response
+/// Full coverage response
 class CoverageResponse {
   final Map<String, TechniqueCoverage> coverage;
   final CoverageApiSummary summary;
@@ -122,98 +120,70 @@ class CoverageResponse {
     return CoverageResponse(
       coverage: coverageMap,
       summary: CoverageApiSummary.fromJson(json['summary'] ?? {}),
-      fromCache: json['fromCache'] ?? false,
+      fromCache: true, // Always from Firestore cache
     );
   }
 }
 
-/// Service to fetch coverage data from the CrowdStrike API proxy
+/// Service to fetch coverage data directly from Firestore
+/// No Cloud Function invocation - bypasses org policy entirely
 class CoverageService {
-  // Use appropriate host based on platform
-  // - Android emulator: 10.0.2.2 (maps to host machine's localhost)
-  // - Web/Desktop debug: 127.0.0.1
-  // - Production: relative /api path
-  String get _baseUrl {
-    if (kDebugMode) {
-      // Check if we're on Android (emulator uses 10.0.2.2 to reach host)
-      if (defaultTargetPlatform == TargetPlatform.android) {
-        return 'http://10.0.2.2:5055/tachtechlabscom/us-central1';
-      }
-      return 'http://127.0.0.1:5055/tachtechlabscom/us-central1';
-    }
-    return '/api';
-  }
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  /// Get Firebase Auth token for authenticated requests
-  Future<String?> _getAuthToken() async {
-    try {
-      final user = FirebaseAuth.instance.currentUser;
-      if (user != null) {
-        return await user.getIdToken();
-      }
-    } catch (e) {
-      debugPrint('Failed to get auth token: $e');
-    }
-    return null;
-  }
-
-  /// Build headers with optional auth token
-  Future<Map<String, String>> _buildHeaders() async {
-    final headers = <String, String>{
-      'Content-Type': 'application/json',
-    };
-
-    final token = await _getAuthToken();
-    if (token != null) {
-      headers['Authorization'] = 'Bearer $token';
-    }
-
-    return headers;
-  }
-
-  /// Fetch coverage data from the API
+  /// Fetch coverage data from Firestore
+  /// Data is populated by scheduled Cloud Function (every 15 min)
   Future<CoverageResponse> fetchCoverage({bool refresh = false}) async {
-    final url = Uri.parse('$_baseUrl/getCoverage${refresh ? '?refresh=true' : ''}');
-
     try {
-      final headers = await _buildHeaders();
-      final response = await http.get(url, headers: headers).timeout(
-        const Duration(seconds: 30),
-        onTimeout: () {
-          throw Exception('Request timed out');
-        },
-      );
+      // Read directly from Firestore - no Cloud Function call
+      final doc = await _firestore.collection('coverage').doc('current').get();
 
-      if (response.statusCode == 200) {
-        final json = jsonDecode(response.body) as Map<String, dynamic>;
-        return CoverageResponse.fromJson(json);
-      } else {
-        throw Exception('API error: ${response.statusCode}');
+      if (!doc.exists) {
+        debugPrint('No coverage data in Firestore yet - waiting for scheduled refresh');
+        throw Exception('Coverage data not available. Please wait for initial data sync.');
       }
+
+      final data = doc.data()!;
+      return CoverageResponse.fromJson(data);
     } catch (e) {
-      debugPrint('Coverage fetch error: $e');
+      debugPrint('Firestore read error: $e');
       rethrow;
     }
   }
 
-  /// Check API health
+  /// Stream coverage data for real-time updates
+  /// Useful if we want the UI to update when data changes
+  Stream<CoverageResponse> streamCoverage() {
+    return _firestore
+        .collection('coverage')
+        .doc('current')
+        .snapshots()
+        .where((snapshot) => snapshot.exists)
+        .map((snapshot) => CoverageResponse.fromJson(snapshot.data()!));
+  }
+
+  /// Check if coverage data is available
   Future<bool> checkHealth() async {
-    final url = Uri.parse('$_baseUrl/health');
-
     try {
-      final headers = await _buildHeaders();
-      final response = await http.get(url, headers: headers).timeout(
-        const Duration(seconds: 10),
-      );
-
-      if (response.statusCode == 200) {
-        final json = jsonDecode(response.body) as Map<String, dynamic>;
-        return json['status'] == 'healthy';
-      }
-      return false;
+      final doc = await _firestore.collection('coverage').doc('current').get();
+      return doc.exists;
     } catch (e) {
       debugPrint('Health check error: $e');
       return false;
+    }
+  }
+
+  /// Get last update timestamp
+  Future<DateTime?> getLastUpdate() async {
+    try {
+      final doc = await _firestore.collection('coverage').doc('current').get();
+      if (doc.exists) {
+        final updatedAt = doc.data()?['updatedAt'] as Timestamp?;
+        return updatedAt?.toDate();
+      }
+      return null;
+    } catch (e) {
+      debugPrint('Failed to get last update: $e');
+      return null;
     }
   }
 }

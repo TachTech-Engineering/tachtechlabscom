@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'firebase_options.dart';
 import 'providers/router_provider.dart';
 import 'providers/dashboard_providers.dart';
@@ -10,20 +9,10 @@ import 'theme/app_theme.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Initialize Firebase
+  // Initialize Firebase (for Firestore client SDK)
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
-  // Sign in anonymously - this gives us a Firebase Auth token
-  // that Cloud Functions can verify without needing allUsers IAM
-  try {
-    final userCredential = await FirebaseAuth.instance.signInAnonymously();
-    debugPrint('Signed in anonymously: ${userCredential.user?.uid}');
-  } catch (e) {
-    debugPrint('Anonymous sign-in failed: $e');
-    // App continues without auth - will fall back to public endpoints if available
-  }
 
   runApp(
     const ProviderScope(

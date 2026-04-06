@@ -76,7 +76,7 @@ The ATT&CK Detection Coverage Dashboard visualizes a CrowdStrike Next-Gen SIEM t
 
 The Flutter Web frontend renders 14 tactics and 250+ techniques as a vertical accordion with color-coded coverage heatmapping. Cloud Functions proxy the CrowdStrike API to retrieve correlation rules, IOA rules, and alerts, then calculate per-technique coverage levels.
 
-Phase 0 validated the environment. Phase 1 confirmed all CrowdStrike APIs are accessible. Phase 2 (v0.4-v0.5) deployed Cloud Functions, verified CrowdStrike auth, but is BLOCKED by a GCP org policy preventing public function access. **v0.6 resolves the org policy blocker (or works around it via Firebase Auth), completes the E2E data flow, and adds platform filtering (Phase 3).**
+Phase 0 validated the environment. Phase 1 confirmed all CrowdStrike APIs are accessible. Phase 2 (v0.4-v0.5) deployed Cloud Functions, verified CrowdStrike auth, but was BLOCKED by a GCP org policy preventing public function access. **v0.6 resolves the org policy blocker with Firestore-First architecture - browser reads Firestore directly, scheduled function refreshes data every 15 minutes. No browser-to-function calls needed.**
 
 ---
 
@@ -196,9 +196,9 @@ The methodology evolves alongside the project. Retrospectives, gotcha registry r
 
 | Component | Status | Phase to Fix |
 |-----------|--------|-------------|
-| Public function access | BLOCKED (org policy) | **v0.6** (IT exception or Firebase Auth) |
-| Flutter -> live endpoints | NOT CONNECTED | **v0.6** (after blocker resolution) |
-| Navigator export -> live data | NOT WIRED | **v0.6** (after blocker resolution) |
+| Public function access | **SOLVED (Firestore-First)** | **v0.6** - Browser reads Firestore directly |
+| Flutter -> live endpoints | **READY** | **v0.6** - Reads from Firestore coverage/current |
+| Navigator export -> live data | NOT WIRED | **v0.6** (pending deploy) |
 | Platform filtering | NOT IMPLEMENTED | **v0.6** |
 | Sub-technique expansion | NOT IMPLEMENTED | **v0.6** (P1) or v0.7 |
 | Threat actor overlays | NOT IMPLEMENTED | v0.7 |
@@ -228,41 +228,62 @@ The methodology evolves alongside the project. Retrospectives, gotcha registry r
 
 # 4. Architecture
 
+## Firestore-First Architecture (v0.6)
+
+**Why:** GCP org policy blocks `allUsers` on Cloud Functions. Browser cannot invoke functions. Solution: browser never calls functions - reads Firestore directly.
+
 ```
-Browser
-  |
-  +-- Flutter Web (Riverpod 3.0, GoRouter)
-        |
-        +-- coverage_service.dart
-        |     (currently mock data - v0.6 wires to live after blocker)
-        |
-        +-- Firebase Hosting rewrites (/api/* -> Cloud Functions)
-        |     |
-        |     +-- BLOCKER: Org policy prevents hosting rewrites from invoking functions
-        |     |   without public access (allUsers/allAuthenticatedUsers blocked)
-        |     |
-        |     +-- Option A: IT exception grants public access
-        |     +-- Option B: Firebase Auth (anonymous) + token-based invocation
-        |
-        +-- Firebase Cloud Functions (Node 20, v1 syntax, runWith secrets)
-              |  /api/health
-              |  /api/coverage
-              |  /api/correlation-rules
-              |  /api/ioa-rules
-              |  /api/debug
-              |
-              +-- Firebase Secrets (runWith)
-              |     CROWDSTRIKE_CLIENT_ID
-              |     CROWDSTRIKE_CLIENT_SECRET
-              |
-              +-- Firestore (cache layer, 15-min TTL)
-              |
-              +-- CrowdStrike Falcon API (us-1)
-                    |  /oauth2/token
-                    |  /correlation-rules/combined/rules/v1
-                    |  /ioarules/entities/rule-groups/v1
-                    |  /alerts/entities/alerts/v2
-                    |  /incidents/entities/incidents/GET/v1
+Cloud Scheduler (every 15 minutes)
+      |
+      v
+Scheduled Function: refreshCoverage
+      |
+      +-- Firebase Secrets (runWith)
+      |     CROWDSTRIKE_CLIENT_ID
+      |     CROWDSTRIKE_CLIENT_SECRET
+      |
+      +-- CrowdStrike Falcon API (us-1)
+      |     /oauth2/token
+      |     /correlation-rules/combined/rules/v1
+      |     /ioarules/entities/rule-groups/v1
+      |     /alerts/entities/alerts/v2
+      |
+      v
+Firestore: coverage/current (writes coverage data)
+      ^
+      |
+Browser (SEPARATE FLOW - no function invocation)
+      |
+      +-- Flutter Web (Riverpod 3.0, GoRouter)
+            |
+            +-- coverage_service.dart
+            |     (reads Firestore directly via client SDK)
+            |
+            +-- Firebase Hosting (static files only)
+```
+
+**Key Point:** Org policy is irrelevant because browser never invokes Cloud Functions.
+
+### Data Flow
+
+1. Cloud Scheduler triggers `refreshCoverage` every 15 minutes
+2. Function authenticates to CrowdStrike (OAuth2)
+3. Function fetches rules, alerts, calculates coverage
+4. Function writes to Firestore `coverage/current`
+5. User opens app (any time)
+6. Flutter reads Firestore directly (client SDK)
+7. UI displays coverage data
+
+### HTTP Endpoints (still available with auth)
+
+```
+Firebase Cloud Functions (Node 20, v1 syntax, runWith secrets)
+      |  /api/health (requires auth token)
+      |  /api/coverage (requires auth token)
+      |  /api/correlation-rules (requires auth token)
+      |  /api/ioa-rules (requires auth token)
+      |  /api/debug (requires auth token)
+      |  /api/triggerRefresh (manual refresh trigger)
 ```
 
 ### 4.1 Platform Filtering Data Flow (NEW - v0.6)
@@ -330,8 +351,9 @@ STIX Enterprise Bundle (JSON)
 
 CrowdStrike OAuth2 client credentials flow. Client ID and Secret stored via Firebase Secret Manager (runWith). Secrets are injected at function invocation time.
 
-### 5.6 Org Policy Blocker (G16)
+### 5.6 Org Policy Blocker (G16) - SOLVED
 
+**Original Problem:**
 ```
 ERROR: FAILED_PRECONDITION: One or more users named in the policy do not belong to a permitted customer
 - allUsers blocked
@@ -339,11 +361,20 @@ ERROR: FAILED_PRECONDITION: One or more users named in the policy do not belong 
 - Hosting rewrites cannot invoke functions without public access
 ```
 
-**Resolution options:**
-1. IT grants org policy exception for project tachtechlabscom (preferred)
-2. Implement Firebase Authentication (anonymous auth + token verification)
+**Solution: Firestore-First Architecture (v0.6)**
 
-**Authenticated workaround:**
+Browser never invokes Cloud Functions. Instead:
+1. Scheduled function (`refreshCoverage`) runs every 15 minutes
+2. Function fetches CrowdStrike data, writes to Firestore `coverage/current`
+3. Flutter reads directly from Firestore using client SDK
+4. Org policy is irrelevant - no browser-to-function calls
+
+**Why Firestore-First over Firebase Auth:**
+- Simpler (no auth tokens, no middleware)
+- Same data freshness (15-min schedule vs 15-min cache)
+- Same pattern as kjtcom project
+
+**HTTP endpoints still work with auth token (for debugging):**
 ```bash
 curl -H "Authorization: Bearer $(gcloud auth print-identity-token)" \
   https://us-central1-tachtechlabscom.cloudfunctions.net/health
@@ -478,7 +509,8 @@ From Phase 1 discovery (v0.3), each technique:
 |--------|--------|-------|
 | allUsers on Cloud Functions | BLOCKED | GCP org policy prevents granting |
 | allAuthenticatedUsers on Cloud Functions | BLOCKED | GCP org policy prevents granting |
-| IT exception requested | PENDING | v0.5 recommendation |
+| IT exception requested | **NOT NEEDED** | Firestore-First architecture bypasses entirely |
+| **Firestore-First solution** | **IMPLEMENTED (v0.6)** | Browser reads Firestore directly |
 
 ### 8.5 IAM Verification Commands
 
@@ -612,10 +644,13 @@ tachtechlabscom/
 | G13 | IAM: artifactregistry.writer missing | Verify IAM roles in pre-flight. Run gcloud IAM check before deploy. | v0.4 | **RESOLVED (v0.5)** |
 | G14 | gcloud CLI may not be installed on Windows | Install via `winget install Google.CloudSDK` or download installer | v0.5 | ACTIVE |
 | G15 | Windows line endings in secrets | Use `echo -n` or `tr -d '\r\n'` | v0.5 | ACTIVE |
-| **G16** | **GCP org policy blocks allUsers/allAuthenticatedUsers** | **Request IT exception OR implement Firebase Auth** | **v0.5** | **BLOCKING** |
-| **G17** | **Hosting rewrites return 403** | **Use direct function URLs with auth token as workaround** | **v0.5** | **ACTIVE** |
+| **G16** | **GCP org policy blocks allUsers/allAuthenticatedUsers** | **Firestore-First architecture - browser reads Firestore directly** | **v0.6** | **RESOLVED** |
+| **G17** | **Hosting rewrites return 403** | **Not needed - Firestore-First doesn't use rewrites** | **v0.6** | **RESOLVED** |
 | **G18** | **Missing build artifact** | **Agent MUST produce all 4 artifacts. Log gap in report if unable.** | **v0.6** | **ACTIVE** |
 | **G19** | **v1/v2 function syntax confusion** | **Current deployed state is v1/Node 20/runWith. Do NOT change.** | **v0.6** | **ACTIVE** |
+| **G20** | **Firebase web app creation requires admin** | **David needs Kyle to create web app or grant Firebase Admin role** | **v0.6** | **BLOCKING** |
+| **G21** | **flutterfire configure fails without web app** | **Must create web app first via Console or `firebase apps:create WEB`** | **v0.6** | **BLOCKING** |
+| **G22** | **Initial Firestore empty until first refresh** | **Call `triggerRefresh` or wait 15 min for scheduled function** | **v0.6** | **ACTIVE** |
 
 ---
 
@@ -637,19 +672,19 @@ tachtechlabscom/
 
 # 14. Changelog
 
-**v0.6 (Phase 2 Completion + Phase 3 Start - Design Update)**
-- Documented v0.5 findings: v1/Node 20/runWith secrets (reverted from v2/Node 22)
-- Documented org policy blocker (G16) with two resolution paths
-- Documented v0.5 build artifact gap (Section 3.4) and added G18
-- Added G19 (v1/v2 function syntax confusion prevention)
-- Added platform filtering architecture (Section 4.1, 6.3)
-- Updated Locked Decisions: CF runtime now v1/Node 20/runWith (v0.5)
-- Added platformFilterProvider to Section 6.1
-- Updated Section 8.2: artifactregistry.writer now GRANTED
-- Added Section 8.4: Org Policy Status
-- Updated Phase Roadmap: v0.6 is 2/3 combined phase
-- Updated repo structure annotations for v0.6 changes
-- Pillar 2 and 4 updated with v0.5 lessons
+**v0.6 (Phase 2 Completion - Firestore-First Architecture)**
+- **SOLVED org policy blocker with Firestore-First architecture**
+- Browser reads Firestore directly - no function invocation
+- Scheduled function `refreshCoverage` runs every 15 minutes
+- Added `triggerRefresh` HTTP endpoint for manual data refresh
+- G16, G17 marked RESOLVED
+- Section 4 updated with Firestore-First diagram
+- Section 5.6 updated: org policy workaround no longer needed
+- Section 8.4 updated: IT exception not needed
+- pubspec.yaml: cloud_firestore (removed firebase_auth)
+- coverage_service.dart: reads from Firestore client SDK
+- functions/src/index.ts: added scheduled + HTTP refresh functions
+- firestore.rules: public read for coverage collection
 
 **v0.5 (Phase 2 - Deploy + Org Policy Block)**
 - Cloud Functions deployed (5 functions, v1 syntax, Node 20)

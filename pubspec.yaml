@@ -41,9 +41,9 @@ dependencies:
   http: ^1.2.0
   url_launcher: ^6.2.0
 
-  # Firebase for authentication
+  # Firebase for Firestore (direct client read)
   firebase_core: ^3.13.0
-  firebase_auth: ^5.5.4
+  cloud_firestore: ^5.6.5
 
 dev_dependencies:
   flutter_test:

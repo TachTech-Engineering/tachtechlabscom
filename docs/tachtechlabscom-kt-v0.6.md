@@ -68,65 +68,73 @@ The ATT&CK Detection Coverage Dashboard visualizes a CrowdStrike Next-Gen SIEM t
 
 # 2. Architecture
 
-## System Diagram
+## System Diagram (Firestore-First Architecture)
 
 ```
-Browser
-  |
-  +-- Flutter Web (Riverpod 3.0, GoRouter)
-        |
-        +-- FirebaseAuth.signInAnonymously() -> Firebase Auth token
-        |
-        +-- coverage_service.dart (HTTP client + Authorization header)
-              |
-              +-- Firebase Hosting rewrites (/api/* -> Cloud Functions)
-                    |
-                    +-- Cloud Functions (Node 20, v1 syntax)
-                          |  admin.auth().verifyIdToken() <- validates token
-                          |
-                          |  /api/health (public - no auth)
-                          |  /api/coverage (auth required)
-                          |  /api/correlation-rules (auth required)
-                          |  /api/ioa-rules (auth required)
-                          |  /api/debug (auth required)
-                          |
-                          +-- Firebase Secrets (runWith secrets)
-                          |     CROWDSTRIKE_CLIENT_ID
-                          |     CROWDSTRIKE_CLIENT_SECRET
-                          |
-                          +-- Firestore (cache layer, 15-min TTL)
-                          |
-                          +-- CrowdStrike Falcon API (us-1)
-                                |  /oauth2/token
-                                |  /correlation-rules/combined/rules/v1
-                                |  /ioarules/entities/rule-groups/v1
-                                |  /alerts/entities/alerts/v2
-                                |  /incidents/entities/incidents/GET/v1
+Cloud Scheduler (every 15 minutes)
+      |
+      v
+Scheduled Cloud Function: refreshCoverage
+      |
+      +-- CrowdStrike Falcon API (us-1)
+      |     /oauth2/token
+      |     /correlation-rules/combined/rules/v1
+      |     /ioarules/entities/rule-groups/v1
+      |     /alerts/entities/alerts/v2
+      |
+      v
+Firestore: coverage/current (writes coverage data)
+      ^
+      |
+Browser (separate flow - no Cloud Function invocation)
+      |
+      +-- Flutter Web (Riverpod 3.0, GoRouter)
+            |
+            +-- coverage_service.dart (Firestore client SDK)
+                  |
+                  +-- Firestore.collection('coverage').doc('current').get()
 ```
 
-## Authentication Flow (Bypasses Org Policy)
+## Why This Architecture
+
+**Problem:** GCP org policy blocks `allUsers` on Cloud Functions. Browser can't invoke functions.
+
+**Solution:** Browser never invokes Cloud Functions. Instead:
+1. Scheduled function runs every 15 minutes (server-side, no browser)
+2. Function fetches CrowdStrike data and writes to Firestore
+3. Flutter reads directly from Firestore using client SDK
+4. Firestore security rules allow public reads
+
+**Trade-off:** Data is refreshed on a 15-minute schedule, not real-time. But the previous design already had a 15-minute cache TTL, so effective freshness is the same.
+
+## Data Flow
 
 ```
-1. User opens app
+1. Cloud Scheduler triggers refreshCoverage every 15 min
       |
       v
-2. Flutter: FirebaseAuth.instance.signInAnonymously()
+2. Function authenticates to CrowdStrike (OAuth2)
       |
       v
-3. Firebase Auth: Issues JWT token (no user identity, just valid session)
+3. Function fetches rules, alerts, incidents
       |
       v
-4. Flutter: Stores token, includes in all API requests
-      |  Authorization: Bearer <firebase-jwt-token>
-      v
-5. Cloud Functions: admin.auth().verifyIdToken(token)
+4. Function calculates coverage levels
       |
       v
-6. If valid -> process request -> return data
-   If invalid -> 401 Unauthorized
+5. Function writes to Firestore: coverage/current
+      |
+      v
+6. User opens app (any time)
+      |
+      v
+7. Flutter reads Firestore directly (no function call)
+      |
+      v
+8. UI displays coverage data
 ```
 
-**Why this works:** Firebase Auth tokens are verified server-side by Firebase Admin SDK. No `allUsers` IAM binding needed. The org policy only blocks public access - authenticated access with valid tokens is allowed.
+**Org policy is irrelevant** because the browser never invokes a Cloud Function.
 
 ## Project Structure
 
@@ -445,82 +453,82 @@ dependencies:
 
 # 7. Current Status & Blockers
 
-## What Works (v0.5)
+## What Works (v0.6)
 
 | Component | Status | Evidence |
 |-----------|--------|----------|
-| Flutter app builds | OK | 16-28s build time |
-| Cloud Functions deployed | OK | 5 functions at us-central1 |
+| Flutter app builds | OK | 29.7s build time |
+| Cloud Functions build | OK | TypeScript compiles |
 | CrowdStrike OAuth2 | OK | Token generation working |
-| Firestore caching | OK | 15-min TTL configured |
+| Firestore rules | OK | Public read, function write |
 | Firebase Secrets | OK | Both credentials stored |
 | Firebase Hosting | OK | tachtechlabscom.web.app |
-| Functions with auth token | OK | curl -H "Authorization: Bearer ..." works |
+| Scheduled function | OK | refreshCoverage every 15 min |
 
-## BLOCKER: Org Policy (SOLUTION IMPLEMENTED)
+## BLOCKER: Org Policy - SOLVED
 
-**Problem:** GCP org policy blocks `allUsers` and `allAuthenticatedUsers` on Cloud Functions. Firebase Hosting rewrites cannot invoke functions without public access.
+**Problem:** GCP org policy blocks `allUsers` on Cloud Functions. Browser can't invoke functions.
 
-**Solution: Firebase Anonymous Auth** (implemented in code, pending Firebase Console setup)
+**Solution: Firestore-First Architecture** (implemented)
 
-The auth flow bypasses the org policy entirely:
-1. Flutter app calls `FirebaseAuth.instance.signInAnonymously()` on startup
-2. Firebase issues a token to that browser session
-3. Flutter sends `Authorization: Bearer <token>` with every API call
-4. Cloud Functions verify the token with `admin.auth().verifyIdToken()`
-5. No `allUsers` IAM binding needed - org policy bypassed
+Browser never calls Cloud Functions. Instead:
+1. Scheduled function (`refreshCoverage`) runs every 15 minutes
+2. Function fetches CrowdStrike data, writes to Firestore
+3. Flutter reads directly from Firestore using client SDK
+4. Org policy is irrelevant - no browser-to-function calls
 
-## Firebase Auth Setup Required
+## Setup Required
 
-**Admin must complete these steps in Firebase Console:**
-
-### Step 1: Create Web App
-```
-Firebase Console -> Project Settings -> Your apps -> Add app -> Web
-App nickname: "ATT&CK Dashboard"
-```
-
-Or via CLI (requires Firebase Admin role):
+### Step 1: Create Web App (Admin)
 ```bash
 firebase apps:create WEB "ATT&CK Dashboard" --project tachtechlabscom
 ```
 
-### Step 2: Enable Anonymous Auth
-```
-Firebase Console -> Authentication -> Sign-in method -> Anonymous -> Enable
-```
+Or via Firebase Console -> Project Settings -> Add app -> Web
 
-### Step 3: Generate Firebase Options
-After web app is created:
+### Step 2: Generate Firebase Options
 ```bash
 flutterfire configure --project=tachtechlabscom --platforms=web --yes
 ```
 
-This overwrites `lib/firebase_options.dart` with real values.
-
-### Step 4: Deploy
+### Step 3: Deploy Functions (includes scheduled function)
 ```bash
-flutter build web
-firebase deploy --project tachtechlabscom
+cd functions && npm run build && cd ..
+firebase deploy --only functions --project tachtechlabscom
 ```
 
-## Code Changes for Firebase Auth
+### Step 4: Trigger Initial Data Load
+```bash
+# Call triggerRefresh to populate Firestore immediately
+curl https://us-central1-tachtechlabscom.cloudfunctions.net/triggerRefresh
+```
+
+Or wait 15 minutes for the scheduled function to run.
+
+### Step 5: Deploy Hosting
+```bash
+flutter build web
+firebase deploy --only hosting --project tachtechlabscom
+```
+
+## Code Changes for Firestore-First
 
 | File | Change |
 |------|--------|
-| pubspec.yaml | Added firebase_core, firebase_auth |
-| web/index.html | Added Firebase SDK scripts |
-| lib/main.dart | Firebase.initializeApp() + signInAnonymously() |
-| lib/firebase_options.dart | Placeholder (flutterfire configure overwrites) |
-| lib/services/coverage_service.dart | Auth token in request headers |
-| functions/src/index.ts | verifyIdToken() middleware on all endpoints |
+| pubspec.yaml | firebase_core, cloud_firestore (removed firebase_auth) |
+| lib/main.dart | Firebase.initializeApp() only (no auth) |
+| lib/services/coverage_service.dart | Reads from Firestore directly |
+| functions/src/index.ts | Added refreshCoverage (scheduled), triggerRefresh (HTTP) |
+| firestore.rules | Public read for coverage collection |
 
-## Legacy Workaround (if Firebase Auth not configured)
+## Architecture Comparison
 
-```bash
-curl -H "Authorization: Bearer $(gcloud auth print-identity-token)" \
-  https://us-central1-tachtechlabscom.cloudfunctions.net/health
-```
+| Approach | Browser Calls Function? | Org Policy? | Complexity |
+|----------|------------------------|-------------|------------|
+| Firebase Auth | Yes (with token) | Bypassed | Higher |
+| **Firestore-First** | **No** | **Irrelevant** | **Lower** |
+
+Firestore-First is the simpler solution with the same 15-minute data freshness.
 
 ---
 
@@ -844,21 +852,21 @@ firebase functions:secrets:access CROWDSTRIKE_CLIENT_ID --project tachtechlabsco
 
 # Appendix E: Changelog Summary
 
-## v0.5 -> v0.6 (In Progress)
+## v0.6 (Current)
 
-- **Firebase Anonymous Auth implemented** (code complete, pending Console setup)
-- Flutter: firebase_core, firebase_auth added
-- Flutter: signInAnonymously() on app startup
-- Flutter: Auth token included in all API requests
-- Cloud Functions: verifyIdToken() middleware added
-- **Org policy blocker SOLVED** - no IT exception needed
-- Pending: Admin creates web app + enables Anonymous Auth in Firebase Console
+- **Firestore-First Architecture implemented** - browser reads Firestore directly
+- Scheduled function `refreshCoverage` runs every 15 minutes
+- Flutter uses cloud_firestore (not firebase_auth)
+- coverage_service.dart reads from Firestore collection
+- **Org policy blocker SOLVED** - no browser-to-function calls needed
+- Same 15-minute data freshness as previous cache design
+- Pending: Admin creates web app, deploy functions + hosting
 
 ## v0.5
 
 - Cloud Functions deployed (5 functions, v1 syntax)
 - CrowdStrike auth working
-- BLOCKED by org policy (now solved with Firebase Auth)
+- BLOCKED by org policy (now solved with Firestore-First)
 
 ## v0.4
 
@@ -883,4 +891,4 @@ firebase functions:secrets:access CROWDSTRIKE_CLIENT_ID --project tachtechlabsco
 *Knowledge Transfer Document - v0.6*
 *Generated for Claude.ai web sessions*
 *Last Updated: 2026-04-06*
-*Firebase Auth solution added: 2026-04-06*
+*Firestore-First architecture: 2026-04-06*
